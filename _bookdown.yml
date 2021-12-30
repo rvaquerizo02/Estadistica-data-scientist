@@ -1,0 +1,5 @@
+book_filename: "estadistica-ds"
+language:
+  ui:
+    chapter_name: "Capítulo "
+delete_merged_file: true
