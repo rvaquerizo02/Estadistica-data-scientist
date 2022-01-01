@@ -1,5 +1,5 @@
 --- 
-title: "Introducción a la estadística para Científicos de Datos"
+title: "Introducción a la estadística para Científicos de Datos con R"
 author: "Raul Vaquerizo"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -8,8 +8,8 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: analisisydecision/libro_estadistica
-description: "Libro de introducción a la estadística para científicos de datos"
+github-repo: https://github.com/rvaquerizo02/Estadistica-data-scientist
+description: "Introducción a la estadística para científicos de datos"
 ---
 
 
