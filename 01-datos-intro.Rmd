@@ -65,7 +65,7 @@ En este trabajo no se va a trabajar con el acceso a estos sistemas, la informaci
 
 Esta figura es clave y aparecerá en más ocasiones para señalar la importancia de las estructuras algebraicas en el análisis y la modelización estadística. 
 
-![](C:\\temp\\Personales\\wordpress\\Libro_estadistica\\_bookdown_files\\univariable1.png)
+![](./imagenes/univariable1.png)
 
 Es relevante disponer de ese conocimiento matemático porque **todo el trabajo que realiza el científico de datos es algebra lineal**, menos el trabajo administrativo el resto es álgebra. De hecho, la ciencia de datos ha evolucionado a la vez que los equipos informáticos han podido manejar estructuras algebraicas más complejas. La estructura más sencilla podría ser un número o una sucesión de números que forma un vector, para analizar vectores haríamos **estadística univariable**. Si tenemos varias variables y ponemos esos vectores en forma matricial ya estamos en disposición de ver muchas variables a la vez. Si a esas **matrices** le añadimos funciones que puedan ser derivadas podremos sintetizar su información mediante **gradientes** y por último si añadimos más dimensiones y complejidad a estas estructuras estamos ante **tensores matemáticos**. Visto como una secuencia:
 
