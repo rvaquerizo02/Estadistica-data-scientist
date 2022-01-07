@@ -1,5 +1,5 @@
 --- 
-title: "Introducción a la estadística para Científicos de Datos con R"
+title: "Introducción a la Estadística para Científicos de Datos"
 author: "Raul Vaquerizo"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -9,7 +9,7 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: https://github.com/rvaquerizo02/Estadistica-data-scientist
-description: "Introducción a la estadística para científicos de datos"
+description: "Libro de introducción a la estadística"
 ---
 
 
@@ -18,52 +18,34 @@ knitr::opts_chunk$set(echo = TRUE, cache=FALSE)
 ```
 # Introducción
 
-Este contenido está sujeto a una licencia [creative commons](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es) 
-
-![](https://www3.gobiernodecanarias.org/medusa/wiki/images/5/5a/00-Logo-Creative-Commons.png)
-
-Todo el contenido estará dispuesto en un [repositorio de git](https://github.com/analisisydecision/Estadistica-data-scientist) y se irá publicando de forma paralela en mi blog [Analisis y Decisión](https://analisisydecision.es/)
-
-
 ## Objetivos
 
-Hay muchos y mejores pero he creado mi propio trabajo de introducción a la estadística en la Ciencia de Datos para dar mi visión particular del oficio y quiero que sirva para contar historias sobre la Estadística desde otro prisma. Se emplea un título comercial donde aparece el término **Cientifico de datos**, personalmente no creo que el nuestro trabajo consista en hacer ciencia con los datos pero en el día a día del llamado científico de datos se aplican análisis estadísticos que nos permiten describir o **descubrir** problemas, sugerir soluciones a esos problemas y mediante diseño de experimentos pilotar o medir la eficiencia de esas soluciones. De este modo, la estadística es uno de los pilares sobre los que se fundamenta eso que _comercialmente_ se denomina **Ciencia de Datos**. 
-
-Como se ha comentado con anterioridad es mejor leer otros trabajos y por ahí da comienzo este ensayo, la referencias empleadas son:
+Hay muchos y mejores pero quiero mi propio ensayo de introducción a la estadística en la Ciencia de Datos, además quiero que  sirva para crear historias sobre la Estadística. Se emplea un título comercial donde aparece **Ciencia de datos** personalmente no creo que el oficio consista en hacer ciencia con los datos, en el día a día se aplican análisis estadísticos que nos permiten describir problemas, sugerir soluciones a esos problemas y mediante diseño de experimentos pilotar o medir la eficiencia de esas soluciones. De este modo, la estadística es uno de los pilares sobre los que se fundamenta eso que se denomina Ciencia de Datos y como os se ha comentado con anterioridad hay más y mejores trabajos y por ahí vamos a comenzar, la referencias empleadas para realizar este trabajo son:
 
 - [Libro de Carlos Gil](https://datanalytics.com/libro_estadistica/index.html)
 - [Introducction to Stadistical Learning](https://fcorowe.github.io/sl/)
 - [R for Data Science](https://es.r4ds.hadley.nz/index.html)
 - [Un Recorrido por los Métodos Cuantitativos en Ciencias Sociales a bordo de R](https://estadisticacienciassocialesr.rbind.io/)
 
-Los aspectos teóricos están sacados del [material que publica José R. Berrendero] (https://caminosaleatorios.wordpress.com/materiales-docentes/) y se recomienda seguir [todo su trabajo en la web] (http://matemáticas.uam.es/~joser.berrendero/docencia.html)
+. Esta serie monográfica será similar a la formación que llevo impartiendo en empresas y postgrados universitarios desde hace algunos años. Los capítulos de los que tendrá este ensayo serán:
 
-Aunque se hará referencia a las publicaciones concretas, las cuentas de Twitter que inspiran algunos capítulos son:
+<ol>
+ 	<li>Datos</li>
+ 	<li>Estadística descriptiva</li>
+ 	<li>Probabilidad y distribuciones que describen un problema</li>
+ 	<li>Estadística descriptiva bivariable</li>
+ 	<li>Muestreo e inferencia de aquella manera</li>
+ 	<li>Regresión lineal</li>
+ 	<li>Que nos cuenta el parámetro de un modelo</li>
+ 	<li>Diseño de experimentos</li>
+ 	<li>Modelos GLM</li>
+</ol>
 
-- [JL Cañadas](https://twitter.com/joscani)
-- [Carlos Gil](https://twitter.com/gilbellosta)
-- [Picanumeros](https://twitter.com/Picanumeros)
-- [AnaBayes](https://twitter.com/AnaBayes) también se hará mención a su [blog](http://anabelforte.com/)
-- [JulioMulero](https://twitter.com/juliomulero)
-- [Dados de Laplace](https://twitter.com/DadosdeLaplace)
-
-
-Esta serie monográfica será similar a la formación que he impartido en empresas, universidades y escuelas de negocio desde hace algunos años. Los capítulos de los que se compone este ensayo son:
-
-- Datos
-- Manejo de datos con R
-- Uniones de tablas con R
-- Representar datos con ggplot
-- Análisis univariable
-- Problemas que plantean las variables
-- ...
-
-
-Visión completamente práctica y desde el punto de vista _frecuentista_ que será distinta a lo que se puede encontrar en otros foros. Cada tema tendrá una sección descriptiva y una sección práctica con R.
+Visión completamente práctica y desde el punto de vista frecuentista que será distinta a lo que podéis encontrar en otros foros. Cada tema tendrá una sección descriptiva y una sección práctica con R.
 
 ## Entorno de trabajo
 
-Se asume un conocimiento básico de R y su entorno, aunque no es necesario ser un usuario avanzado. Como se hizo mención entre los objetivos está el contar historias con la Estadística desde otro punto de vista y para ello la herramienta con la que se va a contar esta misma historia es Markdown desde RStudio a través de la librería bookdown por este motivo es necesario disponer de [RStudio](https://www.rstudio.com/) e instalar las librerías necesarias para crear Markdown. Los paquetes que se van a emplear a lo largo del curso serán:
+Este trabajo está escrito en Markdown desde [RStudio](https://www.rstudio.com/), el primer paso es disponer de RStudio e instalar las librerías necesarias para crear Markdown. Los paquetes que se van a emplear a lo largo del curso serán:
 
 - readxl
 - tidyverse
@@ -74,9 +56,6 @@ Se asume un conocimiento básico de R y su entorno, aunque no es necesario ser u
 - formattable
 - MASS
 - car
-- rmarkdown
-- knitr
-- bookdown
 
 Estas librerías de R se emplearán en casos prácticos pero no son necesarias: 
 
@@ -88,6 +67,6 @@ Estas librerías de R se emplearán en casos prácticos pero no son necesarias:
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'tidyverse','DataExplorer',
 ), 'packages.bib')
 ```
