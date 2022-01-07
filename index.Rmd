@@ -1,5 +1,5 @@
 --- 
-title: "Introducción a la Estadística para Científicos de Datos"
+title: "Introducción a la Estadística para Científicos de Datos con R"
 author: "Raul Vaquerizo"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site

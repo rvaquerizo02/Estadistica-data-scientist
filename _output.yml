@@ -3,7 +3,7 @@ bookdown::gitbook:
   config:
     toc:
       before: |
-        <li><a href="./">Estadística para Cientificos de Datos</a></li>
+        <li><a href="./">Introducción a la Estadística para Científicos de Datos con R/a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     edit: https://github.com/rvaquerizo02/edit/master/%s
