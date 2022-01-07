@@ -67,6 +67,6 @@ Estas librerías de R se emplearán en casos prácticos pero no son necesarias:
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'tidyverse','DataExplorer',
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'tidyverse','DataExplorer'
 ), 'packages.bib')
 ```
