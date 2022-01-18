@@ -6,9 +6,8 @@ En el capítulo anterior se iniciaba el método dialéctico a utilizar en el res
 
 ![](https://pbs.twimg.com/media/D-X2bddXsAAWLE7.jpg)
 
----
-[**Nota**: En la instalación de paquetes R emplea `install.packages("librería")` y sólo será necesario ejecutarlo una vez.]("https://r-coder.com/install-r-packages")
----
+***
+[**Nota**: En la instalación de paquetes R emplea `install.packages("librería")` y sólo será necesario ejecutarlo una vez.](https://r-coder.com/install-r-packages)
 
 
 Para iniciarse en el manejo de datos se destaca el uso de la librería `dplyr` que se encuentra dentro de este **universo tidyverse** y será sobre la que verse este capítulo. Como norma general cuando se trabaje con data frames y `dplyr` manipulando datos se realizarán acciones separadas con la expresión clave `%>%` 'pipe' de modo:
@@ -60,9 +59,9 @@ table(species$Species)
 
 La función `table` realizar tablas de frecuencia (cuenta registros), en este caso se tienen los tres posibles valores que toma la variable `Species` con el número de registros que tiene cada elemento de la variable, el número de registros que tiene cada nivel del factor, hay un factor que no tiene registros, no desaparece el nivel, simplemente aparece con 0 observaciones. 
 
----
+***
 **Nota**: Cuando se trabajen con datos es recomendable emplear sumarizaciones, visualizaciones o salidas de tablas para contrastar que todo el trabajo que se está realizando sea correcto. Esas acciones evitarán posteriores errores. 
----
+
 
 ## Selección de columnas
 
@@ -162,9 +161,9 @@ iris %>% group_by(Species) %>%
 
 Siempre se respeta el orden de ejecución por lo que variables creadas o acciones utilizadas en un paso anterior pueden ser empleadas en un paso posterior. 
 
----
+***
 [**Nota**: desde la versión 4.1.0 es posible emplear como pipe `|>`. El autor de este libro tiene configurado su equipo con el anterior y se siente más cómodo con él, pero cualquiera de las opciones es válida.](https://www.r-bloggers.com/2021/05/the-new-r-pipe/)
----
+
 
 
 
