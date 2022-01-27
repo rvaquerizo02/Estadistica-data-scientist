@@ -134,9 +134,9 @@ df <- sqldf("select * from df1 where anio not in (select anio from df2)")
 df %>% kable()
 ```
 
-### Duplicidades en las uniones de tablas 
+## Duplicidades en las uniones de tablas 
 
-Otra situación habitual que se va a encontrar el científico de datos es la aparición de registros duplicados, es necesario controlar su existencia porque pueden distorsionar el resultado de un análisis. 
+Otra situación habitual que se va a encontrar el científico de datos es la aparición de registros duplicados por el campo identificador (ID), es necesario controlar su existencia porque pueden distorsionar el resultado de un análisis. 
 
 ```{r}
 df1 <- data.frame(anio = c(2018, 2019, 2020, 2021), variable1=c(10, 20, 30, 40))
@@ -155,3 +155,6 @@ df %>% group_by(anio) %>% summarise(registros=n()) %>%
 
 En el capítulo anterior ya se anotó la **importancia de establecer mecanismos de control cuando se trabajen con datos**, bien sea visualizaciones de datos agrupaciones, tablas de frecuencia o estadísticos básicos que veremos en posteriores capítulos. 
 
+## Referencias
+
+[Javier Alvarez Liébana](https://dadosdelaplace.github.io/courses-ECI-2022/resumenes.html#relacionar-datos-joins)

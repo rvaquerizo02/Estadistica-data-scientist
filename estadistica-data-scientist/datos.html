@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 2 Datos | Introducción a la Estadística para Científicos de Datos con R</title>
+  <meta name="description" content="Libro de introducción a la estadística" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 2 Datos | Introducción a la Estadística para Científicos de Datos con R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Libro de introducción a la estadística" />
+  <meta name="github-repo" content="https://github.com/rvaquerizo02/Estadistica-data-scientist" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 2 Datos | Introducción a la Estadística para Científicos de Datos con R" />
+  
+  <meta name="twitter:description" content="Libro de introducción a la estadística" />
+  
+
+<meta name="author" content="Raul Vaquerizo" />
+
+
+<meta name="date" content="2022-01-27" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="manejo-de-datos-con-r.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introducción a la Estadística para Científicos de Datos con R/a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.1</b> Objetivos</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#entorno-de-trabajo"><i class="fa fa-check"></i><b>1.2</b> Entorno de trabajo</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="datos.html"><a href="datos.html"><i class="fa fa-check"></i><b>2</b> Datos</a><ul>
+<li class="chapter" data-level="2.1" data-path="datos.html"><a href="datos.html#qué-son-los-datos"><i class="fa fa-check"></i><b>2.1</b> Qué son los datos</a></li>
+<li class="chapter" data-level="2.2" data-path="datos.html"><a href="datos.html#tipos-de-datos"><i class="fa fa-check"></i><b>2.2</b> Tipos de datos</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="datos.html"><a href="datos.html#datos-internos"><i class="fa fa-check"></i><b>2.2.1</b> Datos internos</a></li>
+<li class="chapter" data-level="2.2.2" data-path="datos.html"><a href="datos.html#datos-externos"><i class="fa fa-check"></i><b>2.2.2</b> Datos externos:</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="datos.html"><a href="datos.html#almacenamiento-de-datos"><i class="fa fa-check"></i><b>2.3</b> Almacenamiento de datos</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="datos.html"><a href="datos.html#sistemas-operacionales"><i class="fa fa-check"></i><b>2.3.1</b> Sistemas operacionales</a></li>
+<li class="chapter" data-level="2.3.2" data-path="datos.html"><a href="datos.html#sistemas-informacionales-tradicionales"><i class="fa fa-check"></i><b>2.3.2</b> Sistemas informacionales tradicionales</a></li>
+<li class="chapter" data-level="2.3.3" data-path="datos.html"><a href="datos.html#data-lake"><i class="fa fa-check"></i><b>2.3.3</b> Data Lake</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="datos.html"><a href="datos.html#todo-es-álgebra-lineal"><i class="fa fa-check"></i><b>2.4</b> Todo es álgebra lineal</a></li>
+<li class="chapter" data-level="2.5" data-path="datos.html"><a href="datos.html#como-se-disponen-los-datos"><i class="fa fa-check"></i><b>2.5</b> Como se disponen los datos</a></li>
+<li class="chapter" data-level="2.6" data-path="datos.html"><a href="datos.html#tipos-de-variables"><i class="fa fa-check"></i><b>2.6</b> Tipos de Variables</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="datos.html"><a href="datos.html#variables-cuantitativas"><i class="fa fa-check"></i><b>2.6.1</b> Variables cuantitativas</a></li>
+<li class="chapter" data-level="2.6.2" data-path="datos.html"><a href="datos.html#variables-cualitativas.-factores"><i class="fa fa-check"></i><b>2.6.2</b> Variables cualitativas. Factores</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="datos.html"><a href="datos.html#el-rol-de-las-variables-en-los-datos"><i class="fa fa-check"></i><b>2.7</b> El rol de las variables en los datos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejo de datos con R</a><ul>
+<li class="chapter" data-level="3.1" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#universo-tidyverse"><i class="fa fa-check"></i><b>3.1</b> Universo tidyverse</a></li>
+<li class="chapter" data-level="3.2" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#selección-de-registros"><i class="fa fa-check"></i><b>3.2</b> Selección de registros</a></li>
+<li class="chapter" data-level="3.3" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#selección-de-columnas"><i class="fa fa-check"></i><b>3.3</b> Selección de columnas</a></li>
+<li class="chapter" data-level="3.4" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#creación-o-actualización-de-variables"><i class="fa fa-check"></i><b>3.4</b> Creación o actualización de variables</a></li>
+<li class="chapter" data-level="3.5" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#ordenar-datos"><i class="fa fa-check"></i><b>3.5</b> Ordenar datos</a></li>
+<li class="chapter" data-level="3.6" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#sumarizar-valores"><i class="fa fa-check"></i><b>3.6</b> Sumarizar valores</a></li>
+<li class="chapter" data-level="3.7" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#combinación-de-acciones"><i class="fa fa-check"></i><b>3.7</b> Combinación de acciones</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html"><i class="fa fa-check"></i><b>4</b> Uniones de tablas con R</a><ul>
+<li class="chapter" data-level="4.1" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#uniones-verticales"><i class="fa fa-check"></i><b>4.1</b> Uniones verticales</a></li>
+<li class="chapter" data-level="4.2" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#uniones-horizontales-o-join"><i class="fa fa-check"></i><b>4.2</b> Uniones horizontales o <em>join</em></a><ul>
+<li class="chapter" data-level="4.2.1" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#inner-join"><i class="fa fa-check"></i><b>4.2.1</b> Inner join</a></li>
+<li class="chapter" data-level="4.2.2" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#left-join"><i class="fa fa-check"></i><b>4.2.2</b> Left join</a></li>
+<li class="chapter" data-level="4.2.3" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#anti-join"><i class="fa fa-check"></i><b>4.2.3</b> Anti join</a></li>
+<li class="chapter" data-level="4.2.4" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#librería-sqldf"><i class="fa fa-check"></i><b>4.2.4</b> Librería sqldf</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#duplicidades-en-las-uniones-de-tablas"><i class="fa fa-check"></i><b>4.3</b> Duplicidades en las uniones de tablas</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="representación-básica-con-ggplot.html"><a href="representación-básica-con-ggplot.html"><i class="fa fa-check"></i><b>5</b> Representación básica con ggplot</a><ul>
+<li class="chapter" data-level="5.1" data-path="representación-básica-con-ggplot.html"><a href="representación-básica-con-ggplot.html#histogramas"><i class="fa fa-check"></i><b>5.1</b> Histogramas</a></li>
+<li class="chapter" data-level="5.2" data-path="representación-básica-con-ggplot.html"><a href="representación-básica-con-ggplot.html#gráficos-de-densidad"><i class="fa fa-check"></i><b>5.2</b> Gráficos de densidad</a></li>
+<li class="chapter" data-level="5.3" data-path="representación-básica-con-ggplot.html"><a href="representación-básica-con-ggplot.html#gráficos-de-caja-boxplot"><i class="fa fa-check"></i><b>5.3</b> Gráficos de caja (boxplot)</a></li>
+<li class="chapter" data-level="5.4" data-path="representación-básica-con-ggplot.html"><a href="representación-básica-con-ggplot.html#gráficos-de-tarta"><i class="fa fa-check"></i><b>5.4</b> Gráficos de tarta</a></li>
+<li class="chapter" data-level="5.5" data-path="representación-básica-con-ggplot.html"><a href="representación-básica-con-ggplot.html#gráficos-de-barras"><i class="fa fa-check"></i><b>5.5</b> Gráficos de barras</a></li>
+<li class="chapter" data-level="5.6" data-path="representación-básica-con-ggplot.html"><a href="representación-básica-con-ggplot.html#gráficos-de-líneas"><i class="fa fa-check"></i><b>5.6</b> Gráficos de líneas</a></li>
+<li class="chapter" data-level="5.7" data-path="representación-básica-con-ggplot.html"><a href="representación-básica-con-ggplot.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>5.7</b> Gráfico de dispersión</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introducción a la Estadística para Científicos de Datos con R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="datos" class="section level1">
+<h1><span class="header-section-number">Capítulo 2</span> Datos</h1>
+<div id="qué-son-los-datos" class="section level2">
+<h2><span class="header-section-number">2.1</span> Qué son los datos</h2>
+<p>Los <strong>datos están en boca de todos</strong>, “la nueva revolución industrial”, “el nuevo petróleo”, “el nuevo plutonio”,… pero ¿qué son los datos? Si nos dirigimos al diccionario de la Real Academia tenemos:</p>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li><ol start="13" style="list-style-type: lower-alpha">
+<li>Información sobre algo concreto que permite su conocimiento exacto o sirve para deducir las consecuencias derivadas de un hecho. A este problema le faltan datos numéricos.</li>
+</ol></li>
+<li><ol start="13" style="list-style-type: lower-alpha">
+<li>Documento, testimonio, fundamento.</li>
+</ol></li>
+<li><ol start="13" style="list-style-type: lower-alpha">
+<li>Inform. Información dispuesta de manera adecuada para su tratamiento por una computadora.
+Base de datos: Conjunto de datos organizado de tal modo que permita obtener con rapidez diversos tipos de información.</li>
+</ol></li>
+</ol>
+</blockquote>
+<p>Parece que la tercera acepción es la correcta pero <strong>los datos no son información</strong>, nos van a permitir obtener información, ésta se obtiene mediante un <strong>análisis estadístico</strong>. Disponer datos de forma organizada no es información. Es la estadística a través de un análisis descriptivo, a través de un modelo o a través de un algoritmo la que obtiene la información. Un científico de datos es un gestor, coge datos y los transforma en información a través de análisis estadísticos más o menos complejos.</p>
+</div>
+<div id="tipos-de-datos" class="section level2">
+<h2><span class="header-section-number">2.2</span> Tipos de datos</h2>
+<p>El científico de datos accederá a datos informatizados y, atendiendo a su origen, una posible clasificación sería:</p>
+<div id="datos-internos" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Datos internos</h3>
+<p>Son los datos que recoge la propia organización fruto de su actividad, ejemplos en esta línea son:</p>
+<ul>
+<li>Información sociodemográfica</li>
+<li>Información sobre la operativa del cliente</li>
+<li>Contratos activos (y no activos)</li>
+<li>Contactos con el cliente</li>
+<li>Encuestas</li>
+<li>Datos de la red comercial</li>
+<li>…</li>
+</ul>
+<p>La lista es larga y depende del tipo de actividad realizada. En este ámbito se está mejorando con la inclusión de sistemas informacionales y la puesta en valor del uso de los datos, en este sentido es necesario señalar la importancia que toman en las organizaciones los equipos humanos de Tecnologías de la Información. Los datos internos pueden estar organizados o no pero son propiedad de la organización que pretende explotarlos.</p>
+</div>
+<div id="datos-externos" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Datos externos:</h3>
+<p>Datos libres o generados por empresas especializadas y que pueden mejorar los análisis estadísticos. Ejemplos:</p>
+<ul>
+<li>Datos GIS de un instituto geográfico</li>
+<li>Análisis de competencia (promociones, puntos de venta, …)</li>
+<li>Estadísticas del INE, Registro de la Propiedad o BOE. Cualquier estadística que publique un estado o una organización de estados</li>
+<li>Bureaux de crédito</li>
+<li>BBDD externas</li>
+<li>…</li>
+</ul>
+<p>Este tipo de datos está tomando más peso y aparecen expresiones como <em>escrapear</em> (del inglés scrapping) nos permite obtener datos de sitios web, un ejemplo de fuente de información son las RRSS. Por ejemplo, ¿tendría el mismo precio de un seguro de motos aquel cliente que pone en Instagram fotos de paisajes en sus rutas en moto o aquel cliente que publica acrobacias en su historia?</p>
+</div>
+</div>
+<div id="almacenamiento-de-datos" class="section level2">
+<h2><span class="header-section-number">2.3</span> Almacenamiento de datos</h2>
+<p>Es un tema complejo pero el científico de datos debe conocer los entornos que suministran datos y de ese modo hacer un mejor aprovechamiento de ellos. Una visión sintetizada y simplista sería.</p>
+<div id="sistemas-operacionales" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Sistemas operacionales</h3>
+<p>Son los sistemas con los que se gestiona una organización y con los que trabajan aquellos que, en muchas ocasiones, no les preocupa lo más mínimo la ciencia de datos. Aquí existen sistemas como mainframes, AS400 o CRMs, estos sistemas tienen información exhaustiva sobre operaciones y sobre la actividad, pero esa información no está (estaba) pensada para explotarse, muchos carecen de visión cliente y están más orientados a productos y a la propia actividad empresarial. Pueden suministrar información en tiempo real pero el modo en el que se almacenan estos datos puede dificultar su explotación estadística.</p>
+</div>
+<div id="sistemas-informacionales-tradicionales" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Sistemas informacionales tradicionales</h3>
+<p>Al albor de la importancia de los datos nacieron los primeros sistemas informacionales como el data warehouse, lo principal en ellos es la estructura y la distinción entre productos, contratos y clientes. Estos sistemas empiezan a tener campos, variables, pensadas para su explotación estadística y la modelización. Además, toma relevancia la tabulación de los datos con una visión histórica. Estos sistemas informacionales son caros, requieren recursos para su actualización y provienen de procesos intermedios que, en ocasiones, no recogen toda la problemática del operacional pero gracias a ellos las organizaciones han empezado a conocer la importancia de gestionar los datos, la importancia de la <strong>inteligencia de negocio</strong>, el <em>bussines intelligence</em>.</p>
+</div>
+<div id="data-lake" class="section level3">
+<h3><span class="header-section-number">2.3.3</span> Data Lake</h3>
+<p>Es el ‘nuevo’ paradigma al amparo de la aparición de equipos informáticos más potentes, se accede de un modo muy rápido, permite disponer de un gran volumen sin estructura por lo que la información puede ser muy exhaustiva, es más complejo distinguir la visión cliente y esa falta de estructura hace que el acceso a estos sistemas requiera de software y hardware específico además de equipos humanos más especializados. No están pensados para el análisis estadístico tradicional pero es factible. Hay una menor integridad en la información disponible pero se puede acceder y explotar un volumen de información que antes era más complicado por lo que se abren nuevas formas de explotación estadística de datos.</p>
+<p>En este trabajo no se va a trabajar con el acceso a estos sistemas, la información vendrá tabulada directamente pero es necesario reiterar <strong>el científico de datos tiene que tener claro donde están los datos y como acceder a ellos</strong>.</p>
+</div>
+</div>
+<div id="todo-es-álgebra-lineal" class="section level2">
+<h2><span class="header-section-number">2.4</span> Todo es álgebra lineal</h2>
+<p>Esta figura es clave y aparecerá en más ocasiones para señalar la importancia de las estructuras algebraicas en el análisis y la modelización estadística.</p>
+<p><img src="imagenes/univariable1.png" /></p>
+<p>Es relevante disponer de ese conocimiento matemático porque <strong>todo el trabajo que realiza el científico de datos es algebra lineal</strong>, menos el trabajo administrativo el resto es álgebra. De hecho, la ciencia de datos ha evolucionado a la vez que los equipos informáticos han podido manejar estructuras algebraicas más complejas. La estructura más sencilla podría ser un número o una sucesión de números que forma un vector, para analizar vectores haríamos <strong>estadística univariable</strong>. Si tenemos varias variables y ponemos esos vectores en forma matricial ya estamos en disposición de ver muchas variables a la vez. Si a esas <strong>matrices</strong> le añadimos funciones que puedan ser derivadas podremos sintetizar su información mediante <strong>gradientes</strong> y por último si añadimos más dimensiones y complejidad a estas estructuras estamos ante <strong>tensores matemáticos</strong>. Visto como una secuencia:</p>
+<ul>
+<li><p>Vectores -&gt; análisis univariable como tablas de frecuencia, sumarización estadística o gráficos, al trabajo con estructuras vectoriales se le puede denominar <strong>business intelligence</strong>.</p></li>
+<li><p>Matrices -&gt; análisis multivariable como modelos lineales, componentes principales,.. cuando se trabaja con cálculo matricial estamos haciendo <strong>modelización estadística</strong>.</p></li>
+<li><p>Gradientes -&gt; análisis multivariable basado en modelos de aprendizaje automático, tenemos funciones multivariables que nos permiten derivar matrices de forma parcial para buscar máximos y mínimos locales, permiten realizar modelos de <strong>machine learning</strong>.</p></li>
+<li><p>Tensores matemáticos -&gt; aprendizaje profundo con redes neuronales que imitan el comportamiento humano, <strong>inteligencia artificial</strong>.</p></li>
+</ul>
+<p>Es evidente el paralelismo entre la evolución matemática y la evolución informática. Mayor capacidad de computación ha implicado poder manejar estructuras algebraicas más complejas y esto ha permitido una evolución en el análisis estadístico.</p>
+</div>
+<div id="como-se-disponen-los-datos" class="section level2">
+<h2><span class="header-section-number">2.5</span> Como se disponen los datos</h2>
+<p>Para poder llevar a cabo un análisis estadístico los datos no sólo han de estar disponibles, además deben de tener una lógica y una estructura para ser utilizados. Habitualmente, los datos estarán dispuestos en <strong>tablas</strong> donde, de forma horizontal, tenemos registros y de forma vertical tenemos columnas. Existen diversas “dialécticas” en ciencia de datos para hacer referencia a esas columnas y a esos registros, en general dependerá del software que empleemos en nuestro trabajo. En este ensayo se va a emplear <strong>R</strong> y la librería <code>tidyverse</code> de este modo la estructura de datos principal será el <strong>data frame</strong>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="datos.html#cb1-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="datos.html#cb1-2"></a></span>
+<span id="cb1-3"><a href="datos.html#cb1-3"></a><span class="kw">data</span>(<span class="st">&quot;iris&quot;</span>)</span>
+<span id="cb1-4"><a href="datos.html#cb1-4"></a><span class="kw">str</span>(iris)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="datos.html#cb3-1"></a><span class="kw">head</span>(iris, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa</code></pre>
+<p>La función <code>str</code> nos permite describir las características de un objeto de R, en este caso se trata de un data frame donde cada fila será un registro, una observación, que podrá ser un individuo, un contrato, una compañía, una especie de flor, un pingüino,… depende de la <strong>población</strong> que esté en estudio. De esa población se pueden extraer subconjuntos de registros que llamaremos <strong>muestras</strong> que deberían ser representativos de la población y permitirían, con menos medios, estudiar los problemas que deseamos analizar en la población. Esta muestra permitiría <strong>inferir</strong> aspectos de interés en la población.</p>
+<p>Cada columna del data frame será denominada <strong>variable</strong> que define una característica de la observación, esta característica puede ser cualitativa (factor) o cuantitativa (número). El estudio de esas características será el que nos lleve a describir o estimar el problema al que nos enfrentamos.</p>
+</div>
+<div id="tipos-de-variables" class="section level2">
+<h2><span class="header-section-number">2.6</span> Tipos de Variables</h2>
+<p>Cuando se afrontan proyectos de ciencia de datos la mejor solución es dividir las variables en cualidades o cantidades, con sus matices.</p>
+<div id="variables-cuantitativas" class="section level3">
+<h3><span class="header-section-number">2.6.1</span> Variables cuantitativas</h3>
+<p>Son numéricas y pueden tener un número muy grande (en algunos casos infinito) de valores y describen una cantidad numéricamente. En sucesivos capítulos se verá que estas variables serán descritas con estadísticos descriptivos, en análisis visuales se emplearán histogramas, gráficos de densidades o gráficos de cajas (boxplot).</p>
+<p>Los problemas que plantean estas variables son:</p>
+<ul>
+<li><p>Aparición de valores modales que desvirtúan la forma o la distribución de los valores como por ejemplo el valor 0 en una variable que recoja saldo en fondos de inversión, ¿eliminamos una variable porque el 80% de las veces toma un valor 0?</p></li>
+<li><p>Valores atípicos o <em>outlier</em> también pueden desvirtuar los análisis estadísticos. Si una observación tiene una variable numérica que toma un valor anormalmente alto o bajo, ¿debemos incluirla en el análisis?</p></li>
+<li><p>Valores perdidos o valores missing en las variables cuantitativas supone un problema, debemos tener clara nuestra estrategia con los valores perdidos antes de analizar la información que nos suministran los datos. ¿Qué hacemos con esas observaciones que no tienen datos para determinadas variables? ¿Tiene sentido que no tengan datos?</p></li>
+</ul>
+</div>
+<div id="variables-cualitativas.-factores" class="section level3">
+<h3><span class="header-section-number">2.6.2</span> Variables cualitativas. Factores</h3>
+<p>Toman un número finito (en ocasiones muy extenso) de valores y describen una cualidad. En el conjunto de datos pueden ser tanto numéricas como cadenas de caracteres, da igual el formato pero es necesario saber que representa una cualidad. Esta cualidad puede estar ordenada como puede ser un ranking <code>bueno/medio/malo</code> o simplemente describir un valor como es el sexo <code>Femenino/Masculino</code>. Siguiendo con la dialéctica de R a estas variables las vamos a denominar <strong>factores</strong> y a cada valor que pueda tomar el factor le denominamos <strong>nivel</strong>. Para describir estas variables emplearemos tablas de frecuencia donde se pueden contar el total de observaciones para cada nivel del factor o bien relativizar esas cantidades y calcular frecuencias como porcentajes sobre el total de observaciones. Gráficamente se sugiere usar gráficos de barras o de tarta que se verán posteriormente.</p>
+<p>Los problemas que presentan son análogos a los vistos con las variables cuantitativas:</p>
+<ul>
+<li>Valores modales, si un factor presenta un nivel con un gran número de observaciones, ¿merece esfuerzo incluir ese factor?</li>
+<li>Valores missing, si el valor no está disponible ¿podemos crear otro nivel que sea N/D?</li>
+<li>Gran número de niveles de un factor. En ocasiones tendremos factores con miles de niveles como un código postal, es evidente que tenemos que agrupar los niveles de un factor, ¿qué estrategias de agrupamiento podemos seguir?</li>
+</ul>
+</div>
+</div>
+<div id="el-rol-de-las-variables-en-los-datos" class="section level2">
+<h2><span class="header-section-number">2.7</span> El rol de las variables en los datos</h2>
+<p>Una vez es conocido el como se estructuran los datos y como se puede aproximar a ellos el científico de datos es necesario remarcar que las variables no tienen todas el mismo rol, en un conjunto de datos cada variable juega un papel distinto. Hay variables que identifican registros, hay fechas, medidas, campos calculados, factores reclasificados… Se tiene claro que todas estas variables siempre serán factores o variables cuantitativas, pueden almacenarse como una cadena de caracteres o como un número, pero dentro del conjunto de datos hay que tener muy claro que función desempeñan.</p>
+<p>Una clasificación global del rol de las variables en los datos es:</p>
+<ul>
+<li><p><strong>Variable Target</strong>: Es la variable más importante porque describe el objetivo sobre el que realizamos el análisis. Es la variable encargada de dar respuesta al problema que planteamos a los datos.</p></li>
+<li><p>Variable input: Esta variable servirá para “explicar” el comportamiento de nuestra variable target.</p></li>
+<li><p>ID: las observaciones suelen ir identificados por un campo del conjunto de datos. Puede ser un DNI, un número de contrato, una codificación administrativa,…</p></li>
+<li><p>Raw (variable en bruto): serán las variables que nos ayudarán a crear cualquiera de los tipos anteriores. Por ejemplo, una fecha en sí misma no debe ser un dato de entrada en un modelo de clasificación, ha de ser transformada para crear una variable objetivo o bien una variable input que nos ayude a predecir o explicar nuestro el comportamiento de la variable target.</p></li>
+</ul>
+<p>En determinados análisis el científico de datos no dispone de esa variable target que dirige el análisis. La disponibilidad de la variable target también define el tipo de análisis estadístico a plantear. Durante todo este ensayo se van a emplear ejemplos con variable target definida, todos los análisis estadísticos serán dirigidos.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="manejo-de-datos-con-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rvaquerizo02/edit/master/01-datos-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
