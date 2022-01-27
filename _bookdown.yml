@@ -2,5 +2,5 @@ book_filename: "estadistica-data-scientist"
 output_dir: "estadistica-data-scientist"
 language:
   ui:
-    chapter_name: "Capítulo"
+    chapter_name: "Capítulo "
 delete_merged_file: true

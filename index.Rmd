@@ -26,6 +26,8 @@ Hay muchos y mejores pero quiero mi propio ensayo de introducción a la estadís
 - [Introducction to Stadistical Learning](https://fcorowe.github.io/sl/)
 - [R for Data Science](https://es.r4ds.hadley.nz/index.html)
 - [Un Recorrido por los Métodos Cuantitativos en Ciencias Sociales a bordo de R](https://estadisticacienciassocialesr.rbind.io/)
+- [Analizando datos, visualizando información, contando historias de Javier Alvarez Liébana](https://dadosdelaplace.github.io/courses-ECI-2022/index.html)
+
 
 . Esta serie monográfica será similar a la formación que llevo impartiendo en empresas y postgrados universitarios desde hace algunos años. Los capítulos de los que tendrá este ensayo serán:
 

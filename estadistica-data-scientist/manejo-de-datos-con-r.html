@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 3 Manejo de datos con R | Introducción a la Estadística para Científicos de Datos con R</title>
+  <meta name="description" content="Libro de introducción a la estadística" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 3 Manejo de datos con R | Introducción a la Estadística para Científicos de Datos con R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Libro de introducción a la estadística" />
+  <meta name="github-repo" content="https://github.com/rvaquerizo02/Estadistica-data-scientist" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 3 Manejo de datos con R | Introducción a la Estadística para Científicos de Datos con R" />
+  
+  <meta name="twitter:description" content="Libro de introducción a la estadística" />
+  
+
+<meta name="author" content="Raul Vaquerizo" />
+
+
+<meta name="date" content="2022-01-27" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="datos.html"/>
+<link rel="next" href="uniones-de-tablas-con-r.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.17/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introducción a la Estadística para Científicos de Datos con R/a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.1</b> Objetivos</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#entorno-de-trabajo"><i class="fa fa-check"></i><b>1.2</b> Entorno de trabajo</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="datos.html"><a href="datos.html"><i class="fa fa-check"></i><b>2</b> Datos</a><ul>
+<li class="chapter" data-level="2.1" data-path="datos.html"><a href="datos.html#qué-son-los-datos"><i class="fa fa-check"></i><b>2.1</b> Qué son los datos</a></li>
+<li class="chapter" data-level="2.2" data-path="datos.html"><a href="datos.html#tipos-de-datos"><i class="fa fa-check"></i><b>2.2</b> Tipos de datos</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="datos.html"><a href="datos.html#datos-internos"><i class="fa fa-check"></i><b>2.2.1</b> Datos internos</a></li>
+<li class="chapter" data-level="2.2.2" data-path="datos.html"><a href="datos.html#datos-externos"><i class="fa fa-check"></i><b>2.2.2</b> Datos externos:</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="datos.html"><a href="datos.html#almacenamiento-de-datos"><i class="fa fa-check"></i><b>2.3</b> Almacenamiento de datos</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="datos.html"><a href="datos.html#sistemas-operacionales"><i class="fa fa-check"></i><b>2.3.1</b> Sistemas operacionales</a></li>
+<li class="chapter" data-level="2.3.2" data-path="datos.html"><a href="datos.html#sistemas-informacionales-tradicionales"><i class="fa fa-check"></i><b>2.3.2</b> Sistemas informacionales tradicionales</a></li>
+<li class="chapter" data-level="2.3.3" data-path="datos.html"><a href="datos.html#data-lake"><i class="fa fa-check"></i><b>2.3.3</b> Data Lake</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="datos.html"><a href="datos.html#todo-es-álgebra-lineal"><i class="fa fa-check"></i><b>2.4</b> Todo es álgebra lineal</a></li>
+<li class="chapter" data-level="2.5" data-path="datos.html"><a href="datos.html#como-se-disponen-los-datos"><i class="fa fa-check"></i><b>2.5</b> Como se disponen los datos</a></li>
+<li class="chapter" data-level="2.6" data-path="datos.html"><a href="datos.html#tipos-de-variables"><i class="fa fa-check"></i><b>2.6</b> Tipos de Variables</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="datos.html"><a href="datos.html#variables-cuantitativas"><i class="fa fa-check"></i><b>2.6.1</b> Variables cuantitativas</a></li>
+<li class="chapter" data-level="2.6.2" data-path="datos.html"><a href="datos.html#variables-cualitativas.-factores"><i class="fa fa-check"></i><b>2.6.2</b> Variables cualitativas. Factores</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="datos.html"><a href="datos.html#el-rol-de-las-variables-en-los-datos"><i class="fa fa-check"></i><b>2.7</b> El rol de las variables en los datos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejo de datos con R</a><ul>
+<li class="chapter" data-level="3.1" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#universo-tidyverse"><i class="fa fa-check"></i><b>3.1</b> Universo tidyverse</a></li>
+<li class="chapter" data-level="3.2" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#selección-de-registros"><i class="fa fa-check"></i><b>3.2</b> Selección de registros</a></li>
+<li class="chapter" data-level="3.3" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#selección-de-columnas"><i class="fa fa-check"></i><b>3.3</b> Selección de columnas</a></li>
+<li class="chapter" data-level="3.4" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#creación-o-actualización-de-variables"><i class="fa fa-check"></i><b>3.4</b> Creación o actualización de variables</a></li>
+<li class="chapter" data-level="3.5" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#ordenar-datos"><i class="fa fa-check"></i><b>3.5</b> Ordenar datos</a></li>
+<li class="chapter" data-level="3.6" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#sumarizar-valores"><i class="fa fa-check"></i><b>3.6</b> Sumarizar valores</a></li>
+<li class="chapter" data-level="3.7" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#combinación-de-acciones"><i class="fa fa-check"></i><b>3.7</b> Combinación de acciones</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html"><i class="fa fa-check"></i><b>4</b> Uniones de tablas con R</a><ul>
+<li class="chapter" data-level="4.1" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#uniones-verticales"><i class="fa fa-check"></i><b>4.1</b> Uniones verticales</a></li>
+<li class="chapter" data-level="4.2" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#uniones-horizontales-o-join"><i class="fa fa-check"></i><b>4.2</b> Uniones horizontales o <em>join</em></a><ul>
+<li class="chapter" data-level="4.2.1" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#inner-join"><i class="fa fa-check"></i><b>4.2.1</b> Inner join</a></li>
+<li class="chapter" data-level="4.2.2" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#left-join"><i class="fa fa-check"></i><b>4.2.2</b> Left join</a></li>
+<li class="chapter" data-level="4.2.3" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#anti-join"><i class="fa fa-check"></i><b>4.2.3</b> Anti join</a></li>
+<li class="chapter" data-level="4.2.4" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#librería-sqldf"><i class="fa fa-check"></i><b>4.2.4</b> Librería sqldf</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#duplicidades-en-las-uniones-de-tablas"><i class="fa fa-check"></i><b>4.3</b> Duplicidades en las uniones de tablas</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="representación-básica-con-ggplot.html"><a href="representación-básica-con-ggplot.html"><i class="fa fa-check"></i><b>5</b> Representación básica con ggplot</a><ul>
+<li class="chapter" data-level="5.1" data-path="representación-básica-con-ggplot.html"><a href="representación-básica-con-ggplot.html#histogramas"><i class="fa fa-check"></i><b>5.1</b> Histogramas</a></li>
+<li class="chapter" data-level="5.2" data-path="representación-básica-con-ggplot.html"><a href="representación-básica-con-ggplot.html#gráficos-de-densidad"><i class="fa fa-check"></i><b>5.2</b> Gráficos de densidad</a></li>
+<li class="chapter" data-level="5.3" data-path="representación-básica-con-ggplot.html"><a href="representación-básica-con-ggplot.html#gráficos-de-caja-boxplot"><i class="fa fa-check"></i><b>5.3</b> Gráficos de caja (boxplot)</a></li>
+<li class="chapter" data-level="5.4" data-path="representación-básica-con-ggplot.html"><a href="representación-básica-con-ggplot.html#gráficos-de-tarta"><i class="fa fa-check"></i><b>5.4</b> Gráficos de tarta</a></li>
+<li class="chapter" data-level="5.5" data-path="representación-básica-con-ggplot.html"><a href="representación-básica-con-ggplot.html#gráficos-de-barras"><i class="fa fa-check"></i><b>5.5</b> Gráficos de barras</a></li>
+<li class="chapter" data-level="5.6" data-path="representación-básica-con-ggplot.html"><a href="representación-básica-con-ggplot.html#gráficos-de-líneas"><i class="fa fa-check"></i><b>5.6</b> Gráficos de líneas</a></li>
+<li class="chapter" data-level="5.7" data-path="representación-básica-con-ggplot.html"><a href="representación-básica-con-ggplot.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>5.7</b> Gráfico de dispersión</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introducción a la Estadística para Científicos de Datos con R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="manejo-de-datos-con-r" class="section level1">
+<h1><span class="header-section-number">Capítulo 3</span> Manejo de datos con R</h1>
+<div id="universo-tidyverse" class="section level2">
+<h2><span class="header-section-number">3.1</span> Universo tidyverse</h2>
+<p>En el capítulo anterior se iniciaba el método dialéctico a utilizar en el resto del ensayo fundamentado en la idea de <strong>transformar datos en información mediante análisis estadístico con el software R</strong>. Los datos a explotar tienen una estructura tabular que llamamos <em>data frame</em>. Esta estructura contiene observaciones y variables sobre las que se fundamenta la labor del científico de datos ya que son ellas las que plantean y resuelven problemas. Para trabajar con data frames en R disponemos de un entorno conocido como <code>tidyverse</code> que engloba un gran número de librerías de R.</p>
+<p><img src="https://pbs.twimg.com/media/D-X2bddXsAAWLE7.jpg" /></p>
+<hr />
+<p><a href="https://r-coder.com/install-r-packages"><strong>Nota</strong>: En la instalación de paquetes R emplea <code>install.packages("librería")</code> y sólo será necesario ejecutarlo una vez.</a></p>
+<p>Para iniciarse en el manejo de datos se destaca el uso de la librería <code>dplyr</code> que se encuentra dentro de este <strong>universo tidyverse</strong> y será sobre la que verse este capítulo. Como norma general cuando se trabaje con data frames y <code>dplyr</code> manipulando datos se realizarán acciones separadas con la expresión clave <code>%&gt;%</code> ‘pipe’ de modo:</p>
+<p><code>df_final &lt;- df_inicial %&gt;% ACCION1 %&gt;% ACCION2 %&gt;% … %&gt;% ACCION_N</code></p>
+<p>Cada acción tiene su correspondiente <em>verbo</em>:</p>
+<ul>
+<li>Selección de columnas -&gt; <code>select</code></li>
+<li>Selección de registros -&gt; <code>filter</code></li>
+<li>Creación/modificación de variables -&gt; <code>mutate</code></li>
+<li>Sumarizar por variables valores -&gt; <code>group_by %&gt;% summarize</code></li>
+<li>Ordenar dataframes -&gt; <code>arrange</code></li>
+</ul>
+<p>Estos 5 elementos deben servir al científico de datos para realizar el 80% del manejo de datos habitual con R. Por ese motivo se va a ilustrar su uso mediante ejemplos:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="manejo-de-datos-con-r.html#cb1-1"></a><span class="co"># Recordar que sólo es necesario instalar los paquetes una vez</span></span>
+<span id="cb1-2"><a href="manejo-de-datos-con-r.html#cb1-2"></a><span class="co"># install.packages(&#39;tidyverse&#39;)</span></span>
+<span id="cb1-3"><a href="manejo-de-datos-con-r.html#cb1-3"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="manejo-de-datos-con-r.html#cb1-4"></a></span>
+<span id="cb1-5"><a href="manejo-de-datos-con-r.html#cb1-5"></a><span class="co"># Se cargan los datos de ejemplo</span></span>
+<span id="cb1-6"><a href="manejo-de-datos-con-r.html#cb1-6"></a><span class="kw">data</span>(iris)</span>
+<span id="cb1-7"><a href="manejo-de-datos-con-r.html#cb1-7"></a><span class="kw">head</span>(iris, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa</code></pre>
+<p><code>library(tidyverse)</code> permite disponer de las librerías del universo tidyverse, los ejemplos se van a realziar con el conjunto de datos iris al que se accede con <code>data</code>, <code>head</code> nos permite ver los 5 primeros registros del data frame.</p>
+</div>
+<div id="selección-de-registros" class="section level2">
+<h2><span class="header-section-number">3.2</span> Selección de registros</h2>
+<p>Al seleccionar registros se está seleccionando una muestra de observaciones en base a un criterio. El verbo de <code>dplyr</code>a emplear será <code>filter</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="manejo-de-datos-con-r.html#cb3-1"></a>setosa &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span></span>
+<span id="cb3-2"><a href="manejo-de-datos-con-r.html#cb3-2"></a><span class="st">  </span><span class="kw">filter</span>(Species<span class="op">==</span><span class="st">&quot;setosa&quot;</span>)</span>
+<span id="cb3-3"><a href="manejo-de-datos-con-r.html#cb3-3"></a><span class="kw">head</span>(setosa, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa</code></pre>
+<p>Puede ser útil emplear una lista para una condición. En ese caso se ha de realizar.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="manejo-de-datos-con-r.html#cb5-1"></a>species_to_select =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;setosa&quot;</span>,<span class="st">&quot;virginica&quot;</span>)</span>
+<span id="cb5-2"><a href="manejo-de-datos-con-r.html#cb5-2"></a>species &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span></span>
+<span id="cb5-3"><a href="manejo-de-datos-con-r.html#cb5-3"></a><span class="st">  </span><span class="kw">filter</span>(Species <span class="op">%in%</span><span class="st"> </span>species_to_select)</span>
+<span id="cb5-4"><a href="manejo-de-datos-con-r.html#cb5-4"></a></span>
+<span id="cb5-5"><a href="manejo-de-datos-con-r.html#cb5-5"></a><span class="kw">table</span>(species<span class="op">$</span>Species)</span></code></pre></div>
+<pre><code>## 
+##     setosa versicolor  virginica 
+##         50          0         50</code></pre>
+<p>La función <code>table</code> realizar tablas de frecuencia (cuenta registros), en este caso se tienen los tres posibles valores que toma la variable <code>Species</code> con el número de registros que tiene cada elemento de la variable, el número de registros que tiene cada nivel del factor, hay un factor que no tiene registros, no desaparece el nivel, simplemente aparece con 0 observaciones.</p>
+<hr />
+<p><strong>Nota</strong>: Cuando se trabajen con datos es recomendable emplear sumarizaciones, visualizaciones o salidas de tablas para contrastar que todo el trabajo que se está realizando sea correcto. Esas acciones evitarán posteriores errores.</p>
+</div>
+<div id="selección-de-columnas" class="section level2">
+<h2><span class="header-section-number">3.3</span> Selección de columnas</h2>
+<p>Para esta tarea se emplea el verbo <code>select</code> que aparece en otros paquetes de R, cuando una función se emplea por más de un paquete se recomienda emplear la estructura <code>librería::función</code> en este caso <code>dplyr::select</code> y de ese modo se indica a R que la función <code>select</code> es específicamente de la librería <code>dplyr</code>. Hecho el apunte se presentan los ejemplos.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="manejo-de-datos-con-r.html#cb7-1"></a><span class="co"># Librería para mejorar las visualizaciones de tablas</span></span>
+<span id="cb7-2"><a href="manejo-de-datos-con-r.html#cb7-2"></a><span class="kw">library</span>(DT)</span>
+<span id="cb7-3"><a href="manejo-de-datos-con-r.html#cb7-3"></a></span>
+<span id="cb7-4"><a href="manejo-de-datos-con-r.html#cb7-4"></a>two.columns &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span></span>
+<span id="cb7-5"><a href="manejo-de-datos-con-r.html#cb7-5"></a><span class="st">  </span><span class="kw">select</span>(Sepal.Length,Sepal.Width)</span>
+<span id="cb7-6"><a href="manejo-de-datos-con-r.html#cb7-6"></a><span class="kw">datatable</span>(two.columns)</span></code></pre></div>
+<div id="htmlwidget-79ab979f56f6718be9e6" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-79ab979f56f6718be9e6">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150"],[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5,7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7,6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],[3.5,3,3.2,3.1,3.6,3.9,3.4,3.4,2.9,3.1,3.7,3.4,3,3,4,4.4,3.9,3.5,3.8,3.8,3.4,3.7,3.6,3.3,3.4,3,3.4,3.5,3.4,3.2,3.1,3.4,4.1,4.2,3.1,3.2,3.5,3.6,3,3.4,3.5,2.3,3.2,3.5,3.8,3,3.8,3.2,3.7,3.3,3.2,3.2,3.1,2.3,2.8,2.8,3.3,2.4,2.9,2.7,2,3,2.2,2.9,2.9,3.1,3,2.7,2.2,2.5,3.2,2.8,2.5,2.8,2.9,3,2.8,3,2.9,2.6,2.4,2.4,2.7,2.7,3,3.4,3.1,2.3,3,2.5,2.6,3,2.6,2.3,2.7,3,2.9,2.9,2.5,2.8,3.3,2.7,3,2.9,3,3,2.5,2.9,2.5,3.6,3.2,2.7,3,2.5,2.8,3.2,3,3.8,2.6,2.2,3.2,2.8,2.8,2.7,3.3,3.2,2.8,3,2.8,3,2.8,3.8,2.8,2.8,2.6,3,3.4,3.1,3,3.1,3.1,3.1,2.7,3.2,3.3,3,2.5,3,3.4,3]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Sepal.Length<\/th>\n      <th>Sepal.Width<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<p>En el ejemplo anterior se introduce el uso de la librería <code>DT</code> para mejorar la visualización del data frame resultante de la selección. Del mismo modo que ocurría con las observaciones es posible realizar una selección mediante lista de variables:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="manejo-de-datos-con-r.html#cb8-1"></a>columns =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Sepal.Length&#39;</span>,<span class="st">&#39;Sepal.Width&#39;</span>)</span>
+<span id="cb8-2"><a href="manejo-de-datos-con-r.html#cb8-2"></a></span>
+<span id="cb8-3"><a href="manejo-de-datos-con-r.html#cb8-3"></a>two.columns &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span></span>
+<span id="cb8-4"><a href="manejo-de-datos-con-r.html#cb8-4"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(columns)</span></code></pre></div>
+</div>
+<div id="creación-o-actualización-de-variables" class="section level2">
+<h2><span class="header-section-number">3.4</span> Creación o actualización de variables</h2>
+<p>El verbo para generar nuevas variables es <code>mutate</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="manejo-de-datos-con-r.html#cb9-1"></a>iris2 &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span></span>
+<span id="cb9-2"><a href="manejo-de-datos-con-r.html#cb9-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Sepal.Length.6 =</span> <span class="kw">ifelse</span>(Sepal.Length <span class="op">&gt;=</span><span class="dv">6</span>, <span class="st">&#39;GE 6&#39;</span>, <span class="st">&#39;LT 6&#39;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb9-3"><a href="manejo-de-datos-con-r.html#cb9-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Sepal.Length.rela =</span> Sepal.Length<span class="op">/</span><span class="kw">mean</span>(Sepal.Length))</span></code></pre></div>
+<p>Se crea una variable cualitativa mediante una condición con la función <code>ifelse</code>, también se ilustra el ejemplo con la creación de una variable numérica que es la operación matemática de dividir <code>Sepal.Lentgh</code> por su propia media.</p>
+<p>Muy habitual en el trabajo diario de un científico de datos a la hora de crear variables es la necesidad de anidar condiciones, para ello se puede emplear la función <a href="https://dplyr.tidyverse.org/reference/case_when.html"><code>case_when</code></a>. Un ejemplo de uso es.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="manejo-de-datos-con-r.html#cb10-1"></a>iris2 &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span></span>
+<span id="cb10-2"><a href="manejo-de-datos-con-r.html#cb10-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Sepal.Length.agrupado =</span> <span class="kw">case_when</span>(</span>
+<span id="cb10-3"><a href="manejo-de-datos-con-r.html#cb10-3"></a>    Sepal.Length <span class="op">&lt;=</span><span class="st"> </span><span class="dv">5</span> <span class="op">~</span><span class="st"> &#39;1. Menor de 5&#39;</span>,</span>
+<span id="cb10-4"><a href="manejo-de-datos-con-r.html#cb10-4"></a>    Sepal.Length <span class="op">&lt;=</span><span class="st"> </span><span class="dv">6</span> <span class="op">~</span><span class="st"> &#39;2. Entre 5 y 6&#39;</span>,</span>
+<span id="cb10-5"><a href="manejo-de-datos-con-r.html#cb10-5"></a>    <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> &#39;3. Mayor de 6&#39;</span>))</span>
+<span id="cb10-6"><a href="manejo-de-datos-con-r.html#cb10-6"></a></span>
+<span id="cb10-7"><a href="manejo-de-datos-con-r.html#cb10-7"></a><span class="kw">table</span>(iris2<span class="op">$</span>Sepal.Length.agrupado)</span></code></pre></div>
+<pre><code>## 
+##  1. Menor de 5 2. Entre 5 y 6  3. Mayor de 6 
+##             32             57             61</code></pre>
+<p>Las condiciones son excluyentes en función del orden y se recomienda especificar la condición final <em>“y si no”</em> mediante <code>TRUE</code>, facilita el control de errores. A lo largo de todo el ensayo será una función que aparezca de forma recurrente.</p>
+</div>
+<div id="ordenar-datos" class="section level2">
+<h2><span class="header-section-number">3.5</span> Ordenar datos</h2>
+<p>Las ordenaciones requieren siempre de <code>arrange</code>. Ordenación ascendente:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="manejo-de-datos-con-r.html#cb12-1"></a>order1 &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span></span>
+<span id="cb12-2"><a href="manejo-de-datos-con-r.html#cb12-2"></a><span class="st">  </span><span class="kw">arrange</span>(Sepal.Length)</span></code></pre></div>
+<p>Ordenación descendente:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="manejo-de-datos-con-r.html#cb13-1"></a>order2 &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span></span>
+<span id="cb13-2"><a href="manejo-de-datos-con-r.html#cb13-2"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(Sepal.Length))</span></code></pre></div>
+<p>Separando por <code>,</code> es posible poner más de una variable en la ordenación.</p>
+</div>
+<div id="sumarizar-valores" class="section level2">
+<h2><span class="header-section-number">3.6</span> Sumarizar valores</h2>
+<p>En este caso se emplea una combinación de acciones, primero <code>group_by</code> indica el campo por el que se desea agrupar, el campo a sumarizar. Definido el campo, mediante <code>summarise</code> se indica la operación matemática y la variable sobre la que se realiza.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="manejo-de-datos-con-r.html#cb14-1"></a>iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span></span>
+<span id="cb14-2"><a href="manejo-de-datos-con-r.html#cb14-2"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean.Sepal.Length =</span> <span class="kw">mean</span>(Sepal.Length),</span>
+<span id="cb14-3"><a href="manejo-de-datos-con-r.html#cb14-3"></a>            <span class="dt">sd.Sepal.Length =</span> <span class="kw">sd</span>(Sepal.Length),</span>
+<span id="cb14-4"><a href="manejo-de-datos-con-r.html#cb14-4"></a>            <span class="dt">rows =</span> <span class="kw">n</span>())</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre><code>## # A tibble: 3 × 4
+##   Species    mean.Sepal.Length sd.Sepal.Length  rows
+##   &lt;fct&gt;                  &lt;dbl&gt;           &lt;dbl&gt; &lt;int&gt;
+## 1 setosa                  5.01           0.352    50
+## 2 versicolor              5.94           0.516    50
+## 3 virginica               6.59           0.636    50</code></pre>
+<p>Las posibles agregaciones a realizar con summarise son amplias, se disponen de funciones de agrupación, rango o dispersión.</p>
+</div>
+<div id="combinación-de-acciones" class="section level2">
+<h2><span class="header-section-number">3.7</span> Combinación de acciones</h2>
+<p>Se realizan combinaciones de acciones con <code>dplyr</code> por lo que es posible que, separando por el pipe <code>%&gt;%</code>, podamos combinar distintas acciones.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="manejo-de-datos-con-r.html#cb17-1"></a>iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span></span>
+<span id="cb17-2"><a href="manejo-de-datos-con-r.html#cb17-2"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean.Sepal.Length =</span> <span class="kw">mean</span>(Sepal.Length),</span>
+<span id="cb17-3"><a href="manejo-de-datos-con-r.html#cb17-3"></a>            <span class="dt">sd.Sepal.Length =</span> <span class="kw">sd</span>(Sepal.Length),</span>
+<span id="cb17-4"><a href="manejo-de-datos-con-r.html#cb17-4"></a>            <span class="dt">rows =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb17-5"><a href="manejo-de-datos-con-r.html#cb17-5"></a><span class="st">  </span><span class="kw">filter</span>(mean.Sepal.Length<span class="op">&gt;=</span><span class="fl">5.7</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb17-6"><a href="manejo-de-datos-con-r.html#cb17-6"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(mean.Sepal.Length))</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre><code>## # A tibble: 2 × 4
+##   Species    mean.Sepal.Length sd.Sepal.Length  rows
+##   &lt;fct&gt;                  &lt;dbl&gt;           &lt;dbl&gt; &lt;int&gt;
+## 1 virginica               6.59           0.636    50
+## 2 versicolor              5.94           0.516    50</code></pre>
+<p>Siempre se respeta el orden de ejecución por lo que variables creadas o acciones utilizadas en un paso anterior pueden ser empleadas en un paso posterior.</p>
+<hr />
+<p><a href="https://www.r-bloggers.com/2021/05/the-new-r-pipe/"><strong>Nota</strong>: desde la versión 4.1.0 es posible emplear como pipe <code>|&gt;</code>. El autor de este libro tiene configurado su equipo con el anterior y se siente más cómodo con él, pero cualquiera de las opciones es válida.</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="datos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="uniones-de-tablas-con-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rvaquerizo02/edit/master/02-datos-R.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
