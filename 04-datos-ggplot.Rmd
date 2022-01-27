@@ -1,4 +1,4 @@
-# Representación básica con ggplot
+# Representación gráfica básica con ggplot
 
 Además del manejo de datos es necesario tener conocimientos de representación de datos. En este trabajo se va a emplear la librería de R `ggplot` y se trabajarán las **representaciones gráficas básicas** que ha de manejar un científico de datos. Se pueden explorar las múltiples posibilidades que ofrece esta librería [en la web Statistical tools for high-throughput data analysis](http://www.sthda.com/english/)  que dispone de un gran número de recursos para R entre los que destaca el [uso del paquete ggplot](http://www.sthda.com/english/wiki/ggplot2-essentials). 
 
