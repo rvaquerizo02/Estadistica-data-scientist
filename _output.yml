@@ -2,6 +2,7 @@ bookdown::gitbook:
   css: style.css
   config:
     toc:
+      collapse: section
       before: |
         <li><a href="./">Introducción a la Estadística para Científicos de Datos con R/a></li>
       after: |

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 6 Descripción numérica de variables | Introducción a la Estadística para Científicos de Datos con R</title>
+  <meta name="description" content="Libro de introducción a la estadística" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 6 Descripción numérica de variables | Introducción a la Estadística para Científicos de Datos con R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Libro de introducción a la estadística" />
+  <meta name="github-repo" content="https://github.com/rvaquerizo02/Estadistica-data-scientist" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 6 Descripción numérica de variables | Introducción a la Estadística para Científicos de Datos con R" />
+  
+  <meta name="twitter:description" content="Libro de introducción a la estadística" />
+  
+
+<meta name="author" content="Raul Vaquerizo" />
+
+
+<meta name="date" content="2022-02-27" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="representación-gráfica-básica-con-ggplot.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introducción a la Estadística para Científicos de Datos con R/a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.1</b> Objetivos</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#entorno-de-trabajo"><i class="fa fa-check"></i><b>1.2</b> Entorno de trabajo</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="datos.html"><a href="datos.html"><i class="fa fa-check"></i><b>2</b> Datos</a><ul>
+<li class="chapter" data-level="2.1" data-path="datos.html"><a href="datos.html#qué-son-los-datos"><i class="fa fa-check"></i><b>2.1</b> Qué son los datos</a></li>
+<li class="chapter" data-level="2.2" data-path="datos.html"><a href="datos.html#tipos-de-datos"><i class="fa fa-check"></i><b>2.2</b> Tipos de datos</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="datos.html"><a href="datos.html#datos-internos"><i class="fa fa-check"></i><b>2.2.1</b> Datos internos</a></li>
+<li class="chapter" data-level="2.2.2" data-path="datos.html"><a href="datos.html#datos-externos"><i class="fa fa-check"></i><b>2.2.2</b> Datos externos:</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="datos.html"><a href="datos.html#almacenamiento-de-datos"><i class="fa fa-check"></i><b>2.3</b> Almacenamiento de datos</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="datos.html"><a href="datos.html#sistemas-operacionales"><i class="fa fa-check"></i><b>2.3.1</b> Sistemas operacionales</a></li>
+<li class="chapter" data-level="2.3.2" data-path="datos.html"><a href="datos.html#sistemas-informacionales-tradicionales"><i class="fa fa-check"></i><b>2.3.2</b> Sistemas informacionales tradicionales</a></li>
+<li class="chapter" data-level="2.3.3" data-path="datos.html"><a href="datos.html#data-lake"><i class="fa fa-check"></i><b>2.3.3</b> Data Lake</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="datos.html"><a href="datos.html#todo-es-álgebra-lineal"><i class="fa fa-check"></i><b>2.4</b> Todo es álgebra lineal</a></li>
+<li class="chapter" data-level="2.5" data-path="datos.html"><a href="datos.html#como-se-disponen-los-datos"><i class="fa fa-check"></i><b>2.5</b> Como se disponen los datos</a></li>
+<li class="chapter" data-level="2.6" data-path="datos.html"><a href="datos.html#tipos-de-variables"><i class="fa fa-check"></i><b>2.6</b> Tipos de Variables</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="datos.html"><a href="datos.html#variables-cuantitativas"><i class="fa fa-check"></i><b>2.6.1</b> Variables cuantitativas</a></li>
+<li class="chapter" data-level="2.6.2" data-path="datos.html"><a href="datos.html#variables-cualitativas.-factores"><i class="fa fa-check"></i><b>2.6.2</b> Variables cualitativas. Factores</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="datos.html"><a href="datos.html#el-rol-de-las-variables-en-los-datos"><i class="fa fa-check"></i><b>2.7</b> El rol de las variables en los datos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejo de datos con R</a><ul>
+<li class="chapter" data-level="3.1" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#universo-tidyverse"><i class="fa fa-check"></i><b>3.1</b> Universo tidyverse</a></li>
+<li class="chapter" data-level="3.2" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#selección-de-registros"><i class="fa fa-check"></i><b>3.2</b> Selección de registros</a></li>
+<li class="chapter" data-level="3.3" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#selección-de-columnas"><i class="fa fa-check"></i><b>3.3</b> Selección de columnas</a></li>
+<li class="chapter" data-level="3.4" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#creación-o-actualización-de-variables"><i class="fa fa-check"></i><b>3.4</b> Creación o actualización de variables</a></li>
+<li class="chapter" data-level="3.5" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#ordenar-datos"><i class="fa fa-check"></i><b>3.5</b> Ordenar datos</a></li>
+<li class="chapter" data-level="3.6" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#sumarizar-valores"><i class="fa fa-check"></i><b>3.6</b> Sumarizar valores</a></li>
+<li class="chapter" data-level="3.7" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#combinación-de-acciones"><i class="fa fa-check"></i><b>3.7</b> Combinación de acciones</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html"><i class="fa fa-check"></i><b>4</b> Uniones de tablas con R</a><ul>
+<li class="chapter" data-level="4.1" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#uniones-verticales"><i class="fa fa-check"></i><b>4.1</b> Uniones verticales</a></li>
+<li class="chapter" data-level="4.2" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#uniones-horizontales-o-join"><i class="fa fa-check"></i><b>4.2</b> Uniones horizontales o <em>join</em></a><ul>
+<li class="chapter" data-level="4.2.1" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#inner-join"><i class="fa fa-check"></i><b>4.2.1</b> Inner join</a></li>
+<li class="chapter" data-level="4.2.2" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#left-join"><i class="fa fa-check"></i><b>4.2.2</b> Left join</a></li>
+<li class="chapter" data-level="4.2.3" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#anti-join"><i class="fa fa-check"></i><b>4.2.3</b> Anti join</a></li>
+<li class="chapter" data-level="4.2.4" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#librería-sqldf"><i class="fa fa-check"></i><b>4.2.4</b> Librería sqldf</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#duplicidades-en-las-uniones-de-tablas"><i class="fa fa-check"></i><b>4.3</b> Duplicidades en las uniones de tablas</a></li>
+<li class="chapter" data-level="4.4" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#referencias"><i class="fa fa-check"></i><b>4.4</b> Referencias</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="representación-gráfica-básica-con-ggplot.html"><a href="representación-gráfica-básica-con-ggplot.html"><i class="fa fa-check"></i><b>5</b> Representación gráfica básica con ggplot</a><ul>
+<li class="chapter" data-level="5.1" data-path="representación-gráfica-básica-con-ggplot.html"><a href="representación-gráfica-básica-con-ggplot.html#histogramas"><i class="fa fa-check"></i><b>5.1</b> Histogramas</a></li>
+<li class="chapter" data-level="5.2" data-path="representación-gráfica-básica-con-ggplot.html"><a href="representación-gráfica-básica-con-ggplot.html#gráficos-de-densidad"><i class="fa fa-check"></i><b>5.2</b> Gráficos de densidad</a></li>
+<li class="chapter" data-level="5.3" data-path="representación-gráfica-básica-con-ggplot.html"><a href="representación-gráfica-básica-con-ggplot.html#gráficos-de-caja-boxplot"><i class="fa fa-check"></i><b>5.3</b> Gráficos de caja (boxplot)</a></li>
+<li class="chapter" data-level="5.4" data-path="representación-gráfica-básica-con-ggplot.html"><a href="representación-gráfica-básica-con-ggplot.html#gráficos-de-tarta"><i class="fa fa-check"></i><b>5.4</b> Gráficos de tarta</a></li>
+<li class="chapter" data-level="5.5" data-path="representación-gráfica-básica-con-ggplot.html"><a href="representación-gráfica-básica-con-ggplot.html#gráficos-de-barras"><i class="fa fa-check"></i><b>5.5</b> Gráficos de barras</a></li>
+<li class="chapter" data-level="5.6" data-path="representación-gráfica-básica-con-ggplot.html"><a href="representación-gráfica-básica-con-ggplot.html#gráficos-de-líneas"><i class="fa fa-check"></i><b>5.6</b> Gráficos de líneas</a></li>
+<li class="chapter" data-level="5.7" data-path="representación-gráfica-básica-con-ggplot.html"><a href="representación-gráfica-básica-con-ggplot.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>5.7</b> Gráfico de dispersión</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html"><i class="fa fa-check"></i><b>6</b> Descripción numérica de variables</a><ul>
+<li class="chapter" data-level="6.1" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#transformar-datos-en-información"><i class="fa fa-check"></i><b>6.1</b> Transformar datos en información</a></li>
+<li class="chapter" data-level="6.2" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#caso-práctico.-campaña-de-venta-cruzada"><i class="fa fa-check"></i><b>6.2</b> Caso práctico. Campaña de venta cruzada</a></li>
+<li class="chapter" data-level="6.3" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#el-rol-de-las-variables-en-el-conjunto-de-datos"><i class="fa fa-check"></i><b>6.3</b> El rol de las variables en el conjunto de datos</a></li>
+<li class="chapter" data-level="6.4" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#análisis-descriptivos-de-los-datos"><i class="fa fa-check"></i><b>6.4</b> Análisis descriptivos de los datos</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#descritivos-en-variables-cualitativas-factores"><i class="fa fa-check"></i><b>6.4.1</b> Descritivos en variables cualitativas (factores)</a></li>
+<li class="chapter" data-level="6.4.2" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#descritivos-en-variables-cuantitativas"><i class="fa fa-check"></i><b>6.4.2</b> Descritivos en variables cuantitativas</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introducción a la Estadística para Científicos de Datos con R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="descripcion-numerica-variables" class="section level1">
+<h1><span class="header-section-number">Capítulo 6</span> Descripción numérica de variables</h1>
+<p>Se comienza con la recopilación de datos, la tabulación de los mismos y el establecimiento de la tipología y el rol que juegan éstos en el conjunto de datos. Establecido ese marco de es necesario describir datos, recordemos que por si mismos los datos no dicen nada, no resuelven nada. Esa información la suministra un análisis.</p>
+<div id="transformar-datos-en-información" class="section level2">
+<h2><span class="header-section-number">6.1</span> Transformar datos en información</h2>
+<p><img src="imagenes/univariable1.png" /></p>
+<p>Recordando lo tratado en el capítulo 2, el álgebra lineal define el análisis estadístico, la estructura más sencilla es el vector donde aplicaría el análisis univariable, <strong>el inicio de todo</strong>. Si se dispone de más de una variable ya podemos disponer esa serie de datos en forma matricial, buscar estructuras dentro de esas matrices nos produce el análisis multivariable. Conforme ha mejorado la capacidad de computación se han podido crear sistemas estadísticos capaces de aprender de los propios datos, al conjunto de análsis basados en estos sistemas se le denomina <em>machine learning</em>. Actualmente, se está avanzando más, hay entornos más sofisticados capaces de trabajar con tensores matemáticos, estructuras algebraicas multidimensionales que permiten implementar algoritmos que imitan los procesos de aprendizaje humano, este conjunto de técnicas y algoritmos se recogen dentro del ámbito de la inteligencia artificial.</p>
+<p>El presente trabajo se centra en el análisis univariable y servirá de introducción al análisis multivariable. Este capítulo, para ilustrustar como realizar el análisis univariable empleará un caso práctico orientado al marketing analítico.</p>
+</div>
+<div id="caso-práctico.-campaña-de-venta-cruzada" class="section level2">
+<h2><span class="header-section-number">6.2</span> Caso práctico. Campaña de venta cruzada</h2>
+<p>Dentro del mundo del marketing es muy habitual emplear análisis estadísticos para mejorar los resultados de las acciones comerciales. En este caso, una aseguradora española que opera en el ramo de salud desea realizar una campaña de venta cruzada a sus clientes y ofrecer producto de Autos. El ejemplo <a href="https://www.kaggle.com/anmolkumar/health-insurance-cross-sell-prediction">se obtiene de una competición de Kaggle</a>, se recomienda descargar y guardar en el equipo local los datos para poder replicar el código, aunque los datos estarán subidos al repositorio.</p>
+<p>El análisis univariable nos sirve cuando tenemos cuestiones del tipo:</p>
+<ul>
+<li>Estudiar la calidad de la información.</li>
+<li>Descripción inicial de las variables presentes en el conjunto de datos. En el caso práctico nos permite conocer la cartera de clientes encuestados.</li>
+<li>Identificar que características de nuestros datos que pueden ser eficaces cuando tenemos que plantear análisis. Que características de nuestra cartera pueden ser relevantes para ofrecer una acción comercial.</li>
+</ul>
+<p>Todas estas cuestiones están vinculadas a la estadística y en primer término a la estadística sobre una sola variable. Comencemos el trabajo con el caso práctico.</p>
+<p>Del conjunto de datos de trabajo <code>train.csv</code> nos han pasado la siguiente información:</p>
+<ul>
+<li>id Unique ID for the customer</li>
+<li>Gender Gender of the customer</li>
+<li>Age Age of the customer</li>
+<li>Driving_License 0 : Customer does not have DL, 1 : Customer already has DL</li>
+<li>Region_Code Unique code for the region of the customer</li>
+<li>Previously_Insured 1 : Customer already has Vehicle Insurance, 0 : Customer doesn’t have Vehicle Insurance</li>
+<li>Vehicle_Age Age of the Vehicle</li>
+<li>Vehicle_Damage 1 : Customer got his/her vehicle damaged in the past. 0 : Customer didn’t get his/her vehicle damaged in the past.</li>
+<li>Annual_Premium The amount customer needs to pay as premium in the year</li>
+<li>PolicySalesChannel Anonymized Code for the channel of outreaching to the customer ie. Different Agents, Over Mail, Over Phone, In Person, etc.</li>
+<li>Vintage Number of Days, Customer has been associated with the company</li>
+<li>Response 1 : Customer is interested, 0 : Customer is not interested</li>
+</ul>
+<p>Se comienza el proceso de análisis.</p>
+</div>
+<div id="el-rol-de-las-variables-en-el-conjunto-de-datos" class="section level2">
+<h2><span class="header-section-number">6.3</span> El rol de las variables en el conjunto de datos</h2>
+<p>Como se comentó en el capítulo 2 dentro de los datos cada variable tiene una función distinta y esta función define lo que se desea hacer con los datos. En este caso, se dispone de un conjunto de datos suministrado por una aseguradora para ofrecer un seguro de automóviles a sus asegurados de Salud. La variable más relevante será nuestra variable respuesta o <em>target</em>, por la propia definición de los datos es sencillo, ese papel lo realiza el campo <code>response</code>. Para identificar cada registro, cada cliente, se dispone de un campo <code>id</code> el rol de esta variable será directamente el de ID. El resto de variables se consideran variables de entrada, variables <em>input</em>.</p>
+<p>Es práctica habitual cuando se trabaja con datos nombrar los campos de las tablas de tal forma que sea más sencillo identificar cual es el papel de cada variable en el conjunto de datos. En el caso concreto que se está estudiando recordaos, <code>response</code> es target e <code>id</code>es ID. El nombre del resto de las variables solo las define y todas ellas serán variables de entrada o variables <em>input</em>. Puede ser recomendable incluir en el nombre de la variable, además de una breve descripción, un prefijo que nos definiera el rol dentro del conjunto de datos. En este caso práctico se tiene un número bajo de variables, pero es posible encontrarse situaciones en las que sea necesario analizar <em>cientos</em> de variables y esas prácticas facilitan los análisis.</p>
+<p>Conocida la función de cada variable en el conjunto de datos se comienza a describir los elementos del conjunto de datos.</p>
+</div>
+<div id="análisis-descriptivos-de-los-datos" class="section level2">
+<h2><span class="header-section-number">6.4</span> Análisis descriptivos de los datos</h2>
+<p>Recuperando, de nuevo, el capítulo 2 allí se dividieron las variables en 2 tipos, variables cuantitativas y variables cualitativas que llamamos factores. En base a esta división se planteaba una posible descripción numérica y una posible descripción gráfica para variables de entrada o <em>input</em>, aquellas variables ID o variables en bruto <em>raw</em> no tiene sentido que se estudien porque no deberían aportar nada en nuestro análisis.</p>
+<p>Con estas premisas, el primer paso es determinar que tipo de variable es cada una de las que tenemos en el conjunto de datos. Se comienza el trabajo con datos:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="descripcion-numerica-variables.html#cb1-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="descripcion-numerica-variables.html#cb1-2"></a></span>
+<span id="cb1-3"><a href="descripcion-numerica-variables.html#cb1-3"></a>train &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;./data/train.csv&quot;</span>)</span>
+<span id="cb1-4"><a href="descripcion-numerica-variables.html#cb1-4"></a><span class="kw">head</span>(train,<span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 12
+##      id Gender   Age Driving_License Region_Code Previously_Insured Vehicle_Age
+##   &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;           &lt;dbl&gt;       &lt;dbl&gt;              &lt;dbl&gt; &lt;chr&gt;      
+## 1     1 Male      44               1          28                  0 &gt; 2 Years  
+## 2     2 Male      76               1           3                  0 1-2 Year   
+## 3     3 Male      47               1          28                  0 &gt; 2 Years  
+## 4     4 Male      21               1          11                  1 &lt; 1 Year   
+## 5     5 Female    29               1          41                  1 &lt; 1 Year   
+## # … with 5 more variables: Vehicle_Damage &lt;chr&gt;, Annual_Premium &lt;dbl&gt;,
+## #   Policy_Sales_Channel &lt;dbl&gt;, Vintage &lt;dbl&gt;, Response &lt;dbl&gt;</code></pre>
+<p>El conjunto de datos de trabajo es un archivo csv que se llama train y que previamente se ha descargado (como se indica con anterioridad), la función <code>read_csv</code> permite importar ese csv y crear un data frame en la sesión de trabajo de R. Mediante la función <code>str</code> es posible ver el tipo de variables que tiene el data frame:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="descripcion-numerica-variables.html#cb3-1"></a><span class="kw">str</span>(train)</span></code></pre></div>
+<pre><code>## spec_tbl_df [381,109 × 12] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ id                  : num [1:381109] 1 2 3 4 5 6 7 8 9 10 ...
+##  $ Gender              : chr [1:381109] &quot;Male&quot; &quot;Male&quot; &quot;Male&quot; &quot;Male&quot; ...
+##  $ Age                 : num [1:381109] 44 76 47 21 29 24 23 56 24 32 ...
+##  $ Driving_License     : num [1:381109] 1 1 1 1 1 1 1 1 1 1 ...
+##  $ Region_Code         : num [1:381109] 28 3 28 11 41 33 11 28 3 6 ...
+##  $ Previously_Insured  : num [1:381109] 0 0 0 1 1 0 0 0 1 1 ...
+##  $ Vehicle_Age         : chr [1:381109] &quot;&gt; 2 Years&quot; &quot;1-2 Year&quot; &quot;&gt; 2 Years&quot; &quot;&lt; 1 Year&quot; ...
+##  $ Vehicle_Damage      : chr [1:381109] &quot;Yes&quot; &quot;No&quot; &quot;Yes&quot; &quot;No&quot; ...
+##  $ Annual_Premium      : num [1:381109] 40454 33536 38294 28619 27496 ...
+##  $ Policy_Sales_Channel: num [1:381109] 26 26 26 152 152 160 152 26 152 152 ...
+##  $ Vintage             : num [1:381109] 217 183 27 203 39 176 249 72 28 80 ...
+##  $ Response            : num [1:381109] 1 0 1 0 0 0 0 1 0 0 ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   id = col_double(),
+##   ..   Gender = col_character(),
+##   ..   Age = col_double(),
+##   ..   Driving_License = col_double(),
+##   ..   Region_Code = col_double(),
+##   ..   Previously_Insured = col_double(),
+##   ..   Vehicle_Age = col_character(),
+##   ..   Vehicle_Damage = col_character(),
+##   ..   Annual_Premium = col_double(),
+##   ..   Policy_Sales_Channel = col_double(),
+##   ..   Vintage = col_double(),
+##   ..   Response = col_double()
+##   .. )</code></pre>
+<p>Numéricas o carácter, como se indicó, pero una variable numérica no tiene necesariamente un comportamiento numérico, por ese motivo siempre es mejor disponer las variables en</p>
+<ul>
+<li>Variables cuantitativas</li>
+<li>Variables cualitativas o factores</li>
+</ul>
+<p>No todas las variables numéricas serán variables cuantitativas, pero si todas las variables cualitativas serán factores, aunque pueden tener un orden.</p>
+<div id="descritivos-en-variables-cualitativas-factores" class="section level3">
+<h3><span class="header-section-number">6.4.1</span> Descritivos en variables cualitativas (factores)</h3>
+<p>En los datos hay variables que se pueden cuantificar y otras que definen cualidades de los datos. Una cualidad puede ser una característica (género, canal de venta,…) o puede tener un orden como es una variable cualitativa ordinal (antigüedad de cliente, nivel de satisfacción,…) en ambos casos, para describir su comportamiento de forma numérica se emplearán tablas de frecuencias. Estas tablas presentan cada valor de la variable cualitativa, o lo que es lo mismo, cada nivel del factor y contabilizan los registros que tienen esa característica. A la hora de contabilizar se tienen las <strong>frecuencias absolutas</strong> que contabiliza el número de registros para cada nivel del factor o las <strong>frecuencias relativas</strong> que contabiliza el porcentaje de individuos en cada nivel del factor y permiten <em>relativizar</em> esa cantidad.</p>
+<p>En el ejemplo de trabajo se dispone de diversas variables cualitativas. Se ilustran ejemplos de tablas de frecuencia mediante la librería <code>dplyr</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="descripcion-numerica-variables.html#cb5-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Gender) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">Frecuencia absoluta</span><span class="st">`</span> =<span class="st"> </span><span class="kw">n</span>()))</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Gender</th>
+<th align="right">Frecuencia absoluta</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Female</td>
+<td align="right">175020</td>
+</tr>
+<tr class="even">
+<td align="left">Male</td>
+<td align="right">206089</td>
+</tr>
+</tbody>
+</table>
+<p>Señalar la importancia de relativizar los datos absolutos, de obtener porcentajes.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="descripcion-numerica-variables.html#cb6-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Gender) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">Frecuencia relativa</span><span class="st">`</span> =<span class="st"> </span><span class="kw">n</span>()<span class="op">/</span><span class="kw">nrow</span>(train)))</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Gender</th>
+<th align="right">Frecuencia relativa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Female</td>
+<td align="right">0.4592387</td>
+</tr>
+<tr class="even">
+<td align="left">Male</td>
+<td align="right">0.5407613</td>
+</tr>
+</tbody>
+</table>
+<p>La variable género no tiene ningún tipo de orden, pero una variable cualitativa puede requerir un orden.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="descripcion-numerica-variables.html#cb7-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Vehicle_Age) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">Frecuencia relativa</span><span class="st">`</span> =<span class="st"> </span><span class="kw">n</span>()<span class="op">/</span><span class="kw">nrow</span>(train)))</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Vehicle_Age</th>
+<th align="right">Frecuencia relativa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">&lt; 1 Year</td>
+<td align="right">0.4323855</td>
+</tr>
+<tr class="even">
+<td align="left">&gt; 2 Years</td>
+<td align="right">0.0420011</td>
+</tr>
+<tr class="odd">
+<td align="left">1-2 Year</td>
+<td align="right">0.5256134</td>
+</tr>
+</tbody>
+</table>
+<p>Por defecto R siempre presenta en las tablas de frecuencias el orden léxico gráfico, no el orden que tiene la variable, en este caso se tienen vehículos &lt; 1, 1 - 2 y &gt; 2, pero no es el orden que presenta el factor, es necesaria una ordenación.</p>
+<p>Creación y ordenación del factor.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="descripcion-numerica-variables.html#cb8-1"></a><span class="kw">table</span>(train<span class="op">$</span>Vehicle_Age)</span></code></pre></div>
+<pre><code>## 
+##  &lt; 1 Year &gt; 2 Years  1-2 Year 
+##    164786     16007    200316</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="descripcion-numerica-variables.html#cb10-1"></a>train<span class="op">$</span>Vehicle_Age =<span class="st"> </span><span class="kw">factor</span>(train<span class="op">$</span>Vehicle_Age, <span class="dt">levels=</span><span class="kw">c</span>(<span class="st">&#39;&lt; 1 Year&#39;</span>,<span class="st">&#39;1-2 Year&#39;</span>, <span class="st">&#39;&gt; 2 Years&#39;</span>))</span>
+<span id="cb10-2"><a href="descripcion-numerica-variables.html#cb10-2"></a><span class="kw">table</span>(train<span class="op">$</span>Vehicle_Age)</span></code></pre></div>
+<pre><code>## 
+##  &lt; 1 Year  1-2 Year &gt; 2 Years 
+##    164786    200316     16007</code></pre>
+<p>La función <code>table</code> permite realizar rápidas tablas de frecuencias, cuando trabajemos con variables categóricas es importante realizar esas rápidas comprobaciones sobre el correcto tratamiento de los datos.</p>
+<p>Nueva variable con el factor reclasificado mediante <code>tidyverse</code>.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="descripcion-numerica-variables.html#cb12-1"></a>train &lt;-<span class="st"> </span>train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">fr_vehicle_age =</span> <span class="kw">case_when</span>(</span>
+<span id="cb12-2"><a href="descripcion-numerica-variables.html#cb12-2"></a>  Vehicle_Age<span class="op">==</span><span class="st">&#39;&lt; 1 Year&#39;</span> <span class="op">~</span><span class="st"> &#39;01 menor 1 año&#39;</span>,</span>
+<span id="cb12-3"><a href="descripcion-numerica-variables.html#cb12-3"></a>  Vehicle_Age<span class="op">==</span><span class="st">&#39;1-2 Year&#39;</span> <span class="op">~</span><span class="st"> &#39;02 Entre 1 y 2 años&#39;</span>,</span>
+<span id="cb12-4"><a href="descripcion-numerica-variables.html#cb12-4"></a>  <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> &#39;03 más de 2 años&#39;</span>))</span>
+<span id="cb12-5"><a href="descripcion-numerica-variables.html#cb12-5"></a><span class="kw">table</span>(train<span class="op">$</span>fr_vehicle_age)</span></code></pre></div>
+<pre><code>## 
+##      01 menor 1 año 02 Entre 1 y 2 años    03 más de 2 años 
+##              164786              200316               16007</code></pre>
+<p>Usando cualquiera de los dos métodos para clasificar correctamente factores ordinales si es recomendable emplear un sufijo para determinar aquellas variables que han de ser analizadas, en este caso, se emplea <code>fr_</code> indicando “factor_reclasificado”. Práctica muy útil cuando se manejen grandes cantidades de variables y poder distinguir variables input de variables raw (en bruto).</p>
+</div>
+<div id="descritivos-en-variables-cuantitativas" class="section level3">
+<h3><span class="header-section-number">6.4.2</span> Descritivos en variables cuantitativas</h3>
+<p>Las variables cuantitativas pueden tomar valores finitos (ejemplo la edad, antigüedad de cliente,…) o valores infinitos (ejemplo prima de un seguro, salario,…) pero en ambas situaciones se emplearán los mismos análisis descriptivos:</p>
+<ul>
+<li>Estadísticos descriptivos</li>
+<li>Representación gráfica que describa la forma y los posibles valores que toma la variable</li>
+</ul>
+<p>Y se pondrá especial cuidado en detectar algunos de estos problemas:</p>
+<ul>
+<li>Detección de valores modales</li>
+<li>Detección de outliers</li>
+<li>Detección de valores missing</li>
+</ul>
+<div id="medidas-de-posición" class="section level4">
+<h4><span class="header-section-number">6.4.2.1</span> Medidas de posición</h4>
+<p>Los <strong>estadísticos descriptivos</strong> permiten conocer valores relevantes que toman las variables de trabajo. Cuando se quiere conocer sobre que valores se sitúa la variable estamos analizando <strong>medidas de posición</strong> entre las que destacan:</p>
+<ul>
+<li>Media</li>
+<li>Mediana</li>
+<li>Percentiles</li>
+<li>Moda</li>
+</ul>
+<div id="media-de-una-variable" class="section level5">
+<h5><span class="header-section-number">6.4.2.1.1</span> Media de una variable</h5>
+<p>Es el valor sobre el que se sitúan los datos se obtendría sumando todos los valores de la variable y dividiendo por el número de registros, en los datos de trabajo, para la variable <code>Age</code> se tiene:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="descripcion-numerica-variables.html#cb14-1"></a>train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="kw">sum</span>(Age)<span class="op">/</span><span class="kw">nrow</span>(train))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 1
+##   `sum(Age)/nrow(train)`
+##                    &lt;dbl&gt;
+## 1                   38.8</code></pre>
+<p>Evidentemente R dispone de una función que realiza este cálculo y podemos hacerlo de diversas formas:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="descripcion-numerica-variables.html#cb16-1"></a>train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="kw">mean</span>(Age))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 1
+##   `mean(Age)`
+##         &lt;dbl&gt;
+## 1        38.8</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="descripcion-numerica-variables.html#cb18-1"></a><span class="kw">mean</span>(train<span class="op">$</span>Age)</span></code></pre></div>
+<pre><code>## [1] 38.82258</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="descripcion-numerica-variables.html#cb20-1"></a><span class="kw">mean</span>(train<span class="op">$</span>Annual_Premium)</span></code></pre></div>
+<pre><code>## [1] 30564.39</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="descripcion-numerica-variables.html#cb22-1"></a><span class="kw">mean</span>(train<span class="op">$</span>Vintage)</span></code></pre></div>
+<pre><code>## [1] 154.3474</code></pre>
+<p>Para describir correctamente los datos es necesario calcular la media para todas las variables cuantitativas, en R, mediante la librería <code>kable</code> es posible realizar salidas de datos formateadas:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="descripcion-numerica-variables.html#cb24-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">Media edad</span><span class="st">`</span> =<span class="st"> </span><span class="kw">mean</span>(Age), </span>
+<span id="cb24-2"><a href="descripcion-numerica-variables.html#cb24-2"></a>                    <span class="st">`</span><span class="dt">Media de prima</span><span class="st">`</span> =<span class="st"> </span><span class="kw">mean</span>(Annual_Premium),</span>
+<span id="cb24-3"><a href="descripcion-numerica-variables.html#cb24-3"></a>                    <span class="st">`</span><span class="dt">Media de antigüedad (meses)</span><span class="st">`</span> =<span class="st"> </span><span class="kw">mean</span>(Vintage)))</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Media edad</th>
+<th align="right">Media de prima</th>
+<th align="right">Media de antigüedad (meses)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">38.82258</td>
+<td align="right">30564.39</td>
+<td align="right">154.3474</td>
+</tr>
+</tbody>
+</table>
+<p>Los valores de las variables se sitúan en el entorno de la media pero este valor está muy influenciado por la escala, al definirse como la suma de los valores de la variable entre el número de registros si uno de esos valores es muy alto es posible que la media tienda a perder representatividad sólo por un dato atípico.</p>
+</div>
+<div id="mediana-de-una-variable" class="section level5">
+<h5><span class="header-section-number">6.4.2.1.2</span> Mediana de una variable</h5>
+<p>Si se ordenan los datos de la variable en estudio de menor a mayor y establecemos un corte justo a la mitad tenemos otra medida de posición que nos permite conocer el punto que divide esa variable al 50% en valores inferiores y al 50% en valores superiores, esta medida es conocida como <strong>mediana</strong>. No es una programación exacta pero ilustrando el ejemplo con <code>tidyverse</code> se puede hacer.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="descripcion-numerica-variables.html#cb25-1"></a>train <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Age) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">arrange</span>(Age) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="kw">row_number</span>() <span class="op">==</span><span class="st"> </span><span class="kw">round</span>(<span class="kw">nrow</span>(train)<span class="op">/</span><span class="dv">2</span>,<span class="dv">0</span>)) </span></code></pre></div>
+<pre><code>## # A tibble: 1 × 1
+##     Age
+##   &lt;dbl&gt;
+## 1    36</code></pre>
+<p>Se ha definido una función empleando <code>tidyverse</code> para aproximar el cálculo de la mediana, esta función tiene sus limitaciones pero sirve para establecer ese valor que deja a su derecha el 50% y a su izquierda el otro 50% de las observaciones. Evidentemente es mejor emplear la función específica de R:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="descripcion-numerica-variables.html#cb27-1"></a><span class="kw">median</span>(train<span class="op">$</span>Age)</span></code></pre></div>
+<pre><code>## [1] 36</code></pre>
+</div>
+<div id="percentiles-de-una-variable" class="section level5">
+<h5><span class="header-section-number">6.4.2.1.3</span> Percentiles de una variable</h5>
+<p>Además de esa separación 50% de valores a la izquierda - 50% de valores a la derecha para conocer como es una variable numéricamente podemos desear 5% - 95% o 75% - 25% a esos valores que dejan un X% de valores por la derecha se les denomina <strong>percentiles</strong>:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="descripcion-numerica-variables.html#cb29-1"></a><span class="kw">quantile</span>(train<span class="op">$</span>Age, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>)) </span></code></pre></div>
+<pre><code>##   0%  25%  50%  75% 100% 
+##   20   25   36   49   85</code></pre>
+<p>Para obtener el percentil aparece la función <code>quantile</code> que es cuantil en español, es el cuantil el que toma los valores de la variable a intervalos regulares si deseamos dividir en % estamos ante percentiles. Estos valores tienen unos puntos que caracterizan los datos, el percentil 0 es el mínimo de los valores de nuestra variable el valor 100 es el máximo de la variable y, por supuesto, el percentil 50 es la mediana de la variable. Una variable edad es cuantitativa ordinal, en este caso se tienen <strong>valores finitos</strong> entre 20 y 85. Si se replica el código para la variable prima:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="descripcion-numerica-variables.html#cb31-1"></a><span class="kw">quantile</span>(train<span class="op">$</span>Annual_Premium, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>)) </span></code></pre></div>
+<pre><code>##     0%    25%    50%    75%   100% 
+##   2630  24405  31669  39400 540165</code></pre>
+<p>En este caso la variable toma muchos valores, <strong>infinitos</strong>, entre 2630 y 540165 eso ya ofrece una impresión de la mayor complejidad para estudiar la concentración de valores.</p>
+</div>
+<div id="moda" class="section level5">
+<h5><span class="header-section-number">6.4.2.1.4</span> Moda</h5>
+<p>Otra medida importante para conocer como se posicionan los valores de una variable es la <strong>moda</strong>, se define como el valor más repetido. Puede parecer más relevante para variables cuantitativas finitas, sin embargo puede ser importante en variables cuantitativas infinitas porque hay valores que se repiten en la distribución y pueden representar un comportamiento. En R hay paquetes que calculan la moda pero podemos crear nuestra propia función:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="descripcion-numerica-variables.html#cb33-1"></a>Mode &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb33-2"><a href="descripcion-numerica-variables.html#cb33-2"></a>  fx &lt;-<span class="st"> </span><span class="kw">unique</span>(x)</span>
+<span id="cb33-3"><a href="descripcion-numerica-variables.html#cb33-3"></a>  fx[<span class="kw">which.max</span>(<span class="kw">tabulate</span>(<span class="kw">match</span>(x, fx)))]}</span>
+<span id="cb33-4"><a href="descripcion-numerica-variables.html#cb33-4"></a><span class="co"># Moda para Age</span></span>
+<span id="cb33-5"><a href="descripcion-numerica-variables.html#cb33-5"></a><span class="kw">Mode</span>(train<span class="op">$</span>Age)</span></code></pre></div>
+<pre><code>## [1] 24</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="descripcion-numerica-variables.html#cb35-1"></a><span class="co"># Moda para Annual_Premium</span></span>
+<span id="cb35-2"><a href="descripcion-numerica-variables.html#cb35-2"></a><span class="kw">Mode</span>(train<span class="op">$</span>Annual_Premium)</span></code></pre></div>
+<pre><code>## [1] 2630</code></pre>
+<p>En los datos de trabajo la edad más repetida es <code>Mode(train$Age)</code> y hay un valor en la prima muy repetido que es el 2630</p>
+</div>
+</div>
+<div id="medidas-de-dispersión" class="section level4">
+<h4><span class="header-section-number">6.4.2.2</span> Medidas de dispersión</h4>
+<p>Además de conocer sobre que valores se concentra la variable es necesario analizar como de dispersos están esos valores de esa medida de centralidad. Entre ellas se van a estudiar</p>
+<ul>
+<li>Rango intercuartílico</li>
+<li>Varianza y desviación típica</li>
+<li>Coeficiente de variación</li>
+</ul>
+<div id="rango-intercuartílico" class="section level5">
+<h5><span class="header-section-number">6.4.2.2.1</span> Rango intercuartílico</h5>
+<p>Como indica su nombre es un rango, un número inferior y un número superior donde esperamos tener el 50% de las observaciones, recuperando las definición del percentil, un rango que recogería ese porcentaje estaría entre el percentil 25 y el percentil 75, pues así se define el rango intercuartílico como la diferencia entre el percentil 75 - percentil 25</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="descripcion-numerica-variables.html#cb37-1"></a><span class="kw">quantile</span>(train<span class="op">$</span>Age, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.75</span>)) <span class="op">-</span><span class="st"> </span><span class="kw">quantile</span>(train<span class="op">$</span>Age, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.25</span>))</span></code></pre></div>
+<pre><code>## 75% 
+##  24</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="descripcion-numerica-variables.html#cb39-1"></a><span class="kw">IQR</span>(train<span class="op">$</span>Age)</span></code></pre></div>
+<pre><code>## [1] 24</code></pre>
+<p>Esta medida establece una dispersión a partir de los percentiles, es una característica de las medidas de dispersión, siempre miden una diferencia con una medida de posición.</p>
+</div>
+<div id="varianza-y-desviación-típica" class="section level5">
+<h5><span class="header-section-number">6.4.2.2.2</span> Varianza y desviación típica</h5>
+<p>Para medir la dispersión una medida a emplear es la diferencia de cada observación a la media de todas las observaciones, pero es necesario eliminar el efecto del signo y elevar al cuadrado, si promediamos esa diferencia estaríamos ante la varianza.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="descripcion-numerica-variables.html#cb41-1"></a><span class="kw">sum</span>((train<span class="op">$</span>Age <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(train<span class="op">$</span>Age))<span class="op">**</span><span class="dv">2</span>)<span class="op">/</span>(<span class="kw">nrow</span>(train)<span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 240.6101</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="descripcion-numerica-variables.html#cb43-1"></a><span class="kw">var</span>(train<span class="op">$</span>Age)</span></code></pre></div>
+<pre><code>## [1] 240.6101</code></pre>
+<p>La varianza no tiene una unidad de medida, para ello contamos con la <strong>desviación típica</strong>.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="descripcion-numerica-variables.html#cb45-1"></a><span class="kw">sqrt</span>(<span class="kw">var</span>(train<span class="op">$</span>Age))</span></code></pre></div>
+<pre><code>## [1] 15.51161</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="descripcion-numerica-variables.html#cb47-1"></a><span class="kw">sd</span>(train<span class="op">$</span>Age)</span></code></pre></div>
+<pre><code>## [1] 15.51161</code></pre>
+<p>La desviación típica es la raiz de la varianza y está expresada en las mismas unidades que la variable lo que puede facilitar su interpretacion.</p>
+</div>
+<div id="coeficiente-de-variación" class="section level5">
+<h5><span class="header-section-number">6.4.2.2.3</span> Coeficiente de variación</h5>
+<p><a href="https://twitter.com/AnaBayes/status/1443087641600217088">Hilo de Twitter de AnaBayes para entender la importancia del coeficiente de variación</a></p>
+<p><a href="https://twitter.com/AnaBayes">Autor: AnaBayes</a></p>
+<p>Se define como la relación entre la desviación típica y la media y habitualmente se expresa en porcentaje. Es una medida de dispersión muy relevante porque no está en la unidad de la variable, es decir, no es lo mismo una dispersión de 200 grs. en una población de ranas que 200 grs. en una población de caballos, pero si podemos establecer una dispersión que sea el x% de la media. En este caso no es necesario disponer de una función.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="descripcion-numerica-variables.html#cb49-1"></a><span class="kw">sd</span>(train<span class="op">$</span>Age) <span class="op">*</span><span class="st"> </span><span class="dv">100</span><span class="op">/</span><span class="kw">mean</span>(train<span class="op">$</span>Age)</span></code></pre></div>
+<pre><code>## [1] 39.95512</code></pre>
+<p>Se puede decir que la variabilidad de la variable <code>Age</code> es un 40%. Cuando se analizan estadísticos descriptivos de cualquier tipo es muy importante <strong>relativizar</strong> porque empleando valores absolutos todas las conclusiones están afectadas por la unidad de medida.</p>
+</div>
+</div>
+<div id="medidas-de-forma" class="section level4">
+<h4><span class="header-section-number">6.4.2.3</span> Medidas de forma</h4>
+<p>En el capítulo 4 se vieron los histogramas y los gráficos de densidad, en ellos se aprecia como es la forma, <strong>como se distribuye</strong> una variable en función del número de observaciones. La variable se ordena, se hacen tramos en los valores de la variable y se representan barras en función del número de observaciones que tiene cada tramo. Si se unen esas barras con una función continua se obtiene un gráfico de densidad que tiene la forma. Esa línea tiene dos características importantes lo apuntada que es y hacia que posición va ese apuntamiento, la curtosis mide ese apuntamiento y la asimetría mide la dirección de esa punta. No es habitual obtener estas medidas de posición pero si es importante conocer la forma que tiene una variable porque esa forma es posible que pertenezca a una familia de funciones conocidas.</p>
+<p>Para conocer la asimetría se emplea el paquete de R <code>e1071</code> que contiene una serie de funciones estadísticas.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="descripcion-numerica-variables.html#cb51-1"></a><span class="kw">library</span>(e1071)</span>
+<span id="cb51-2"><a href="descripcion-numerica-variables.html#cb51-2"></a><span class="kw">skewness</span>(train<span class="op">$</span>Age)</span></code></pre></div>
+<pre><code>## [1] 0.6725337</code></pre>
+<p>Un valor superior a 0 indica que es asimétrica a la izquierda por lo que la moda &lt; mediana &lt; media. Valores inferiores a 0 indican asimetría a la derecha por lo que media &lt; mediana &lt; moda, la simetría perfecta sería media = mediana = moda. La asimetría a la izquierda es propia de variables que indican precios como es <code>Annual_Premium</code> en los datos de trabajo.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="descripcion-numerica-variables.html#cb53-1"></a><span class="kw">skewness</span>(train<span class="op">$</span>Annual_Premium)</span></code></pre></div>
+<pre><code>## [1] 1.766073</code></pre>
+<p>En este caso se tiene una asimetría muy alta a la izquierda, hay importes muy altos de prima anual. Con la función <code>skewness</code> se puede calcular la asimetría por varios métodos, sería necesario modificar el parámetro <code>type</code>.</p>
+<p>La curtosis o apuntamiento también se calcula con la función <code>kurtosis</code> del paquete <code>e1071</code>.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="descripcion-numerica-variables.html#cb55-1"></a><span class="kw">kurtosis</span>(train<span class="op">$</span>Age)</span></code></pre></div>
+<pre><code>## [1] -0.5656762</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="descripcion-numerica-variables.html#cb57-1"></a><span class="kw">kurtosis</span>(train<span class="op">$</span>Annual_Premium)</span></code></pre></div>
+<pre><code>## [1] 34.00391</code></pre>
+<p>Una curtosis negativa indica una distribución “más cuadrada” y una curtosis positiva indica un apuntamiento, cuanto mayor sea ese apuntamiento mayor será la curtosis. En el ejemplo de trabajo la curtosis de la variable <code>Age</code> es negativa, es una forma de caja; sin embargo, para la variable <code>Annual_Premium</code> se tiene un apuntamiento muy alto, apuntamiento alto y asimetría hacia la izquierda.</p>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="representación-gráfica-básica-con-ggplot.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rvaquerizo02/edit/master/05-descripcion-numerica-variables.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

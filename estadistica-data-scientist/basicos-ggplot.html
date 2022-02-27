@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 5 Representación gráfica básica con ggplot | Introducción a la Estadística para Científicos de Datos con R</title>
+  <meta name="description" content="Libro de introducción a la estadística" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 5 Representación gráfica básica con ggplot | Introducción a la Estadística para Científicos de Datos con R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Libro de introducción a la estadística" />
+  <meta name="github-repo" content="https://github.com/rvaquerizo02/Estadistica-data-scientist" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 5 Representación gráfica básica con ggplot | Introducción a la Estadística para Científicos de Datos con R" />
+  
+  <meta name="twitter:description" content="Libro de introducción a la estadística" />
+  
+
+<meta name="author" content="Raul Vaquerizo" />
+
+
+<meta name="date" content="2022-02-27" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="uniones-de-tablas-con-r.html"/>
+<link rel="next" href="descripcion-numerica-variables.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introducción a la Estadística para Científicos de Datos con R/a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.1</b> Objetivos</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#entorno-de-trabajo"><i class="fa fa-check"></i><b>1.2</b> Entorno de trabajo</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="datos.html"><a href="datos.html"><i class="fa fa-check"></i><b>2</b> Datos</a><ul>
+<li class="chapter" data-level="2.1" data-path="datos.html"><a href="datos.html#qué-son-los-datos"><i class="fa fa-check"></i><b>2.1</b> Qué son los datos</a></li>
+<li class="chapter" data-level="2.2" data-path="datos.html"><a href="datos.html#tipos-de-datos"><i class="fa fa-check"></i><b>2.2</b> Tipos de datos</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="datos.html"><a href="datos.html#datos-internos"><i class="fa fa-check"></i><b>2.2.1</b> Datos internos</a></li>
+<li class="chapter" data-level="2.2.2" data-path="datos.html"><a href="datos.html#datos-externos"><i class="fa fa-check"></i><b>2.2.2</b> Datos externos:</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="datos.html"><a href="datos.html#almacenamiento-de-datos"><i class="fa fa-check"></i><b>2.3</b> Almacenamiento de datos</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="datos.html"><a href="datos.html#sistemas-operacionales"><i class="fa fa-check"></i><b>2.3.1</b> Sistemas operacionales</a></li>
+<li class="chapter" data-level="2.3.2" data-path="datos.html"><a href="datos.html#sistemas-informacionales-tradicionales"><i class="fa fa-check"></i><b>2.3.2</b> Sistemas informacionales tradicionales</a></li>
+<li class="chapter" data-level="2.3.3" data-path="datos.html"><a href="datos.html#data-lake"><i class="fa fa-check"></i><b>2.3.3</b> Data Lake</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="datos.html"><a href="datos.html#todo-es-álgebra-lineal"><i class="fa fa-check"></i><b>2.4</b> Todo es álgebra lineal</a></li>
+<li class="chapter" data-level="2.5" data-path="datos.html"><a href="datos.html#como-se-disponen-los-datos"><i class="fa fa-check"></i><b>2.5</b> Como se disponen los datos</a></li>
+<li class="chapter" data-level="2.6" data-path="datos.html"><a href="datos.html#tipos-de-variables"><i class="fa fa-check"></i><b>2.6</b> Tipos de Variables</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="datos.html"><a href="datos.html#variables-cuantitativas"><i class="fa fa-check"></i><b>2.6.1</b> Variables cuantitativas</a></li>
+<li class="chapter" data-level="2.6.2" data-path="datos.html"><a href="datos.html#variables-cualitativas.-factores"><i class="fa fa-check"></i><b>2.6.2</b> Variables cualitativas. Factores</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="datos.html"><a href="datos.html#el-rol-de-las-variables-en-los-datos"><i class="fa fa-check"></i><b>2.7</b> El rol de las variables en los datos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejo de datos con R</a><ul>
+<li class="chapter" data-level="3.1" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#universo-tidyverse"><i class="fa fa-check"></i><b>3.1</b> Universo tidyverse</a></li>
+<li class="chapter" data-level="3.2" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#selección-de-registros"><i class="fa fa-check"></i><b>3.2</b> Selección de registros</a></li>
+<li class="chapter" data-level="3.3" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#selección-de-columnas"><i class="fa fa-check"></i><b>3.3</b> Selección de columnas</a></li>
+<li class="chapter" data-level="3.4" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#creación-o-actualización-de-variables"><i class="fa fa-check"></i><b>3.4</b> Creación o actualización de variables</a></li>
+<li class="chapter" data-level="3.5" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#ordenar-datos"><i class="fa fa-check"></i><b>3.5</b> Ordenar datos</a></li>
+<li class="chapter" data-level="3.6" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#sumarizar-valores"><i class="fa fa-check"></i><b>3.6</b> Sumarizar valores</a></li>
+<li class="chapter" data-level="3.7" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#combinación-de-acciones"><i class="fa fa-check"></i><b>3.7</b> Combinación de acciones</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html"><i class="fa fa-check"></i><b>4</b> Uniones de tablas con R</a><ul>
+<li class="chapter" data-level="4.1" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#uniones-verticales"><i class="fa fa-check"></i><b>4.1</b> Uniones verticales</a></li>
+<li class="chapter" data-level="4.2" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#uniones-horizontales-o-join"><i class="fa fa-check"></i><b>4.2</b> Uniones horizontales o <em>join</em></a><ul>
+<li class="chapter" data-level="4.2.1" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#inner-join"><i class="fa fa-check"></i><b>4.2.1</b> Inner join</a></li>
+<li class="chapter" data-level="4.2.2" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#left-join"><i class="fa fa-check"></i><b>4.2.2</b> Left join</a></li>
+<li class="chapter" data-level="4.2.3" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#anti-join"><i class="fa fa-check"></i><b>4.2.3</b> Anti join</a></li>
+<li class="chapter" data-level="4.2.4" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#librería-sqldf"><i class="fa fa-check"></i><b>4.2.4</b> Librería sqldf</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#duplicidades-en-las-uniones-de-tablas"><i class="fa fa-check"></i><b>4.3</b> Duplicidades en las uniones de tablas</a></li>
+<li class="chapter" data-level="4.4" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#referencias"><i class="fa fa-check"></i><b>4.4</b> Referencias</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html"><i class="fa fa-check"></i><b>5</b> Representación gráfica básica con ggplot</a><ul>
+<li class="chapter" data-level="5.1" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#histogramas"><i class="fa fa-check"></i><b>5.1</b> Histogramas</a></li>
+<li class="chapter" data-level="5.2" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-densidad"><i class="fa fa-check"></i><b>5.2</b> Gráficos de densidad</a></li>
+<li class="chapter" data-level="5.3" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-caja-boxplot"><i class="fa fa-check"></i><b>5.3</b> Gráficos de caja (boxplot)</a></li>
+<li class="chapter" data-level="5.4" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-tarta"><i class="fa fa-check"></i><b>5.4</b> Gráficos de tarta</a></li>
+<li class="chapter" data-level="5.5" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-barras"><i class="fa fa-check"></i><b>5.5</b> Gráficos de barras</a></li>
+<li class="chapter" data-level="5.6" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-líneas"><i class="fa fa-check"></i><b>5.6</b> Gráficos de líneas</a></li>
+<li class="chapter" data-level="5.7" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>5.7</b> Gráfico de dispersión</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html"><i class="fa fa-check"></i><b>6</b> Descripción numérica de variables</a><ul>
+<li class="chapter" data-level="6.1" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#transformar-datos-en-información"><i class="fa fa-check"></i><b>6.1</b> Transformar datos en información</a></li>
+<li class="chapter" data-level="6.2" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#caso-práctico.-campaña-de-venta-cruzada"><i class="fa fa-check"></i><b>6.2</b> Caso práctico. Campaña de venta cruzada</a></li>
+<li class="chapter" data-level="6.3" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#el-rol-de-las-variables-en-el-conjunto-de-datos"><i class="fa fa-check"></i><b>6.3</b> El rol de las variables en el conjunto de datos</a></li>
+<li class="chapter" data-level="6.4" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#análisis-descriptivos-de-los-datos"><i class="fa fa-check"></i><b>6.4</b> Análisis descriptivos de los datos</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#descritivos-en-variables-cualitativas-factores"><i class="fa fa-check"></i><b>6.4.1</b> Descritivos en variables cualitativas (factores)</a></li>
+<li class="chapter" data-level="6.4.2" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#descritivos-en-variables-cuantitativas"><i class="fa fa-check"></i><b>6.4.2</b> Descritivos en variables cuantitativas</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introducción a la Estadística para Científicos de Datos con R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="basicos-ggplot" class="section level1">
+<h1><span class="header-section-number">Capítulo 5</span> Representación gráfica básica con ggplot</h1>
+<p>Además del manejo de datos es necesario tener conocimientos de representación de datos. En este trabajo se va a emplear la librería de R <code>ggplot</code> y se trabajarán las <strong>representaciones gráficas básicas</strong> que ha de manejar un científico de datos. Se pueden explorar las múltiples posibilidades que ofrece esta librería <a href="http://www.sthda.com/english/">en la web Statistical tools for high-throughput data analysis</a> que dispone de un gran número de recursos para R entre los que destaca el <a href="http://www.sthda.com/english/wiki/ggplot2-essentials">uso del paquete ggplot</a>.</p>
+<p>Iniciamos el proceso cargando la librería <code>tidyverse</code> donde podemos encontrar <code>ggplot</code> como podemos en los mensajes que nos ofrece cuando la cargamos.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="basicos-ggplot.html#cb1-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="basicos-ggplot.html#cb1-2"></a><span class="kw">data</span>(iris)</span></code></pre></div>
+<p>Ya está disponible esta librería gráfica, se puede observar en el mensaje <code>Attaching packages</code>. A modo introductorio, cuando se emplea <code>ggplot</code> siempre se requiere:</p>
+<ul>
+<li><code>data</code> conjunto de datos que tiene la información a representar, <strong>siempre será un data frame</strong>.</li>
+<li><code>aes</code> Aesthetics es la parte del código donde pondremos lo que deseamos visualizar por ejes además de otras características como color, grupos,…</li>
+<li><code>geom_</code> Geometry define el tipo de visualización que deseamos, también podremos establecer las variables a visualizar y otras opciones de visualización.</li>
+</ul>
+<p>La representación gráfica dependerá del tipo de variable que deseamos estudiar, recordando capítulos anteriores que hay dos grandes dos tipos, variables cuantitativas y variables cualitativas que, en la dialéctica de R, se denominan <strong>factores</strong> .</p>
+<p>Para estudiar variables cuantitativas emplearemos:</p>
+<ul>
+<li>Histogramas</li>
+<li>Gráficos de densidad</li>
+<li>Boxplot</li>
+</ul>
+<p>En variables cualitativas:</p>
+<ul>
+<li>Gráficas de tarta</li>
+<li>Gráficos de barra</li>
+</ul>
+<p>También podremos realizar visualizaciones que contengan dos variables, en ese caso se combinan tipos de variables.</p>
+<ul>
+<li>Gráficos de líneas</li>
+<li>Gráficos de puntos</li>
+</ul>
+<div id="histogramas" class="section level2">
+<h2><span class="header-section-number">5.1</span> Histogramas</h2>
+<p>Es una representación gráfica para variables numéricas en forma de barras donde el alto de la barra representa la frecuencia de los valores numéricos agrupados. Nos permite visualizar <strong>la forma y la distribución</strong> de una variable numérica.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="basicos-ggplot.html#cb2-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> iris, <span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Se observa la sintaxis más básica como <code>ggplot(data = data.frame , aes(x=var.cuantitativa)) + geom_histogram()</code> que siempre se empleará con <code>ggplot()</code> y si se añaden opciones al gráfico lo haremos con <code>+</code>. En este caso, solo se representa una variable que estará en el eje x de menor a mayor valor y unas barras que en función de su anchura representan un tramo que <strong>divide la variable cuantitativa en tramos de igual tamaño</strong> y la altura de las barras recoge el número de observaciones que tiene cada tramo.</p>
+<p>Se puede establecer el número de tramos que por defecto está establecido en 30 como nos dice el comentario que ofrece R tras ejecutar el código. Para ello se juega con la opción <code>bins=</code></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="basicos-ggplot.html#cb4-1"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> iris, <span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">10</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Esa anchura del tramo puede hacer que la variable tome una u otra forma, por ese motivo es recomendable ver ese histograma como una función continua, como un gráfico de densidad.</p>
+</div>
+<div id="gráficos-de-densidad" class="section level2">
+<h2><span class="header-section-number">5.2</span> Gráficos de densidad</h2>
+<p>Es una variación del histograma que permite ver la distribución de una variable mediante una línea continua.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="basicos-ggplot.html#cb5-1"></a><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_density</span>()</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Ver la distribución de ese modo limita el problema que supone la anchura de las barras del histograma. Este gráfico representa lo mismo que el histograma pero se distribuye de una forma continua. En el eje x se representa el % de observaciones de forma que el la función que representa el gráfico de densidad deja el 100% de los datos bajo ella. El valor de <em>lo que queda debajo de la función</em> es 1.</p>
+</div>
+<div id="gráficos-de-caja-boxplot" class="section level2">
+<h2><span class="header-section-number">5.3</span> Gráficos de caja (boxplot)</h2>
+<p>Gráfico que recoge información relevante sobre la distribución, las medidas de dispersión y centralidad de una variable numérica.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="basicos-ggplot.html#cb6-1"></a><span class="kw">ggplot</span>(iris,<span class="kw">aes</span>(<span class="dt">y=</span>Sepal.Length)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Este análisis permite recoger mucha información sobre la que volveremos posteriormente. Es habitual categorizar este tipo de gráficos para estudiar visualmente diferencias en la distribución:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="basicos-ggplot.html#cb7-1"></a><span class="kw">ggplot</span>(iris,<span class="kw">aes</span>(<span class="dt">x=</span>Species, <span class="dt">y=</span>Sepal.Length)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>En este caso, al representar dos variables en <code>aes</code> se especifican tanto la x como la y que crea grupos, en realidad este gráfico no deja de ser la combinación de dos variables.</p>
+</div>
+<div id="gráficos-de-tarta" class="section level2">
+<h2><span class="header-section-number">5.4</span> Gráficos de tarta</h2>
+<p>Gráficos empleados para mostrar proporciones en variables categóricas, el circulo representa el total, el 100% y cada porción una parte de ese 100%.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="basicos-ggplot.html#cb8-1"></a>resumen &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">conteo=</span><span class="kw">n</span>())</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="basicos-ggplot.html#cb10-1"></a><span class="kw">ggplot</span>(resumen, <span class="kw">aes</span>(<span class="dt">x=</span><span class="st">&#39;&#39;</span>, <span class="dt">y=</span>conteo, <span class="dt">fill=</span>Species)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">width=</span><span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb10-2"><a href="basicos-ggplot.html#cb10-2"></a><span class="st">  </span><span class="kw">coord_polar</span>(<span class="st">&quot;y&quot;</span>, <span class="dt">start=</span><span class="dv">0</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Una práctica recomendable a la hora de realizar gráficos con factores y ggplot, la creación de un data frame previo con la agrupación por el factor en análisis y el cálculo de la variable a representar, en este caso se desea ver la proporción de cada especie en los datos. No hay variable x, la medida es esa sumarización que se ha llamado <code>conteo</code> y cada grupo será una especie. Es un factor, cuando representemos factores en el 80% de las ocasiones aparecerá <code>geom_bar</code> y si ya hemos creado la variable a representar, como es el caso porque hemos hecho una sumarización previa entonces se usará <code>stat = 'identity'</code>. Para especificar que sea un gráfico de tarta añadiremos <code>coord_polar</code></p>
+</div>
+<div id="gráficos-de-barras" class="section level2">
+<h2><span class="header-section-number">5.5</span> Gráficos de barras</h2>
+<p>Gráfico empleado para representar frecuencias de <strong>variables categóricas (factores)</strong> en un eje se pondrá el factor y en el otro la frecuencia total o frecuencia relativa del factor</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="basicos-ggplot.html#cb11-1"></a><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>Species, <span class="dt">y=</span>Sepal.Width)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>También es habitual la combinación de 2 factores en este tipo de gráfico. Creamos un nuevo factor como resultado de la comparación de la longitud del sépalo.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="basicos-ggplot.html#cb12-1"></a>iris &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Sepal.Length.factor =</span> <span class="kw">case_when</span>(</span>
+<span id="cb12-2"><a href="basicos-ggplot.html#cb12-2"></a>  Sepal.Length<span class="op">&gt;=</span><span class="dv">5</span> <span class="op">~</span><span class="st"> &#39;Mayor 5 mm&#39;</span>,</span>
+<span id="cb12-3"><a href="basicos-ggplot.html#cb12-3"></a>  <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> &#39;Menor de 5 mm&#39;</span>))</span></code></pre></div>
+<p>Se emplea la función <code>case_when</code> para crear ese factor, cada condición tiene un valor y por último con <code>TRUE</code> tenemos los restantes registros. Vamos a representar 3 barras, una por especie, y dentro de cada una de ellas vemos el número de registros separada por ese factor que se ha creado con anterioridad.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="basicos-ggplot.html#cb13-1"></a>resumen &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Species, Sepal.Length.factor) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb13-2"><a href="basicos-ggplot.html#cb13-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">registros =</span> <span class="kw">n</span>())</span></code></pre></div>
+<pre><code>## `summarise()` regrouping output by &#39;Species&#39; (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="basicos-ggplot.html#cb15-1"></a><span class="kw">ggplot</span>(resumen, <span class="kw">aes</span>(<span class="dt">x=</span>Species, <span class="dt">y=</span>registros, <span class="dt">fill=</span>Sepal.Length.factor, <span class="dt">color=</span>Sepal.Length.factor)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Se puede ver como este gráfico de barras distingue el número de registros por especie y de forma apilada, uno encima de otro, tenemos distintos colores en las barras que nos identifican aquellos registros que tienen la longitud del sépalo mayor de 5 mm. Este tipo de gráfica de barras son barras apiladas. Además de crear barras apiladas se pueden crear barras agrupadas:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="basicos-ggplot.html#cb16-1"></a><span class="kw">ggplot</span>(resumen, <span class="kw">aes</span>(<span class="dt">x=</span>Species, <span class="dt">y=</span>registros, <span class="dt">fill=</span>Sepal.Length.factor, <span class="dt">color=</span>Sepal.Length.factor)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb16-2"><a href="basicos-ggplot.html#cb16-2"></a><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Para modificar el tipo de gráfico sólo tenemos que emplear la opción <code>position = "dodge"</code>.</p>
+</div>
+<div id="gráficos-de-líneas" class="section level2">
+<h2><span class="header-section-number">5.6</span> Gráficos de líneas</h2>
+<p>Esta representación gráfica muestra dos variables como una secuencia de datos unidos por una línea, muy habitual en las series temporales. En los datos utilizados no se dispone de datos temporales pero se puede emplear para sumarizar la media de la anchura del sépalo por especie.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="basicos-ggplot.html#cb17-1"></a>resumen &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">media=</span><span class="kw">mean</span>(Sepal.Width))</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="basicos-ggplot.html#cb19-1"></a><span class="kw">ggplot</span>(resumen, <span class="kw">aes</span>(<span class="dt">x=</span>Species, <span class="dt">y=</span>media, <span class="dt">group=</span><span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>()</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>El eje x es la especie y en el eje y tenemos la media de la anchura del sépalo, como en casos anteriores se sugiere realizar la sumarización previa creando un conjunto de datos de resumen. Destacar la necesidad de poner la opción <code>group = 1</code> ya que es necesario especificar el “número de cortes”, de este modo especificamos que el 100 de las observaciones están en un grupo.</p>
+</div>
+<div id="gráfico-de-dispersión" class="section level2">
+<h2><span class="header-section-number">5.7</span> Gráfico de dispersión</h2>
+<p>Gráfico empleado para visualizar en 2 ejes variables numéricas, muy útil para estudiar relaciones entre variables.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="basicos-ggplot.html#cb20-1"></a><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length, <span class="dt">y=</span>Sepal.Width)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Un gráfico sobre el que se volverá de forma reiterada a lo largo del ensayo.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="uniones-de-tablas-con-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="descripcion-numerica-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rvaquerizo02/edit/master/04-datos-ggplot.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
