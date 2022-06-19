@@ -63,3 +63,6 @@ representación-gráfica-básica-con-ggplot-datos-ggplot
 datos-ggplot-representación-gráfica-básica-con-ggplot
 descripcion-numerica-variables
 basicos-ggplot
+descripción-gráfica-de-datos
+descripción-gráfica-de-factores
+descripción-gráfica-de-variables-numéricas
