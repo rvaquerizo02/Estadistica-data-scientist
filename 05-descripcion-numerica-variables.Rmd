@@ -47,7 +47,7 @@ Es práctica habitual cuando se trabaja con datos nombrar los campos de las tabl
 
 Conocida la función de cada variable en el conjunto de datos se comienza a describir los elementos del conjunto de datos. 
 
-## Análisis descriptivos de los datos
+## Análisis descriptivos de los datos 
 
 Recuperando, de nuevo, el capítulo 2 allí se dividieron las variables en 2 tipos, variables cuantitativas y variables cualitativas que llamamos factores. En base a esta división se planteaba una posible descripción numérica y una posible descripción gráfica para variables de entrada o _input_, aquellas variables ID o variables en bruto  _raw_ no tiene sentido que se estudien porque no deberían aportar nada en nuestro análisis. 
 
@@ -56,11 +56,11 @@ Con estas premisas, el primer paso es determinar que tipo de variable es cada un
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse)
 
-train <- read_csv("./data/train.csv")
+train <- read.csv("./data/train.csv")
 head(train,5)
 ```
 
-El conjunto de datos de trabajo es un archivo csv que se llama train y que previamente se ha descargado (como se indica con anterioridad), la función `read_csv` permite importar ese csv y crear un data frame en la sesión de trabajo de R. Mediante la función `str` es posible ver el tipo de variables que tiene el data frame:
+El conjunto de datos de trabajo es un archivo csv que se llama train y que previamente se ha descargado (como se indica con anterioridad), la función `read.csv` permite importar el csv de trabajo y crear un data frame en la sesión de R. Mediante la función `str` es posible ver el tipo de variables que tiene el data frame:
 
 ```{r}
 str(train)
@@ -73,9 +73,9 @@ Numéricas o carácter, como se indicó, pero una variable numérica no tiene ne
 
 No todas las variables numéricas serán variables cuantitativas, pero si todas las variables cualitativas serán factores, aunque pueden tener un orden. 
 
----
-[**Nota**: Nunca se debe tratar una cualidad como un número, si el sexo viene codificado 1-mujer 2-hombre, no debemos tratar esa variable como cuantitativa.
----
+
+>**Nota**: Nunca se debe tratar una cualidad como un número, si el sexo viene codificado 1-mujer 2-hombre, no debemos tratar esa variable como cuantitativa.
+
 
 ### Descritivos en variables cualitativas (factores)
 
@@ -298,4 +298,5 @@ La curtosis o apuntamiento también se calcula con la función `kurtosis` del pa
 kurtosis(train$Age)
 kurtosis(train$Annual_Premium)
 ```
+
 Una curtosis negativa indica una distribución "más cuadrada" y una curtosis positiva indica un apuntamiento, cuanto mayor sea ese apuntamiento mayor será la curtosis. En el ejemplo de trabajo la curtosis de la variable `Age` es negativa, es una forma de caja; sin embargo, para la variable `Annual_Premium` se tiene un apuntamiento muy alto, apuntamiento alto y asimetría hacia la izquierda. 

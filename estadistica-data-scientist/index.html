@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Introducción a la Estadística para Científicos de Datos con R</title>
   <meta name="description" content="Libro de introducción a la estadística" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Introducción a la Estadística para Científicos de Datos con R" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Libro de introducción a la estadística" />
   <meta name="github-repo" content="https://github.com/rvaquerizo02/Estadistica-data-scientist" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Raul Vaquerizo" />
 
 
-<meta name="date" content="2022-06-19" />
+<meta name="date" content="2022-08-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,8 @@
   
 
 <link rel="next" href="datos.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,8 +49,10 @@
 
 
 
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 
@@ -70,30 +72,36 @@
 <li><a href="./">Introducción a la Estadística para Científicos de Datos con R/a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.1</b> Objetivos</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#entorno-de-trabajo"><i class="fa fa-check"></i><b>1.2</b> Entorno de trabajo</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="datos.html"><a href="datos.html"><i class="fa fa-check"></i><b>2</b> Datos</a><ul>
+<li class="chapter" data-level="2" data-path="datos.html"><a href="datos.html"><i class="fa fa-check"></i><b>2</b> Datos</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="datos.html"><a href="datos.html#qué-son-los-datos"><i class="fa fa-check"></i><b>2.1</b> Qué son los datos</a></li>
-<li class="chapter" data-level="2.2" data-path="datos.html"><a href="datos.html#tipos-de-datos"><i class="fa fa-check"></i><b>2.2</b> Tipos de datos</a><ul>
+<li class="chapter" data-level="2.2" data-path="datos.html"><a href="datos.html#tipos-de-datos"><i class="fa fa-check"></i><b>2.2</b> Tipos de datos</a>
+<ul>
 <li class="chapter" data-level="2.2.1" data-path="datos.html"><a href="datos.html#datos-internos"><i class="fa fa-check"></i><b>2.2.1</b> Datos internos</a></li>
 <li class="chapter" data-level="2.2.2" data-path="datos.html"><a href="datos.html#datos-externos"><i class="fa fa-check"></i><b>2.2.2</b> Datos externos:</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="datos.html"><a href="datos.html#almacenamiento-de-datos"><i class="fa fa-check"></i><b>2.3</b> Almacenamiento de datos</a><ul>
+<li class="chapter" data-level="2.3" data-path="datos.html"><a href="datos.html#almacenamiento-de-datos"><i class="fa fa-check"></i><b>2.3</b> Almacenamiento de datos</a>
+<ul>
 <li class="chapter" data-level="2.3.1" data-path="datos.html"><a href="datos.html#sistemas-operacionales"><i class="fa fa-check"></i><b>2.3.1</b> Sistemas operacionales</a></li>
 <li class="chapter" data-level="2.3.2" data-path="datos.html"><a href="datos.html#sistemas-informacionales-tradicionales"><i class="fa fa-check"></i><b>2.3.2</b> Sistemas informacionales tradicionales</a></li>
 <li class="chapter" data-level="2.3.3" data-path="datos.html"><a href="datos.html#data-lake"><i class="fa fa-check"></i><b>2.3.3</b> Data Lake</a></li>
 </ul></li>
 <li class="chapter" data-level="2.4" data-path="datos.html"><a href="datos.html#todo-es-álgebra-lineal"><i class="fa fa-check"></i><b>2.4</b> Todo es álgebra lineal</a></li>
 <li class="chapter" data-level="2.5" data-path="datos.html"><a href="datos.html#como-se-disponen-los-datos"><i class="fa fa-check"></i><b>2.5</b> Como se disponen los datos</a></li>
-<li class="chapter" data-level="2.6" data-path="datos.html"><a href="datos.html#tipos-de-variables"><i class="fa fa-check"></i><b>2.6</b> Tipos de Variables</a><ul>
+<li class="chapter" data-level="2.6" data-path="datos.html"><a href="datos.html#tipos-de-variables"><i class="fa fa-check"></i><b>2.6</b> Tipos de Variables</a>
+<ul>
 <li class="chapter" data-level="2.6.1" data-path="datos.html"><a href="datos.html#variables-cuantitativas"><i class="fa fa-check"></i><b>2.6.1</b> Variables cuantitativas</a></li>
 <li class="chapter" data-level="2.6.2" data-path="datos.html"><a href="datos.html#variables-cualitativas.-factores"><i class="fa fa-check"></i><b>2.6.2</b> Variables cualitativas. Factores</a></li>
 </ul></li>
 <li class="chapter" data-level="2.7" data-path="datos.html"><a href="datos.html#el-rol-de-las-variables-en-los-datos"><i class="fa fa-check"></i><b>2.7</b> El rol de las variables en los datos</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejo de datos con R</a><ul>
+<li class="chapter" data-level="3" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejo de datos con R</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#universo-tidyverse"><i class="fa fa-check"></i><b>3.1</b> Universo tidyverse</a></li>
 <li class="chapter" data-level="3.2" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#selección-de-registros"><i class="fa fa-check"></i><b>3.2</b> Selección de registros</a></li>
 <li class="chapter" data-level="3.3" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#selección-de-columnas"><i class="fa fa-check"></i><b>3.3</b> Selección de columnas</a></li>
@@ -102,9 +110,11 @@
 <li class="chapter" data-level="3.6" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#sumarizar-valores"><i class="fa fa-check"></i><b>3.6</b> Sumarizar valores</a></li>
 <li class="chapter" data-level="3.7" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#combinación-de-acciones"><i class="fa fa-check"></i><b>3.7</b> Combinación de acciones</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html"><i class="fa fa-check"></i><b>4</b> Uniones de tablas con R</a><ul>
+<li class="chapter" data-level="4" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html"><i class="fa fa-check"></i><b>4</b> Uniones de tablas con R</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#uniones-verticales"><i class="fa fa-check"></i><b>4.1</b> Uniones verticales</a></li>
-<li class="chapter" data-level="4.2" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#uniones-horizontales-o-join"><i class="fa fa-check"></i><b>4.2</b> Uniones horizontales o <em>join</em></a><ul>
+<li class="chapter" data-level="4.2" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#uniones-horizontales-o-join"><i class="fa fa-check"></i><b>4.2</b> Uniones horizontales o <em>join</em></a>
+<ul>
 <li class="chapter" data-level="4.2.1" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#inner-join"><i class="fa fa-check"></i><b>4.2.1</b> Inner join</a></li>
 <li class="chapter" data-level="4.2.2" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#left-join"><i class="fa fa-check"></i><b>4.2.2</b> Left join</a></li>
 <li class="chapter" data-level="4.2.3" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#anti-join"><i class="fa fa-check"></i><b>4.2.3</b> Anti join</a></li>
@@ -113,7 +123,8 @@
 <li class="chapter" data-level="4.3" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#duplicidades-en-las-uniones-de-tablas"><i class="fa fa-check"></i><b>4.3</b> Duplicidades en las uniones de tablas</a></li>
 <li class="chapter" data-level="4.4" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#referencias"><i class="fa fa-check"></i><b>4.4</b> Referencias</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html"><i class="fa fa-check"></i><b>5</b> Representación gráfica básica con ggplot</a><ul>
+<li class="chapter" data-level="5" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html"><i class="fa fa-check"></i><b>5</b> Representación gráfica básica con ggplot</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#histogramas"><i class="fa fa-check"></i><b>5.1</b> Histogramas</a></li>
 <li class="chapter" data-level="5.2" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-densidad"><i class="fa fa-check"></i><b>5.2</b> Gráficos de densidad</a></li>
 <li class="chapter" data-level="5.3" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-caja-boxplot"><i class="fa fa-check"></i><b>5.3</b> Gráficos de caja (boxplot)</a></li>
@@ -122,18 +133,38 @@
 <li class="chapter" data-level="5.6" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-líneas"><i class="fa fa-check"></i><b>5.6</b> Gráficos de líneas</a></li>
 <li class="chapter" data-level="5.7" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>5.7</b> Gráfico de dispersión</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html"><i class="fa fa-check"></i><b>6</b> Descripción numérica de variables</a><ul>
+<li class="chapter" data-level="6" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html"><i class="fa fa-check"></i><b>6</b> Descripción numérica de variables</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#transformar-datos-en-información"><i class="fa fa-check"></i><b>6.1</b> Transformar datos en información</a></li>
 <li class="chapter" data-level="6.2" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#caso-práctico.-campaña-de-venta-cruzada"><i class="fa fa-check"></i><b>6.2</b> Caso práctico. Campaña de venta cruzada</a></li>
 <li class="chapter" data-level="6.3" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#el-rol-de-las-variables-en-el-conjunto-de-datos"><i class="fa fa-check"></i><b>6.3</b> El rol de las variables en el conjunto de datos</a></li>
-<li class="chapter" data-level="6.4" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#análisis-descriptivos-de-los-datos"><i class="fa fa-check"></i><b>6.4</b> Análisis descriptivos de los datos</a><ul>
+<li class="chapter" data-level="6.4" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#análisis-descriptivos-de-los-datos"><i class="fa fa-check"></i><b>6.4</b> Análisis descriptivos de los datos</a>
+<ul>
 <li class="chapter" data-level="6.4.1" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#descritivos-en-variables-cualitativas-factores"><i class="fa fa-check"></i><b>6.4.1</b> Descritivos en variables cualitativas (factores)</a></li>
 <li class="chapter" data-level="6.4.2" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#descritivos-en-variables-cuantitativas"><i class="fa fa-check"></i><b>6.4.2</b> Descritivos en variables cuantitativas</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="descripción-gráfica-de-datos.html"><a href="descripción-gráfica-de-datos.html"><i class="fa fa-check"></i><b>7</b> Descripción gráfica de datos</a><ul>
-<li class="chapter" data-level="7.0.1" data-path="descripción-gráfica-de-datos.html"><a href="descripción-gráfica-de-datos.html#descripción-gráfica-de-factores"><i class="fa fa-check"></i><b>7.0.1</b> Descripción gráfica de factores</a></li>
-<li class="chapter" data-level="7.0.2" data-path="descripción-gráfica-de-datos.html"><a href="descripción-gráfica-de-datos.html#descripción-gráfica-de-variables-numéricas"><i class="fa fa-check"></i><b>7.0.2</b> Descripción gráfica de variables numéricas</a></li>
+<li class="chapter" data-level="7" data-path="descripcion-grafica-datos.html"><a href="descripcion-grafica-datos.html"><i class="fa fa-check"></i><b>7</b> Descripción gráfica de datos</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="descripcion-grafica-datos.html"><a href="descripcion-grafica-datos.html#descripción-gráfica-de-factores"><i class="fa fa-check"></i><b>7.0.1</b> Descripción gráfica de factores</a></li>
+<li class="chapter" data-level="7.0.2" data-path="descripcion-grafica-datos.html"><a href="descripcion-grafica-datos.html#descripción-gráfica-de-variables-numéricas"><i class="fa fa-check"></i><b>7.0.2</b> Descripción gráfica de variables numéricas</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="problemas-datos.html"><a href="problemas-datos.html"><i class="fa fa-check"></i><b>8</b> Problemas con los datos</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="problemas-datos.html"><a href="problemas-datos.html#problemática-con-factores"><i class="fa fa-check"></i><b>8.1</b> Problemática con factores</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="problemas-datos.html"><a href="problemas-datos.html#factores-con-niveles-de-pocos-registros"><i class="fa fa-check"></i><b>8.1.1</b> Factores con niveles de pocos registros</a></li>
+<li class="chapter" data-level="8.1.2" data-path="problemas-datos.html"><a href="problemas-datos.html#factores-que-aparecen-como-variables-numéricas"><i class="fa fa-check"></i><b>8.1.2</b> Factores que aparecen como variables numéricas</a></li>
+<li class="chapter" data-level="8.1.3" data-path="problemas-datos.html"><a href="problemas-datos.html#factores-con-un-gran-número-de-niveles"><i class="fa fa-check"></i><b>8.1.3</b> Factores con un gran número de niveles</a></li>
+<li class="chapter" data-level="8.1.4" data-path="problemas-datos.html"><a href="problemas-datos.html#factores-con-valores-perdidos"><i class="fa fa-check"></i><b>8.1.4</b> Factores con valores perdidos</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="problemas-datos.html"><a href="problemas-datos.html#problemas-con-variables-numéricas"><i class="fa fa-check"></i><b>8.2</b> Problemas con variables numéricas</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="problemas-datos.html"><a href="problemas-datos.html#valores-modales"><i class="fa fa-check"></i><b>8.2.1</b> Valores modales</a></li>
+<li class="chapter" data-level="8.2.2" data-path="problemas-datos.html"><a href="problemas-datos.html#valores-atípicos"><i class="fa fa-check"></i><b>8.2.2</b> Valores atípicos</a></li>
+<li class="chapter" data-level="8.2.3" data-path="problemas-datos.html"><a href="problemas-datos.html#variables-numéricas-como-factores"><i class="fa fa-check"></i><b>8.2.3</b> Variables numéricas como factores</a></li>
+<li class="chapter" data-level="8.2.4" data-path="problemas-datos.html"><a href="problemas-datos.html#valores-perdidos-en-variables-numéricas"><i class="fa fa-check"></i><b>8.2.4</b> Valores perdidos en variables numéricas</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -158,12 +189,12 @@
 <div id="header">
 <h1 class="title">Introducción a la Estadística para Científicos de Datos con R</h1>
 <p class="author"><em>Raul Vaquerizo</em></p>
-<p class="date"><em>2022-06-19</em></p>
+<p class="date"><em>2022-08-13</em></p>
 </div>
-<div id="introducción" class="section level1">
-<h1><span class="header-section-number">Capítulo 1</span> Introducción</h1>
-<div id="objetivos" class="section level2">
-<h2><span class="header-section-number">1.1</span> Objetivos</h2>
+<div id="introducción" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Capítulo 1</span> Introducción<a href="index.html#introducción" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="objetivos" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Objetivos<a href="index.html#objetivos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Hay muchos y mejores pero quiero mi propio ensayo de introducción a la estadística en la Ciencia de Datos, además quiero que sirva para crear historias sobre la Estadística. Se emplea un título comercial donde aparece <strong>Ciencia de datos</strong> personalmente no creo que el oficio consista en hacer ciencia con los datos, en el día a día se aplican análisis estadísticos que nos permiten describir problemas, sugerir soluciones a esos problemas y mediante diseño de experimentos pilotar o medir la eficiencia de esas soluciones. De este modo, la estadística es uno de los pilares sobre los que se fundamenta eso que se denomina Ciencia de Datos y como os se ha comentado con anterioridad hay más y mejores trabajos y por ahí vamos a comenzar, la referencias empleadas para realizar este trabajo son:</p>
 <ul>
 <li><a href="https://datanalytics.com/libro_estadistica/index.html">Libro de Carlos Gil</a></li>
@@ -204,8 +235,8 @@ Modelos GLM
 </ol>
 <p>Visión completamente práctica y desde el punto de vista frecuentista que será distinta a lo que podéis encontrar en otros foros. Cada tema tendrá una sección descriptiva y una sección práctica con R.</p>
 </div>
-<div id="entorno-de-trabajo" class="section level2">
-<h2><span class="header-section-number">1.2</span> Entorno de trabajo</h2>
+<div id="entorno-de-trabajo" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Entorno de trabajo<a href="index.html#entorno-de-trabajo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Este trabajo está escrito en Markdown desde <a href="https://www.rstudio.com/">RStudio</a>, el primer paso es disponer de RStudio e instalar las librerías necesarias para crear Markdown. Los paquetes que se van a emplear a lo largo del curso serán:</p>
 <ul>
 <li>readxl</li>
@@ -237,7 +268,6 @@ Modelos GLM
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -256,6 +286,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -276,6 +307,10 @@ gitbook.start({
 "text": null
 },
 "download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }

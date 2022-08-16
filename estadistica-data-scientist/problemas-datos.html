@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 8 Problemas con los datos | Introducción a la Estadística para Científicos de Datos con R</title>
+  <meta name="description" content="Libro de introducción a la estadística" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 8 Problemas con los datos | Introducción a la Estadística para Científicos de Datos con R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Libro de introducción a la estadística" />
+  <meta name="github-repo" content="https://github.com/rvaquerizo02/Estadistica-data-scientist" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 8 Problemas con los datos | Introducción a la Estadística para Científicos de Datos con R" />
+  
+  <meta name="twitter:description" content="Libro de introducción a la estadística" />
+  
+
+<meta name="author" content="Raul Vaquerizo" />
+
+
+<meta name="date" content="2022-08-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="descripcion-grafica-datos.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introducción a la Estadística para Científicos de Datos con R/a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.1</b> Objetivos</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#entorno-de-trabajo"><i class="fa fa-check"></i><b>1.2</b> Entorno de trabajo</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="datos.html"><a href="datos.html"><i class="fa fa-check"></i><b>2</b> Datos</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="datos.html"><a href="datos.html#qué-son-los-datos"><i class="fa fa-check"></i><b>2.1</b> Qué son los datos</a></li>
+<li class="chapter" data-level="2.2" data-path="datos.html"><a href="datos.html#tipos-de-datos"><i class="fa fa-check"></i><b>2.2</b> Tipos de datos</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="datos.html"><a href="datos.html#datos-internos"><i class="fa fa-check"></i><b>2.2.1</b> Datos internos</a></li>
+<li class="chapter" data-level="2.2.2" data-path="datos.html"><a href="datos.html#datos-externos"><i class="fa fa-check"></i><b>2.2.2</b> Datos externos:</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="datos.html"><a href="datos.html#almacenamiento-de-datos"><i class="fa fa-check"></i><b>2.3</b> Almacenamiento de datos</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="datos.html"><a href="datos.html#sistemas-operacionales"><i class="fa fa-check"></i><b>2.3.1</b> Sistemas operacionales</a></li>
+<li class="chapter" data-level="2.3.2" data-path="datos.html"><a href="datos.html#sistemas-informacionales-tradicionales"><i class="fa fa-check"></i><b>2.3.2</b> Sistemas informacionales tradicionales</a></li>
+<li class="chapter" data-level="2.3.3" data-path="datos.html"><a href="datos.html#data-lake"><i class="fa fa-check"></i><b>2.3.3</b> Data Lake</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="datos.html"><a href="datos.html#todo-es-álgebra-lineal"><i class="fa fa-check"></i><b>2.4</b> Todo es álgebra lineal</a></li>
+<li class="chapter" data-level="2.5" data-path="datos.html"><a href="datos.html#como-se-disponen-los-datos"><i class="fa fa-check"></i><b>2.5</b> Como se disponen los datos</a></li>
+<li class="chapter" data-level="2.6" data-path="datos.html"><a href="datos.html#tipos-de-variables"><i class="fa fa-check"></i><b>2.6</b> Tipos de Variables</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="datos.html"><a href="datos.html#variables-cuantitativas"><i class="fa fa-check"></i><b>2.6.1</b> Variables cuantitativas</a></li>
+<li class="chapter" data-level="2.6.2" data-path="datos.html"><a href="datos.html#variables-cualitativas.-factores"><i class="fa fa-check"></i><b>2.6.2</b> Variables cualitativas. Factores</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="datos.html"><a href="datos.html#el-rol-de-las-variables-en-los-datos"><i class="fa fa-check"></i><b>2.7</b> El rol de las variables en los datos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejo de datos con R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#universo-tidyverse"><i class="fa fa-check"></i><b>3.1</b> Universo tidyverse</a></li>
+<li class="chapter" data-level="3.2" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#selección-de-registros"><i class="fa fa-check"></i><b>3.2</b> Selección de registros</a></li>
+<li class="chapter" data-level="3.3" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#selección-de-columnas"><i class="fa fa-check"></i><b>3.3</b> Selección de columnas</a></li>
+<li class="chapter" data-level="3.4" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#creación-o-actualización-de-variables"><i class="fa fa-check"></i><b>3.4</b> Creación o actualización de variables</a></li>
+<li class="chapter" data-level="3.5" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#ordenar-datos"><i class="fa fa-check"></i><b>3.5</b> Ordenar datos</a></li>
+<li class="chapter" data-level="3.6" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#sumarizar-valores"><i class="fa fa-check"></i><b>3.6</b> Sumarizar valores</a></li>
+<li class="chapter" data-level="3.7" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#combinación-de-acciones"><i class="fa fa-check"></i><b>3.7</b> Combinación de acciones</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html"><i class="fa fa-check"></i><b>4</b> Uniones de tablas con R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#uniones-verticales"><i class="fa fa-check"></i><b>4.1</b> Uniones verticales</a></li>
+<li class="chapter" data-level="4.2" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#uniones-horizontales-o-join"><i class="fa fa-check"></i><b>4.2</b> Uniones horizontales o <em>join</em></a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#inner-join"><i class="fa fa-check"></i><b>4.2.1</b> Inner join</a></li>
+<li class="chapter" data-level="4.2.2" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#left-join"><i class="fa fa-check"></i><b>4.2.2</b> Left join</a></li>
+<li class="chapter" data-level="4.2.3" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#anti-join"><i class="fa fa-check"></i><b>4.2.3</b> Anti join</a></li>
+<li class="chapter" data-level="4.2.4" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#librería-sqldf"><i class="fa fa-check"></i><b>4.2.4</b> Librería sqldf</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#duplicidades-en-las-uniones-de-tablas"><i class="fa fa-check"></i><b>4.3</b> Duplicidades en las uniones de tablas</a></li>
+<li class="chapter" data-level="4.4" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#referencias"><i class="fa fa-check"></i><b>4.4</b> Referencias</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html"><i class="fa fa-check"></i><b>5</b> Representación gráfica básica con ggplot</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#histogramas"><i class="fa fa-check"></i><b>5.1</b> Histogramas</a></li>
+<li class="chapter" data-level="5.2" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-densidad"><i class="fa fa-check"></i><b>5.2</b> Gráficos de densidad</a></li>
+<li class="chapter" data-level="5.3" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-caja-boxplot"><i class="fa fa-check"></i><b>5.3</b> Gráficos de caja (boxplot)</a></li>
+<li class="chapter" data-level="5.4" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-tarta"><i class="fa fa-check"></i><b>5.4</b> Gráficos de tarta</a></li>
+<li class="chapter" data-level="5.5" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-barras"><i class="fa fa-check"></i><b>5.5</b> Gráficos de barras</a></li>
+<li class="chapter" data-level="5.6" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-líneas"><i class="fa fa-check"></i><b>5.6</b> Gráficos de líneas</a></li>
+<li class="chapter" data-level="5.7" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>5.7</b> Gráfico de dispersión</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html"><i class="fa fa-check"></i><b>6</b> Descripción numérica de variables</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#transformar-datos-en-información"><i class="fa fa-check"></i><b>6.1</b> Transformar datos en información</a></li>
+<li class="chapter" data-level="6.2" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#caso-práctico.-campaña-de-venta-cruzada"><i class="fa fa-check"></i><b>6.2</b> Caso práctico. Campaña de venta cruzada</a></li>
+<li class="chapter" data-level="6.3" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#el-rol-de-las-variables-en-el-conjunto-de-datos"><i class="fa fa-check"></i><b>6.3</b> El rol de las variables en el conjunto de datos</a></li>
+<li class="chapter" data-level="6.4" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#análisis-descriptivos-de-los-datos"><i class="fa fa-check"></i><b>6.4</b> Análisis descriptivos de los datos</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#descritivos-en-variables-cualitativas-factores"><i class="fa fa-check"></i><b>6.4.1</b> Descritivos en variables cualitativas (factores)</a></li>
+<li class="chapter" data-level="6.4.2" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#descritivos-en-variables-cuantitativas"><i class="fa fa-check"></i><b>6.4.2</b> Descritivos en variables cuantitativas</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="descripcion-grafica-datos.html"><a href="descripcion-grafica-datos.html"><i class="fa fa-check"></i><b>7</b> Descripción gráfica de datos</a>
+<ul>
+<li class="chapter" data-level="7.0.1" data-path="descripcion-grafica-datos.html"><a href="descripcion-grafica-datos.html#descripción-gráfica-de-factores"><i class="fa fa-check"></i><b>7.0.1</b> Descripción gráfica de factores</a></li>
+<li class="chapter" data-level="7.0.2" data-path="descripcion-grafica-datos.html"><a href="descripcion-grafica-datos.html#descripción-gráfica-de-variables-numéricas"><i class="fa fa-check"></i><b>7.0.2</b> Descripción gráfica de variables numéricas</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="problemas-datos.html"><a href="problemas-datos.html"><i class="fa fa-check"></i><b>8</b> Problemas con los datos</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="problemas-datos.html"><a href="problemas-datos.html#problemática-con-factores"><i class="fa fa-check"></i><b>8.1</b> Problemática con factores</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="problemas-datos.html"><a href="problemas-datos.html#factores-con-niveles-de-pocos-registros"><i class="fa fa-check"></i><b>8.1.1</b> Factores con niveles de pocos registros</a></li>
+<li class="chapter" data-level="8.1.2" data-path="problemas-datos.html"><a href="problemas-datos.html#factores-que-aparecen-como-variables-numéricas"><i class="fa fa-check"></i><b>8.1.2</b> Factores que aparecen como variables numéricas</a></li>
+<li class="chapter" data-level="8.1.3" data-path="problemas-datos.html"><a href="problemas-datos.html#factores-con-un-gran-número-de-niveles"><i class="fa fa-check"></i><b>8.1.3</b> Factores con un gran número de niveles</a></li>
+<li class="chapter" data-level="8.1.4" data-path="problemas-datos.html"><a href="problemas-datos.html#factores-con-valores-perdidos"><i class="fa fa-check"></i><b>8.1.4</b> Factores con valores perdidos</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="problemas-datos.html"><a href="problemas-datos.html#problemas-con-variables-numéricas"><i class="fa fa-check"></i><b>8.2</b> Problemas con variables numéricas</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="problemas-datos.html"><a href="problemas-datos.html#valores-modales"><i class="fa fa-check"></i><b>8.2.1</b> Valores modales</a></li>
+<li class="chapter" data-level="8.2.2" data-path="problemas-datos.html"><a href="problemas-datos.html#valores-atípicos"><i class="fa fa-check"></i><b>8.2.2</b> Valores atípicos</a></li>
+<li class="chapter" data-level="8.2.3" data-path="problemas-datos.html"><a href="problemas-datos.html#variables-numéricas-como-factores"><i class="fa fa-check"></i><b>8.2.3</b> Variables numéricas como factores</a></li>
+<li class="chapter" data-level="8.2.4" data-path="problemas-datos.html"><a href="problemas-datos.html#valores-perdidos-en-variables-numéricas"><i class="fa fa-check"></i><b>8.2.4</b> Valores perdidos en variables numéricas</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introducción a la Estadística para Científicos de Datos con R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="problemas-datos" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Capítulo 8</span> Problemas con los datos<a href="problemas-datos.html#problemas-datos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Siguiendo con el desarrollo se ha establecido una estructura de datos, fundamentalmente se está trabajando con <em>data frames</em>, que se componen de filas (registros) y columnas (variables). Tanto registros como variables pueden presentar problemas que dificulten la gestión de la información al científico de datos. En este capítulo se van a estudiar los problemas más comunes con los datos y se plantean posibles estrategias para resolver estos problemas. Aunque los datos pueden presentar problemas desde el punto de vista de los registros y desde el punto de vista de las variables en este caso se van a abordar <strong>análisis de variables</strong> que permitirán identificar tanto variables como registros que distorsionan el análisis. Para encontrar y describir estas situaciones se dispone tanto de análisis numéricos como análisis gráficos sencillos con los que se tomó contacto en los dos capítulos anteriores.</p>
+<p>Para ilustrar esta situaciones se continúa con el <a href="https://analisisydecision.es/estadistica-data-scientist/descripcion-numerica-variables.html#caso-pr%C3%A1ctico.-campa%C3%B1a-de-venta-cruzada">caso práctico de trabajo visto en el apartado 6.2 de este libro</a>. Como en capítulos anteriores se cargan los datos:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="problemas-datos.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="problemas-datos.html#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="problemas-datos.html#cb1-3" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/train.csv&quot;</span>)</span>
+<span id="cb1-4"><a href="problemas-datos.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(train,<span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##   id Gender Age Driving_License Region_Code Previously_Insured Vehicle_Age
+## 1  1   Male  44               1          28                  0   &gt; 2 Years
+## 2  2   Male  76               1           3                  0    1-2 Year
+## 3  3   Male  47               1          28                  0   &gt; 2 Years
+## 4  4   Male  21               1          11                  1    &lt; 1 Year
+## 5  5 Female  29               1          41                  1    &lt; 1 Year
+##   Vehicle_Damage Annual_Premium Policy_Sales_Channel Vintage Response
+## 1            Yes          40454                   26     217        1
+## 2             No          33536                   26     183        0
+## 3            Yes          38294                   26      27        1
+## 4             No          28619                  152     203        0
+## 5             No          27496                  152      39        0</code></pre>
+<p>A modo de recuerdo, son datos de una compañía de seguros que opera en el ramo de salud y que desea realizar una campaña de venta cruzada para ofrecer seguro de automóviles a sus asegurados de salud. Para ello ha elaborado una encuesta que le permite perfilar que clientes son los más propensos a comprar su producto de automóviles.</p>
+<div id="problemática-con-factores" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Problemática con factores<a href="problemas-datos.html#problemática-con-factores" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="factores-con-niveles-de-pocos-registros" class="section level3 hasAnchor" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> Factores con niveles de pocos registros<a href="problemas-datos.html#factores-con-niveles-de-pocos-registros" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Cuando se estudian características, cualidades, es posible que una cualidad esté presente en un porcentaje muy alto de observaciones. Cuando un factor presenta un nivel con un gran número de observaciones y el resto de niveles apenas tiene observaciones, ¿tiene sentido conservar ese factor?</p>
+<p>En la descripción de los datos se hace mención a esta variable <code>Driving_License</code>. El científico de datos va a emplear la estadística para conocer y depurar la calidad de los datos que maneja, esa estadística le va a permitir transformar esos datos en información pero antes de todo análisis tiene que apelar al sentido común y al conocimiento y la motivación de su trabajo. El problema que se quiere resolver con los datos a nuestra disposición es <strong>determinar que clientes del ramo de salud son más propensos a comprar una póliza del ramo de automóviles</strong> ¿tiene sentido vender a clientes sin carnet de conducir pólizas de automóviles? ¿Qué nos dice la variable?</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="problemas-datos.html#cb3-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(<span class="at">Driving_License=</span><span class="fu">as.factor</span>(Driving_License)) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="problemas-datos.html#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">porcen_clientes =</span> <span class="fu">n</span>()<span class="sc">/</span><span class="fu">nrow</span>(train))</span>
+<span id="cb3-3"><a href="problemas-datos.html#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="problemas-datos.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(resumen, <span class="fu">aes</span>(<span class="at">x=</span>Driving_License, <span class="at">y=</span>porcen_clientes)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb3-5"><a href="problemas-datos.html#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Distribución de variable Driving_License&quot;</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>La práctica totalidad de los clientes encuestados tiene carnet. Es una variable que no tiene sentido, si se va a ofrecer un seguro de automóviles será necesario que el cliente pueda optar a tener un automóvil. En esta situación se plantea una estrategia muy simple <strong>la variable ha de ser eliminada</strong>, bien es cierto que se puede plantear la eliminación de aquellos clientes que no tienen carnet, pero son muy pocos. Un análisis descriptivo de lo más sencillo está permitiendo detectar claros problemas de negocio.</p>
+<blockquote>
+<p>Cuando se trabaje con factores es necesario estudiar si hay algún nivel con un porcentaje desmesurado de observaciones, esa desmesura la debe establecer el científico de datos con sus análisis descriptivos, si fuera necesario fijar un umbral, por encima de un 95% de observaciones en un mismo nivel se sugiere trabajar con mayor detenimiento ese factor.</p>
+</blockquote>
+</div>
+<div id="factores-que-aparecen-como-variables-numéricas" class="section level3 hasAnchor" number="8.1.2">
+<h3><span class="header-section-number">8.1.2</span> Factores que aparecen como variables numéricas<a href="problemas-datos.html#factores-que-aparecen-como-variables-numéricas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Se sigue haciendo mención en múltiples ocasiones, <strong>el científico de datos debe conocer los datos con los que está trabajando</strong>. Habrá situaciones en las que se enfrente a cientos (miles de variables) y tenga que decidir cuales de ellas sirven en su tarea. Esto sucede cuando los tablones de trabajo se almacenan en estructuras como <em>data lakes</em> con un volumen ingente tanto de registros como de variables por eso el científico de datos establece como describir esas variables, si describir una variable numérica o describir un factor. En los datos de trabajo este problema se presenta en la variable <code>Region_code</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="problemas-datos.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(train<span class="sc">$</span>Region_Code)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    0.00   15.00   28.00   26.39   35.00   52.00</code></pre>
+<p>¿Tiene sentido esta sumarización? Evidentemente no, y este es uno de los problemas más comunes que aparece en el trabajo con datos. El formato de las variables no es el adecuado, lo podremos identificar conociendo los datos o bien asignando nombres a las variables que nos permitan “intuir” el tipo, en este caso se emplea el sufijo <em>code</em> que ya nos deja claro que tipo de variable es y como debemos tratarla</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="problemas-datos.html#cb6-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(<span class="at">Region_Code=</span><span class="fu">as.factor</span>(Region_Code)) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">porcen_clientes =</span> <span class="fu">n</span>()<span class="sc">/</span><span class="fu">nrow</span>(train)) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(porcen_clientes))</span>
+<span id="cb6-2"><a href="problemas-datos.html#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="problemas-datos.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(resumen)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 2
+##   Region_Code porcen_clientes
+##   &lt;fct&gt;                 &lt;dbl&gt;
+## 1 28                   0.279 
+## 2 8                    0.0889
+## 3 46                   0.0518
+## 4 41                   0.0479
+## 5 15                   0.0349
+## 6 30                   0.0320</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="problemas-datos.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(resumen, <span class="fu">aes</span>(<span class="at">x=</span>Region_Code, <span class="at">y=</span>porcen_clientes)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb8-2"><a href="problemas-datos.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Distribución de variable Region_Code&quot;</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Se ha indicado con anterioridad que son datos de una aseguradora española, si se conoce la distribución geográfica de España esta variable hace referencia a las provincias, donde el 28 es Madrid y el 8 es Barcelona. Es posible que este dato no se conozca, se insiste, es relevante asociar un dato numérico a una codificación, esta variable nunca habría de tratarse como numérica. En el caso que nos ocupa, conocida la estructura administrativa de España, aparece la provincia 0, como tal no es un valor perdido, es un <strong>valor desconocido</strong> que no ofrece información a la resolución del problema que se está planteando con los datos.</p>
+<blockquote>
+<p><strong>IMPORTANTE:</strong> Nunca se deben dar análisis numéricos de factores, no se deben hacer medias de regiones, ni medias de sexo, ni percentiles de códigos. Hay que tener muy claros los datos que participan en los análisis.</p>
+</blockquote>
+</div>
+<div id="factores-con-un-gran-número-de-niveles" class="section level3 hasAnchor" number="8.1.3">
+<h3><span class="header-section-number">8.1.3</span> Factores con un gran número de niveles<a href="problemas-datos.html#factores-con-un-gran-número-de-niveles" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Trabajar con códigos puede plantear un problema con el número de niveles en un factor, en el ejemplo de la variable <strong>Region_Code</strong> se representa el ranking de porcentaje de encuestas por provincia española:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="problemas-datos.html#cb9-1" aria-hidden="true" tabindex="-1"></a>train <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(<span class="at">Region_Code=</span><span class="fu">as.factor</span>(Region_Code)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="problemas-datos.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">porcen_clientes =</span> <span class="fu">n</span>()<span class="sc">/</span><span class="fu">nrow</span>(train)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="problemas-datos.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(Region_Code,porcen_clientes), <span class="at">y=</span>porcen_clientes)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb9-4"><a href="problemas-datos.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Distribución de variable Region_Code&quot;</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>El código empleado en ggplot tiene aspectos interesantes y que permiten crear gráficos descriptivos más completos. Empezando por indicar que no se crea un data frame temporal intermedio, directamente se emplea el pipe (%&gt;%) para realizar la representación gráfica. Por otro lado, se emplea la función <code>reorder(factor, orden)</code> para ordenar el factor en análisis en función de otro campo, en este caso se pretenden ordenar los códigos de provincia en función del porcentaje de observaciones que contiene. Por otro lado, para realizar un ranking se emplea un gráfico de barras horizontal, para rotar el gráfico se emplea <code>coord_flip()</code>, se aprecia que el eje y conserva el nombre de la variable establecida en <code>aes</code>. Este trabajo es habitual cuando se quieren representar rankings de factores.</p>
+<p>Cabe preguntarse ¿Es necesario agrupar esta variable? Se puede responder con otra cuestión, ¿se debe dar la misma relevancia al código 28 (Madrid) que al código postal 51 (Ceuta)? La respuesta evidente es no, pero esta respuesta <strong>no tiene ningún sustento estadísto</strong>, al menos de momento. Cuando aparece esta situación será de utilidad agrupar los niveles del factor, posibles estrategias para esta labor:</p>
+<ul>
+<li>Agrupar los niveles en base al peso, en este caso al % de clientes.</li>
+<li>Agrupar los niveles en base a “criterios de negocio”.</li>
+<li>Agrupar los niveles en base a <em>nuestro problema</em>, en este caso, agrupar los códigos de provincia en base a una variable respuesta, agrupar en base al interés por el producto de automóviles.</li>
+</ul>
+<p>En la tercera de las estrategias se plantea estudiar una variable en función de otra lo que denominamos análisis bivariable, en estos momentos no se dispone de una herramienta para realizar este análisis por ello se sugiere la primera de las estrategias.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="problemas-datos.html#cb10-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">fr_zona =</span> <span class="fu">case_when</span>(</span>
+<span id="cb10-2"><a href="problemas-datos.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  Region_Code <span class="sc">==</span> <span class="dv">28</span> <span class="sc">~</span> <span class="st">&#39;Madrid&#39;</span>,</span>
+<span id="cb10-3"><a href="problemas-datos.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  Region_Code <span class="sc">==</span> <span class="dv">8</span> <span class="sc">~</span> <span class="st">&#39;Barcelona&#39;</span>,</span>
+<span id="cb10-4"><a href="problemas-datos.html#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&#39;Resto&#39;</span>)) </span>
+<span id="cb10-5"><a href="problemas-datos.html#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="problemas-datos.html#cb10-6" aria-hidden="true" tabindex="-1"></a>train <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(fr_zona) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">porcen_clientes =</span> <span class="fu">n</span>()<span class="sc">/</span><span class="fu">nrow</span>(train)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-7"><a href="problemas-datos.html#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>fr_zona, <span class="at">y=</span>porcen_clientes)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Se transforma un factor con 53 niveles en un nuevo factor reclasificado (prefijo fr_ en la variable) que tiene 3 niveles.</p>
+<blockquote>
+<p>Es buena práctica asignar prefijos o sufijos a variables que se codifiquen cuando se manejan datos. De este modo se puede determinar el rol que juega esa variable en el análisis planteado. A lo largo de este trabajo se insistirá en esa labor.</p>
+</blockquote>
+</div>
+<div id="factores-con-valores-perdidos" class="section level3 hasAnchor" number="8.1.4">
+<h3><span class="header-section-number">8.1.4</span> Factores con valores perdidos<a href="problemas-datos.html#factores-con-valores-perdidos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Otro de los problemas que aparece en los datos son los <strong>valores perdidos o <em>missing</em></strong>. Es una problemática común con valores numéricos pero hay matices que el científico de datos debe conocer. El valor perdido no ha de ser necesariamente un valor <code>NA</code> en R si volvemos al ejemplo de la variable <code>Region_Code</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="problemas-datos.html#cb11-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Region_Code) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="problemas-datos.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">porcen_clientes =</span> <span class="fu">n</span>()<span class="sc">/</span><span class="fu">nrow</span>(train)) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(Region_Code)</span>
+<span id="cb11-3"><a href="problemas-datos.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(resumen)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 2
+##   Region_Code porcen_clientes
+##         &lt;dbl&gt;           &lt;dbl&gt;
+## 1           0         0.00530
+## 2           1         0.00264
+## 3           2         0.0106 
+## 4           3         0.0243 
+## 5           4         0.00473
+## 6           5         0.00336</code></pre>
+<p>Se ha indicado que <code>Region_Code</code> es una variable que recoge los códigos provinciales de España. En España no existe un código provincial 0, no es un valor perdido, es un <strong>valor desconocido</strong>. Puede parecer lo mismo pero no lo es, se volverá sobre esta situación cuando se trabajen los valores perdidos numéricos.</p>
+<p>Posibles estrategias ante esta situación:</p>
+<ul>
+<li>Imputar ese valor al nivel con mayor número de observaciones, al 28. Esta posibilidad no debería afectar al estudio, pero es cierto que el 0 tiene cierto peso.</li>
+<li>Al disponer de más de 300.000 observaciones se puede optar por eliminar esas observaciones, no deben afectar al estudio.</li>
+<li>No hacer nada. Pocas observaciones, no deberían existir clientes sin provincia. Se puede dejar ese nivel de esa observación y estudiar si tiene un comportamiento atípico.</li>
+</ul>
+</div>
+</div>
+<div id="problemas-con-variables-numéricas" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Problemas con variables numéricas<a href="problemas-datos.html#problemas-con-variables-numéricas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="valores-modales" class="section level3 hasAnchor" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Valores modales<a href="problemas-datos.html#valores-modales" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Esta es una problemática que no se trata en muchas ocasiones pero tiene relevancia en las aproximaciones iniciales a los datos. En las variables numéricas hay valores que se repiten en múltiples ocasiones y pueden recoger comportamientos a tener en cuenta. Para las primeras aproximaciones a las variables numéricas se disponía tanto de los gráficos de densidad como de los histogramas. Se analiza la variable <code>Annual_Premium</code></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="problemas-datos.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span> train,<span class="fu">aes</span>(<span class="at">x =</span> Annual_Premium))<span class="sc">+</span></span>
+<span id="cb13-2"><a href="problemas-datos.html#cb13-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">100</span>) <span class="sc">+</span> </span>
+<span id="cb13-3"><a href="problemas-datos.html#cb13-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">y=</span> <span class="dv">10000</span> <span class="sc">*</span> ..count..), <span class="at">color=</span><span class="st">&#39;Blue&#39;</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="problemas-datos.html#cb14-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&#39;Distribución de la variable prima&#39;</span>)</span></code></pre></div>
+<pre><code>## $title
+## [1] &quot;Distribución de la variable prima&quot;
+## 
+## attr(,&quot;class&quot;)
+## [1] &quot;labels&quot;</code></pre>
+<p>La prima es un importe, el científico de datos ya ha de familiarizarse con los gráficos de densidad, y en importes se suelen obtener formas asimétricas con mayor número de observaciones a la izquierda con colas muy largas. Es decir, hay una alta concentración de importes bajos o habituales y luego hay importes desmesurados, no suelen producirse importes negativos o importes 0. Sin embargo, en este caso la prima anual que es lo que paga el cliente por su seguro de Salud tiene un gran número de observaciones en un valor muy próximo a 0. Se puede considerar que la variable <code>Annual_Premium</code> tiene un valor modal que se va a identificar numéricamente:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="problemas-datos.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb16-2"><a href="problemas-datos.html#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="problemas-datos.html#cb16-3" aria-hidden="true" tabindex="-1"></a>Mode <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb16-4"><a href="problemas-datos.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  fx <span class="ot">&lt;-</span> <span class="fu">unique</span>(x)</span>
+<span id="cb16-5"><a href="problemas-datos.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  fx[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(x, fx)))]}</span>
+<span id="cb16-6"><a href="problemas-datos.html#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="problemas-datos.html#cb16-7" aria-hidden="true" tabindex="-1"></a>moda <span class="ot">&lt;-</span> <span class="fu">Mode</span>(train<span class="sc">$</span>Annual_Premium)</span>
+<span id="cb16-8"><a href="problemas-datos.html#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="problemas-datos.html#cb16-9" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(<span class="at">Prima_modal =</span> <span class="fu">ifelse</span>(Annual_Premium <span class="sc">&lt;=</span> moda, <span class="st">&quot;Si&quot;</span>, <span class="st">&quot;No&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-10"><a href="problemas-datos.html#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">porcen_clientes =</span> <span class="fu">n</span>() <span class="sc">/</span> <span class="fu">nrow</span>(train))</span>
+<span id="cb16-11"><a href="problemas-datos.html#cb16-11" aria-hidden="true" tabindex="-1"></a>                              </span>
+<span id="cb16-12"><a href="problemas-datos.html#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(resumen)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Prima_modal
+</th>
+<th style="text-align:right;">
+porcen_clientes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+No
+</td>
+<td style="text-align:right;">
+0.8297679
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Si
+</td>
+<td style="text-align:right;">
+0.1702321
+</td>
+</tr>
+</tbody>
+</table>
+<p>Sirva este proceso de ejemplo de uso de la librería <code>kableExtra</code> para la presentación de data frames con formas vistosas en R. Se calcula la moda de la variable <code>Annual_Premium</code> y se determina cuantos registros están por debajo de ese umbral de 2630€ de importe anual, se tiene 17% que es un número importante de observaciones para determinar con el equipo que suministra los datos que está sucediendo con esa variable.</p>
+<p>En esta situación una posible estrategia es discretizar la variable prima para dar ese sentido de negocio, es decir, crear un factor a partir de la variable numérica que nos permita aislar ese comportamiento. En este caso, se decide mantener la variable y posteriores análisis indicarán que hacer con ella pero parece clara la necesidad de discretizar.</p>
+</div>
+<div id="valores-atípicos" class="section level3 hasAnchor" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Valores atípicos<a href="problemas-datos.html#valores-atípicos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Un valor atípico es aquel que está fuera de un rango de valores donde esperamos encontrarnos un % muy alto de observaciones, estos valores se denominan <strong>outliers</strong> y pueden distorsionar tanto análisis numéricos como gráficos. Volviendo sobre la variable <code>Annual_Premium</code> y los gráficos boxplot vistos en el capítulo 7.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="problemas-datos.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(train , <span class="fu">aes</span>(<span class="at">y =</span> Annual_Premium)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Este gráfico se realiza a partir de las medidas de posición y las medidas de dispersión de una variable. No existe una definición formal de outlier pero se usa un umbral sobre el que se volverá posteriormente, si un valor supera 1.5 veces el rango intercuartílico estamos ante un outlier:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="problemas-datos.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(train , <span class="fu">aes</span>(<span class="at">y =</span> Annual_Premium)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>(<span class="at">outlier.colour =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>En este código mediante <code>outlier.colour = "red"</code> podemos cambiar el color a los outliers, podemos cambiar el color a aquellas observaciones que están +/- 1.5 veces por encima del rango intercuartílico.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="problemas-datos.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(train<span class="sc">$</span>Annual_Premium)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    2630   24405   31669   30564   39400  540165</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="problemas-datos.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Límite inferior del rango intercuartílico</span></span>
+<span id="cb21-2"><a href="problemas-datos.html#cb21-2" aria-hidden="true" tabindex="-1"></a>lim1 <span class="ot">=</span> <span class="fu">summary</span>(train<span class="sc">$</span>Annual_Premium)[<span class="dv">2</span>] <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> <span class="fu">IQR</span>(train<span class="sc">$</span>Annual_Premium) </span>
+<span id="cb21-3"><a href="problemas-datos.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(train<span class="sc">$</span>Annual_Premium<span class="sc">&lt;=</span>lim1)</span></code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="problemas-datos.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Límite superior del rango intercuartílico</span></span>
+<span id="cb23-2"><a href="problemas-datos.html#cb23-2" aria-hidden="true" tabindex="-1"></a>lim2 <span class="ot">=</span> <span class="fu">summary</span>(train<span class="sc">$</span>Annual_Premium)[<span class="dv">5</span>] <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> <span class="fu">IQR</span>(train<span class="sc">$</span>Annual_Premium) </span>
+<span id="cb23-3"><a href="problemas-datos.html#cb23-3" aria-hidden="true" tabindex="-1"></a>lim2 </span></code></pre></div>
+<pre><code>## 3rd Qu. 
+## 61892.5</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="problemas-datos.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(train<span class="sc">$</span>Annual_Premium<span class="sc">&gt;=</span>lim2)</span></code></pre></div>
+<pre><code>## [1] 10320</code></pre>
+<p>Como indicaba el boxplot la variable <code>Annual_Premium</code> no tiene valores atípicos en la parte inferior de su distribución, pero en la parte superior, todo aquel valor que supere los 6.18925^{4} será considerado como un outlier. En este caso tenemos 10320 observaciones cuyo valor de prima está por encima de ese umbral, tenemos 10320 outliers. Pueden parecer muchas observaciones pero trabajamos con 381109 observaciones lo que supone un 2.7% del total de registros.</p>
+<p>En este caso, las estrategias para solventar este problema dependen del científico de datos, se puede optar:</p>
+<ul>
+<li>Eliminar las observaciones. Si no se tienen muchos registros se pueden considerar atípicos y no participar en el estudio.</li>
+<li>Asignación de un valor máximo de modo que no sean atípicos. En este caso se vuelve a la idea de discretizar una variable numérica ya que si supera determinado umbral tendría siempre el mismo valor.</li>
+</ul>
+</div>
+<div id="variables-numéricas-como-factores" class="section level3 hasAnchor" number="8.2.3">
+<h3><span class="header-section-number">8.2.3</span> Variables numéricas como factores<a href="problemas-datos.html#variables-numéricas-como-factores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>En apartados anteriores se está viendo la posibilidad de tratar variables numéricas como factores para solventar tanto la existencia de valores modales que puedan tener un <em>significado de negocio</em> como solventar la existencia de outliers y no tener que eliminar registros. Sin embargo, hay ocasiones en las que una variable numérica puede interesarnos que sea un factor sobre todo en procesos de modelización como se verá en capítulos posteriores. Sirva como ejemplo la variable <code>Age</code>:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="problemas-datos.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span> train,<span class="fu">aes</span>(<span class="at">x=</span> Age))<span class="sc">+</span></span>
+<span id="cb27-2"><a href="problemas-datos.html#cb27-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>)<span class="sc">+</span></span>
+<span id="cb27-3"><a href="problemas-datos.html#cb27-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="dv">5</span> <span class="sc">*</span> ..count..), <span class="at">color=</span><span class="st">&#39;Blue&#39;</span>) <span class="sc">+</span> </span>
+<span id="cb27-4"><a href="problemas-datos.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Distribución variable Edad&quot;</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>La edad toma valores finitos con orden. Como variable numérica se aprecian dos formas en los datos, en edades jóvenes y edades maduras.</p>
+</div>
+<div id="valores-perdidos-en-variables-numéricas" class="section level3 hasAnchor" number="8.2.4">
+<h3><span class="header-section-number">8.2.4</span> Valores perdidos en variables numéricas<a href="problemas-datos.html#valores-perdidos-en-variables-numéricas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Esta problemática afecta tanto a variables numéricas como factores, las estrategias para resolver el problema son parecidas. Sin embargo, este problema tiene importancia en variables numéricas porque el científico de datos debe conocer como se preparan la información que está manejando ya que será habitual que el propio científico de datos realice ese <em>tablón de datos</em> esa tabla que es una base de observaciones a la que se pueden ir anexando columnas, a la que se va uniendo datos en forma de nuevas variables. En ese proceso de añadir datos la forma en la que los añadamos puede hacer que un valor perdido tenga sentido.</p>
+<p>Por ejemplo, una base de clientes de una entidad bancaria, un <em>tablón</em> de clientes, se van uniendo nuevos datos y es necesario crear una variable que indique si el cliente presente en ese tablón tiene saldo en fondo de inversión o no tiene. El tablón de inicio tiene los clientes de trabajo, por otro lado, se extraen los clientes con fondos de inversión y se cruzan ambas tablas, al realizar el cruce es posible que, aquellos que nunca han tenido fondos de inversión, no hayan cruzado y se queden con un valor vacío, en ese caso el valor perdido tiene un sentido -&gt; ‘El cliente no ha tenido fondos de inversión’ En esta situación no se debe establecer un saldo de 0 en fondos de inversión porque es posible que un cliente que haya tenido fondos tenga saldo 0. Se tienen 3 posibles situaciones, saldo, saldo 0 o nunca ha tenido fondos. Esa situación la describe un valor perdido, ¿tiene sentido dar un valor 0 al valor perdido?</p>
+<p>Hay que tener clara la importancia de esa variable en el análisis porque la imputación de valores perdidos en variables numéricas se puede volver un proceso muy costoso. Se pueden imputar valores medios, realizar un modelo específico para imputar valores perdidos, asignar un valor modal teniendo en cuenta la problemática que puede surgir. Un gran número de valores perdidos también es un indicador de la calidad de la información y de las variables. En los datos de trabajo no se tienen valores perdidos pero en este caso la estrategia el clara <strong>es necesario imputar los valores perdidos</strong> pero es el científico de datos el que debe elegir el tipo de imputación. En R hay paquetes y muchas posibilidades de imputación pero siempre bajo un criterio de negocio que ampare su decisión.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="descripcion-grafica-datos.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rvaquerizo02/edit/master/07-problemas-datos.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

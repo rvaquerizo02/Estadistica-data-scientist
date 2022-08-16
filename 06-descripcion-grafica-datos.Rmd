@@ -1,4 +1,4 @@
-# Descripción gráfica de datos
+# Descripción gráfica de datos {#descripcion-grafica-datos}
 
 Los estadísticos son insuficientes para conocer una variable, la siguiente figura es muy conocida y presenta unas series de pares de datos X e Y con los mismos estadísticos que son completamente diferentes. 
 
@@ -10,7 +10,7 @@ El primer paso es cargar los datos de trabajo, ya conocidos, y se da comienzo co
 
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse)
-train <- read_csv("./data/train.csv")
+train <- read.csv("./data/train.csv")
 ```
 
 ### Descripción gráfica de factores
