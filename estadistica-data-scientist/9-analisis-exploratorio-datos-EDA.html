@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Capítulo 9 Análisis Exploratorio de Datos. EDA | Introducción a la Estadística para Científicos de Datos con R" />
+<meta property="og:type" content="book" />
+
+<meta property="og:description" content="Libro de introducción a la estadística" />
+<meta name="github-repo" content="https://github.com/rvaquerizo02/Estadistica-data-scientist" />
+
+<meta name="author" content="Raul Vaquerizo" />
+
+<meta name="date" content="2022-09-13" />
+
+
+<meta name="description" content="Libro de introducción a la estadística">
+
+<title>Capítulo 9 Análisis Exploratorio de Datos. EDA | Introducción a la Estadística para Científicos de Datos con R</title>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.24/datatables.js"></script>
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="toc.css" type="text/css" />
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+/* show arrow before summary tag as in bootstrap
+TODO: remove if boostrap in updated in html_document (rmarkdown#1485) */
+details > summary {
+  display: list-item;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li class="has-sub"><a href="index.html#introducción" id="toc-introducción"><span class="toc-section-number">1</span> Introducción</a>
+<ul>
+<li><a href="1.1-objetivos.html#objetivos" id="toc-objetivos"><span class="toc-section-number">1.1</span> Objetivos</a></li>
+<li><a href="1.2-entorno-de-trabajo.html#entorno-de-trabajo" id="toc-entorno-de-trabajo"><span class="toc-section-number">1.2</span> Entorno de trabajo</a></li>
+</ul></li>
+<li class="has-sub"><a href="2-datos.html#datos" id="toc-datos"><span class="toc-section-number">2</span> Datos</a>
+<ul>
+<li><a href="2.1-qué-son-los-datos.html#qué-son-los-datos" id="toc-qué-son-los-datos"><span class="toc-section-number">2.1</span> Qué son los datos</a></li>
+<li class="has-sub"><a href="2.2-tipos-de-datos.html#tipos-de-datos" id="toc-tipos-de-datos"><span class="toc-section-number">2.2</span> Tipos de datos</a>
+<ul>
+<li><a href="2.2-tipos-de-datos.html#datos-internos" id="toc-datos-internos"><span class="toc-section-number">2.2.1</span> Datos internos</a></li>
+<li><a href="2.2-tipos-de-datos.html#datos-externos" id="toc-datos-externos"><span class="toc-section-number">2.2.2</span> Datos externos:</a></li>
+</ul></li>
+<li class="has-sub"><a href="2.3-almacenamiento-de-datos.html#almacenamiento-de-datos" id="toc-almacenamiento-de-datos"><span class="toc-section-number">2.3</span> Almacenamiento de datos</a>
+<ul>
+<li><a href="2.3-almacenamiento-de-datos.html#sistemas-operacionales" id="toc-sistemas-operacionales"><span class="toc-section-number">2.3.1</span> Sistemas operacionales</a></li>
+<li><a href="2.3-almacenamiento-de-datos.html#sistemas-informacionales-tradicionales" id="toc-sistemas-informacionales-tradicionales"><span class="toc-section-number">2.3.2</span> Sistemas informacionales tradicionales</a></li>
+<li><a href="2.3-almacenamiento-de-datos.html#data-lake" id="toc-data-lake"><span class="toc-section-number">2.3.3</span> Data Lake</a></li>
+</ul></li>
+<li><a href="2.4-todo-es-álgebra-lineal.html#todo-es-álgebra-lineal" id="toc-todo-es-álgebra-lineal"><span class="toc-section-number">2.4</span> Todo es álgebra lineal</a></li>
+<li><a href="2.5-como-se-disponen-los-datos.html#como-se-disponen-los-datos" id="toc-como-se-disponen-los-datos"><span class="toc-section-number">2.5</span> Como se disponen los datos</a></li>
+<li class="has-sub"><a href="2.6-tipos-de-variables.html#tipos-de-variables" id="toc-tipos-de-variables"><span class="toc-section-number">2.6</span> Tipos de Variables</a>
+<ul>
+<li><a href="2.6-tipos-de-variables.html#variables-cuantitativas" id="toc-variables-cuantitativas"><span class="toc-section-number">2.6.1</span> Variables cuantitativas</a></li>
+<li><a href="2.6-tipos-de-variables.html#variables-cualitativas.-factores" id="toc-variables-cualitativas.-factores"><span class="toc-section-number">2.6.2</span> Variables cualitativas. Factores</a></li>
+</ul></li>
+<li><a href="2.7-el-rol-de-las-variables-en-los-datos.html#el-rol-de-las-variables-en-los-datos" id="toc-el-rol-de-las-variables-en-los-datos"><span class="toc-section-number">2.7</span> El rol de las variables en los datos</a></li>
+</ul></li>
+<li class="has-sub"><a href="3-manejo-de-datos-con-r.html#manejo-de-datos-con-r" id="toc-manejo-de-datos-con-r"><span class="toc-section-number">3</span> Manejo de datos con R</a>
+<ul>
+<li><a href="3.1-universo-tidyverse.html#universo-tidyverse" id="toc-universo-tidyverse"><span class="toc-section-number">3.1</span> Universo tidyverse</a></li>
+<li><a href="3.2-selección-de-registros.html#selección-de-registros" id="toc-selección-de-registros"><span class="toc-section-number">3.2</span> Selección de registros</a></li>
+<li><a href="3.3-selección-de-columnas.html#selección-de-columnas" id="toc-selección-de-columnas"><span class="toc-section-number">3.3</span> Selección de columnas</a></li>
+<li><a href="3.4-creación-o-actualización-de-variables.html#creación-o-actualización-de-variables" id="toc-creación-o-actualización-de-variables"><span class="toc-section-number">3.4</span> Creación o actualización de variables</a></li>
+<li><a href="3.5-ordenar-datos.html#ordenar-datos" id="toc-ordenar-datos"><span class="toc-section-number">3.5</span> Ordenar datos</a></li>
+<li><a href="3.6-sumarizar-valores.html#sumarizar-valores" id="toc-sumarizar-valores"><span class="toc-section-number">3.6</span> Sumarizar valores</a></li>
+<li><a href="3.7-combinación-de-acciones.html#combinación-de-acciones" id="toc-combinación-de-acciones"><span class="toc-section-number">3.7</span> Combinación de acciones</a></li>
+</ul></li>
+<li class="has-sub"><a href="4-uniones-de-tablas-con-r.html#uniones-de-tablas-con-r" id="toc-uniones-de-tablas-con-r"><span class="toc-section-number">4</span> Uniones de tablas con R</a>
+<ul>
+<li><a href="4.1-uniones-verticales.html#uniones-verticales" id="toc-uniones-verticales"><span class="toc-section-number">4.1</span> Uniones verticales</a></li>
+<li class="has-sub"><a href="4.2-uniones-horizontales-o-join.html#uniones-horizontales-o-join" id="toc-uniones-horizontales-o-join"><span class="toc-section-number">4.2</span> Uniones horizontales o <em>join</em></a>
+<ul>
+<li><a href="4.2-uniones-horizontales-o-join.html#inner-join" id="toc-inner-join"><span class="toc-section-number">4.2.1</span> Inner join</a></li>
+<li><a href="4.2-uniones-horizontales-o-join.html#left-join" id="toc-left-join"><span class="toc-section-number">4.2.2</span> Left join</a></li>
+<li><a href="4.2-uniones-horizontales-o-join.html#anti-join" id="toc-anti-join"><span class="toc-section-number">4.2.3</span> Anti join</a></li>
+<li><a href="4.2-uniones-horizontales-o-join.html#librería-sqldf" id="toc-librería-sqldf"><span class="toc-section-number">4.2.4</span> Librería sqldf</a></li>
+</ul></li>
+<li><a href="4.3-duplicidades-en-las-uniones-de-tablas.html#duplicidades-en-las-uniones-de-tablas" id="toc-duplicidades-en-las-uniones-de-tablas"><span class="toc-section-number">4.3</span> Duplicidades en las uniones de tablas</a></li>
+<li><a href="4.4-referencias.html#referencias" id="toc-referencias"><span class="toc-section-number">4.4</span> Referencias</a></li>
+</ul></li>
+<li class="has-sub"><a href="5-basicos-ggplot.html#basicos-ggplot" id="toc-basicos-ggplot"><span class="toc-section-number">5</span> Representación gráfica básica con ggplot</a>
+<ul>
+<li><a href="5.1-histogramas.html#histogramas" id="toc-histogramas"><span class="toc-section-number">5.1</span> Histogramas</a></li>
+<li><a href="5.2-gráficos-de-densidad.html#gráficos-de-densidad" id="toc-gráficos-de-densidad"><span class="toc-section-number">5.2</span> Gráficos de densidad</a></li>
+<li><a href="5.3-gráficos-de-caja-boxplot.html#gráficos-de-caja-boxplot" id="toc-gráficos-de-caja-boxplot"><span class="toc-section-number">5.3</span> Gráficos de caja (boxplot)</a></li>
+<li><a href="5.4-gráficos-de-tarta.html#gráficos-de-tarta" id="toc-gráficos-de-tarta"><span class="toc-section-number">5.4</span> Gráficos de tarta</a></li>
+<li><a href="5.5-gráficos-de-barras.html#gráficos-de-barras" id="toc-gráficos-de-barras"><span class="toc-section-number">5.5</span> Gráficos de barras</a></li>
+<li><a href="5.6-gráficos-de-líneas.html#gráficos-de-líneas" id="toc-gráficos-de-líneas"><span class="toc-section-number">5.6</span> Gráficos de líneas</a></li>
+<li><a href="5.7-gráfico-de-dispersión.html#gráfico-de-dispersión" id="toc-gráfico-de-dispersión"><span class="toc-section-number">5.7</span> Gráfico de dispersión</a></li>
+</ul></li>
+<li class="has-sub"><a href="6-descripcion-numerica-variables.html#descripcion-numerica-variables" id="toc-descripcion-numerica-variables"><span class="toc-section-number">6</span> Descripción numérica de variables</a>
+<ul>
+<li><a href="6.1-transformar-datos-en-información.html#transformar-datos-en-información" id="toc-transformar-datos-en-información"><span class="toc-section-number">6.1</span> Transformar datos en información</a></li>
+<li><a href="6.2-caso-práctico.-campaña-de-venta-cruzada.html#caso-práctico.-campaña-de-venta-cruzada" id="toc-caso-práctico.-campaña-de-venta-cruzada"><span class="toc-section-number">6.2</span> Caso práctico. Campaña de venta cruzada</a></li>
+<li><a href="6.3-el-rol-de-las-variables-en-el-conjunto-de-datos.html#el-rol-de-las-variables-en-el-conjunto-de-datos" id="toc-el-rol-de-las-variables-en-el-conjunto-de-datos"><span class="toc-section-number">6.3</span> El rol de las variables en el conjunto de datos</a></li>
+<li class="has-sub"><a href="6.4-análisis-descriptivos-de-los-datos.html#análisis-descriptivos-de-los-datos" id="toc-análisis-descriptivos-de-los-datos"><span class="toc-section-number">6.4</span> Análisis descriptivos de los datos</a>
+<ul>
+<li><a href="6.4-análisis-descriptivos-de-los-datos.html#descritivos-en-variables-cualitativas-factores" id="toc-descritivos-en-variables-cualitativas-factores"><span class="toc-section-number">6.4.1</span> Descritivos en variables cualitativas (factores)</a></li>
+<li><a href="6.4-análisis-descriptivos-de-los-datos.html#descritivos-en-variables-cuantitativas" id="toc-descritivos-en-variables-cuantitativas"><span class="toc-section-number">6.4.2</span> Descritivos en variables cuantitativas</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="7-descripcion-grafica-datos.html#descripcion-grafica-datos" id="toc-descripcion-grafica-datos"><span class="toc-section-number">7</span> Descripción gráfica de datos</a>
+<ul>
+<li><a href="7-descripcion-grafica-datos.html#descripción-gráfica-de-factores" id="toc-descripción-gráfica-de-factores"><span class="toc-section-number">7.0.1</span> Descripción gráfica de factores</a></li>
+<li><a href="7-descripcion-grafica-datos.html#descripción-gráfica-de-variables-numéricas" id="toc-descripción-gráfica-de-variables-numéricas"><span class="toc-section-number">7.0.2</span> Descripción gráfica de variables numéricas</a></li>
+</ul></li>
+<li class="has-sub"><a href="8-problemas-datos.html#problemas-datos" id="toc-problemas-datos"><span class="toc-section-number">8</span> Problemas con los datos</a>
+<ul>
+<li class="has-sub"><a href="8.1-problemática-con-factores.html#problemática-con-factores" id="toc-problemática-con-factores"><span class="toc-section-number">8.1</span> Problemática con factores</a>
+<ul>
+<li><a href="8.1-problemática-con-factores.html#factores-con-niveles-de-pocos-registros" id="toc-factores-con-niveles-de-pocos-registros"><span class="toc-section-number">8.1.1</span> Factores con niveles de pocos registros</a></li>
+<li><a href="8.1-problemática-con-factores.html#factores-que-aparecen-como-variables-numéricas" id="toc-factores-que-aparecen-como-variables-numéricas"><span class="toc-section-number">8.1.2</span> Factores que aparecen como variables numéricas</a></li>
+<li><a href="8.1-problemática-con-factores.html#factores-con-un-gran-número-de-niveles" id="toc-factores-con-un-gran-número-de-niveles"><span class="toc-section-number">8.1.3</span> Factores con un gran número de niveles</a></li>
+<li><a href="8.1-problemática-con-factores.html#factores-con-valores-perdidos" id="toc-factores-con-valores-perdidos"><span class="toc-section-number">8.1.4</span> Factores con valores perdidos</a></li>
+</ul></li>
+<li class="has-sub"><a href="8.2-problemas-con-variables-numéricas.html#problemas-con-variables-numéricas" id="toc-problemas-con-variables-numéricas"><span class="toc-section-number">8.2</span> Problemas con variables numéricas</a>
+<ul>
+<li><a href="8.2-problemas-con-variables-numéricas.html#valores-modales" id="toc-valores-modales"><span class="toc-section-number">8.2.1</span> Valores modales</a></li>
+<li><a href="8.2-problemas-con-variables-numéricas.html#valores-atípicos" id="toc-valores-atípicos"><span class="toc-section-number">8.2.2</span> Valores atípicos</a></li>
+<li><a href="8.2-problemas-con-variables-numéricas.html#variables-numéricas-como-factores" id="toc-variables-numéricas-como-factores"><span class="toc-section-number">8.2.3</span> Variables numéricas como factores</a></li>
+<li><a href="8.2-problemas-con-variables-numéricas.html#valores-perdidos-en-variables-numéricas" id="toc-valores-perdidos-en-variables-numéricas"><span class="toc-section-number">8.2.4</span> Valores perdidos en variables numéricas</a></li>
+</ul></li>
+</ul></li>
+<li><a href="9-analisis-exploratorio-datos-EDA.html#analisis-exploratorio-datos-EDA" id="toc-analisis-exploratorio-datos-EDA"><span class="toc-section-number">9</span> Análisis Exploratorio de Datos. EDA</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="analisis-exploratorio-datos-EDA" class="section level1" number="9">
+<h1><span class="header-section-number">Capítulo 9</span> Análisis Exploratorio de Datos. EDA</h1>
+<p>La práctica totalidad de lo que se ha trabajado hasta el momento se resume en este capítulo. El <strong>análisis EDA</strong> (<strong>E</strong>xploratory <strong>D</strong>ata <strong>A</strong>nalysis) es el primer paso que ha de seguir un científico de datos cuando se aproxima a los datos, pero el científico de datos tiene que saber como pueden ser sus datos, que tipo de variables los componen, el nivel al que se encuentran los registros, que problemas pueden presentar sus datos o como resumir esa información, es decir, necesita conocer en profundidad todos los capítulos anteriores.</p>
+<p>Para realizar este tipo de análisis <code>R</code> dispone de distintas librerías, algunas de ellas son:</p>
+<ul>
+<li><a href="https://joachim-gassen.github.io/ExPanDaR/">ExPanDaR</a></li>
+<li><a href="https://github.com/ekstroem/dataMaid">dataMaid</a></li>
+<li>DataExplorer</li>
+</ul>
+<p>El propio científico de datos debería tener sus propias herramientas descriptivas, sin embargo, en este capítulo se empleará <strong>DataExplorer</strong> por rapidez de realización, sencillez de uso y fácil interpretación de la salida que ofrece.</p>
+<p>En la línea habitual se trabaja con el caso práctico de la campaña de venta cruzada de una empresa aseguradora.</p>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="9-analisis-exploratorio-datos-EDA.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb176-2"><a href="9-analisis-exploratorio-datos-EDA.html#cb176-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb176-3"><a href="9-analisis-exploratorio-datos-EDA.html#cb176-3" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/train.csv&quot;</span>)</span>
+<span id="cb176-4"><a href="9-analisis-exploratorio-datos-EDA.html#cb176-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(train,<span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##   id Gender Age Driving_License Region_Code Previously_Insured Vehicle_Age
+## 1  1   Male  44               1          28                  0   &gt; 2 Years
+## 2  2   Male  76               1           3                  0    1-2 Year
+## 3  3   Male  47               1          28                  0   &gt; 2 Years
+## 4  4   Male  21               1          11                  1    &lt; 1 Year
+## 5  5 Female  29               1          41                  1    &lt; 1 Year
+##   Vehicle_Damage Annual_Premium Policy_Sales_Channel Vintage Response
+## 1            Yes          40454                   26     217        1
+## 2             No          33536                   26     183        0
+## 3            Yes          38294                   26      27        1
+## 4             No          28619                  152     203        0
+## 5             No          27496                  152      39        0</code></pre>
+<p>En el capítulo anterior ya aparecieron posibles problemas, no sólo de datos, también de negocio, por ese motivo se insiste en la idea de dar importancia al problema de negocio que está abordando el científico de datos.</p>
+<p>El primer paso es conocer el número de observaciones con las que trabajamos, como son las variables del conjunto de datos y saber si es posible prescindir de algunas, para ello se empleará la función <code>introduce</code>.</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="9-analisis-exploratorio-datos-EDA.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DataExplorer)</span>
+<span id="cb178-2"><a href="9-analisis-exploratorio-datos-EDA.html#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="fu">introduce</span>(train)</span></code></pre></div>
+<pre><code>##     rows columns discrete_columns continuous_columns all_missing_columns
+## 1 381109      12                3                  9                   0
+##   total_missing_values complete_rows total_observations memory_usage
+## 1                    0        381109            4573308     27443752</code></pre>
+<p>Este análisis se puede acompañar de una visión gráfica.</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="9-analisis-exploratorio-datos-EDA.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_intro</span>(train)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-91-1.png" width="672" /></p>
+<p>Disponemos de 381109 observaciones y 12 variables donde un 25% son factores frente al 75% de numéricas, todos las columnas están completas y no hay observaciones sin datos por lo que no es necesaria una limpieza previa. Observemos a continuación que variables tiene el conjunto de datos.</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="9-analisis-exploratorio-datos-EDA.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_str</span>(train)</span></code></pre></div>
+<p>Se observa que hay variables como <code>Previously_Insured</code>, <code>Region_Code</code> o <code>Policy_Sales_Channel</code> que son numéricas y serían susceptibles de ser factores. Los propios nombres de variables y sus descripciones tienen que ser de ayuda en estos primeros acercamientos. El siguiente paso es describir las variables en función del tipo. Si la variable es numérica se recomendaba la realización de histogramas, con <code>plot_histogram</code> se automatiza esta labor.</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="9-analisis-exploratorio-datos-EDA.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_histogram</span>(train, <span class="at">ncol =</span> <span class="dv">3</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
+<p>Se disponen de 6 variables numéricas dispuestas en dos filas con <code>ncol=3</code> columnas. En este punto el científico de datos ya debe empezar a describir comportamientos dando ese sentido de negocio. Veamos variable por variable:</p>
+<ul>
+<li>Age. Es la edad del encuestado, la moda en 25 años aproximadamente con otro repunte en torno a los 45.</li>
+<li>Annual_Premium. Prima anual concentrada en valores bajos con algún registro con valor superior a 40000 €.</li>
+<li>Id. Identificador de cliente poco o nada puede aportar a la resolución de un problema con los datos.</li>
+<li>Policy_Sales_Channerl. Canal de venta del contrato, no tiene sentido su histograma, ha de ser tratada como un factor.</li>
+<li>Region_Code. Es un código de región ha de ser tratada como un factor.</li>
+<li>Vintage. Antigüedad del contrato, no tiene una forma definida, de hecho sus posibles valores se parecen mucho al campo identificativo.</li>
+</ul>
+<p>De este modo es como se recomienda el acercamiento a los datos, buscando ese sentido de los posibles resultados y estudiando las formas, los posibles valores que toman las variables. En este primer paso ya es necesario modificar los datos de trabajo.</p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="9-analisis-exploratorio-datos-EDA.html#cb183-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> </span>
+<span id="cb183-2"><a href="9-analisis-exploratorio-datos-EDA.html#cb183-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Policy_Sales_Channel =</span> <span class="fu">as.character</span>(Policy_Sales_Channel),</span>
+<span id="cb183-3"><a href="9-analisis-exploratorio-datos-EDA.html#cb183-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Region_Code =</span> <span class="fu">as.character</span>(Region_Code))</span></code></pre></div>
+<p>Las siguientes variables a analizar serán los factores, se emplea la función <code>plot_bar</code>.</p>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="9-analisis-exploratorio-datos-EDA.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bar</span>(train)</span></code></pre></div>
+<pre><code>## 2 columns ignored with more than 50 categories.
+## Region_Code: 53 categories
+## Policy_Sales_Channel: 155 categories</code></pre>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
+<p>En este caso DataExplorer nos arroja un warning que da una pista sobre un problema que tiene nuestro conjunto de datos de trabajo:</p>
+<blockquote>
+<p>2 columns ignored with more than 50 categories.
+Region_Code: 53 categories
+Policy_Sales_Channel: 155 categories</p>
+</blockquote>
+<p>Hay dos columnas que se considera innecesario representar, justo los factores que se acaban de crear. Estas variables son susceptibles de ser agrupadas pero no han de ser tratadas como numéricas. En cuanto al resto de variables:</p>
+<ul>
+<li>Gender. Describe el sexo del encuestado, es un factor con dos niveles.</li>
+<li>Vehicle_Age. Esta variable define la antigüedad del vehículo, se ha agrupado en 3 niveles de un factor y por eso no es numérica pero es necesario observar el orden. Es un factor, pero es un factor con orden, &lt;1 1-2 y &gt;2. En este caso el orden lexicográfico pone en primer lugar el nivel 1-2 Year y ha de estar en segundo lugar.</li>
+<li>Vehicle_Damage. Indica si el vehículo tiene daños, a priori no parece presentar resultado anómalo.</li>
+<li>Driving_License. Indica si se dispone o no de carnet, apenas hay observaciones sin carnet, ¿tiene sentido ofrecer un seguro de automóviles a clientes sin carnet? Esos registros son susceptibles de ser eliminados.</li>
+<li>Previously_Insured. Es una variable numérica pero al tomar 2 valores se interpreta como factor.</li>
+<li>Response. Será la variable más relevante de nuestro conjunto de datos, toma valores 1/0 Si/No.</li>
+</ul>
+<p>A continuación se resuelven algunos de los problemas planteados. Se empieza por la variable <code>Vehicle_Age</code>, para reordenar factores en R se cuenta con la función <code>factor</code>, se podría hacer:</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="9-analisis-exploratorio-datos-EDA.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(train<span class="sc">$</span>Vehicle_Age)</span></code></pre></div>
+<pre><code>## 
+##  &lt; 1 Year &gt; 2 Years  1-2 Year 
+##    164786     16007    200316</code></pre>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="9-analisis-exploratorio-datos-EDA.html#cb188-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Vehicle_Age=</span><span class="fu">factor</span>(Vehicle_Age, <span class="fu">c</span>(<span class="st">&#39;&lt; 1 Year&#39;</span>,<span class="st">&#39;1-2 Year&#39;</span>,<span class="st">&#39;&gt; 2 Years&#39;</span>)))</span>
+<span id="cb188-2"><a href="9-analisis-exploratorio-datos-EDA.html#cb188-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(train<span class="sc">$</span>Vehicle_Age)</span></code></pre></div>
+<pre><code>## 
+##  &lt; 1 Year  1-2 Year &gt; 2 Years 
+##    164786    200316     16007</code></pre>
+<p>Sin embargo, en este punto se plantea una recomendación. Cuando se trabaja con datos en bruto y estos datos son analizados y clasificados es bueno crear una nueva variable y jugar con prefijos para determinar si esa variable está trabajada o no. En este caso, tratándose de un factor, se emplea el prefijo <code>fr_</code> de factor reclasificado, en el ejemplo que se está trabajando:</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="9-analisis-exploratorio-datos-EDA.html#cb190-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">fr_vehicle_age =</span> <span class="fu">factor</span>(Vehicle_Age, <span class="fu">c</span>(<span class="st">&#39;&lt; 1 Year&#39;</span>,<span class="st">&#39;1-2 Year&#39;</span>,<span class="st">&#39;&gt; 2 Years&#39;</span>)))</span>
+<span id="cb190-2"><a href="9-analisis-exploratorio-datos-EDA.html#cb190-2" aria-hidden="true" tabindex="-1"></a>train <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(fr_vehicle_age) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">conteo=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb190-3"><a href="9-analisis-exploratorio-datos-EDA.html#cb190-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>fr_vehicle_age, <span class="at">y=</span>conteo)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&#39;identity&#39;</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
+<p>Con la variable <code>Driving_License</code> se plantean dos posibles soluciones, eliminar esos pocos registros sin licencia de conducción o directamente ignorar la variable. De momento no se eliminan esos registros. El resto de factores que a priori no parecen presentar problema se renombran.</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="9-analisis-exploratorio-datos-EDA.html#cb191-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">rename</span>(</span>
+<span id="cb191-2"><a href="9-analisis-exploratorio-datos-EDA.html#cb191-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">fr_gender =</span> Gender,</span>
+<span id="cb191-3"><a href="9-analisis-exploratorio-datos-EDA.html#cb191-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">fr_vehicle_damage =</span> Vehicle_Damage, </span>
+<span id="cb191-4"><a href="9-analisis-exploratorio-datos-EDA.html#cb191-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">fr_previouly_insured =</span> Previously_Insured)</span></code></pre></div>
+<p>Quedan pendientes los dos factores con un gran número de niveles. En el caso de <code>Region_Code</code> se sabe que los datos provienen de una aseguradora española y se tienen 52 códigos, es evidente que hace mención a las provincias españolas:</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="9-analisis-exploratorio-datos-EDA.html#cb192-1" aria-hidden="true" tabindex="-1"></a>train <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(<span class="at">Region_Code=</span><span class="fu">as.factor</span>(Region_Code)) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">conteo=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb192-2"><a href="9-analisis-exploratorio-datos-EDA.html#cb192-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(Region_Code,conteo), <span class="at">y =</span>conteo)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&#39;Identity&#39;</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>() </span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
+<p>Se observa que los niveles 28 y 8 son los que más encuestados tienen, en el caso de las provincias españolas hacen mención a Madrid y Barcelona. En este caso se puede sugerir una agrupación con los 10 niveles más representativos y un resto.</p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="9-analisis-exploratorio-datos-EDA.html#cb193-1" aria-hidden="true" tabindex="-1"></a>provincias <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Region_Code) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">conteo=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb193-2"><a href="9-analisis-exploratorio-datos-EDA.html#cb193-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(conteo)) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">fr_region_code =</span> <span class="fu">case_when</span>(</span>
+<span id="cb193-3"><a href="9-analisis-exploratorio-datos-EDA.html#cb193-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">row_number</span>() <span class="sc">&lt;=</span> <span class="dv">10</span> <span class="sc">~</span> Region_Code,</span>
+<span id="cb193-4"><a href="9-analisis-exploratorio-datos-EDA.html#cb193-4" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&#39;Resto&#39;</span>))</span>
+<span id="cb193-5"><a href="9-analisis-exploratorio-datos-EDA.html#cb193-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb193-6"><a href="9-analisis-exploratorio-datos-EDA.html#cb193-6" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(provincias)</span></code></pre></div>
+<pre><code>## Joining, by = &quot;Region_Code&quot;</code></pre>
+<p>Otra posible agrupación tendría ese <em>sentido de negocio</em>.</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="9-analisis-exploratorio-datos-EDA.html#cb195-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">fr_region_code2 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb195-2"><a href="9-analisis-exploratorio-datos-EDA.html#cb195-2" aria-hidden="true" tabindex="-1"></a>  Region_Code <span class="sc">==</span> <span class="dv">28</span> <span class="sc">~</span> <span class="st">&#39;Madrid&#39;</span>,</span>
+<span id="cb195-3"><a href="9-analisis-exploratorio-datos-EDA.html#cb195-3" aria-hidden="true" tabindex="-1"></a>  Region_Code <span class="sc">==</span> <span class="dv">8</span> <span class="sc">~</span> <span class="st">&#39;Barcelona&#39;</span>,</span>
+<span id="cb195-4"><a href="9-analisis-exploratorio-datos-EDA.html#cb195-4" aria-hidden="true" tabindex="-1"></a>  <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&#39;Resto&#39;</span>))</span></code></pre></div>
+<p>Sin embargo, la mejor agrupación será aquella que una provincias con similar comportamiento ante un problema o ante la respuesta de un problema. En la misma situación está la variable <code>Policy_Sales_Channel</code> donde no tenemos ese conocimiento de negocio necesario para proponer una agrupación de niveles del factor. En capítulos posteriores se retomará este problema y se propondrá una solución.</p>
+<p>El análisis EDA permite al científico de datos esa primera aproximación a los datos, pero esos datos se quieren emplear para resolver un problema y de momento sólo se está en una fase descriptiva. La librería <code>DataExplorer</code> además de tener diversas funciones para realizar estos descriptivos tiene la posibilidad de automatizar un reporte con esa aproximación mediante la función <code>create_report</code>. En cualquier caso, se recomienda que el analista disponga de sus propias herramientas.</p>
+
+</div>
+<p style="text-align: center;">
+<a href="8.2-problemas-con-variables-numéricas.html"><button class="btn btn-default">Previous</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>

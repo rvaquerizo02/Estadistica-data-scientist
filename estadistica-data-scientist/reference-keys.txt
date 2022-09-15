@@ -72,3 +72,4 @@ valores-modales
 valores-atípicos
 variables-numéricas-como-factores
 valores-perdidos-en-variables-numéricas
+analisis-exploratorio-datos-EDA
