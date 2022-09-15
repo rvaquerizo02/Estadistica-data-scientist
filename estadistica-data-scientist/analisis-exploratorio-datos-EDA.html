@@ -23,7 +23,7 @@
 <meta name="author" content="Raul Vaquerizo" />
 
 
-<meta name="date" content="2022-09-13" />
+<meta name="date" content="2022-09-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -210,8 +210,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="descripcion-grafica-datos.html"><a href="descripcion-grafica-datos.html"><i class="fa fa-check"></i><b>7</b> Descripción gráfica de datos</a>
 <ul>
-<li class="chapter" data-level="7.0.1" data-path="descripcion-grafica-datos.html"><a href="descripcion-grafica-datos.html#descripción-gráfica-de-factores"><i class="fa fa-check"></i><b>7.0.1</b> Descripción gráfica de factores</a></li>
-<li class="chapter" data-level="7.0.2" data-path="descripcion-grafica-datos.html"><a href="descripcion-grafica-datos.html#descripción-gráfica-de-variables-numéricas"><i class="fa fa-check"></i><b>7.0.2</b> Descripción gráfica de variables numéricas</a></li>
+<li class="chapter" data-level="7.1" data-path="descripcion-grafica-datos.html"><a href="descripcion-grafica-datos.html#descripción-gráfica-de-factores"><i class="fa fa-check"></i><b>7.1</b> Descripción gráfica de factores</a></li>
+<li class="chapter" data-level="7.2" data-path="descripcion-grafica-datos.html"><a href="descripcion-grafica-datos.html#descripción-gráfica-de-variables-numéricas"><i class="fa fa-check"></i><b>7.2</b> Descripción gráfica de variables numéricas</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="problemas-datos.html"><a href="problemas-datos.html"><i class="fa fa-check"></i><b>8</b> Problemas con los datos</a>
 <ul>
@@ -253,15 +253,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="analisis-exploratorio-datos-EDA" class="section level1 hasAnchor" number="9">
 <h1><span class="header-section-number">Capítulo 9</span> Análisis Exploratorio de Datos. EDA<a href="analisis-exploratorio-datos-EDA.html#analisis-exploratorio-datos-EDA" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Los capítulos 7 y 8 se resumen en este capítulo mediante visualizaciones vistas en el capítulo 5. El <strong>análisis EDA</strong> (<strong>E</strong>xploratory <strong>D</strong>ata <strong>A</strong>nalysis) es el primer paso que ha de seguir un científico de datos cuando se aproxima a los datos, pero el científico de datos ha de preocuparse en saber como pueden ser sus datos, que tipo de variables los componen, el nivel al que se encuentran los registros, que problemas pueden presentar sus datos o como resumir esa información.</p>
+<p>Los capítulos 7 y 8 se resumen en éste mediante visualizaciones trabajadas en el capítulo 5. El <strong>análisis EDA</strong> (<strong>E</strong>xploratory <strong>D</strong>ata <strong>A</strong>nalysis) es el primer paso que ha de seguir un científico de datos y articula los temas tratados en el capítulo 2 ya que convertir datos en información implica que el científico de datos ha de preocuparse en saber como pueden estar estructurados sus datos, que tipo de variables los componen, el nivel al que se encuentran los registros, que problemas pueden presentar o como resumir información. Además, es necesario conocer los capítulos 3 y 4 para el manejo de variables y cruces de tablas y por este motivo el análisis EDA es la base, pero lo visto anteriormente son los cimientos.</p>
 <p>Para realizar este tipo de análisis R dispone de distintas librerías, algunas de ellas son:</p>
 <ul>
 <li><a href="https://joachim-gassen.github.io/ExPanDaR/">ExPanDaR</a></li>
 <li><a href="https://github.com/ekstroem/dataMaid">dataMaid</a></li>
 <li>DataExplorer</li>
 </ul>
-<p>El propio científico de datos debería tener sus propias herramientas descriptivas, sin embargo, en este capítulo se empleará <strong>DataExplorer</strong> por rapidez de realización, sencillez de uso y fácil interpretación de la salida que ofrece.</p>
-<p>En la línea habitual se trabaja con el caso práctico de la campaña de venta cruzada de una empresa aseguradora.</p>
+<blockquote>
+<p>Se sugiere que sea el propio científico de datos quien debería tener sus propias herramientas descriptivas.</p>
+</blockquote>
+<p>En este capítulo del ensayo se empleará la libería <strong>DataExplorer</strong> por rapidez de realización, sencillez de uso y fácil interpretación de la salida que ofrece. En la línea habitual se trabaja con el caso práctico de la campaña de venta cruzada de una empresa aseguradora.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="analisis-exploratorio-datos-EDA.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="analisis-exploratorio-datos-EDA.html#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="analisis-exploratorio-datos-EDA.html#cb1-3" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/train.csv&quot;</span>)</span>
@@ -278,8 +280,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3            Yes          38294                   26      27        1
 ## 4             No          28619                  152     203        0
 ## 5             No          27496                  152      39        0</code></pre>
-<p>En el capítulo anterior ya aparecieron posibles problemas, no sólo de datos, también de negocio, por ese motivo se insiste en la idea de dar importancia al problema de negocio que está abordando el científico de datos.</p>
-<p>El primer paso es conocer el número de observaciones con las que trabajamos, como son las variables del conjunto de datos y saber si es posible prescindir de algunas, para ello se empleará la función <code>introduce</code>.</p>
+<p>En el capítulo anterior ya aparecieron posibles problemas, no sólo de datos, también cuestiones de negocio a las que llegamos tras un análisis estadístico sencillo, por ese motivo se insiste en la idea de dar importancia al problema de negocio que se está abordando. El primer paso es conocer el número de observaciones y como son las variables del conjunto de datos, esto nos permite saber si es posible prescindir de algunas (observaciones y/o variables). Con DataExplorer se comenzará con la función <code>introduce</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="analisis-exploratorio-datos-EDA.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DataExplorer)</span>
 <span id="cb3-2"><a href="analisis-exploratorio-datos-EDA.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">introduce</span>(train)</span></code></pre></div>
 <pre><code>##     rows columns discrete_columns continuous_columns all_missing_columns
@@ -294,20 +295,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Se observa que hay variables como <code>Previously_Insured</code>, <code>Region_Code</code> o <code>Policy_Sales_Channel</code> que son numéricas y serían susceptibles de ser factores. Los propios nombres de variables y sus descripciones tienen que ser de ayuda en estos primeros acercamientos. El siguiente paso es describir las variables en función del tipo. Si la variable es numérica se recomendaba la realización de histogramas, con <code>plot_histogram</code> se automatiza esta labor.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="analisis-exploratorio-datos-EDA.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_histogram</span>(train, <span class="at">ncol =</span> <span class="dv">3</span>)</span></code></pre></div>
 <p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p>Se disponen de 6 variables numéricas dispuestas en dos filas con <code>ncol=3</code> columnas. En este punto el científico de datos ya debe empezar a describir comportamientos dando ese sentido de negocio. Veamos variable por variable:</p>
+<p>Se disponen de 6 variables numéricas dispuestas en tres columnas con <code>ncol=3</code> columnas. En este punto el científico de datos ya debe empezar a describir comportamientos buscando ese <em>sentido de negocio</em>. Veamos variable por variable:</p>
 <ul>
-<li>Age. Es la edad del encuestado, la moda en 25 años aproximadamente con otro repunte en torno a los 45.</li>
-<li>Annual_Premium. Prima anual concentrada en valores bajos con algún registro con valor superior a 40000 €.</li>
-<li>Id. Identificador de cliente poco o nada puede aportar a la resolución de un problema con los datos.</li>
-<li>Policy_Sales_Channerl. Canal de venta del contrato, no tiene sentido su histograma, ha de ser tratada como un factor.</li>
-<li>Region_Code. Es un código de región ha de ser tratada como un factor.</li>
-<li>Vintage. Antigüedad del contrato, no tiene una forma definida, de hecho sus posibles valores se parecen mucho al campo identificativo.</li>
+<li><code>Age</code> Es la edad del encuestado, la moda en 25 años aproximadamente con otro repunte en torno a los 45.</li>
+<li><code>Annual_Premium</code> Prima anual concentrada en valores bajos con algún registro con valor superior a 40000 €.</li>
+<li><code>Id</code> Identificador de cliente poco o nada puede aportar a la resolución de un problema con los datos.</li>
+<li><code>Policy_Sales_Channel</code> Canal de venta del contrato, no tiene sentido su histograma, ha de ser tratada como un factor.</li>
+<li><code>Region_Code</code> Es un código de región ha de ser tratada como un factor.</li>
+<li><code>Vintage</code> Antigüedad del contrato, no tiene una forma definida, de hecho sus posibles valores se parecen mucho al campo identificativo.</li>
 </ul>
-<p>De este modo es como se recomienda el acercamiento a los datos, buscando ese sentido de los posibles resultados y estudiando las formas, los posibles valores que toman las variables. En este primer paso ya es necesario modificar los datos de trabajo.</p>
+<p>El primer acercamiento va buscando ese sentido y pretende utilizar dialéctica propia de negocio estudiando las formas, los posibles valores que toman las observaciones y las variables. Sin embargo, en este primer paso ya encontramos acciones y modificaciones interesantes.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="analisis-exploratorio-datos-EDA.html#cb8-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> </span>
 <span id="cb8-2"><a href="analisis-exploratorio-datos-EDA.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Policy_Sales_Channel =</span> <span class="fu">as.character</span>(Policy_Sales_Channel),</span>
 <span id="cb8-3"><a href="analisis-exploratorio-datos-EDA.html#cb8-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">Region_Code =</span> <span class="fu">as.character</span>(Region_Code))</span></code></pre></div>
-<p>Las siguientes variables a analizar serán los factores, se emplea la función <code>plot_bar</code>.</p>
+<p>Las siguientes variables a analizar serán los factores, en el capítulo 7 se sugirió el uso de gráficos de barras, en DataExplorer se emplea la función <code>plot_bar</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="analisis-exploratorio-datos-EDA.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_bar</span>(train)</span></code></pre></div>
 <pre><code>## 2 columns ignored with more than 50 categories.
 ## Region_Code: 53 categories
@@ -321,14 +322,14 @@ Policy_Sales_Channel: 155 categories</p>
 </blockquote>
 <p>Hay dos columnas que se considera innecesario representar, justo los factores que se acaban de crear. Estas variables son susceptibles de ser agrupadas pero no han de ser tratadas como numéricas. En cuanto al resto de variables:</p>
 <ul>
-<li>Gender. Describe el sexo del encuestado, es un factor con dos niveles.</li>
-<li>Vehicle_Age. Esta variable define la antigüedad del vehículo, se ha agrupado en 3 niveles de un factor y por eso no es numérica pero es necesario observar el orden. Es un factor, pero es un factor con orden, &lt;1 1-2 y &gt;2. En este caso el orden lexicográfico pone en primer lugar el nivel 1-2 Year y ha de estar en segundo lugar.</li>
-<li>Vehicle_Damage. Indica si el vehículo tiene daños, a priori no parece presentar resultado anómalo.</li>
-<li>Driving_License. Indica si se dispone o no de carnet, apenas hay observaciones sin carnet, ¿tiene sentido ofrecer un seguro de automóviles a clientes sin carnet? Esos registros son susceptibles de ser eliminados.</li>
-<li>Previously_Insured. Es una variable numérica pero al tomar 2 valores se interpreta como factor.</li>
-<li>Response. Será la variable más relevante de nuestro conjunto de datos, toma valores 1/0 Si/No.</li>
+<li><code>Gender</code> Describe el sexo del encuestado, es un factor con dos niveles.</li>
+<li><code>Vehicle_Age</code> Esta variable define la antigüedad del vehículo, se ha agrupado en 3 niveles de un factor y por eso no es numérica pero es necesario observar el orden. Es un factor y el EDA ya nos advierte un posible problema, el orden, &lt;1 1-2 y &gt;2. En este caso toma el orden lexicográfico pone en primer lugar el nivel 1-2 Year y ha de estar en segundo lugar.</li>
+<li><code>Vehicle_Damage</code> Indica si el vehículo tiene daños, a priori no parece presentar resultado anómalo.</li>
+<li><code>Driving_License</code> Indica si se dispone o no de carnet, apenas hay observaciones sin carnet, ¿tiene sentido ofrecer un seguro de automóviles a clientes sin carnet? Esos registros son susceptibles de ser eliminados.</li>
+<li><code>Previously_Insured</code> Es una variable numérica pero al tomar 2 valores se interpreta como factor.</li>
+<li><code>Response</code> Será la variable más relevante de nuestro conjunto de datos, toma valores 1/0 Si/No.</li>
 </ul>
-<p>A continuación se resuelven algunos de los problemas planteados. Se empieza por la variable <code>Vehicle_Age</code>, para reordenar factores en R se cuenta con la función <code>factor</code>, se podría hacer:</p>
+<p>A continuación se resuelven algunos de los problemas planteados. Se empieza por la variable <code>Vehicle_Age</code>, para reordenar factores en R se cuenta con la función <code>factor</code>, se sugiere hacer:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="analisis-exploratorio-datos-EDA.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(train<span class="sc">$</span>Vehicle_Age)</span></code></pre></div>
 <pre><code>## 
 ##  &lt; 1 Year &gt; 2 Years  1-2 Year 
@@ -360,13 +361,13 @@ Policy_Sales_Channel: 155 categories</p>
 <span id="cb18-5"><a href="analisis-exploratorio-datos-EDA.html#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-6"><a href="analisis-exploratorio-datos-EDA.html#cb18-6" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(provincias)</span></code></pre></div>
 <pre><code>## Joining, by = &quot;Region_Code&quot;</code></pre>
-<p>Otra posible agrupación tendría ese <em>sentido de negocio</em>.</p>
+<p>Otra posible agrupación tendría ese <em>sentido de negocio provincial</em></p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="analisis-exploratorio-datos-EDA.html#cb20-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">fr_region_code2 =</span> <span class="fu">case_when</span>(</span>
 <span id="cb20-2"><a href="analisis-exploratorio-datos-EDA.html#cb20-2" aria-hidden="true" tabindex="-1"></a>  Region_Code <span class="sc">==</span> <span class="dv">28</span> <span class="sc">~</span> <span class="st">&#39;Madrid&#39;</span>,</span>
 <span id="cb20-3"><a href="analisis-exploratorio-datos-EDA.html#cb20-3" aria-hidden="true" tabindex="-1"></a>  Region_Code <span class="sc">==</span> <span class="dv">8</span> <span class="sc">~</span> <span class="st">&#39;Barcelona&#39;</span>,</span>
 <span id="cb20-4"><a href="analisis-exploratorio-datos-EDA.html#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&#39;Resto&#39;</span>))</span></code></pre></div>
 <p>Sin embargo, la mejor agrupación será aquella que una provincias con similar comportamiento ante un problema o ante la respuesta de un problema. En la misma situación está la variable <code>Policy_Sales_Channel</code> donde no tenemos ese conocimiento de negocio necesario para proponer una agrupación de niveles del factor. En capítulos posteriores se retomará este problema y se propondrá una solución.</p>
-<p>El análisis EDA permite al científico de datos esa primera aproximación a los datos, pero esos datos se quieren emplear para resolver un problema y de momento sólo se está en una fase descriptiva. La librería <code>DataExplorer</code> además de tener diversas funciones para realizar estos descriptivos tiene la posibilidad de automatizar un reporte con esa aproximación mediante la función <code>create_report</code>. En cualquier caso, se recomienda que el analista disponga de sus propias herramientas.</p>
+<p>El análisis EDA permite al científico de datos esa primera aproximación a los datos, pero esos datos se quieren emplear para resolver un problema y de momento sólo se está en una fase descriptiva. La librería <code>DataExplorer</code> además de tener diversas funciones para realizar estos descriptivos tiene la posibilidad de automatizar un reporte con esa aproximación mediante la función <code>create_report</code>. En cualquier caso y reiterando comentarios anteriores, se recomienda que el analista disponga de sus propias herramientas.</p>
 
 </div>
             </section>

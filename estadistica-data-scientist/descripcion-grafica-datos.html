@@ -23,7 +23,7 @@
 <meta name="author" content="Raul Vaquerizo" />
 
 
-<meta name="date" content="2022-09-13" />
+<meta name="date" content="2022-09-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -210,8 +210,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7" data-path="descripcion-grafica-datos.html"><a href="descripcion-grafica-datos.html"><i class="fa fa-check"></i><b>7</b> Descripción gráfica de datos</a>
 <ul>
-<li class="chapter" data-level="7.0.1" data-path="descripcion-grafica-datos.html"><a href="descripcion-grafica-datos.html#descripción-gráfica-de-factores"><i class="fa fa-check"></i><b>7.0.1</b> Descripción gráfica de factores</a></li>
-<li class="chapter" data-level="7.0.2" data-path="descripcion-grafica-datos.html"><a href="descripcion-grafica-datos.html#descripción-gráfica-de-variables-numéricas"><i class="fa fa-check"></i><b>7.0.2</b> Descripción gráfica de variables numéricas</a></li>
+<li class="chapter" data-level="7.1" data-path="descripcion-grafica-datos.html"><a href="descripcion-grafica-datos.html#descripción-gráfica-de-factores"><i class="fa fa-check"></i><b>7.1</b> Descripción gráfica de factores</a></li>
+<li class="chapter" data-level="7.2" data-path="descripcion-grafica-datos.html"><a href="descripcion-grafica-datos.html#descripción-gráfica-de-variables-numéricas"><i class="fa fa-check"></i><b>7.2</b> Descripción gráfica de variables numéricas</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="problemas-datos.html"><a href="problemas-datos.html"><i class="fa fa-check"></i><b>8</b> Problemas con los datos</a>
 <ul>
@@ -262,8 +262,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>El primer paso es cargar los datos de trabajo, ya conocidos, y se da comienzo con el trabajo.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="descripcion-grafica-datos.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="descripcion-grafica-datos.html#cb1-2" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/train.csv&quot;</span>)</span></code></pre></div>
-<div id="descripción-gráfica-de-factores" class="section level3 hasAnchor" number="7.0.1">
-<h3><span class="header-section-number">7.0.1</span> Descripción gráfica de factores<a href="descripcion-grafica-datos.html#descripción-gráfica-de-factores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="descripción-gráfica-de-factores" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Descripción gráfica de factores<a href="descripcion-grafica-datos.html#descripción-gráfica-de-factores" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Si numéricamente tenemos frecuencias absolutas o frecuencias relativas los gráficos más sencillos para describir estas variables son los gráficos de barras y gráficos de sectores.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="descripcion-grafica-datos.html#cb2-1" aria-hidden="true" tabindex="-1"></a>resumen <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">clientes =</span> <span class="fu">n</span>())</span>
 <span id="cb2-2"><a href="descripcion-grafica-datos.html#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -321,8 +321,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Se recuerda que una variable cuantitativa puede tener un número finito de elementos lo que da pie a ser tratada como un factor, paradigma de esta situación es la variable edad en prácticamente todos los conjuntos de datos.</p>
 </div>
-<div id="descripción-gráfica-de-variables-numéricas" class="section level3 hasAnchor" number="7.0.2">
-<h3><span class="header-section-number">7.0.2</span> Descripción gráfica de variables numéricas<a href="descripcion-grafica-datos.html#descripción-gráfica-de-variables-numéricas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="descripción-gráfica-de-variables-numéricas" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Descripción gráfica de variables numéricas<a href="descripcion-grafica-datos.html#descripción-gráfica-de-variables-numéricas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Vistos con anterioridad los estadísticos de posición, variación y forma para las variables cuantitativas es imprescindible la descripción gráfica, en el capítulo introductorio a ggplot se pusieron sobre el papel diversos análisis gráficos que servirán para realizar esta descripción. Se parte con los gráficos más sencillos, realizados con el código más sencillo de <code>ggplot</code> y paulatinamente se irá sofisticando ese código a lo largo del curso.</p>
 <p>Se comienza con los histogramas y los gráficos de densidad.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="descripcion-grafica-datos.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogramas</span></span>

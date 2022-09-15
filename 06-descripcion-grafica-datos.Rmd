@@ -13,7 +13,7 @@ library(tidyverse)
 train <- read.csv("./data/train.csv")
 ```
 
-### Descripción gráfica de factores
+## Descripción gráfica de factores
 
 Si numéricamente tenemos frecuencias absolutas o frecuencias relativas los gráficos más sencillos para describir estas variables son los gráficos de barras y gráficos de sectores. 
 
@@ -98,7 +98,7 @@ describe_factor(train, 'Age')
 
 Se recuerda que una variable cuantitativa puede tener un número finito de elementos lo que da pie a ser tratada como un factor, paradigma de esta situación es la variable edad en prácticamente todos los conjuntos de datos. 
 
-### Descripción gráfica de variables numéricas
+## Descripción gráfica de variables numéricas
 
 Vistos con anterioridad los estadísticos de posición, variación y forma para las variables cuantitativas es imprescindible la descripción gráfica, en el capítulo introductorio a ggplot se pusieron sobre el papel diversos análisis gráficos que servirán para realizar esta descripción. Se parte con los gráficos más sencillos, realizados con el código más sencillo de `ggplot` y paulatinamente se irá sofisticando ese código a lo largo del curso. 
 

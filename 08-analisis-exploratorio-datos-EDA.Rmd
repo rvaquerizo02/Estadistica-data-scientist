@@ -1,6 +1,6 @@
 # Análisis Exploratorio de Datos. EDA {#analisis-exploratorio-datos-EDA}
 
-Los capítulos 7 y 8 se resumen en este capítulo mediante visualizaciones vistas en el capítulo 5. El **análisis EDA** (**E**xploratory **D**ata **A**nalysis) es el primer paso que ha de seguir un científico de datos cuando se aproxima a los datos, pero el científico de datos ha de preocuparse en saber como pueden ser sus datos, que tipo de variables los componen, el nivel al que se encuentran los registros, que problemas pueden presentar sus datos o como resumir esa información.
+Los capítulos 7 y 8 se resumen en éste mediante visualizaciones trabajadas en el capítulo 5. El **análisis EDA** (**E**xploratory **D**ata **A**nalysis) es el primer paso que ha de seguir un científico de datos y articula los temas tratados en el capítulo 2 ya que convertir datos en información implica que el científico de datos ha de preocuparse en saber como pueden estar estructurados sus datos, que tipo de variables los componen, el nivel al que se encuentran los registros, que problemas pueden presentar  o como resumir información. Además, es necesario conocer los capítulos 3 y 4 para el manejo de variables y cruces de tablas y por este motivo el análisis EDA es la base, pero lo visto anteriormente son los cimientos. 
 
 Para realizar este tipo de análisis R dispone de distintas librerías, algunas de ellas son:
 
@@ -8,9 +8,9 @@ Para realizar este tipo de análisis R dispone de distintas librerías, algunas 
 * [dataMaid](https://github.com/ekstroem/dataMaid)
 * DataExplorer
 
-El propio científico de datos debería tener sus propias herramientas descriptivas, sin embargo, en este capítulo se empleará **DataExplorer** por rapidez de realización, sencillez de uso y fácil interpretación de la salida que ofrece. 
+> Se sugiere que sea el propio científico de datos quien debería tener sus propias herramientas descriptivas.
 
-En la línea habitual se trabaja con el caso práctico de la campaña de venta cruzada de una empresa aseguradora.
+En este capítulo del ensayo se empleará la libería **DataExplorer** por rapidez de realización, sencillez de uso y fácil interpretación de la salida que ofrece. En la línea habitual se trabaja con el caso práctico de la campaña de venta cruzada de una empresa aseguradora.
 
 ```{r message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -19,9 +19,7 @@ train <- read.csv("./data/train.csv")
 head(train,5)
 ```
 
-En el capítulo anterior ya aparecieron posibles problemas, no sólo de datos, también de negocio, por ese motivo se insiste en la idea de dar importancia al problema de negocio que está abordando el científico de datos. 
-
-El primer paso es conocer el número de observaciones con las que trabajamos, como son las variables del conjunto de datos y saber si es posible prescindir de algunas, para ello se empleará la función `introduce`.
+En el capítulo anterior ya aparecieron posibles problemas, no sólo de datos, también cuestiones de negocio a las que llegamos tras un análisis estadístico sencillo, por ese motivo se insiste en la idea de dar importancia al problema de negocio que se está abordando. El primer paso es conocer el número de observaciones y como son las variables del conjunto de datos, esto nos permite saber si es posible prescindir de algunas (observaciones y/o variables). Con DataExplorer se comenzará con la función `introduce`.
 
 ```{r message=FALSE, warning=FALSE}
 library(DataExplorer)
@@ -47,16 +45,16 @@ Se observa que hay variables como  `Previously_Insured`, `Region_Code` o `Policy
 plot_histogram(train, ncol = 3)
 ```
 
-Se disponen de 6 variables numéricas dispuestas en dos filas con `ncol=3` columnas. En este punto el científico de datos ya debe empezar a describir comportamientos dando ese sentido de negocio. Veamos variable por variable:
+Se disponen de 6 variables numéricas dispuestas en tres columnas con `ncol=3` columnas. En este punto el científico de datos ya debe empezar a describir comportamientos buscando ese _sentido de negocio_. Veamos variable por variable:
 
-* Age. Es la edad del encuestado, la moda en 25 años aproximadamente con otro repunte en torno a los 45. 
-* Annual_Premium. Prima anual concentrada en valores bajos con algún registro con valor superior a 40000 €.
-* Id. Identificador de cliente poco o nada puede aportar a la resolución de un problema con los datos. 
-* Policy_Sales_Channel. Canal de venta del contrato, no tiene sentido su histograma, ha de ser tratada como un factor. 
-* Region_Code. Es un código de región ha de ser tratada como un factor.
-* Vintage. Antigüedad del contrato, no tiene una forma definida, de hecho sus posibles valores se parecen mucho al campo identificativo. 
+* `Age` Es la edad del encuestado, la moda en 25 años aproximadamente con otro repunte en torno a los 45. 
+* `Annual_Premium` Prima anual concentrada en valores bajos con algún registro con valor superior a 40000 €.
+* `Id` Identificador de cliente poco o nada puede aportar a la resolución de un problema con los datos. 
+* `Policy_Sales_Channel` Canal de venta del contrato, no tiene sentido su histograma, ha de ser tratada como un factor. 
+* `Region_Code` Es un código de región ha de ser tratada como un factor.
+* `Vintage` Antigüedad del contrato, no tiene una forma definida, de hecho sus posibles valores se parecen mucho al campo identificativo. 
 
-De este modo es como se recomienda el acercamiento a los datos, buscando ese sentido de los posibles resultados y estudiando las formas, los posibles valores que toman las variables. En este primer paso ya es necesario modificar los datos de trabajo.
+El primer acercamiento va buscando ese sentido y pretende utilizar dialéctica propia de negocio estudiando las formas, los posibles valores que toman las observaciones y las variables. Sin embargo, en este primer paso ya encontramos acciones y modificaciones interesantes.
 
 ```{r}
 train <- train %>% 
@@ -64,7 +62,7 @@ train <- train %>%
          Region_Code = as.character(Region_Code))
 ```
 
-Las siguientes variables a analizar serán los factores, se emplea la función `plot_bar`. 
+Las siguientes variables a analizar serán los factores, en el capítulo 7 se sugirió el uso de gráficos de barras, en DataExplorer se emplea la función `plot_bar`. 
 
 ```{r}
 plot_bar(train)
@@ -78,14 +76,14 @@ Policy_Sales_Channel: 155 categories
 
 Hay dos columnas que se considera innecesario representar, justo los factores que se acaban de crear. Estas variables son susceptibles de ser agrupadas pero no han de ser tratadas como numéricas. En cuanto al resto de variables:
 
-* Gender. Describe el sexo del encuestado, es un factor con dos niveles.
-* Vehicle_Age. Esta variable define la antigüedad del vehículo, se ha agrupado en 3 niveles de un factor y por eso no es numérica pero es necesario observar el orden. Es un factor, pero es un factor con orden, <1 1-2 y >2. En este caso el orden lexicográfico pone en primer lugar el nivel 1-2 Year y ha de estar en segundo lugar. 
-* Vehicle_Damage. Indica si el vehículo tiene daños, a priori no parece presentar resultado anómalo.
-* Driving_License. Indica si se dispone o no de carnet, apenas hay observaciones sin carnet, ¿tiene sentido ofrecer un seguro de automóviles a clientes sin carnet? Esos registros son susceptibles de ser eliminados.
-* Previously_Insured. Es una variable numérica pero al tomar 2 valores se interpreta como factor. 
-* Response. Será la variable más relevante de nuestro conjunto de datos, toma valores 1/0 Si/No.
+* `Gender` Describe el sexo del encuestado, es un factor con dos niveles.
+* `Vehicle_Age` Esta variable define la antigüedad del vehículo, se ha agrupado en 3 niveles de un factor y por eso no es numérica pero es necesario observar el orden. Es un factor y el EDA ya nos advierte un posible problema, el orden, <1 1-2 y >2. En este caso toma el orden lexicográfico pone en primer lugar el nivel 1-2 Year y ha de estar en segundo lugar. 
+* `Vehicle_Damage` Indica si el vehículo tiene daños, a priori no parece presentar resultado anómalo.
+* `Driving_License` Indica si se dispone o no de carnet, apenas hay observaciones sin carnet, ¿tiene sentido ofrecer un seguro de automóviles a clientes sin carnet? Esos registros son susceptibles de ser eliminados.
+* `Previously_Insured` Es una variable numérica pero al tomar 2 valores se interpreta como factor. 
+* `Response` Será la variable más relevante de nuestro conjunto de datos, toma valores 1/0 Si/No.
 
-A continuación se resuelven algunos de los problemas planteados. Se empieza por la variable `Vehicle_Age`, para reordenar factores en R se cuenta con la función `factor`, se podría hacer:
+A continuación se resuelven algunos de los problemas planteados. Se empieza por la variable `Vehicle_Age`, para reordenar factores en R se cuenta con la función `factor`, se sugiere hacer:
 
 ```{r}
 table(train$Vehicle_Age)
@@ -128,7 +126,7 @@ provincias <- train %>% group_by(Region_Code) %>% summarise(conteo=n()) %>%
 train <- train %>% left_join(provincias)
 ```
 
-Otra posible agrupación tendría ese _sentido de negocio_.
+Otra posible agrupación tendría ese _sentido de negocio provincial_
 
 ```{r}
 train <- train %>% mutate(fr_region_code2 = case_when(
@@ -139,4 +137,4 @@ train <- train %>% mutate(fr_region_code2 = case_when(
 
 Sin embargo, la mejor agrupación será aquella que una provincias con similar comportamiento ante un problema o ante la respuesta de un problema. En la misma situación está la variable `Policy_Sales_Channel` donde no tenemos ese conocimiento de negocio necesario para proponer una agrupación de niveles del factor. En capítulos posteriores se retomará este problema y se propondrá una solución. 
 
-El análisis EDA permite al científico de datos esa primera aproximación a los datos, pero esos datos se quieren emplear para resolver un problema y de momento sólo se está en una fase descriptiva. La librería `DataExplorer` además de tener diversas funciones para realizar estos descriptivos tiene la posibilidad de automatizar un reporte con esa aproximación mediante la función `create_report`. En cualquier caso, se recomienda que el analista disponga de sus propias herramientas. 
+El análisis EDA permite al científico de datos empezar el trabajo con los datos, pero esos datos se quieren emplear para resolver un problema y de momento sólo se está en una fase descriptiva. En cuanto a la librería `DataExplorer` además de tener diversas funciones para realizar estos descriptivos tiene la posibilidad de automatizar un reporte con esa aproximación mediante la función `create_report`. En cualquier caso y reiterando comentarios anteriores, se recomienda que el analista disponga de sus propias herramientas. 
