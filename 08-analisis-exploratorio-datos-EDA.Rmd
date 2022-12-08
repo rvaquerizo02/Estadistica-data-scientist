@@ -33,7 +33,7 @@ Este análisis se puede acompañar de una visión gráfica.
 plot_intro(train)
 ```
 
-Disponemos de 381109 observaciones y 12 variables donde un 25% son factores frente al 75% de numéricas, todos las columnas están completas y no hay observaciones sin datos por lo que no es necesaria una limpieza previa. Observemos a continuación que variables tiene el conjunto de datos.
+El conjunto de datos tiene 381109 observaciones y 12 variables donde un 25% son factores frente al 75% de numéricas, todos las columnas están completas y no hay observaciones sin datos por lo que no es necesaria una limpieza previa. Observemos a continuación que variables tiene el conjunto de datos.
 
 ```{r}
 plot_str(train)

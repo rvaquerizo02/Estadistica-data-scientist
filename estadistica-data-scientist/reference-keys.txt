@@ -89,3 +89,11 @@ distribución-uniforme
 distribución-normal
 distribución-gamma
 distribuciones-conocidas
+analisis-bivariable
+describir-dos-variables
+variable-numérica-frente-a-variable-numérica
+factores-frente-a-variables-numéricas
+factores-frente-a-factores
+propuesta-de-análisis-gráfico-para-el-análisis-bivariable
+agrupación-de-variables-cuantitativas
+correlación-entre-factores.-la-v-de-cramer
