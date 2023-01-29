@@ -23,7 +23,7 @@
 <meta name="author" content="Raul Vaquerizo" />
 
 
-<meta name="date" content="2022-10-16" />
+<meta name="date" content="2023-01-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -253,6 +253,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.4.3" data-path="probabilidad-distribuciones.html"><a href="probabilidad-distribuciones.html#distribución-gamma"><i class="fa fa-check"></i><b>10.4.3</b> Distribución gamma</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="analisis-bivariable.html"><a href="analisis-bivariable.html"><i class="fa fa-check"></i><b>11</b> Análisis bivariable</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="analisis-bivariable.html"><a href="analisis-bivariable.html#variable-numérica-frente-a-variable-numérica"><i class="fa fa-check"></i><b>11.1</b> Variable numérica frente a variable numérica</a></li>
+<li class="chapter" data-level="11.2" data-path="analisis-bivariable.html"><a href="analisis-bivariable.html#factores-frente-a-variables-numéricas"><i class="fa fa-check"></i><b>11.2</b> Factores frente a variables numéricas</a></li>
+<li class="chapter" data-level="11.3" data-path="analisis-bivariable.html"><a href="analisis-bivariable.html#factores-frente-a-factores"><i class="fa fa-check"></i><b>11.3</b> Factores frente a factores</a></li>
+<li class="chapter" data-level="11.4" data-path="analisis-bivariable.html"><a href="analisis-bivariable.html#propuesta-de-análisis-gráfico-para-el-análisis-bivariable"><i class="fa fa-check"></i><b>11.4</b> Propuesta de análisis gráfico para el análisis bivariable</a></li>
+<li class="chapter" data-level="11.5" data-path="analisis-bivariable.html"><a href="analisis-bivariable.html#correlación-entre-factores.-la-v-de-cramer"><i class="fa fa-check"></i><b>11.5</b> Correlación entre factores. La V de Cramer</a></li>
+<li class="chapter" data-level="11.6" data-path="analisis-bivariable.html"><a href="analisis-bivariable.html#agrupación-de-variables-cuantitativas"><i class="fa fa-check"></i><b>11.6</b> Agrupación de variables cuantitativas</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html"><i class="fa fa-check"></i><b>12</b> Muestreo e inferencia estadística</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#muestreo"><i class="fa fa-check"></i><b>12.1</b> Muestreo</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#muestreo-aleatorio-simple"><i class="fa fa-check"></i><b>12.1.1</b> Muestreo aleatorio simple</a></li>
+<li class="chapter" data-level="12.1.2" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#muestreo-aleatorio-estratificado"><i class="fa fa-check"></i><b>12.1.2</b> Muestreo aleatorio estratificado</a></li>
+<li class="chapter" data-level="12.1.3" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#muestreo-por-conglomerados"><i class="fa fa-check"></i><b>12.1.3</b> Muestreo por conglomerados</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#inferencia-estadística"><i class="fa fa-check"></i><b>12.2</b> Inferencia estadística</a></li>
+<li class="chapter" data-level="12.3" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#estimación-de-parámetros"><i class="fa fa-check"></i><b>12.3</b> Estimación de parámetros</a></li>
+<li class="chapter" data-level="12.4" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#intervalos-de-confianza"><i class="fa fa-check"></i><b>12.4</b> Intervalos de confianza</a></li>
+<li class="chapter" data-level="12.5" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#contrastes-de-hipótesis"><i class="fa fa-check"></i><b>12.5</b> Contrastes de hipótesis</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -312,7 +334,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Este análisis se puede acompañar de una visión gráfica.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="analisis-exploratorio-datos-EDA.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_intro</span>(train)</span></code></pre></div>
 <p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>Disponemos de 381109 observaciones y 12 variables donde un 25% son factores frente al 75% de numéricas, todos las columnas están completas y no hay observaciones sin datos por lo que no es necesaria una limpieza previa. Observemos a continuación que variables tiene el conjunto de datos.</p>
+<p>El conjunto de datos tiene 381109 observaciones y 12 variables donde un 25% son factores frente al 75% de numéricas, todos las columnas están completas y no hay observaciones sin datos por lo que no es necesaria una limpieza previa. Observemos a continuación que variables tiene el conjunto de datos.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="analisis-exploratorio-datos-EDA.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_str</span>(train)</span></code></pre></div>
 <p>Se observa que hay variables como <code>Previously_Insured</code>, <code>Region_Code</code> o <code>Policy_Sales_Channel</code> que son numéricas y serían susceptibles de ser factores. Los propios nombres de variables y sus descripciones tienen que ser de ayuda en estos primeros acercamientos. El siguiente paso es describir las variables en función del tipo. Si la variable es numérica se recomendaba la realización de histogramas, con <code>plot_histogram</code> se automatiza esta labor.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="analisis-exploratorio-datos-EDA.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_histogram</span>(train, <span class="at">ncol =</span> <span class="dv">3</span>)</span></code></pre></div>

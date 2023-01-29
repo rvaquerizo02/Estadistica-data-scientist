@@ -53,14 +53,21 @@ train %>% group_by(Vehicle_Age) %>% summarise(pct= round(n()/nrow(train),3))
 ```
 En esta situación la probabilidad coincide con el porcentaje de observaciones, de ahí la tendencia a transformar una probabilidad en un porcentaje, _en la medida de lo posible_ el científico de datos debe evitar esa transformación. De igual modo se puede plantear para la variable `Age` ya que es una variable "peculiar" donde la línea entre la cantidad o la cualidad con orden es muy fina. Si se plantea como numérica es necesario recordar que una integral calcula el área bajo una curva en un determinado intervalo, por lo que se puede obtener el área que hay por debajo de un valor hasta el siguiente. Por ejemplo, la probabilidad de tener 50 años o más en la población de trabajo, en la encuesta realizada, es:
 
+
+
 ```{r}
+train %>% ggplot(aes(x=Age)) + geom_density() + ggtitle("Probabilidad de tener más de 50 años en los datos") + 
+  geom_vline(xintercept = 50, color = "red") + geom_segment(aes(x = 80, y = 0.025, xend = 64, yend = 0.005),
+                  arrow = arrow(length = unit(0.5, "cm")), color='red')
+
+
 # Es necesario obtener la función de densidad
 densidad <- density(train$Age)
 
 integrate(approxfun(densidad), lower=50, upper=max(train$Age))
 ```
 
-Esa es la probabilidad de tener 50 años o más en los datos en estudio a partir de la función de densidad. 
+Lo que queda por debajo de la curva de densidad, donde apunta la flecha creada con `geom_segment`,  es la probabilidad de tener 50 años o más en los datos de la población en estudio. 
 
 >Se puede hilar un argumento del siguiente modo:
 1. Una variable numérica se describe mediante un histograma o una gráfica de densidad que es una función continua

@@ -57,7 +57,7 @@ species <- iris %>%
 table(species$Species)
 ```
 
-La función `table` realizar tablas de frecuencia (cuenta registros), en este caso se tienen los tres posibles valores que toma la variable `Species` con el número de registros que tiene cada elemento de la variable, el número de registros que tiene cada nivel del factor, hay un factor que no tiene registros, no desaparece el nivel, simplemente aparece con 0 observaciones. 
+La función `table` realiza tablas de frecuencia (cuenta registros), en este caso se tienen los tres posibles valores que toma la variable `Species` con el número de registros que tiene cada elemento de la variable, el número de registros que tiene cada nivel del factor, hay un factor que no tiene registros, no desaparece el nivel, simplemente aparece con 0 observaciones. 
 
 ***
 **Nota**: Cuando se trabajen con datos es recomendable emplear sumarizaciones, visualizaciones o salidas de tablas para contrastar que todo el trabajo que se está realizando sea correcto. Esas acciones evitarán posteriores errores. 

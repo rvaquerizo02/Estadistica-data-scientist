@@ -23,7 +23,7 @@
 <meta name="author" content="Raul Vaquerizo" />
 
 
-<meta name="date" content="2022-12-08" />
+<meta name="date" content="2023-01-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="probabilidad-distribuciones.html"/>
-
+<link rel="next" href="muestreo-inferencia.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -261,6 +261,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.4" data-path="analisis-bivariable.html"><a href="analisis-bivariable.html#propuesta-de-análisis-gráfico-para-el-análisis-bivariable"><i class="fa fa-check"></i><b>11.4</b> Propuesta de análisis gráfico para el análisis bivariable</a></li>
 <li class="chapter" data-level="11.5" data-path="analisis-bivariable.html"><a href="analisis-bivariable.html#correlación-entre-factores.-la-v-de-cramer"><i class="fa fa-check"></i><b>11.5</b> Correlación entre factores. La V de Cramer</a></li>
 <li class="chapter" data-level="11.6" data-path="analisis-bivariable.html"><a href="analisis-bivariable.html#agrupación-de-variables-cuantitativas"><i class="fa fa-check"></i><b>11.6</b> Agrupación de variables cuantitativas</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html"><i class="fa fa-check"></i><b>12</b> Muestreo e inferencia estadística</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#muestreo"><i class="fa fa-check"></i><b>12.1</b> Muestreo</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#muestreo-aleatorio-simple"><i class="fa fa-check"></i><b>12.1.1</b> Muestreo aleatorio simple</a></li>
+<li class="chapter" data-level="12.1.2" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#muestreo-aleatorio-estratificado"><i class="fa fa-check"></i><b>12.1.2</b> Muestreo aleatorio estratificado</a></li>
+<li class="chapter" data-level="12.1.3" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#muestreo-por-conglomerados"><i class="fa fa-check"></i><b>12.1.3</b> Muestreo por conglomerados</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#inferencia-estadística"><i class="fa fa-check"></i><b>12.2</b> Inferencia estadística</a></li>
+<li class="chapter" data-level="12.3" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#estimación-de-parámetros"><i class="fa fa-check"></i><b>12.3</b> Estimación de parámetros</a></li>
+<li class="chapter" data-level="12.4" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#intervalos-de-confianza"><i class="fa fa-check"></i><b>12.4</b> Intervalos de confianza</a></li>
+<li class="chapter" data-level="12.5" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#contrastes-de-hipótesis"><i class="fa fa-check"></i><b>12.5</b> Contrastes de hipótesis</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -593,8 +606,8 @@ pct_clientes
 <p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Aunque sean datos simulados es evidente, por como se ha hecho la simulación, que a medida que aumenta la altura aumenta el peso. Hay una medida estadística para describir esta situación, el coeficiente de correlación que en R se calcula mediante la función <code>cor</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="analisis-bivariable.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(peso, altura)</span></code></pre></div>
-<pre><code>## [1] 0.8056867</code></pre>
-<p>Esta medida de 0.81 indica que peso y altura se relacionan positivamente, a medida que aumenta uno aumenta el otro pero no es una medida de graduación, sólo mide la <strong>fuerza</strong> de esa relación. El coeficiente de correlación es un valor que toma valores entre -1 y 1 donde -1 significa total correlación negativa (aumenta una implica que disminuye la otra variable), 0 significa que no existe ningún tipo de correlación y 1 la correlación positiva (aumenta una aumenta otra variable).</p>
+<pre><code>## [1] 0.8449634</code></pre>
+<p>Esta medida de 0.84 indica que peso y altura se relacionan positivamente, a medida que aumenta uno aumenta el otro pero no es una medida de graduación, sólo mide la <strong>fuerza</strong> de esa relación. El coeficiente de correlación es un valor que toma valores entre -1 y 1 donde -1 significa total correlación negativa (aumenta una implica que disminuye la otra variable), 0 significa que no existe ningún tipo de correlación y 1 la correlación positiva (aumenta una aumenta otra variable).</p>
 <p>Simulando y representando las distintas formas de correlación se tiene:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="analisis-bivariable.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
 <span id="cb6-2"><a href="analisis-bivariable.html#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1925,8 +1938,8 @@ pct_anterior_agregado
           </div>
         </div>
       </div>
-<a href="probabilidad-distribuciones.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="probabilidad-distribuciones.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="muestreo-inferencia.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
