@@ -23,7 +23,7 @@
 <meta name="author" content="Raul Vaquerizo" />
 
 
-<meta name="date" content="2023-01-11" />
+<meta name="date" content="2023-02-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,14 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.24/datatables.js"></script>
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -196,6 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-barras"><i class="fa fa-check"></i><b>5.5</b> Gráficos de barras</a></li>
 <li class="chapter" data-level="5.6" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-líneas"><i class="fa fa-check"></i><b>5.6</b> Gráficos de líneas</a></li>
 <li class="chapter" data-level="5.7" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>5.7</b> Gráfico de dispersión</a></li>
+<li class="chapter" data-level="5.8" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#múltiples-gráficos-con-gridextra"><i class="fa fa-check"></i><b>5.8</b> Múltiples gráficos con gridExtra</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html"><i class="fa fa-check"></i><b>6</b> Descripción numérica de variables</a>
 <ul>
@@ -275,6 +284,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.4" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#intervalos-de-confianza"><i class="fa fa-check"></i><b>12.4</b> Intervalos de confianza</a></li>
 <li class="chapter" data-level="12.5" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#contrastes-de-hipótesis"><i class="fa fa-check"></i><b>12.5</b> Contrastes de hipótesis</a></li>
 </ul></li>
+<li class="chapter" data-level="13" data-path="regresion-lineal.html"><a href="regresion-lineal.html"><i class="fa fa-check"></i><b>13</b> Regresión lineal</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="regresion-lineal.html"><a href="regresion-lineal.html#modelo-de-regresión-lineal-simple"><i class="fa fa-check"></i><b>13.1</b> Modelo de regresión lineal simple</a></li>
+<li class="chapter" data-level="13.2" data-path="regresion-lineal.html"><a href="regresion-lineal.html#el-coeficiente-de-determinación-o-r2"><i class="fa fa-check"></i><b>13.2</b> El coeficiente de determinación o <span class="math inline">\(R^2\)</span></a></li>
+<li class="chapter" data-level="13.3" data-path="regresion-lineal.html"><a href="regresion-lineal.html#transformaciones-de-variables"><i class="fa fa-check"></i><b>13.3</b> Transformaciones de variables</a></li>
+<li class="chapter" data-level="13.4" data-path="regresion-lineal.html"><a href="regresion-lineal.html#tramificación-de-variables-en-modelos-lineales"><i class="fa fa-check"></i><b>13.4</b> Tramificación de variables en modelos lineales</a></li>
+<li class="chapter" data-level="13.5" data-path="regresion-lineal.html"><a href="regresion-lineal.html#factores-en-modelos-de-regresión"><i class="fa fa-check"></i><b>13.5</b> Factores en modelos de regresión</a></li>
+<li class="chapter" data-level="13.6" data-path="regresion-lineal.html"><a href="regresion-lineal.html#modelo-de-regresión-lineal-múltiple"><i class="fa fa-check"></i><b>13.6</b> Modelo de regresión lineal múltiple</a></li>
+<li class="chapter" data-level="13.7" data-path="regresion-lineal.html"><a href="regresion-lineal.html#métodos-de-selección-de-variables"><i class="fa fa-check"></i><b>13.7</b> Métodos de selección de variables</a>
+<ul>
+<li class="chapter" data-level="13.7.1" data-path="regresion-lineal.html"><a href="regresion-lineal.html#método-fordward"><i class="fa fa-check"></i><b>13.7.1</b> Método fordward</a></li>
+<li class="chapter" data-level="13.7.2" data-path="regresion-lineal.html"><a href="regresion-lineal.html#método-backward"><i class="fa fa-check"></i><b>13.7.2</b> Método backward</a></li>
+<li class="chapter" data-level="13.7.3" data-path="regresion-lineal.html"><a href="regresion-lineal.html#método-stepwise"><i class="fa fa-check"></i><b>13.7.3</b> Método stepwise</a></li>
+</ul></li>
+<li class="chapter" data-level="13.8" data-path="regresion-lineal.html"><a href="regresion-lineal.html#el-principio-de-parsimonia"><i class="fa fa-check"></i><b>13.8</b> El principio de parsimonia</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -299,13 +324,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Capítulo 4</span> Uniones de tablas con R<a href="uniones-de-tablas-con-r.html#uniones-de-tablas-con-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Además de manejar los datos de un data frame en ocasiones es necesario realizar uniones entre conjuntos de datos para crear o añadir nuevas variables a un data frame que es una base de observaciones inicial. Se pueden establecer 2 tipos de uniones fundamentales, uniones verticales de tablas y uniones horizontales. Las uniones verticales serán las concatenaciones de data frames, poner una estructura de datos encima de otra y las uniones horizontales serán las que se denominarán <em>join</em>.</p>
 <p>Se emplea una estructura de datos sencilla para ejemplificar el funcionamiento.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="uniones-de-tablas-con-r.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb1-2"><a href="uniones-de-tablas-con-r.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="uniones-de-tablas-con-r.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="uniones-de-tablas-con-r.html#cb1-4" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2021</span>), <span class="at">variable1=</span><span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>), <span class="at">variable2=</span><span class="fu">c</span>(<span class="dv">1000</span>,<span class="dv">2000</span>,<span class="dv">3000</span>,<span class="dv">4000</span>))</span>
-<span id="cb1-5"><a href="uniones-de-tablas-con-r.html#cb1-5" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2017</span>, <span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>), <span class="at">variable1=</span><span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">80</span>), <span class="at">variable3=</span><span class="fu">c</span>(<span class="dv">5000</span>,<span class="dv">6000</span>,<span class="dv">7000</span>,<span class="dv">8000</span>))</span>
-<span id="cb1-6"><a href="uniones-de-tablas-con-r.html#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="uniones-de-tablas-con-r.html#cb1-7" aria-hidden="true" tabindex="-1"></a>df1 <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="uniones-de-tablas-con-r.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb22-2"><a href="uniones-de-tablas-con-r.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb22-3"><a href="uniones-de-tablas-con-r.html#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="uniones-de-tablas-con-r.html#cb22-4" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2021</span>), <span class="at">variable1=</span><span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>), <span class="at">variable2=</span><span class="fu">c</span>(<span class="dv">1000</span>,<span class="dv">2000</span>,<span class="dv">3000</span>,<span class="dv">4000</span>))</span>
+<span id="cb22-5"><a href="uniones-de-tablas-con-r.html#cb22-5" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2017</span>, <span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>), <span class="at">variable1=</span><span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">80</span>), <span class="at">variable3=</span><span class="fu">c</span>(<span class="dv">5000</span>,<span class="dv">6000</span>,<span class="dv">7000</span>,<span class="dv">8000</span>))</span>
+<span id="cb22-6"><a href="uniones-de-tablas-con-r.html#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="uniones-de-tablas-con-r.html#cb22-7" aria-hidden="true" tabindex="-1"></a>df1 <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -367,7 +392,7 @@ variable2
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="uniones-de-tablas-con-r.html#cb2-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="uniones-de-tablas-con-r.html#cb23-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -433,15 +458,15 @@ variable3
 <div id="uniones-verticales" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Uniones verticales<a href="uniones-de-tablas-con-r.html#uniones-verticales" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El siguiente código emplea la función <code>rbind.data.frame</code> para concatenar datos, para poner una tabla encima de otra y generaría un error:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="uniones-de-tablas-con-r.html#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">rbind.data.frame</span>(df1, df2)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="uniones-de-tablas-con-r.html#cb24-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">rbind.data.frame</span>(df1, df2)</span></code></pre></div>
 <p><code>Error in match.names(clabs, names(xi)) : names do not match previous names</code></p>
 <p>Significa que ambos conjuntos de datos no tienen las mismas variables.
 En las uniones verticales con la función <code>rbind.data.frame</code> se han de unir las <strong>mismas estructuras</strong>. En los datos de trabajo no se dispone de la misma estructura por lo que se torna necesario saber que deseamos unir verticalmente, saber que deseamos concatenar. Si deseamos realizar una unión de todos los datos ambas tablas requieren de las mismas variables:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="uniones-de-tablas-con-r.html#cb4-1" aria-hidden="true" tabindex="-1"></a>df1<span class="sc">$</span>variable3 <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb4-2"><a href="uniones-de-tablas-con-r.html#cb4-2" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>variable2 <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb4-3"><a href="uniones-de-tablas-con-r.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="uniones-de-tablas-con-r.html#cb4-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">rbind.data.frame</span>(df1, df2) </span>
-<span id="cb4-5"><a href="uniones-de-tablas-con-r.html#cb4-5" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="uniones-de-tablas-con-r.html#cb25-1" aria-hidden="true" tabindex="-1"></a>df1<span class="sc">$</span>variable3 <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb25-2"><a href="uniones-de-tablas-con-r.html#cb25-2" aria-hidden="true" tabindex="-1"></a>df2<span class="sc">$</span>variable2 <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb25-3"><a href="uniones-de-tablas-con-r.html#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="uniones-de-tablas-con-r.html#cb25-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">rbind.data.frame</span>(df1, df2) </span>
+<span id="cb25-5"><a href="uniones-de-tablas-con-r.html#cb25-5" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -576,8 +601,8 @@ NA
 </table>
 <p>Se han creado las variables 3 y 2 donde ha sido necesario y ya se está en disposición de concatenar ambos data frames. Observemos como queda el data frame resultante. Es importante puntualizar que se están produciendo duplicidades por la variable anio, cabe preguntarse ¿son necesarias esas duplicidades? Cuando se trabaje con datos es muy importante disponer de un campo identificativo del registro y determinar si existen duplicidades por ese campo.</p>
 <p>En cualquier caso, con el paquete <code>dplyr</code> se pueden concatenar data frames mediante la función <code>bind_rows</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="uniones-de-tablas-con-r.html#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(df1, df2)</span>
-<span id="cb5-2"><a href="uniones-de-tablas-con-r.html#cb5-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="uniones-de-tablas-con-r.html#cb26-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(df1, df2)</span>
+<span id="cb26-2"><a href="uniones-de-tablas-con-r.html#cb26-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -720,13 +745,13 @@ NA
 <div id="inner-join" class="section level3 hasAnchor" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> Inner join<a href="uniones-de-tablas-con-r.html#inner-join" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Es la intersección de dos conjuntos de datos. Usamos la función <code>inner_join</code> de <code>dplyr</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="uniones-de-tablas-con-r.html#cb6-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2021</span>), <span class="at">variable1=</span><span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>), <span class="at">variable2=</span><span class="fu">c</span>(<span class="dv">1000</span>,<span class="dv">2000</span>,<span class="dv">3000</span>,<span class="dv">4000</span>))</span>
-<span id="cb6-2"><a href="uniones-de-tablas-con-r.html#cb6-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2017</span>, <span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>), <span class="at">variable1=</span><span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">80</span>), <span class="at">variable3=</span><span class="fu">c</span>(<span class="dv">5000</span>,<span class="dv">6000</span>,<span class="dv">7000</span>,<span class="dv">8000</span>))</span>
-<span id="cb6-3"><a href="uniones-de-tablas-con-r.html#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="uniones-de-tablas-con-r.html#cb6-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(df1,df2, <span class="at">by=</span><span class="st">&#39;anio&#39;</span>)</span>
-<span id="cb6-5"><a href="uniones-de-tablas-con-r.html#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="uniones-de-tablas-con-r.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Equivale a df &lt;- df1 %&gt;% inner_join(df2, by=&#39;anio&#39;)</span></span>
-<span id="cb6-7"><a href="uniones-de-tablas-con-r.html#cb6-7" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="uniones-de-tablas-con-r.html#cb27-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2021</span>), <span class="at">variable1=</span><span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>), <span class="at">variable2=</span><span class="fu">c</span>(<span class="dv">1000</span>,<span class="dv">2000</span>,<span class="dv">3000</span>,<span class="dv">4000</span>))</span>
+<span id="cb27-2"><a href="uniones-de-tablas-con-r.html#cb27-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2017</span>, <span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>), <span class="at">variable1=</span><span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">80</span>), <span class="at">variable3=</span><span class="fu">c</span>(<span class="dv">5000</span>,<span class="dv">6000</span>,<span class="dv">7000</span>,<span class="dv">8000</span>))</span>
+<span id="cb27-3"><a href="uniones-de-tablas-con-r.html#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="uniones-de-tablas-con-r.html#cb27-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(df1,df2, <span class="at">by=</span><span class="st">&#39;anio&#39;</span>)</span>
+<span id="cb27-5"><a href="uniones-de-tablas-con-r.html#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="uniones-de-tablas-con-r.html#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Equivale a df &lt;- df1 %&gt;% inner_join(df2, by=&#39;anio&#39;)</span></span>
+<span id="cb27-7"><a href="uniones-de-tablas-con-r.html#cb27-7" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -802,10 +827,10 @@ variable3
 </tbody>
 </table>
 <p>La unión de ambas estructuras tiene una variable <code>variable1</code> en común, <code>dplyr</code> entiende que es necesario preservar las variables del conjunto de datos de la derecha, con el sufijo <code>.x</code>, y las variables del conjunto de datos de la izquierda, con el sufijo <code>.y</code> por este motivo es muy relevante determinar que se quiere unir. En los datos de trabajo podríamos saber cuales de los datos de la izquierda coinciden por año con los de la derecha y unir la variable 3.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="uniones-de-tablas-con-r.html#cb7-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>variable1)</span>
-<span id="cb7-2"><a href="uniones-de-tablas-con-r.html#cb7-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(df1,df2)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="uniones-de-tablas-con-r.html#cb28-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>variable1)</span>
+<span id="cb28-2"><a href="uniones-de-tablas-con-r.html#cb28-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(df1,df2)</span></code></pre></div>
 <pre><code>## Joining, by = &quot;anio&quot;</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="uniones-de-tablas-con-r.html#cb9-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="uniones-de-tablas-con-r.html#cb30-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -873,12 +898,12 @@ variable3
 <div id="left-join" class="section level3 hasAnchor" number="4.2.2">
 <h3><span class="header-section-number">4.2.2</span> Left join<a href="uniones-de-tablas-con-r.html#left-join" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Quizá una de las uniones más habituales en el trabajo diario de un científico de datos. Se parte de un conjunto de datos de base y se le añaden nuevas variables por la derecha respetando las observaciones de la izquierda. La función de <code>dplyr</code> usada es <code>left_join</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="uniones-de-tablas-con-r.html#cb10-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2021</span>), <span class="at">variable1=</span><span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>))</span>
-<span id="cb10-2"><a href="uniones-de-tablas-con-r.html#cb10-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2017</span>, <span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>), <span class="at">variable3=</span><span class="fu">c</span>(<span class="dv">5000</span>,<span class="dv">6000</span>,<span class="dv">7000</span>,<span class="dv">8000</span>))</span>
-<span id="cb10-3"><a href="uniones-de-tablas-con-r.html#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="uniones-de-tablas-con-r.html#cb10-4" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> df1 <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(df2)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="uniones-de-tablas-con-r.html#cb31-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2021</span>), <span class="at">variable1=</span><span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>))</span>
+<span id="cb31-2"><a href="uniones-de-tablas-con-r.html#cb31-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2017</span>, <span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>), <span class="at">variable3=</span><span class="fu">c</span>(<span class="dv">5000</span>,<span class="dv">6000</span>,<span class="dv">7000</span>,<span class="dv">8000</span>))</span>
+<span id="cb31-3"><a href="uniones-de-tablas-con-r.html#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="uniones-de-tablas-con-r.html#cb31-4" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> df1 <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(df2)</span></code></pre></div>
 <pre><code>## Joining, by = &quot;anio&quot;</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="uniones-de-tablas-con-r.html#cb12-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="uniones-de-tablas-con-r.html#cb33-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -945,12 +970,12 @@ NA
 <div id="anti-join" class="section level3 hasAnchor" number="4.2.3">
 <h3><span class="header-section-number">4.2.3</span> Anti join<a href="uniones-de-tablas-con-r.html#anti-join" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Vamos se van a seleccionar aquellos registros de una tabla base que no están en otra tabla de cruce.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="uniones-de-tablas-con-r.html#cb13-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2021</span>), <span class="at">variable1=</span><span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>))</span>
-<span id="cb13-2"><a href="uniones-de-tablas-con-r.html#cb13-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2017</span>, <span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>), <span class="at">variable3=</span><span class="fu">c</span>(<span class="dv">5000</span>,<span class="dv">6000</span>,<span class="dv">7000</span>,<span class="dv">8000</span>))</span>
-<span id="cb13-3"><a href="uniones-de-tablas-con-r.html#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="uniones-de-tablas-con-r.html#cb13-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df1 <span class="sc">%&gt;%</span> <span class="fu">anti_join</span>(df2)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="uniones-de-tablas-con-r.html#cb34-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2021</span>), <span class="at">variable1=</span><span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>))</span>
+<span id="cb34-2"><a href="uniones-de-tablas-con-r.html#cb34-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2017</span>, <span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>), <span class="at">variable3=</span><span class="fu">c</span>(<span class="dv">5000</span>,<span class="dv">6000</span>,<span class="dv">7000</span>,<span class="dv">8000</span>))</span>
+<span id="cb34-3"><a href="uniones-de-tablas-con-r.html#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="uniones-de-tablas-con-r.html#cb34-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df1 <span class="sc">%&gt;%</span> <span class="fu">anti_join</span>(df2)</span></code></pre></div>
 <pre><code>## Joining, by = &quot;anio&quot;</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="uniones-de-tablas-con-r.html#cb15-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="uniones-de-tablas-con-r.html#cb36-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -978,16 +1003,16 @@ variable1
 <div id="librería-sqldf" class="section level3 hasAnchor" number="4.2.4">
 <h3><span class="header-section-number">4.2.4</span> Librería sqldf<a href="uniones-de-tablas-con-r.html#librería-sqldf" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Como científicos de datos es <strong>importante saber SQL</strong> como lenguaje de consulta, si sabemos SQL tenemos la librería <code>sqldf</code> para utilizar directamente SQL sobre data frames de R.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="uniones-de-tablas-con-r.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sqldf)</span>
-<span id="cb16-2"><a href="uniones-de-tablas-con-r.html#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="uniones-de-tablas-con-r.html#cb16-3" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2021</span>), <span class="at">variable1=</span><span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>), <span class="at">variable2=</span><span class="fu">c</span>(<span class="dv">1000</span>,<span class="dv">2000</span>,<span class="dv">3000</span>,<span class="dv">4000</span>))</span>
-<span id="cb16-4"><a href="uniones-de-tablas-con-r.html#cb16-4" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2017</span>, <span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>), <span class="at">variable1=</span><span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">80</span>), <span class="at">variable3=</span><span class="fu">c</span>(<span class="dv">5000</span>,<span class="dv">6000</span>,<span class="dv">7000</span>,<span class="dv">8000</span>))</span>
-<span id="cb16-5"><a href="uniones-de-tablas-con-r.html#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="uniones-de-tablas-con-r.html#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Inner Join</span></span>
-<span id="cb16-7"><a href="uniones-de-tablas-con-r.html#cb16-7" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">sqldf</span>(<span class="st">&quot;select a.anio, a.variable1, variable3 </span></span>
-<span id="cb16-8"><a href="uniones-de-tablas-con-r.html#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="st">            from df1 a, df2 b</span></span>
-<span id="cb16-9"><a href="uniones-de-tablas-con-r.html#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="st">            where a.anio = b.anio&quot;</span>)</span>
-<span id="cb16-10"><a href="uniones-de-tablas-con-r.html#cb16-10" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="uniones-de-tablas-con-r.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sqldf)</span>
+<span id="cb37-2"><a href="uniones-de-tablas-con-r.html#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="uniones-de-tablas-con-r.html#cb37-3" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2021</span>), <span class="at">variable1=</span><span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>), <span class="at">variable2=</span><span class="fu">c</span>(<span class="dv">1000</span>,<span class="dv">2000</span>,<span class="dv">3000</span>,<span class="dv">4000</span>))</span>
+<span id="cb37-4"><a href="uniones-de-tablas-con-r.html#cb37-4" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2017</span>, <span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>), <span class="at">variable1=</span><span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">80</span>), <span class="at">variable3=</span><span class="fu">c</span>(<span class="dv">5000</span>,<span class="dv">6000</span>,<span class="dv">7000</span>,<span class="dv">8000</span>))</span>
+<span id="cb37-5"><a href="uniones-de-tablas-con-r.html#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="uniones-de-tablas-con-r.html#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Inner Join</span></span>
+<span id="cb37-7"><a href="uniones-de-tablas-con-r.html#cb37-7" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">sqldf</span>(<span class="st">&quot;select a.anio, a.variable1, variable3 </span></span>
+<span id="cb37-8"><a href="uniones-de-tablas-con-r.html#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="st">            from df1 a, df2 b</span></span>
+<span id="cb37-9"><a href="uniones-de-tablas-con-r.html#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="st">            where a.anio = b.anio&quot;</span>)</span>
+<span id="cb37-10"><a href="uniones-de-tablas-con-r.html#cb37-10" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -1038,11 +1063,11 @@ variable3
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="uniones-de-tablas-con-r.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Left join </span></span>
-<span id="cb17-2"><a href="uniones-de-tablas-con-r.html#cb17-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">sqldf</span>(<span class="st">&quot;select a.anio, a.variable1, variable3 </span></span>
-<span id="cb17-3"><a href="uniones-de-tablas-con-r.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="st">            from df1 a left join df2 b</span></span>
-<span id="cb17-4"><a href="uniones-de-tablas-con-r.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="st">            on a.anio = b.anio&quot;</span>)</span>
-<span id="cb17-5"><a href="uniones-de-tablas-con-r.html#cb17-5" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="uniones-de-tablas-con-r.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Left join </span></span>
+<span id="cb38-2"><a href="uniones-de-tablas-con-r.html#cb38-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">sqldf</span>(<span class="st">&quot;select a.anio, a.variable1, variable3 </span></span>
+<span id="cb38-3"><a href="uniones-de-tablas-con-r.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="st">            from df1 a left join df2 b</span></span>
+<span id="cb38-4"><a href="uniones-de-tablas-con-r.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="st">            on a.anio = b.anio&quot;</span>)</span>
+<span id="cb38-5"><a href="uniones-de-tablas-con-r.html#cb38-5" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -1104,9 +1129,9 @@ NA
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="uniones-de-tablas-con-r.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Anti Join</span></span>
-<span id="cb18-2"><a href="uniones-de-tablas-con-r.html#cb18-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">sqldf</span>(<span class="st">&quot;select * from df1 where anio not in (select anio from df2)&quot;</span>)</span>
-<span id="cb18-3"><a href="uniones-de-tablas-con-r.html#cb18-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="uniones-de-tablas-con-r.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Anti Join</span></span>
+<span id="cb39-2"><a href="uniones-de-tablas-con-r.html#cb39-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">sqldf</span>(<span class="st">&quot;select * from df1 where anio not in (select anio from df2)&quot;</span>)</span>
+<span id="cb39-3"><a href="uniones-de-tablas-con-r.html#cb39-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -1140,12 +1165,12 @@ variable2
 <div id="duplicidades-en-las-uniones-de-tablas" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Duplicidades en las uniones de tablas<a href="uniones-de-tablas-con-r.html#duplicidades-en-las-uniones-de-tablas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Otra situación habitual que se va a encontrar el científico de datos es la aparición de registros duplicados por el campo identificador (ID), es necesario controlar su existencia porque pueden distorsionar el resultado de un análisis.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="uniones-de-tablas-con-r.html#cb19-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2021</span>), <span class="at">variable1=</span><span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>))</span>
-<span id="cb19-2"><a href="uniones-de-tablas-con-r.html#cb19-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2017</span>, <span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2020</span>), <span class="at">variable3=</span><span class="fu">c</span>(<span class="dv">5000</span>,<span class="dv">6000</span>,<span class="dv">7000</span>,<span class="dv">8000</span>, <span class="dv">1000</span>))</span>
-<span id="cb19-3"><a href="uniones-de-tablas-con-r.html#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="uniones-de-tablas-con-r.html#cb19-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df1 <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(df2)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="uniones-de-tablas-con-r.html#cb40-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2021</span>), <span class="at">variable1=</span><span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>))</span>
+<span id="cb40-2"><a href="uniones-de-tablas-con-r.html#cb40-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">anio =</span> <span class="fu">c</span>(<span class="dv">2017</span>, <span class="dv">2018</span>, <span class="dv">2019</span>, <span class="dv">2020</span>, <span class="dv">2020</span>), <span class="at">variable3=</span><span class="fu">c</span>(<span class="dv">5000</span>,<span class="dv">6000</span>,<span class="dv">7000</span>,<span class="dv">8000</span>, <span class="dv">1000</span>))</span>
+<span id="cb40-3"><a href="uniones-de-tablas-con-r.html#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="uniones-de-tablas-con-r.html#cb40-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df1 <span class="sc">%&gt;%</span> <span class="fu">left_join</span>(df2)</span></code></pre></div>
 <pre><code>## Joining, by = &quot;anio&quot;</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="uniones-de-tablas-con-r.html#cb21-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="uniones-de-tablas-con-r.html#cb42-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -1219,8 +1244,8 @@ NA
 </tbody>
 </table>
 <p>En este burdo ejemplo <code>df2</code> tiene duplicado el año 2020 por lo que una left join con ese conjunto de datos por ese campo provocará duplicidades. Una forma de controlarlo será contabilizar por el campo identificativo.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="uniones-de-tablas-con-r.html#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(anio) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">registros=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
-<span id="cb22-2"><a href="uniones-de-tablas-con-r.html#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(registros<span class="sc">&gt;</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="uniones-de-tablas-con-r.html#cb43-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(anio) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">registros=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb43-2"><a href="uniones-de-tablas-con-r.html#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(registros<span class="sc">&gt;</span><span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">kable</span>()</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -1311,6 +1336,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

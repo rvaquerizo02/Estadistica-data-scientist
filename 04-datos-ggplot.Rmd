@@ -146,5 +146,24 @@ Gráfico empleado para visualizar en 2 ejes variables numéricas, muy útil para
 ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width)) + geom_point()
 ```
 
-Un gráfico sobre el que se volverá de forma reiterada a lo largo del ensayo. 
+Un gráfico sobre el que se volverá de forma reiterada a lo largo del ensayo cuando se trabaje la regresión lineal. 
+
+## Múltiples gráficos con gridExtra
+
+Para incluir múltiples gráficos con ggplot se dispone de la librería `gridExtra`, la sintaxis es sencilla ya que sólo es necesario crear un objeto con el gráfico ggplot y emplear la función `grid.arrange` para representar esos objetos. 
+
+```{r message=FALSE, warning=FALSE}
+library(gridExtra)
+
+resumen <- iris %>% group_by(Species, Sepal.Length.factor) %>% 
+  summarise(registros = n())
+p1 = ggplot(resumen, aes(x=Species, y=registros, fill=Sepal.Length.factor, color=Sepal.Length.factor)) + geom_bar(stat="identity")
+
+p2 = ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width)) + geom_point()
+
+grid.arrange(p1, p2, nrow=1)
+
+grid.arrange(p1, p2, ncol=1)
+```
+
 

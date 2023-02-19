@@ -35,9 +35,7 @@ Todos los elementos son elegidos al azar entre toda la población porque todos e
 library(tidyverse)
 library(formattable)
 library(gridExtra)
-
 train <- read.csv("./data/train.csv")
-
 set.seed(10)
 muestra_aleatoria1 <- train %>% sample_n(size = 100, replace = F)
 ```
@@ -55,7 +53,6 @@ set.seed(10)
 selecccionar <- sample(seq(1:nrow(train)) , round(nrow(train) * 0.70))
 datos_entrenamiento <- train[selecccionar,]; 
 datos_test <- train[-selecccionar,]; 
-
 # % de datos de entrenamiento
 nrow(datos_entrenamiento)/nrow(train)
 # % de datos de test
@@ -74,10 +71,8 @@ En el ejemplo de trabajo se pretende balancear la muestra para equilibrar al 50%
 ```{r}
 no_interesados <- nrow(train[train$Response==0,])
 interesados <- nrow(train[train$Response==1,])
-
 muestra_interesados <- train %>% filter(Response==1) %>% sample_n(no_interesados,replace = T)
 muestra_aumentada <- train %>%  filter(Response==0) %>% bind_rows(muestra_interesados)
-
 muestra_disminuida <- train %>% filter(Response==1) %>% 
   bind_rows(sample_n(train %>% filter(Response==0), size=interesados))
 ```
@@ -148,7 +143,6 @@ A la hora de estimar el parámetro se plantea un dilema que el científico de da
 Este dilema está presente siempre que se trabajan datos. Por ejemplo, aseverar que los inmigrantes cometen más delitos que los residentes de un país. Sin embargo, son más los hombres que cometen delitos que las mujeres. En ese caso la solución para vivir con mayor seguridad no sería una sociedad sin extranjeros, será una sociedad sin hombres. Para dar ambos datos se introduce sesgo, puede ser cierto que se acierte en mayor medida pero introduciendo condiciones que interesan al analista. 
 
 > El científico de datos se verá en esta situación, la mejor solución es argumentar, motivar y consensuar el sesgo con los usuarios de los datos.
-
 En el ejemplo de trabajo las aproximaciones iniciales a los datos ya están planteando este dilema. Hay observaciones que deben ser eliminadas debido a que no aportan a la resolución del problema, mejorarán la estimación del número de respuestas positivas pero, ¿aportan algo al análisis?
 
 ```{r message=FALSE, warning=FALSE}
@@ -156,7 +150,6 @@ bivariable <- function(df, target, varib, ajuste=1){
   
 target = as.symbol(target)
 fr_analisis = as.symbol(varib)
-
 g <- df %>%
    group_by(factor_analisis = as.factor(!!fr_analisis)) %>%
    summarise(pct_clientes = round(n()*100/nrow(df),1),
@@ -170,7 +163,6 @@ g <- df %>%
  
 g + labs(title = paste0("Análisis de la variable ",varib))
 }
-
 grid.arrange(ncol=2,
 bivariable(train, 'Response', 'Driving_License', 1),
 bivariable(train, 'Response', 'Vehicle_Damage', 1),
@@ -207,7 +199,6 @@ hist(x)
 
 ```{r}
 edad_40 <- train %>% filter(Age==40)
-
 medias_muestras <- NULL
 for (i in seq(1:500)){
   muestra <- edad_40 %>% sample_n(100, replace = T) 
@@ -260,7 +251,6 @@ Para cada grupo de edad se tiene el % de clientes, el % de interesados, que es i
 resumen <- resumen %>% mutate(error_estimacion = z * (desviacion/sqrt(n_grupo)),
                               lim_inf=media_interesados - error_estimacion,
                               lim_sup=media_interesados + error_estimacion)
-
 ajuste = 200000
 g2 <- ggplot(resumen, aes(x=factor_analisis)) +
   geom_col(aes(y=n_grupo),fill="yellow",alpha=0.5) +
@@ -268,9 +258,7 @@ g2 <- ggplot(resumen, aes(x=factor_analisis)) +
   scale_y_continuous(sec.axis = sec_axis(~./ajuste), name="") +
   geom_ribbon(aes(ymin=lim_inf*ajuste, ymax=lim_sup*ajuste), linetype=2, alpha=0.5) +
   theme_light() 
-
 g2 + labs(title = "Análisis de la variable edad") + ylab("% de clientes") + xlab("Edad clientes")  
-
 ```
 
 Se observa que grupos con gran número de observaciones crean intervalos muy estrechos y grupos de edad con pocas observaciones crean intervalos enormes, incluso con posibles valores negativos que no se pueden dar. En la fórmula de cálculo del intervalo se tiene $\sqrt{n}$, la propia definición del intervalo está "ponderando" la definición del intervalo con el número de observaciones, además, una mayor desviación también hará incrementar el tamaño del intervalo. 
@@ -292,7 +280,6 @@ resumen <- train %>%
             error_estimacion = z * (desviacion/sqrt(n_grupo)),
                               lim_inf=media_interesados - error_estimacion,
                               lim_sup=media_interesados + error_estimacion)
-
 ajuste = 1000000
 g2 <- ggplot(resumen, aes(x=factor_analisis)) +
   geom_col(aes(y=n_grupo),fill="yellow",alpha=0.5) +
@@ -300,7 +287,6 @@ g2 <- ggplot(resumen, aes(x=factor_analisis)) +
   scale_y_continuous(sec.axis = sec_axis(~./ajuste), name="") +
   geom_errorbar(aes(ymin=lim_inf* ajuste, ymax=lim_sup* ajuste), width = 0.2) +
   theme_light() 
-
 g2 + labs(title = "Análisis de la variable sexo") + ylab("% de clientes") + xlab("Género clientes")  
 ```
 
@@ -322,13 +308,10 @@ df3=data.frame(x=rchisq(1:10000, df=3))
 df3$grados_libertad = 3
 df5=data.frame(x=rchisq(1:10000, df=5))
 df5$grados_libertad = 5
-
 df <- rbind.data.frame(df1, df2, df3, df5) %>% 
   mutate(grados_libertad=as.factor(grados_libertad))
-
 df %>% ggplot(aes(x=x, group=grados_libertad, color=grados_libertad, fill=grados_libertad)) + 
   geom_density(alpha=0.3)
-
 ```
 
 
@@ -339,7 +322,6 @@ La **F de Snedecor** se crea a partir de dos chi-cuadrado independientes dividid
 ¿Por qué es necesario conocer estas distribuciones? Porque los principales contrastes de hipótesis bajo unos supuestos poblacionales (habitualmente que se distribuyen normalmente) se distribuyen según estas distribuciones artificiales. Y al igual que en el intervalo de confianza hay una región, una zona en la que tendríamos una seguridad de no equivocarnos a la hora de establecer que un valor inferido esté en esa región. 
 
 >Se tienen muchos supuestos, distribuciones y _artificios estadísticos_ que dependen en gran medida del tamaño de la población. El científico de datos pretende trabajar en un "entorno Big Data" y con modelos de aprendizaje automático donde todos estos aspectos teóricos no tienen cabida y están obsoletos. **Pero todos estos conceptos y el método de trabajo es imprescindible**.
-
 El inicio de todo es la hipótesis, el pilar de una investigación, primero se establece y después se contrasta si es cierta o no. Se parte de una afirmación sobre un parámetro poblacional. ¿Es el parámetro $\theta$   un valor? Se establece la afirmación contraria $\theta$  no es ese valor. 
 
 ¿Un factor es independiente de otro? ¿Es independiente la respuesta positiva a la encuesta del género del cliente encuestado? Este es un **contraste de independencia** y se realiza mediante un test de la chi cuadrado. 
@@ -380,7 +362,6 @@ Se define Error de tipo I α como una probabilidad de rechazar $H_0$ siendo $H_0
 
 ```{r}
 aleatorio <- data.frame(dx = rnorm(1000, mean=0, sd=1))
-
 aleatorio %>% ggplot(aes(dx)) + geom_density() + 
   geom_vline(xintercept = 1.96, linetype="dashed", color='grey', size=2) + 
   geom_vline(xintercept = 1, color = 'blue') + 
@@ -420,7 +401,6 @@ resumen <- train %>%
             error_estimacion = z * (desviacion/sqrt(n_grupo)),
                               lim_inf=media_interesados - error_estimacion,
                               lim_sup=media_interesados + error_estimacion)
-
 ajuste = 1000000
 g2 <- ggplot(resumen, aes(x=factor_analisis)) +
   geom_col(aes(y=n_grupo),fill="yellow",alpha=0.5) +
@@ -428,7 +408,6 @@ g2 <- ggplot(resumen, aes(x=factor_analisis)) +
   scale_y_continuous(sec.axis = sec_axis(~./ajuste), name="") +
   geom_errorbar(aes(ymin=lim_inf* ajuste, ymax=lim_sup* ajuste), width = 0.2) +
   theme_light() 
-
 g2 + labs(title = "Análisis de la variable sexo") + ylab("% de clientes") + xlab("Género clientes")  
 ```
 
@@ -437,7 +416,6 @@ Se aprecia que el intervalo de la proporción de respuestas positivas (de la med
 
 ```{r echo=FALSE}
 muestra <- train %>% sample_n(300) 
-
 resumen <- muestra %>%
   group_by(factor_analisis = Gender) %>%
   summarise(porcen_clientes = round(n()*100/nrow(train),1),
@@ -449,7 +427,6 @@ resumen <- muestra %>%
             error_estimacion = z * (desviacion/sqrt(n_grupo)),
                               lim_inf=media_interesados - error_estimacion,
                               lim_sup=media_interesados + error_estimacion)
-
 ajuste = 1000
 g2 <- ggplot(resumen, aes(x=factor_analisis)) +
   geom_col(aes(y=n_grupo),fill="yellow",alpha=0.5) +
@@ -457,7 +434,6 @@ g2 <- ggplot(resumen, aes(x=factor_analisis)) +
   scale_y_continuous(sec.axis = sec_axis(~./ajuste), name="") +
   geom_errorbar(aes(ymin=lim_inf* ajuste, ymax=lim_sup* ajuste), width = 0.2) +
   theme_light() 
-
 g2 + labs(title = "Análisis de la variable sexo") + ylab("% de clientes") + xlab("Género clientes")  
 ```
 
@@ -489,9 +465,3 @@ En este caso la $H_0$ en condiciones de igualdad es la media de la antigüedad d
 Al igual que sucedía con el muestreo no es necesario que el científico de datos conozca todos los tipos de contrastes y de supuestos necesarios para llevar a cabo el contraste, pero ha de saber plantear una hipótesis, definir correctamente esa hipótesis, determinar que registros se emplean para contrastar esa hipótesis y como han de estar dispuestos esos registros para poder realizar el contraste. 
 
 >No se trata de resolver un problema mediante estadística clásica, se trata de que el científico de datos tenga esa dialéctica estadística que le va a permitir mejorar en sus procesos de modelización. 
-
-
-
-
-
-

@@ -1,3 +1,4 @@
+tab:unnamed-chunk-218
 introducción
 objetivos
 entorno-de-trabajo
@@ -41,6 +42,7 @@ gráficos-de-tarta
 gráficos-de-barras
 gráficos-de-líneas
 gráfico-de-dispersión
+múltiples-gráficos-con-gridextra
 descripcion-numerica-variables
 transformar-datos-en-información
 caso-práctico.-campaña-de-venta-cruzada
@@ -103,3 +105,15 @@ inferencia-estadística
 estimación-de-parámetros
 intervalos-de-confianza
 contrastes-de-hipótesis
+regresion-lineal
+modelo-de-regresión-lineal-simple
+el-coeficiente-de-determinación-o-r2
+transformaciones-de-variables
+tramificación-de-variables-en-modelos-lineales
+factores-en-modelos-de-regresión
+modelo-de-regresión-lineal-múltiple
+métodos-de-selección-de-variables
+método-fordward
+método-backward
+método-stepwise
+el-principio-de-parsimonia

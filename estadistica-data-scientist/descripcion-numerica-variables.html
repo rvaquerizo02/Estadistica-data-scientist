@@ -23,7 +23,7 @@
 <meta name="author" content="Raul Vaquerizo" />
 
 
-<meta name="date" content="2023-01-11" />
+<meta name="date" content="2023-02-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,14 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.24/datatables.js"></script>
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -196,6 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-barras"><i class="fa fa-check"></i><b>5.5</b> Gráficos de barras</a></li>
 <li class="chapter" data-level="5.6" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-líneas"><i class="fa fa-check"></i><b>5.6</b> Gráficos de líneas</a></li>
 <li class="chapter" data-level="5.7" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>5.7</b> Gráfico de dispersión</a></li>
+<li class="chapter" data-level="5.8" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#múltiples-gráficos-con-gridextra"><i class="fa fa-check"></i><b>5.8</b> Múltiples gráficos con gridExtra</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html"><i class="fa fa-check"></i><b>6</b> Descripción numérica de variables</a>
 <ul>
@@ -275,6 +284,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.4" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#intervalos-de-confianza"><i class="fa fa-check"></i><b>12.4</b> Intervalos de confianza</a></li>
 <li class="chapter" data-level="12.5" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#contrastes-de-hipótesis"><i class="fa fa-check"></i><b>12.5</b> Contrastes de hipótesis</a></li>
 </ul></li>
+<li class="chapter" data-level="13" data-path="regresion-lineal.html"><a href="regresion-lineal.html"><i class="fa fa-check"></i><b>13</b> Regresión lineal</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="regresion-lineal.html"><a href="regresion-lineal.html#modelo-de-regresión-lineal-simple"><i class="fa fa-check"></i><b>13.1</b> Modelo de regresión lineal simple</a></li>
+<li class="chapter" data-level="13.2" data-path="regresion-lineal.html"><a href="regresion-lineal.html#el-coeficiente-de-determinación-o-r2"><i class="fa fa-check"></i><b>13.2</b> El coeficiente de determinación o <span class="math inline">\(R^2\)</span></a></li>
+<li class="chapter" data-level="13.3" data-path="regresion-lineal.html"><a href="regresion-lineal.html#transformaciones-de-variables"><i class="fa fa-check"></i><b>13.3</b> Transformaciones de variables</a></li>
+<li class="chapter" data-level="13.4" data-path="regresion-lineal.html"><a href="regresion-lineal.html#tramificación-de-variables-en-modelos-lineales"><i class="fa fa-check"></i><b>13.4</b> Tramificación de variables en modelos lineales</a></li>
+<li class="chapter" data-level="13.5" data-path="regresion-lineal.html"><a href="regresion-lineal.html#factores-en-modelos-de-regresión"><i class="fa fa-check"></i><b>13.5</b> Factores en modelos de regresión</a></li>
+<li class="chapter" data-level="13.6" data-path="regresion-lineal.html"><a href="regresion-lineal.html#modelo-de-regresión-lineal-múltiple"><i class="fa fa-check"></i><b>13.6</b> Modelo de regresión lineal múltiple</a></li>
+<li class="chapter" data-level="13.7" data-path="regresion-lineal.html"><a href="regresion-lineal.html#métodos-de-selección-de-variables"><i class="fa fa-check"></i><b>13.7</b> Métodos de selección de variables</a>
+<ul>
+<li class="chapter" data-level="13.7.1" data-path="regresion-lineal.html"><a href="regresion-lineal.html#método-fordward"><i class="fa fa-check"></i><b>13.7.1</b> Método fordward</a></li>
+<li class="chapter" data-level="13.7.2" data-path="regresion-lineal.html"><a href="regresion-lineal.html#método-backward"><i class="fa fa-check"></i><b>13.7.2</b> Método backward</a></li>
+<li class="chapter" data-level="13.7.3" data-path="regresion-lineal.html"><a href="regresion-lineal.html#método-stepwise"><i class="fa fa-check"></i><b>13.7.3</b> Método stepwise</a></li>
+</ul></li>
+<li class="chapter" data-level="13.8" data-path="regresion-lineal.html"><a href="regresion-lineal.html#el-principio-de-parsimonia"><i class="fa fa-check"></i><b>13.8</b> El principio de parsimonia</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -341,24 +366,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">6.4</span> Análisis descriptivos de los datos<a href="descripcion-numerica-variables.html#análisis-descriptivos-de-los-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Recuperando, de nuevo, el capítulo 2 allí se dividieron las variables en 2 tipos, variables cuantitativas y variables cualitativas que llamamos factores. En base a esta división se planteaba una posible descripción numérica y una posible descripción gráfica para variables de entrada o <em>input</em>, aquellas variables ID o variables en bruto <em>raw</em> no tiene sentido que se estudien porque no deberían aportar nada en nuestro análisis.</p>
 <p>Con estas premisas, el primer paso es determinar que tipo de variable es cada una de las que tenemos en el conjunto de datos. Se comienza el trabajo con datos:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="descripcion-numerica-variables.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="descripcion-numerica-variables.html#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="descripcion-numerica-variables.html#cb1-3" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/train.csv&quot;</span>)</span>
-<span id="cb1-4"><a href="descripcion-numerica-variables.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(train,<span class="dv">5</span>)</span></code></pre></div>
-<pre><code>##   id Gender Age Driving_License Region_Code Previously_Insured Vehicle_Age
-## 1  1   Male  44               1          28                  0   &gt; 2 Years
-## 2  2   Male  76               1           3                  0    1-2 Year
-## 3  3   Male  47               1          28                  0   &gt; 2 Years
-## 4  4   Male  21               1          11                  1    &lt; 1 Year
-## 5  5 Female  29               1          41                  1    &lt; 1 Year
-##   Vehicle_Damage Annual_Premium Policy_Sales_Channel Vintage Response
-## 1            Yes          40454                   26     217        1
-## 2             No          33536                   26     183        0
-## 3            Yes          38294                   26      27        1
-## 4             No          28619                  152     203        0
-## 5             No          27496                  152      39        0</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="descripcion-numerica-variables.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb62-2"><a href="descripcion-numerica-variables.html#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="descripcion-numerica-variables.html#cb62-3" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/train.csv&quot;</span>)</span>
+<span id="cb62-4"><a href="descripcion-numerica-variables.html#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(train,<span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##   id Gender Age Driving_License Region_Code Previously_Insured Vehicle_Age Vehicle_Damage Annual_Premium
+## 1  1   Male  44               1          28                  0   &gt; 2 Years            Yes          40454
+## 2  2   Male  76               1           3                  0    1-2 Year             No          33536
+## 3  3   Male  47               1          28                  0   &gt; 2 Years            Yes          38294
+## 4  4   Male  21               1          11                  1    &lt; 1 Year             No          28619
+## 5  5 Female  29               1          41                  1    &lt; 1 Year             No          27496
+##   Policy_Sales_Channel Vintage Response
+## 1                   26     217        1
+## 2                   26     183        0
+## 3                   26      27        1
+## 4                  152     203        0
+## 5                  152      39        0</code></pre>
 <p>El conjunto de datos de trabajo es un archivo csv que se llama train y que previamente se ha descargado (como se indica con anterioridad), la función <code>read.csv</code> permite importar el csv de trabajo y crear un data frame en la sesión de R. Mediante la función <code>str</code> es posible ver el tipo de variables que tiene el data frame:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="descripcion-numerica-variables.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(train)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="descripcion-numerica-variables.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(train)</span></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    381109 obs. of  12 variables:
 ##  $ id                  : int  1 2 3 4 5 6 7 8 9 10 ...
 ##  $ Gender              : chr  &quot;Male&quot; &quot;Male&quot; &quot;Male&quot; &quot;Male&quot; ...
@@ -385,87 +410,127 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">6.4.1</span> Descritivos en variables cualitativas (factores)<a href="descripcion-numerica-variables.html#descritivos-en-variables-cualitativas-factores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>En los datos hay variables que se pueden cuantificar y otras que definen cualidades de los datos. Una cualidad puede ser una característica (género, canal de venta,…) o puede tener un orden como es una variable cualitativa ordinal (antigüedad de cliente, nivel de satisfacción,…) en ambos casos, para describir su comportamiento de forma numérica se emplearán tablas de frecuencias. Estas tablas presentan cada valor de la variable cualitativa, o lo que es lo mismo, cada nivel del factor y contabilizan los registros que tienen esa característica. A la hora de contabilizar se tienen las <strong>frecuencias absolutas</strong> que contabiliza el número de registros para cada nivel del factor o las <strong>frecuencias relativas</strong> que contabiliza el porcentaje de individuos en cada nivel del factor y permiten <em>relativizar</em> esa cantidad.</p>
 <p>En el ejemplo de trabajo se dispone de diversas variables cualitativas. Se ilustran ejemplos de tablas de frecuencia mediante la librería <code>dplyr</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="descripcion-numerica-variables.html#cb5-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(train <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="st">`</span><span class="at">Frecuencia absoluta</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">n</span>()))</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="descripcion-numerica-variables.html#cb66-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(train <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="st">`</span><span class="at">Frecuencia absoluta</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">n</span>()))</span></code></pre></div>
 <table>
 <thead>
-<tr class="header">
-<th align="left">Gender</th>
-<th align="right">Frecuencia absoluta</th>
+<tr>
+<th style="text-align:left;">
+Gender
+</th>
+<th style="text-align:right;">
+Frecuencia absoluta
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Female</td>
-<td align="right">175020</td>
+<tr>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:right;">
+175020
+</td>
 </tr>
-<tr class="even">
-<td align="left">Male</td>
-<td align="right">206089</td>
+<tr>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:right;">
+206089
+</td>
 </tr>
 </tbody>
 </table>
 <p>Señalar la importancia de relativizar los datos absolutos, de obtener porcentajes.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="descripcion-numerica-variables.html#cb6-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(train <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="st">`</span><span class="at">Frecuencia relativa</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">n</span>()<span class="sc">/</span><span class="fu">nrow</span>(train)))</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="descripcion-numerica-variables.html#cb67-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(train <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="st">`</span><span class="at">Frecuencia relativa</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">n</span>()<span class="sc">/</span><span class="fu">nrow</span>(train)))</span></code></pre></div>
 <table>
 <thead>
-<tr class="header">
-<th align="left">Gender</th>
-<th align="right">Frecuencia relativa</th>
+<tr>
+<th style="text-align:left;">
+Gender
+</th>
+<th style="text-align:right;">
+Frecuencia relativa
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Female</td>
-<td align="right">0.4592387</td>
+<tr>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:right;">
+0.4592387
+</td>
 </tr>
-<tr class="even">
-<td align="left">Male</td>
-<td align="right">0.5407613</td>
+<tr>
+<td style="text-align:left;">
+Male
+</td>
+<td style="text-align:right;">
+0.5407613
+</td>
 </tr>
 </tbody>
 </table>
 <p>La variable género no tiene ningún tipo de orden, pero una variable cualitativa puede requerir un orden.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="descripcion-numerica-variables.html#cb7-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(train <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Vehicle_Age) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="st">`</span><span class="at">Frecuencia relativa</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">n</span>()<span class="sc">/</span><span class="fu">nrow</span>(train)))</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="descripcion-numerica-variables.html#cb68-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(train <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Vehicle_Age) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="st">`</span><span class="at">Frecuencia relativa</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">n</span>()<span class="sc">/</span><span class="fu">nrow</span>(train)))</span></code></pre></div>
 <table>
 <thead>
-<tr class="header">
-<th align="left">Vehicle_Age</th>
-<th align="right">Frecuencia relativa</th>
+<tr>
+<th style="text-align:left;">
+Vehicle_Age
+</th>
+<th style="text-align:right;">
+Frecuencia relativa
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">&lt; 1 Year</td>
-<td align="right">0.4323855</td>
+<tr>
+<td style="text-align:left;">
+&lt; 1 Year
+</td>
+<td style="text-align:right;">
+0.4323855
+</td>
 </tr>
-<tr class="even">
-<td align="left">&gt; 2 Years</td>
-<td align="right">0.0420011</td>
+<tr>
+<td style="text-align:left;">
+&gt; 2 Years
+</td>
+<td style="text-align:right;">
+0.0420011
+</td>
 </tr>
-<tr class="odd">
-<td align="left">1-2 Year</td>
-<td align="right">0.5256134</td>
+<tr>
+<td style="text-align:left;">
+1-2 Year
+</td>
+<td style="text-align:right;">
+0.5256134
+</td>
 </tr>
 </tbody>
 </table>
 <p>Por defecto R siempre presenta en las tablas de frecuencias el orden léxico gráfico, no el orden que tiene la variable, en este caso se tienen vehículos &lt; 1, 1 - 2 y &gt; 2, pero no es el orden que presenta el factor, es necesaria una ordenación.</p>
 <p>Creación y ordenación del factor.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="descripcion-numerica-variables.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(train<span class="sc">$</span>Vehicle_Age)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="descripcion-numerica-variables.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(train<span class="sc">$</span>Vehicle_Age)</span></code></pre></div>
 <pre><code>## 
 ##  &lt; 1 Year &gt; 2 Years  1-2 Year 
 ##    164786     16007    200316</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="descripcion-numerica-variables.html#cb10-1" aria-hidden="true" tabindex="-1"></a>train<span class="sc">$</span>Vehicle_Age <span class="ot">=</span> <span class="fu">factor</span>(train<span class="sc">$</span>Vehicle_Age, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&#39;&lt; 1 Year&#39;</span>,<span class="st">&#39;1-2 Year&#39;</span>, <span class="st">&#39;&gt; 2 Years&#39;</span>))</span>
-<span id="cb10-2"><a href="descripcion-numerica-variables.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(train<span class="sc">$</span>Vehicle_Age)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="descripcion-numerica-variables.html#cb71-1" aria-hidden="true" tabindex="-1"></a>train<span class="sc">$</span>Vehicle_Age <span class="ot">=</span> <span class="fu">factor</span>(train<span class="sc">$</span>Vehicle_Age, <span class="at">levels=</span><span class="fu">c</span>(<span class="st">&#39;&lt; 1 Year&#39;</span>,<span class="st">&#39;1-2 Year&#39;</span>, <span class="st">&#39;&gt; 2 Years&#39;</span>))</span>
+<span id="cb71-2"><a href="descripcion-numerica-variables.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(train<span class="sc">$</span>Vehicle_Age)</span></code></pre></div>
 <pre><code>## 
 ##  &lt; 1 Year  1-2 Year &gt; 2 Years 
 ##    164786    200316     16007</code></pre>
 <p>La función <code>table</code> permite realizar rápidas tablas de frecuencias, cuando trabajemos con variables categóricas es importante realizar esas rápidas comprobaciones sobre el correcto tratamiento de los datos.</p>
 <p>Nueva variable con el factor reclasificado mediante <code>tidyverse</code>.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="descripcion-numerica-variables.html#cb12-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">fr_vehicle_age =</span> <span class="fu">case_when</span>(</span>
-<span id="cb12-2"><a href="descripcion-numerica-variables.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  Vehicle_Age<span class="sc">==</span><span class="st">&#39;&lt; 1 Year&#39;</span> <span class="sc">~</span> <span class="st">&#39;01 menor 1 año&#39;</span>,</span>
-<span id="cb12-3"><a href="descripcion-numerica-variables.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  Vehicle_Age<span class="sc">==</span><span class="st">&#39;1-2 Year&#39;</span> <span class="sc">~</span> <span class="st">&#39;02 Entre 1 y 2 años&#39;</span>,</span>
-<span id="cb12-4"><a href="descripcion-numerica-variables.html#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&#39;03 más de 2 años&#39;</span>))</span>
-<span id="cb12-5"><a href="descripcion-numerica-variables.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(train<span class="sc">$</span>fr_vehicle_age)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="descripcion-numerica-variables.html#cb73-1" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> train <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">fr_vehicle_age =</span> <span class="fu">case_when</span>(</span>
+<span id="cb73-2"><a href="descripcion-numerica-variables.html#cb73-2" aria-hidden="true" tabindex="-1"></a>  Vehicle_Age<span class="sc">==</span><span class="st">&#39;&lt; 1 Year&#39;</span> <span class="sc">~</span> <span class="st">&#39;01 menor 1 año&#39;</span>,</span>
+<span id="cb73-3"><a href="descripcion-numerica-variables.html#cb73-3" aria-hidden="true" tabindex="-1"></a>  Vehicle_Age<span class="sc">==</span><span class="st">&#39;1-2 Year&#39;</span> <span class="sc">~</span> <span class="st">&#39;02 Entre 1 y 2 años&#39;</span>,</span>
+<span id="cb73-4"><a href="descripcion-numerica-variables.html#cb73-4" aria-hidden="true" tabindex="-1"></a>  <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&#39;03 más de 2 años&#39;</span>))</span>
+<span id="cb73-5"><a href="descripcion-numerica-variables.html#cb73-5" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(train<span class="sc">$</span>fr_vehicle_age)</span></code></pre></div>
 <pre><code>## 
 ##      01 menor 1 año 02 Entre 1 y 2 años    03 más de 2 años 
 ##              164786              200316               16007</code></pre>
@@ -496,36 +561,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="media-de-una-variable" class="section level5 hasAnchor" number="6.4.2.1.1">
 <h5><span class="header-section-number">6.4.2.1.1</span> Media de una variable<a href="descripcion-numerica-variables.html#media-de-una-variable" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Es el valor sobre el que se sitúan los datos se obtendría sumando todos los valores de la variable y dividiendo por el número de registros, en los datos de trabajo, para la variable <code>Age</code> se tiene:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="descripcion-numerica-variables.html#cb14-1" aria-hidden="true" tabindex="-1"></a>train <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">sum</span>(Age)<span class="sc">/</span><span class="fu">nrow</span>(train))</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="descripcion-numerica-variables.html#cb75-1" aria-hidden="true" tabindex="-1"></a>train <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">sum</span>(Age)<span class="sc">/</span><span class="fu">nrow</span>(train))</span></code></pre></div>
 <pre><code>##   sum(Age)/nrow(train)
 ## 1             38.82258</code></pre>
 <p>Evidentemente R dispone de una función que realiza este cálculo y podemos hacerlo de diversas formas:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="descripcion-numerica-variables.html#cb16-1" aria-hidden="true" tabindex="-1"></a>train <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">mean</span>(Age))</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="descripcion-numerica-variables.html#cb77-1" aria-hidden="true" tabindex="-1"></a>train <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">mean</span>(Age))</span></code></pre></div>
 <pre><code>##   mean(Age)
 ## 1  38.82258</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="descripcion-numerica-variables.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(train<span class="sc">$</span>Age)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="descripcion-numerica-variables.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(train<span class="sc">$</span>Age)</span></code></pre></div>
 <pre><code>## [1] 38.82258</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="descripcion-numerica-variables.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(train<span class="sc">$</span>Annual_Premium)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="descripcion-numerica-variables.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(train<span class="sc">$</span>Annual_Premium)</span></code></pre></div>
 <pre><code>## [1] 30564.39</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="descripcion-numerica-variables.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(train<span class="sc">$</span>Vintage)</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="descripcion-numerica-variables.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(train<span class="sc">$</span>Vintage)</span></code></pre></div>
 <pre><code>## [1] 154.3474</code></pre>
 <p>Para describir correctamente los datos es necesario calcular la media para todas las variables cuantitativas, en R, mediante la librería <code>kable</code> es posible realizar salidas de datos formateadas:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="descripcion-numerica-variables.html#cb24-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(train <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="st">`</span><span class="at">Media edad</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(Age), </span>
-<span id="cb24-2"><a href="descripcion-numerica-variables.html#cb24-2" aria-hidden="true" tabindex="-1"></a>                    <span class="st">`</span><span class="at">Media de prima</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(Annual_Premium),</span>
-<span id="cb24-3"><a href="descripcion-numerica-variables.html#cb24-3" aria-hidden="true" tabindex="-1"></a>                    <span class="st">`</span><span class="at">Media de antigüedad (meses)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(Vintage)))</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="descripcion-numerica-variables.html#cb85-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(train <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="st">`</span><span class="at">Media edad</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(Age), </span>
+<span id="cb85-2"><a href="descripcion-numerica-variables.html#cb85-2" aria-hidden="true" tabindex="-1"></a>                    <span class="st">`</span><span class="at">Media de prima</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(Annual_Premium),</span>
+<span id="cb85-3"><a href="descripcion-numerica-variables.html#cb85-3" aria-hidden="true" tabindex="-1"></a>                    <span class="st">`</span><span class="at">Media de antigüedad (meses)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">mean</span>(Vintage)))</span></code></pre></div>
 <table>
 <thead>
-<tr class="header">
-<th align="right">Media edad</th>
-<th align="right">Media de prima</th>
-<th align="right">Media de antigüedad (meses)</th>
+<tr>
+<th style="text-align:right;">
+Media edad
+</th>
+<th style="text-align:right;">
+Media de prima
+</th>
+<th style="text-align:right;">
+Media de antigüedad (meses)
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="right">38.82258</td>
-<td align="right">30564.39</td>
-<td align="right">154.3474</td>
+<tr>
+<td style="text-align:right;">
+38.82258
+</td>
+<td style="text-align:right;">
+30564.39
+</td>
+<td style="text-align:right;">
+154.3474
+</td>
 </tr>
 </tbody>
 </table>
@@ -534,21 +611,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="mediana-de-una-variable" class="section level5 hasAnchor" number="6.4.2.1.2">
 <h5><span class="header-section-number">6.4.2.1.2</span> Mediana de una variable<a href="descripcion-numerica-variables.html#mediana-de-una-variable" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Si se ordenan los datos de la variable en estudio de menor a mayor y establecemos un corte justo a la mitad tenemos otra medida de posición que nos permite conocer el punto que divide esa variable al 50% en valores inferiores y al 50% en valores superiores, esta medida es conocida como <strong>mediana</strong>. No es una programación exacta pero ilustrando el ejemplo con <code>tidyverse</code> se puede hacer.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="descripcion-numerica-variables.html#cb25-1" aria-hidden="true" tabindex="-1"></a>train <span class="sc">%&gt;%</span> <span class="fu">select</span>(Age) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(Age) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">==</span> <span class="fu">round</span>(<span class="fu">nrow</span>(train)<span class="sc">/</span><span class="dv">2</span>,<span class="dv">0</span>)) </span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="descripcion-numerica-variables.html#cb86-1" aria-hidden="true" tabindex="-1"></a>train <span class="sc">%&gt;%</span> <span class="fu">select</span>(Age) <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(Age) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">==</span> <span class="fu">round</span>(<span class="fu">nrow</span>(train)<span class="sc">/</span><span class="dv">2</span>,<span class="dv">0</span>)) </span></code></pre></div>
 <pre><code>##   Age
 ## 1  36</code></pre>
 <p>Se ha definido una función empleando <code>tidyverse</code> para aproximar el cálculo de la mediana, esta función tiene sus limitaciones pero sirve para establecer ese valor que deja a su derecha el 50% y a su izquierda el otro 50% de las observaciones. Evidentemente es mejor emplear la función específica de R:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="descripcion-numerica-variables.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(train<span class="sc">$</span>Age)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="descripcion-numerica-variables.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(train<span class="sc">$</span>Age)</span></code></pre></div>
 <pre><code>## [1] 36</code></pre>
 </div>
 <div id="percentiles-de-una-variable" class="section level5 hasAnchor" number="6.4.2.1.3">
 <h5><span class="header-section-number">6.4.2.1.3</span> Percentiles de una variable<a href="descripcion-numerica-variables.html#percentiles-de-una-variable" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Además de esa separación 50% de valores a la izquierda - 50% de valores a la derecha para conocer como es una variable numéricamente podemos desear 5% - 95% o 75% - 25% a esos valores que dejan un X% de valores por la derecha se les denomina <strong>percentiles</strong>:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="descripcion-numerica-variables.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(train<span class="sc">$</span>Age, <span class="at">probs =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>)) </span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="descripcion-numerica-variables.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(train<span class="sc">$</span>Age, <span class="at">probs =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>)) </span></code></pre></div>
 <pre><code>##   0%  25%  50%  75% 100% 
 ##   20   25   36   49   85</code></pre>
 <p>Para obtener el percentil aparece la función <code>quantile</code> que es cuantil en español, es el cuantil el que toma los valores de la variable a intervalos regulares si deseamos dividir en % estamos ante percentiles. Estos valores tienen unos puntos que caracterizan los datos, el percentil 0 es el mínimo de los valores de nuestra variable el valor 100 es el máximo de la variable y, por supuesto, el percentil 50 es la mediana de la variable. Una variable edad es cuantitativa ordinal, en este caso se tienen <strong>valores finitos</strong> entre 20 y 85. Si se replica el código para la variable prima:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="descripcion-numerica-variables.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(train<span class="sc">$</span>Annual_Premium, <span class="at">probs =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>)) </span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="descripcion-numerica-variables.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(train<span class="sc">$</span>Annual_Premium, <span class="at">probs =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>)) </span></code></pre></div>
 <pre><code>##     0%    25%    50%    75%   100% 
 ##   2630  24405  31669  39400 540165</code></pre>
 <p>En este caso la variable toma muchos valores, <strong>infinitos</strong>, entre 2630 y 540165 eso ya ofrece una impresión de la mayor complejidad para estudiar la concentración de valores.</p>
@@ -556,14 +633,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="moda" class="section level5 hasAnchor" number="6.4.2.1.4">
 <h5><span class="header-section-number">6.4.2.1.4</span> Moda<a href="descripcion-numerica-variables.html#moda" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Otra medida importante para conocer como se posicionan los valores de una variable es la <strong>moda</strong>, se define como el valor más repetido. Puede parecer más relevante para variables cuantitativas finitas, sin embargo puede ser importante en variables cuantitativas infinitas porque hay valores que se repiten en la distribución y pueden representar un comportamiento. En R hay paquetes que calculan la moda pero podemos crear nuestra propia función:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="descripcion-numerica-variables.html#cb33-1" aria-hidden="true" tabindex="-1"></a>Mode <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb33-2"><a href="descripcion-numerica-variables.html#cb33-2" aria-hidden="true" tabindex="-1"></a>  fx <span class="ot">&lt;-</span> <span class="fu">unique</span>(x)</span>
-<span id="cb33-3"><a href="descripcion-numerica-variables.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  fx[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(x, fx)))]}</span>
-<span id="cb33-4"><a href="descripcion-numerica-variables.html#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Moda para Age</span></span>
-<span id="cb33-5"><a href="descripcion-numerica-variables.html#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Mode</span>(train<span class="sc">$</span>Age)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="descripcion-numerica-variables.html#cb94-1" aria-hidden="true" tabindex="-1"></a>Mode <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb94-2"><a href="descripcion-numerica-variables.html#cb94-2" aria-hidden="true" tabindex="-1"></a>  fx <span class="ot">&lt;-</span> <span class="fu">unique</span>(x)</span>
+<span id="cb94-3"><a href="descripcion-numerica-variables.html#cb94-3" aria-hidden="true" tabindex="-1"></a>  fx[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(x, fx)))]}</span>
+<span id="cb94-4"><a href="descripcion-numerica-variables.html#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Moda para Age</span></span>
+<span id="cb94-5"><a href="descripcion-numerica-variables.html#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Mode</span>(train<span class="sc">$</span>Age)</span></code></pre></div>
 <pre><code>## [1] 24</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="descripcion-numerica-variables.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Moda para Annual_Premium</span></span>
-<span id="cb35-2"><a href="descripcion-numerica-variables.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Mode</span>(train<span class="sc">$</span>Annual_Premium)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="descripcion-numerica-variables.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Moda para Annual_Premium</span></span>
+<span id="cb96-2"><a href="descripcion-numerica-variables.html#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Mode</span>(train<span class="sc">$</span>Annual_Premium)</span></code></pre></div>
 <pre><code>## [1] 2630</code></pre>
 <p>En los datos de trabajo la edad más repetida es <code>Mode(train$Age)</code> y hay un valor en la prima muy repetido que es el 2630</p>
 </div>
@@ -579,24 +656,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="rango-intercuartílico" class="section level5 hasAnchor" number="6.4.2.2.1">
 <h5><span class="header-section-number">6.4.2.2.1</span> Rango intercuartílico<a href="descripcion-numerica-variables.html#rango-intercuartílico" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Como indica su nombre es un rango, un número inferior y un número superior donde esperamos tener el 50% de las observaciones, recuperando las definición del percentil, un rango que recogería ese porcentaje estaría entre el percentil 25 y el percentil 75, pues así se define el rango intercuartílico como la diferencia entre el percentil 75 - percentil 25</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="descripcion-numerica-variables.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(train<span class="sc">$</span>Age, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.75</span>)) <span class="sc">-</span> <span class="fu">quantile</span>(train<span class="sc">$</span>Age, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.25</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="descripcion-numerica-variables.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(train<span class="sc">$</span>Age, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.75</span>)) <span class="sc">-</span> <span class="fu">quantile</span>(train<span class="sc">$</span>Age, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.25</span>))</span></code></pre></div>
 <pre><code>## 75% 
 ##  24</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="descripcion-numerica-variables.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">IQR</span>(train<span class="sc">$</span>Age)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="descripcion-numerica-variables.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">IQR</span>(train<span class="sc">$</span>Age)</span></code></pre></div>
 <pre><code>## [1] 24</code></pre>
 <p>Esta medida establece una dispersión a partir de los percentiles, es una característica de las medidas de dispersión, siempre miden una diferencia con una medida de posición.</p>
 </div>
 <div id="varianza-y-desviación-típica" class="section level5 hasAnchor" number="6.4.2.2.2">
 <h5><span class="header-section-number">6.4.2.2.2</span> Varianza y desviación típica<a href="descripcion-numerica-variables.html#varianza-y-desviación-típica" class="anchor-section" aria-label="Anchor link to header"></a></h5>
 <p>Para medir la dispersión una medida a emplear es la diferencia de cada observación a la media de todas las observaciones, pero es necesario eliminar el efecto del signo y elevar al cuadrado, si promediamos esa diferencia estaríamos ante la varianza.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="descripcion-numerica-variables.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((train<span class="sc">$</span>Age <span class="sc">-</span> <span class="fu">mean</span>(train<span class="sc">$</span>Age))<span class="sc">**</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="fu">nrow</span>(train)<span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="descripcion-numerica-variables.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((train<span class="sc">$</span>Age <span class="sc">-</span> <span class="fu">mean</span>(train<span class="sc">$</span>Age))<span class="sc">**</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="fu">nrow</span>(train)<span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 240.6101</code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="descripcion-numerica-variables.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(train<span class="sc">$</span>Age)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="descripcion-numerica-variables.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(train<span class="sc">$</span>Age)</span></code></pre></div>
 <pre><code>## [1] 240.6101</code></pre>
 <p>La varianza no tiene una unidad de medida, para ello contamos con la <strong>desviación típica</strong>.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="descripcion-numerica-variables.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">var</span>(train<span class="sc">$</span>Age))</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="descripcion-numerica-variables.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">var</span>(train<span class="sc">$</span>Age))</span></code></pre></div>
 <pre><code>## [1] 15.51161</code></pre>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="descripcion-numerica-variables.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(train<span class="sc">$</span>Age)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="descripcion-numerica-variables.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(train<span class="sc">$</span>Age)</span></code></pre></div>
 <pre><code>## [1] 15.51161</code></pre>
 <p>La desviación típica es la raiz de la varianza y está expresada en las mismas unidades que la variable lo que puede facilitar su interpretacion.</p>
 </div>
@@ -605,7 +682,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><a href="https://twitter.com/AnaBayes/status/1443087641600217088">Hilo de Twitter de AnaBayes para entender la importancia del coeficiente de variación</a></p>
 <p><a href="https://twitter.com/AnaBayes">Autor: AnaBayes</a></p>
 <p>Se define como la relación entre la desviación típica y la media y habitualmente se expresa en porcentaje. Es una medida de dispersión muy relevante porque no está en la unidad de la variable, es decir, no es lo mismo una dispersión de 200 grs. en una población de ranas que 200 grs. en una población de caballos, pero si podemos establecer una dispersión que sea el x% de la media. En este caso no es necesario disponer de una función.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="descripcion-numerica-variables.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(train<span class="sc">$</span>Age) <span class="sc">*</span> <span class="dv">100</span><span class="sc">/</span><span class="fu">mean</span>(train<span class="sc">$</span>Age)</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="descripcion-numerica-variables.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(train<span class="sc">$</span>Age) <span class="sc">*</span> <span class="dv">100</span><span class="sc">/</span><span class="fu">mean</span>(train<span class="sc">$</span>Age)</span></code></pre></div>
 <pre><code>## [1] 39.95512</code></pre>
 <p>Se puede decir que la variabilidad de la variable <code>Age</code> es un 40%. Cuando se analizan estadísticos descriptivos de cualquier tipo es muy importante <strong>relativizar</strong> porque empleando valores absolutos todas las conclusiones están afectadas por la unidad de medida.</p>
 </div>
@@ -614,17 +691,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4><span class="header-section-number">6.4.2.3</span> Medidas de forma<a href="descripcion-numerica-variables.html#medidas-de-forma" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>En el capítulo 4 se vieron los histogramas y los gráficos de densidad, en ellos se aprecia como es la forma, <strong>como se distribuye</strong> una variable en función del número de observaciones. La variable se ordena, se hacen tramos en los valores de la variable y se representan barras en función del número de observaciones que tiene cada tramo. Si se unen esas barras con una función continua se obtiene un gráfico de densidad que tiene la forma. Esa línea tiene dos características importantes lo apuntada que es y hacia que posición va ese apuntamiento, la curtosis mide ese apuntamiento y la asimetría mide la dirección de esa punta. No es habitual obtener estas medidas de posición pero si es importante conocer la forma que tiene una variable porque esa forma es posible que pertenezca a una familia de funciones conocidas.</p>
 <p>Para conocer la asimetría se emplea el paquete de R <code>e1071</code> que contiene una serie de funciones estadísticas.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="descripcion-numerica-variables.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(e1071)</span>
-<span id="cb51-2"><a href="descripcion-numerica-variables.html#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(train<span class="sc">$</span>Age)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="descripcion-numerica-variables.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(e1071)</span>
+<span id="cb112-2"><a href="descripcion-numerica-variables.html#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(train<span class="sc">$</span>Age)</span></code></pre></div>
 <pre><code>## [1] 0.6725337</code></pre>
 <p>Un valor superior a 0 indica que es asimétrica a la izquierda por lo que la moda &lt; mediana &lt; media. Valores inferiores a 0 indican asimetría a la derecha por lo que media &lt; mediana &lt; moda, la simetría perfecta sería media = mediana = moda. La asimetría a la izquierda es propia de variables que indican precios como es <code>Annual_Premium</code> en los datos de trabajo.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="descripcion-numerica-variables.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(train<span class="sc">$</span>Annual_Premium)</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="descripcion-numerica-variables.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">skewness</span>(train<span class="sc">$</span>Annual_Premium)</span></code></pre></div>
 <pre><code>## [1] 1.766073</code></pre>
 <p>En este caso se tiene una asimetría muy alta a la izquierda, hay importes muy altos de prima anual. Con la función <code>skewness</code> se puede calcular la asimetría por varios métodos, sería necesario modificar el parámetro <code>type</code>.</p>
 <p>La curtosis o apuntamiento también se calcula con la función <code>kurtosis</code> del paquete <code>e1071</code>.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="descripcion-numerica-variables.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(train<span class="sc">$</span>Age)</span></code></pre></div>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="descripcion-numerica-variables.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(train<span class="sc">$</span>Age)</span></code></pre></div>
 <pre><code>## [1] -0.5656762</code></pre>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="descripcion-numerica-variables.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(train<span class="sc">$</span>Annual_Premium)</span></code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="descripcion-numerica-variables.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosis</span>(train<span class="sc">$</span>Annual_Premium)</span></code></pre></div>
 <pre><code>## [1] 34.00391</code></pre>
 <p>Una curtosis negativa indica una distribución “más cuadrada” y una curtosis positiva indica un apuntamiento, cuanto mayor sea ese apuntamiento mayor será la curtosis. En el ejemplo de trabajo la curtosis de la variable <code>Age</code> es negativa, es una forma de caja; sin embargo, para la variable <code>Annual_Premium</code> se tiene un apuntamiento muy alto, apuntamiento alto y asimetría hacia la izquierda.</p>
 
@@ -692,6 +769,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
