@@ -52,14 +52,6 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="libs/datatables-binding-0.24/datatables.js"></script>
-<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
-<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -335,432 +327,212 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Diagnóstico del modelo</p></li>
 </ul>
 <p>Es el modelo más sencillo ya que gráficamente se puede <em>intuir</em> como va a ser esa relación lineal. En este caso, no es posible seguir el ejemplo de trabajo que sirve de hilo conductor del ensayo y por ello es necesario emplear otros datos.</p>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="regresion-lineal.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;skimr&quot;)</span></span>
-<span id="cb321-2"><a href="regresion-lineal.html#cb321-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
-<span id="cb321-3"><a href="regresion-lineal.html#cb321-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb321-4"><a href="regresion-lineal.html#cb321-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb321-5"><a href="regresion-lineal.html#cb321-5" aria-hidden="true" tabindex="-1"></a>cost_living <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/Cost_of_living_index.csv&quot;</span>)</span>
-<span id="cb321-6"><a href="regresion-lineal.html#cb321-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb321-7"><a href="regresion-lineal.html#cb321-7" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(cost_living)</span></code></pre></div>
-<table style="width: auto;" class="table table-condensed">
-<caption>
-<span id="tab:unnamed-chunk-218">Table 13.1: </span>Data summary
-</caption>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="regresion-lineal.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;skimr&quot;)</span></span>
+<span id="cb1-2"><a href="regresion-lineal.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb1-3"><a href="regresion-lineal.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="regresion-lineal.html#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="regresion-lineal.html#cb1-5" aria-hidden="true" tabindex="-1"></a>cost_living <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/Cost_of_living_index.csv&quot;</span>)</span>
+<span id="cb1-6"><a href="regresion-lineal.html#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="regresion-lineal.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(cost_living)</span></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-1">Table 13.1: </span>Data summary</caption>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Name
-</td>
-<td style="text-align:left;">
-cost_living
-</td>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">cost_living</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Number of rows
-</td>
-<td style="text-align:left;">
-536
-</td>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">536</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Number of columns
-</td>
-<td style="text-align:left;">
-8
-</td>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">8</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-_______________________
-</td>
-<td style="text-align:left;">
-</td>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Column type frequency:
-</td>
-<td style="text-align:left;">
-</td>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-1
-</td>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">1</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-numeric
-</td>
-<td style="text-align:left;">
-7
-</td>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">7</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-________________________
-</td>
-<td style="text-align:left;">
-</td>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Group variables
-</td>
-<td style="text-align:left;">
-None
-</td>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Variable type: character</strong></p>
 <table>
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="19%" />
+<col width="5%" />
+<col width="5%" />
+<col width="8%" />
+<col width="12%" />
+<col width="15%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left;">
-skim_variable
-</th>
-<th style="text-align:right;">
-n_missing
-</th>
-<th style="text-align:right;">
-complete_rate
-</th>
-<th style="text-align:right;">
-min
-</th>
-<th style="text-align:right;">
-max
-</th>
-<th style="text-align:right;">
-empty
-</th>
-<th style="text-align:right;">
-n_unique
-</th>
-<th style="text-align:right;">
-whitespace
-</th>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-City
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-37
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-536
-</td>
-<td style="text-align:right;">
-0
-</td>
+<tr class="odd">
+<td align="left">City</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">10</td>
+<td align="right">37</td>
+<td align="right">0</td>
+<td align="right">536</td>
+<td align="right">0</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Variable type: numeric</strong></p>
 <table>
+<colgroup>
+<col width="21%" />
+<col width="6%" />
+<col width="9%" />
+<col width="4%" />
+<col width="4%" />
+<col width="4%" />
+<col width="4%" />
+<col width="4%" />
+<col width="4%" />
+<col width="4%" />
+<col width="28%" />
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left;">
-skim_variable
-</th>
-<th style="text-align:right;">
-n_missing
-</th>
-<th style="text-align:right;">
-complete_rate
-</th>
-<th style="text-align:right;">
-mean
-</th>
-<th style="text-align:right;">
-sd
-</th>
-<th style="text-align:right;">
-p0
-</th>
-<th style="text-align:right;">
-p25
-</th>
-<th style="text-align:right;">
-p50
-</th>
-<th style="text-align:right;">
-p75
-</th>
-<th style="text-align:right;">
-p100
-</th>
-<th style="text-align:left;">
-hist
-</th>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Rank
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-268.50
-</td>
-<td style="text-align:right;">
-154.87
-</td>
-<td style="text-align:right;">
-1.00
-</td>
-<td style="text-align:right;">
-134.75
-</td>
-<td style="text-align:right;">
-268.50
-</td>
-<td style="text-align:right;">
-402.25
-</td>
-<td style="text-align:right;">
-536.00
-</td>
-<td style="text-align:left;">
-&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2587&gt;
-</td>
+<tr class="odd">
+<td align="left">Rank</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">268.50</td>
+<td align="right">154.87</td>
+<td align="right">1.00</td>
+<td align="right">134.75</td>
+<td align="right">268.50</td>
+<td align="right">402.25</td>
+<td align="right">536.00</td>
+<td align="left">▇▇▇▇▇</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Cost.of.Living.Index
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-57.19
-</td>
-<td style="text-align:right;">
-19.98
-</td>
-<td style="text-align:right;">
-19.26
-</td>
-<td style="text-align:right;">
-39.37
-</td>
-<td style="text-align:right;">
-61.97
-</td>
-<td style="text-align:right;">
-70.86
-</td>
-<td style="text-align:right;">
-137.56
-</td>
-<td style="text-align:left;">
-&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2581&gt;&lt;U+2581&gt;
-</td>
+<tr class="even">
+<td align="left">Cost.of.Living.Index</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">57.19</td>
+<td align="right">19.98</td>
+<td align="right">19.26</td>
+<td align="right">39.37</td>
+<td align="right">61.97</td>
+<td align="right">70.86</td>
+<td align="right">137.56</td>
+<td align="left">▇▇▇▁▁</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Rent.Index
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-25.21
-</td>
-<td style="text-align:right;">
-16.45
-</td>
-<td style="text-align:right;">
-3.43
-</td>
-<td style="text-align:right;">
-11.69
-</td>
-<td style="text-align:right;">
-23.09
-</td>
-<td style="text-align:right;">
-33.44
-</td>
-<td style="text-align:right;">
-106.49
-</td>
-<td style="text-align:left;">
-&lt;U+2587&gt;&lt;U+2586&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;
-</td>
+<tr class="odd">
+<td align="left">Rent.Index</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">25.21</td>
+<td align="right">16.45</td>
+<td align="right">3.43</td>
+<td align="right">11.69</td>
+<td align="right">23.09</td>
+<td align="right">33.44</td>
+<td align="right">106.49</td>
+<td align="left">▇▆▁▁▁</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Cost.of.Living.Plus.Rent.Index
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-42.05
-</td>
-<td style="text-align:right;">
-17.46
-</td>
-<td style="text-align:right;">
-12.36
-</td>
-<td style="text-align:right;">
-26.65
-</td>
-<td style="text-align:right;">
-44.45
-</td>
-<td style="text-align:right;">
-53.09
-</td>
-<td style="text-align:right;">
-121.21
-</td>
-<td style="text-align:left;">
-&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2582&gt;&lt;U+2581&gt;&lt;U+2581&gt;
-</td>
+<tr class="even">
+<td align="left">Cost.of.Living.Plus.Rent.Index</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">42.05</td>
+<td align="right">17.46</td>
+<td align="right">12.36</td>
+<td align="right">26.65</td>
+<td align="right">44.45</td>
+<td align="right">53.09</td>
+<td align="right">121.21</td>
+<td align="left">▇▇▂▁▁</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Groceries.Index
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-49.76
-</td>
-<td style="text-align:right;">
-19.32
-</td>
-<td style="text-align:right;">
-18.01
-</td>
-<td style="text-align:right;">
-31.50
-</td>
-<td style="text-align:right;">
-51.57
-</td>
-<td style="text-align:right;">
-62.76
-</td>
-<td style="text-align:right;">
-127.35
-</td>
-<td style="text-align:left;">
-&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2585&gt;&lt;U+2581&gt;&lt;U+2581&gt;
-</td>
+<tr class="odd">
+<td align="left">Groceries.Index</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">49.76</td>
+<td align="right">19.32</td>
+<td align="right">18.01</td>
+<td align="right">31.50</td>
+<td align="right">51.57</td>
+<td align="right">62.76</td>
+<td align="right">127.35</td>
+<td align="left">▇▇▅▁▁</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Restaurant.Price.Index
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-54.68
-</td>
-<td style="text-align:right;">
-25.09
-</td>
-<td style="text-align:right;">
-11.93
-</td>
-<td style="text-align:right;">
-31.55
-</td>
-<td style="text-align:right;">
-59.41
-</td>
-<td style="text-align:right;">
-72.34
-</td>
-<td style="text-align:right;">
-151.77
-</td>
-<td style="text-align:left;">
-&lt;U+2587&gt;&lt;U+2586&gt;&lt;U+2587&gt;&lt;U+2581&gt;&lt;U+2581&gt;
-</td>
+<tr class="even">
+<td align="left">Restaurant.Price.Index</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">54.68</td>
+<td align="right">25.09</td>
+<td align="right">11.93</td>
+<td align="right">31.55</td>
+<td align="right">59.41</td>
+<td align="right">72.34</td>
+<td align="right">151.77</td>
+<td align="left">▇▆▇▁▁</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Local.Purchasing.Power.Index
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-89.49
-</td>
-<td style="text-align:right;">
-37.04
-</td>
-<td style="text-align:right;">
-2.24
-</td>
-<td style="text-align:right;">
-56.79
-</td>
-<td style="text-align:right;">
-94.10
-</td>
-<td style="text-align:right;">
-119.50
-</td>
-<td style="text-align:right;">
-186.00
-</td>
-<td style="text-align:left;">
-&lt;U+2582&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2581&gt;
-</td>
+<tr class="odd">
+<td align="left">Local.Purchasing.Power.Index</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">89.49</td>
+<td align="right">37.04</td>
+<td align="right">2.24</td>
+<td align="right">56.79</td>
+<td align="right">94.10</td>
+<td align="right">119.50</td>
+<td align="right">186.00</td>
+<td align="left">▂▇▇▇▁</td>
 </tr>
 </tbody>
 </table>
@@ -779,26 +551,26 @@ Local.Purchasing.Power.Index
 <li>Modelo matemático. El modelo será <span class="math inline">\(Y = \beta_0 + \beta_1X + \epsilon\)</span> Esta fórmula que recuerda a la ecuación punto pendiente de una recta es el principio de la modelización estadística y tiene en pocos componentes todo lo necesario para comenzar a entender como funciona. Se desea estimar el valor de <span class="math inline">\(Y\)</span> que es la variable dependiente costo de la vida por ciuidad, para estimar ese valor se crea una recta de regresión que <em>empieza</em>, que corta el eje desde un punto inicial <span class="math inline">\(\beta_0\)</span> y tiene una pendiente <span class="math inline">\(\beta_1\)</span> que modifica linealmente <span class="math inline">\(X\)</span>, la variable independiente pero no es posible que el modelo describa perfectamente la variable dependiente y por ello aparece el término error <span class="math inline">\(\epsilon\)</span>. En el ejemplo de trabajo la función sería Cost.of.Living.Index = <span class="math inline">\(\beta_0\)</span> + <span class="math inline">\(\beta_1\)</span>*Rent.Index + <span class="math inline">\(\epsilon\)</span></li>
 </ol>
 <p>Este modelo matemático implica que la variable dependiente se modifica en función de una variable independiente de forma aditiva, recordando temas anteriores, ¿que distribución se modificaba de forma aditiva? La distribución normal, la variable Cost.of.Living.Index ha de distribuirse normalmente. Para comprobar si una variable sigue una distribución normal se puede emplear el gráfico de densidad:</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="regresion-lineal.html#cb322-1" aria-hidden="true" tabindex="-1"></a>cost_living <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Cost.of.Living.Index)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-219-1.png" width="672" /></p>
-<p>No se distribuye normalmente y para corroborarlo se disponen de gráficos QQ que compara los cuantiles de la distribucion normal frente a los cuantiles de la distribución de una variable.</p>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="regresion-lineal.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(cost_living<span class="sc">$</span>Cost.of.Living.Index)</span>
-<span id="cb323-2"><a href="regresion-lineal.html#cb323-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(cost_living<span class="sc">$</span>Cost.of.Living.Index)</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-220-1.png" width="672" /></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="regresion-lineal.html#cb2-1" aria-hidden="true" tabindex="-1"></a>cost_living <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Cost.of.Living.Index)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>No se distribuye normalmente y para corroborarlo se disponen de gráficos QQ que compara los cuantiles de la distribución normal frente a los cuantiles de la distribución de una variable.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="regresion-lineal.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(cost_living<span class="sc">$</span>Cost.of.Living.Index)</span>
+<span id="cb3-2"><a href="regresion-lineal.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(cost_living<span class="sc">$</span>Cost.of.Living.Index)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Más que evidente que no se distribuye normalmente ya que los muchos puntos de la distribución están alejados de la recta que marca los cuantiles teóricos de la distribución normal. Entonces, <strong>¿no es posible realizar un modelo lineal?</strong>. Se calcula el coeficiente de correlación lineal entre las variables:</p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="regresion-lineal.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(cost_living<span class="sc">$</span>Cost.of.Living.Index, cost_living<span class="sc">$</span>Rent.Index)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="regresion-lineal.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(cost_living<span class="sc">$</span>Cost.of.Living.Index, cost_living<span class="sc">$</span>Rent.Index)</span></code></pre></div>
 <pre><code>## [1] 0.8133299</code></pre>
 <p>¿Con un coeficiente de correlación lineal superior a 0.8 no va a ser posible crear un modelo de regresión lineal? <strong>Si es posible</strong>, porque el científico de datos busca separar el azar de lo estadísticamente significativo, en su trabajo diario no va a realizar modelos teóricos ideales.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>Estimación de los parámetros del modelo. Los parámetros son esos elementos <span class="math inline">\(\beta\)</span> presentes en la definición del modelo. Esta labor se realiza mediante mínimos cuadrados que es el proceso de modelización estadística más sencillo y para entender como funciona se parte del gráfico de pares de puntos [Rent.Index , Cost.of.Living.Index]</li>
 </ol>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="regresion-lineal.html#cb326-1" aria-hidden="true" tabindex="-1"></a>cost_living <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Rent.Index, <span class="at">y =</span> Cost.of.Living.Index)) <span class="sc">+</span> </span>
-<span id="cb326-2"><a href="regresion-lineal.html#cb326-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-222-1.png" width="672" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="regresion-lineal.html#cb6-1" aria-hidden="true" tabindex="-1"></a>cost_living <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Rent.Index, <span class="at">y =</span> Cost.of.Living.Index)) <span class="sc">+</span> </span>
+<span id="cb6-2"><a href="regresion-lineal.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>El método de mínimos cuadrados traza una función lineal que minimiza la distancia de todos los puntos presentes en los datos a esa función. No se entra en los matices algebraicos para la obtención de la recta de regresión ya que en R está implementado el método mediante la función <code>lm</code>.</p>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="regresion-lineal.html#cb327-1" aria-hidden="true" tabindex="-1"></a>modelo<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> cost_living, <span class="at">formula =</span> Cost.of.Living.Index <span class="sc">~</span> Rent.Index)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="regresion-lineal.html#cb7-1" aria-hidden="true" tabindex="-1"></a>modelo<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data =</span> cost_living, <span class="at">formula =</span> Cost.of.Living.Index <span class="sc">~</span> Rent.Index)</span></code></pre></div>
 <p>Esta función es importante para conocer como se realizan los modelos en R. Evidentemente es necesario indicar los datos de entrada pero también es necesario indicar la fórmula, de ahí la importancia de conocer como será el modelo matemático. Las fórmulas siempre son de la forma variable dependiente ~ variable/s independientes, en este caso es el modelo más sencillo posible <code>Cost.of.Living.Index ~ Rent.Index</code> pero se puede complicar y permitir crear modelos más complejos. Para describir el modelo se emplea la función summary sobre el objeto <code>modelo.1</code> creado con la función <code>lm</code></p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="regresion-lineal.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo<span class="fl">.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="regresion-lineal.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo<span class="fl">.1</span>)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Cost.of.Living.Index ~ Rent.Index, data = cost_living)
@@ -825,12 +597,12 @@ Local.Purchasing.Power.Index
 <li><p>Diagnóstico del modelo. Además del <span class="math inline">\(R^2\)</span> es necesario validar y diagnóstica si se cumplen todas las hipótesis del modelo lineal:</p></li>
 </ol>
 <ul>
-<li>Linealidad. Para estudiar esta situación en el modelo de regresión lineal simple puede servir el gráfico de puntos visto con anterioridad. En este primer ejemplo se va a emplear directamente la recta de regresión creada con el modelo. Para representar gráficamente esa recta es necesario predecir, saber que valores está arojando la recta de regresión y para ello en R está la función <code>predict</code> sobre el objeto modelo con la variable que participa en el modelo.</li>
+<li>Linealidad. Para estudiar esta situación en el modelo de regresión lineal simple puede servir el gráfico de puntos visto con anterioridad. En este primer ejemplo se va a emplear directamente la recta de regresión creada con el modelo. Para representar gráficamente esa recta es necesario predecir, saber que valores está arrojando la recta de regresión y para ello en R está la función <code>predict</code> sobre el objeto modelo con la variable que participa en el modelo.</li>
 </ul>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="regresion-lineal.html#cb330-1" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object=</span>modelo<span class="fl">.1</span>, <span class="at">data=</span>cost_living<span class="sc">$</span>Rent.Index)</span>
-<span id="cb330-2"><a href="regresion-lineal.html#cb330-2" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">prediccion_Cost.of.Living =</span> estimacion.modelo<span class="fl">.1</span>)</span>
-<span id="cb330-3"><a href="regresion-lineal.html#cb330-3" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.1</span><span class="sc">$</span>Rent.Index <span class="ot">=</span> cost_living<span class="sc">$</span>Rent.Index</span>
-<span id="cb330-4"><a href="regresion-lineal.html#cb330-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(estimacion.modelo<span class="fl">.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="regresion-lineal.html#cb10-1" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object=</span>modelo<span class="fl">.1</span>, <span class="at">data=</span>cost_living<span class="sc">$</span>Rent.Index)</span>
+<span id="cb10-2"><a href="regresion-lineal.html#cb10-2" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">prediccion_Cost.of.Living =</span> estimacion.modelo<span class="fl">.1</span>)</span>
+<span id="cb10-3"><a href="regresion-lineal.html#cb10-3" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.1</span><span class="sc">$</span>Rent.Index <span class="ot">=</span> cost_living<span class="sc">$</span>Rent.Index</span>
+<span id="cb10-4"><a href="regresion-lineal.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(estimacion.modelo<span class="fl">.1</span>)</span></code></pre></div>
 <pre><code>##   prediccion_Cost.of.Living Rent.Index
 ## 1                 134.06419     103.03
 ## 2                  94.14415      62.62
@@ -838,13 +610,13 @@ Local.Purchasing.Power.Index
 ## 4                  82.02291      50.35
 ## 5                  71.02786      39.22
 ## 6                 100.60485      69.16</code></pre>
-<p>Esta tarea de generar los datos estimados por la función matemática es <strong>escorear unos datos</strong>, es decir, escorear es obtener las estimaciones del modelo para unos datos. En el ejmeplo es aplicar la función <span class="math inline">\(Y = 32.28 + 0.99·Rent.Index\)</span> a una serie de datos que permita crear un <em>scoring</em> o una variable predicha. En este caso se han escoreado los propios datos participantes en el modelo y permiten visualizar la recta de regresión en los gráficos de dispersión.</p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="regresion-lineal.html#cb332-1" aria-hidden="true" tabindex="-1"></a>cost_living <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Rent.Index, <span class="at">y =</span> Cost.of.Living.Index)) <span class="sc">+</span> </span>
-<span id="cb332-2"><a href="regresion-lineal.html#cb332-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb332-3"><a href="regresion-lineal.html#cb332-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> estimacion.modelo<span class="fl">.1</span>, </span>
-<span id="cb332-4"><a href="regresion-lineal.html#cb332-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x=</span>Rent.Index, <span class="at">y=</span>prediccion_Cost.of.Living), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb332-5"><a href="regresion-lineal.html#cb332-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Estudio de la linealidad&quot;</span>)</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-226-1.png" width="672" /></p>
+<p>Esta tarea de generar los datos estimados por la función matemática es <strong>escorear unos datos</strong>, es decir, escorear es obtener las estimaciones del modelo para unos datos. En el ejemplo es aplicar la función <span class="math inline">\(Y = 32.28 + 0.99·Rent.Index\)</span> a una serie de datos que permita crear un <em>scoring</em> o una variable predicha. En este caso se han escoreado los propios datos participantes en el modelo y permiten visualizar la recta de regresión en los gráficos de dispersión.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="regresion-lineal.html#cb12-1" aria-hidden="true" tabindex="-1"></a>cost_living <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Rent.Index, <span class="at">y =</span> Cost.of.Living.Index)) <span class="sc">+</span> </span>
+<span id="cb12-2"><a href="regresion-lineal.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb12-3"><a href="regresion-lineal.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> estimacion.modelo<span class="fl">.1</span>, </span>
+<span id="cb12-4"><a href="regresion-lineal.html#cb12-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x=</span>Rent.Index, <span class="at">y=</span>prediccion_Cost.of.Living), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="regresion-lineal.html#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Estudio de la linealidad&quot;</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>¿Una recta describe esta nube de puntos? No lo parece, será necesario buscar una manera de salvar esa “no linealidad”. Con una sola variable independiente es sencillo comprobar la linealidad, si se tienen más variables no será tan sencillo y por eso son fundamentales los dos siguientes supuestos que se basan en los <strong>residuos del modelo de regresión</strong>. Los residuos son la distancia entre esa recta de regresión y el dato real, son la diferencia entre lo obtenido por el modelo y lo observado. Si esa distancia no es normal y si no hay independencia entre los residuos es que el modelo lineal no está describiendo el comportamiento. Por lo que los otros supuestos a tener en cuenta son:</p>
 <ul>
 <li><p>Homocedasticidad. La varianza de los residuos ha de ser 0.</p></li>
@@ -852,9 +624,9 @@ Local.Purchasing.Power.Index
 <li><p>Independencia de residuos. No existe correlación entre los residuos producidos por el modelo.</p></li>
 </ul>
 <p>Para diagnosticar los residuos se tienen los gráficos de diagnóstico de los residuos:</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="regresion-lineal.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb333-2"><a href="regresion-lineal.html#cb333-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo<span class="fl">.1</span>)</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-227-1.png" width="672" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="regresion-lineal.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb13-2"><a href="regresion-lineal.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo<span class="fl">.1</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>En estos gráficos los datos deben estar en el entorno de esas líneas discontinuas sin que exista un patrón específico, no se entra en mayor profundidad porque es evidente que no se cumple, esta es una situación que suele dar lugar cuando se estudian teóricamente estos modelos.</p>
 <p>La variable dependiente no sigue una distribución normal y no se cumplen los supuestos, no hay modelo. Esta impostura teórica hace que el científico de datos “huya” de los modelos lineales. Pero el coeficiente de correlación es 0.8, el <span class="math inline">\(R^2\)</span> es 0.66 y los parámetros son significativos, <strong>hay modelo</strong>, lo que sucede es que no está recogiendo el total del efecto lineal de la variable dependiente, el modelo es claramente mejorable.</p>
 </div>
@@ -862,67 +634,68 @@ Local.Purchasing.Power.Index
 <h2><span class="header-section-number">13.2</span> El coeficiente de determinación o <span class="math inline">\(R^2\)</span><a href="regresion-lineal.html#el-coeficiente-de-determinación-o-r2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El <span class="math inline">\(R^2\)</span> ha salido en varias ocasiones en el apartado anterior, es necesario conocer como funciona y las limitaciones que tiene a la hora de medir la capacidad predictiva del modelo. El coeficiente de determinación o <span class="math inline">\(R^2\)</span> es una <strong>medida de la varianza</strong> de la la variable dependiente que recoge la recta de regresión. Es un valor que va desde 0 a 1 donde 0 indica que el modelo es incapaz de medir la variabilidad de la variable dependiente y 1 significa que está recogiendo la totalidad de la variabilidad. Evidentemente, cuanto más próximo a 1 sea ese coeficiente más varianza recoge el modelo, mejor será ese modelo. El <span class="math inline">\(R^2\)</span> mide lo alejadas que están las observaciones de una recta, no indica que no exista relación lineal, nubes de puntos con mucha varianza pueden arrojar coeficientes de determinación menores para rectas de regresión adecuadas y eso no implica que el modelo sea malo.</p>
 <p>El siguiente código está sacado del <a href="https://www.datanalytics.com/2021/02/16/hay-mil-motivos-para-criticar-una-regresion-trucha-pero-una-r2-baja-no-es-uno-de-ellos/" target="_blank">blog de Carlos Gil, riguroso divulgador de temas estadísticos</a>.</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="regresion-lineal.html#cb334-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">3000</span></span>
-<span id="cb334-2"><a href="regresion-lineal.html#cb334-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
-<span id="cb334-3"><a href="regresion-lineal.html#cb334-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb334-4"><a href="regresion-lineal.html#cb334-4" aria-hidden="true" tabindex="-1"></a>foo <span class="ot">&lt;-</span> <span class="cf">function</span>(sigma){</span>
-<span id="cb334-5"><a href="regresion-lineal.html#cb334-5" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="dv">4</span> <span class="sc">-</span> .<span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, sigma)</span>
-<span id="cb334-6"><a href="regresion-lineal.html#cb334-6" aria-hidden="true" tabindex="-1"></a>  modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
-<span id="cb334-7"><a href="regresion-lineal.html#cb334-7" aria-hidden="true" tabindex="-1"></a>  datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb334-8"><a href="regresion-lineal.html#cb334-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> x,</span>
-<span id="cb334-9"><a href="regresion-lineal.html#cb334-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> y, <span class="at">sigma =</span> sigma,</span>
-<span id="cb334-10"><a href="regresion-lineal.html#cb334-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">r.squared =</span> <span class="fu">summary</span>(modelo)<span class="sc">$</span>r.squared)</span>
-<span id="cb334-11"><a href="regresion-lineal.html#cb334-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb334-12"><a href="regresion-lineal.html#cb334-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb334-13"><a href="regresion-lineal.html#cb334-13" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">do.call</span>(</span>
-<span id="cb334-14"><a href="regresion-lineal.html#cb334-14" aria-hidden="true" tabindex="-1"></a>  rbind,</span>
-<span id="cb334-15"><a href="regresion-lineal.html#cb334-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="at">length.out =</span> <span class="dv">20</span>), foo))</span>
-<span id="cb334-16"><a href="regresion-lineal.html#cb334-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb334-17"><a href="regresion-lineal.html#cb334-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(res, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb334-18"><a href="regresion-lineal.html#cb334-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb334-19"><a href="regresion-lineal.html#cb334-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sigma)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="regresion-lineal.html#cb14-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">3000</span></span>
+<span id="cb14-2"><a href="regresion-lineal.html#cb14-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb14-3"><a href="regresion-lineal.html#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="regresion-lineal.html#cb14-4" aria-hidden="true" tabindex="-1"></a>foo <span class="ot">&lt;-</span> <span class="cf">function</span>(sigma){</span>
+<span id="cb14-5"><a href="regresion-lineal.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="dv">4</span> <span class="sc">-</span> .<span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, sigma)</span>
+<span id="cb14-6"><a href="regresion-lineal.html#cb14-6" aria-hidden="true" tabindex="-1"></a>  modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
+<span id="cb14-7"><a href="regresion-lineal.html#cb14-7" aria-hidden="true" tabindex="-1"></a>  datos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb14-8"><a href="regresion-lineal.html#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> x,</span>
+<span id="cb14-9"><a href="regresion-lineal.html#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> y, <span class="at">sigma =</span> sigma,</span>
+<span id="cb14-10"><a href="regresion-lineal.html#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">r.squared =</span> <span class="fu">summary</span>(modelo)<span class="sc">$</span>r.squared)</span>
+<span id="cb14-11"><a href="regresion-lineal.html#cb14-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-12"><a href="regresion-lineal.html#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="regresion-lineal.html#cb14-13" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">do.call</span>(</span>
+<span id="cb14-14"><a href="regresion-lineal.html#cb14-14" aria-hidden="true" tabindex="-1"></a>  rbind,</span>
+<span id="cb14-15"><a href="regresion-lineal.html#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="at">length.out =</span> <span class="dv">20</span>), foo))</span></code></pre></div>
+<pre><code>## Warning in summary.lm(modelo): essentially perfect fit: summary may be
+## unreliable</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="regresion-lineal.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(res, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="regresion-lineal.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="regresion-lineal.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>sigma)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-228-1.png" width="672" /></p>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="regresion-lineal.html#cb336-1" aria-hidden="true" tabindex="-1"></a>r.squared <span class="ot">&lt;-</span> <span class="fu">unique</span>(res[, <span class="fu">c</span>(<span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;r.squared&quot;</span>)])</span>
-<span id="cb336-2"><a href="regresion-lineal.html#cb336-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb336-3"><a href="regresion-lineal.html#cb336-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(r.squared<span class="sc">$</span>sigma,</span>
-<span id="cb336-4"><a href="regresion-lineal.html#cb336-4" aria-hidden="true" tabindex="-1"></a>      r.squared<span class="sc">$</span>r.squared,</span>
-<span id="cb336-5"><a href="regresion-lineal.html#cb336-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">type =</span> <span class="st">&quot;l&quot;</span>,</span>
-<span id="cb336-6"><a href="regresion-lineal.html#cb336-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&quot;sigma&quot;</span>,</span>
-<span id="cb336-7"><a href="regresion-lineal.html#cb336-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab =</span> <span class="st">&quot;r squared&quot;</span>,</span>
-<span id="cb336-8"><a href="regresion-lineal.html#cb336-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&quot;r cuadrado según el error</span><span class="sc">\n</span><span class="st">irreductible del modelo&quot;</span>)</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-228-2.png" width="672" /></p>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="regresion-lineal.html#cb18-1" aria-hidden="true" tabindex="-1"></a>r.squared <span class="ot">&lt;-</span> <span class="fu">unique</span>(res[, <span class="fu">c</span>(<span class="st">&quot;sigma&quot;</span>, <span class="st">&quot;r.squared&quot;</span>)])</span>
+<span id="cb18-2"><a href="regresion-lineal.html#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="regresion-lineal.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(r.squared<span class="sc">$</span>sigma,</span>
+<span id="cb18-4"><a href="regresion-lineal.html#cb18-4" aria-hidden="true" tabindex="-1"></a>      r.squared<span class="sc">$</span>r.squared,</span>
+<span id="cb18-5"><a href="regresion-lineal.html#cb18-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">type =</span> <span class="st">&quot;l&quot;</span>,</span>
+<span id="cb18-6"><a href="regresion-lineal.html#cb18-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">xlab =</span> <span class="st">&quot;sigma&quot;</span>,</span>
+<span id="cb18-7"><a href="regresion-lineal.html#cb18-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">ylab =</span> <span class="st">&quot;r squared&quot;</span>,</span>
+<span id="cb18-8"><a href="regresion-lineal.html#cb18-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">&quot;r cuadrado según el error</span><span class="sc">\n</span><span class="st">irreductible del modelo&quot;</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
 <p>Para datos análogos el <span class="math inline">\(R^2\)</span> se reduce en función de la varianza de la nube de puntos. Un <span class="math inline">\(R^2\)</span> bajo no implica un mal modelo de regresión, puede implicar que la variable dependiente tenga una gran varianza. Sin embargo, un <span class="math inline">\(R^2\)</span> alto si implica que el modelo es aceptable, ¿umbrales para establecer que es alto? Dependerá del analista y el problema.</p>
-<p>En el <code>summary</code> del modelo se tiene el Multiple R-squared y el Adjusted R-squared. El primero es el <span class="math inline">\(R^2\)</span> y el segundo es el <span class="math inline">\(R^2\)</span> ajustado por el número de variables presentes en el modelo. Se acostumbra a usar el ajustado por el número de variables del modelo. Se van a parecer mucho, sobre todo si se aplica el principio de parsimonia a los modelos que tendrá un apartado posterior.</p>
+<p>En el <code>summary</code> del modelo se tiene el Múltiple R-squared y el Adjusted R-squared. El primero es el <span class="math inline">\(R^2\)</span> y el segundo es el <span class="math inline">\(R^2\)</span> ajustado por el número de variables presentes en el modelo. Se acostumbra a usar el ajustado por el número de variables del modelo. Se van a parecer mucho, sobre todo si se aplica el principio de parsimonia a los modelos que tendrá un apartado posterior.</p>
 </div>
 <div id="transformaciones-de-variables" class="section level2 hasAnchor" number="13.3">
 <h2><span class="header-section-number">13.3</span> Transformaciones de variables<a href="regresion-lineal.html#transformaciones-de-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Una variable se puede transformar para mejorar un modelo de regresión lineal, se puede transformar tanto la variable respuesta como la variable independiente. Qué es transformar una variable, se ilustran ejemplos.</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="regresion-lineal.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
-<span id="cb337-2"><a href="regresion-lineal.html#cb337-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb337-3"><a href="regresion-lineal.html#cb337-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>), <span class="at">y=</span><span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>))</span>
-<span id="cb337-4"><a href="regresion-lineal.html#cb337-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb337-5"><a href="regresion-lineal.html#cb337-5" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y))  <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb337-6"><a href="regresion-lineal.html#cb337-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Sin transformación&quot;</span>)</span>
-<span id="cb337-7"><a href="regresion-lineal.html#cb337-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb337-8"><a href="regresion-lineal.html#cb337-8" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="fu">log</span>(y)))  <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb337-9"><a href="regresion-lineal.html#cb337-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Transformación logarítmica&quot;</span>)</span>
-<span id="cb337-10"><a href="regresion-lineal.html#cb337-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb337-11"><a href="regresion-lineal.html#cb337-11" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="fu">sqrt</span>(y)))  <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb337-12"><a href="regresion-lineal.html#cb337-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Transformación raiz&quot;</span>)</span>
-<span id="cb337-13"><a href="regresion-lineal.html#cb337-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb337-14"><a href="regresion-lineal.html#cb337-14" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="fu">asin</span>(y<span class="sc">/</span><span class="fu">max</span>(y))))  <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb337-15"><a href="regresion-lineal.html#cb337-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Transformación arcoseno&quot;</span>)</span>
-<span id="cb337-16"><a href="regresion-lineal.html#cb337-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb337-17"><a href="regresion-lineal.html#cb337-17" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,p3,p4)</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-229-1.png" width="672" /></p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="regresion-lineal.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">remove</span>(p1, p2, p3, p4)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="regresion-lineal.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb19-2"><a href="regresion-lineal.html#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="regresion-lineal.html#cb19-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>), <span class="at">y=</span><span class="fu">seq</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>))</span>
+<span id="cb19-4"><a href="regresion-lineal.html#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="regresion-lineal.html#cb19-5" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y))  <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb19-6"><a href="regresion-lineal.html#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Sin transformación&quot;</span>)</span>
+<span id="cb19-7"><a href="regresion-lineal.html#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="regresion-lineal.html#cb19-8" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="fu">log</span>(y)))  <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb19-9"><a href="regresion-lineal.html#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Transformación logarítmica&quot;</span>)</span>
+<span id="cb19-10"><a href="regresion-lineal.html#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="regresion-lineal.html#cb19-11" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="fu">sqrt</span>(y)))  <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb19-12"><a href="regresion-lineal.html#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Transformación raiz&quot;</span>)</span>
+<span id="cb19-13"><a href="regresion-lineal.html#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="regresion-lineal.html#cb19-14" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="fu">asin</span>(y<span class="sc">/</span><span class="fu">max</span>(y))))  <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb19-15"><a href="regresion-lineal.html#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Transformación arcoseno&quot;</span>)</span>
+<span id="cb19-16"><a href="regresion-lineal.html#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="regresion-lineal.html#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,p3,p4)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="regresion-lineal.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">remove</span>(p1, p2, p3, p4)</span></code></pre></div>
 <p>Un dato lineal, si se transforma ya no es lineal, el científico de datos debe saber que un modelo lineal es una función lineal de su respuesta, pero no es lineal frente a sus parámetros. Puede recoger situaciones no lineales y no es necesario emplear complejos algoritmos para aislar esos comportamientos sin linealidad. Viendo los gráficos anteriores y aplicando una transformación al ejemplo de trabajo.</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="regresion-lineal.html#cb339-1" aria-hidden="true" tabindex="-1"></a>cost_living<span class="sc">$</span>raiz_rent.index <span class="ot">=</span> <span class="fu">sqrt</span>(cost_living<span class="sc">$</span>Rent.Index)</span>
-<span id="cb339-2"><a href="regresion-lineal.html#cb339-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb339-3"><a href="regresion-lineal.html#cb339-3" aria-hidden="true" tabindex="-1"></a>modelo<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(cost_living, <span class="at">formula =</span> Cost.of.Living.Index <span class="sc">~</span> raiz_rent.index)</span>
-<span id="cb339-4"><a href="regresion-lineal.html#cb339-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb339-5"><a href="regresion-lineal.html#cb339-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo<span class="fl">.2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="regresion-lineal.html#cb21-1" aria-hidden="true" tabindex="-1"></a>cost_living<span class="sc">$</span>raiz_rent.index <span class="ot">=</span> <span class="fu">sqrt</span>(cost_living<span class="sc">$</span>Rent.Index)</span>
+<span id="cb21-2"><a href="regresion-lineal.html#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="regresion-lineal.html#cb21-3" aria-hidden="true" tabindex="-1"></a>modelo<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(cost_living, <span class="at">formula =</span> Cost.of.Living.Index <span class="sc">~</span> raiz_rent.index)</span>
+<span id="cb21-4"><a href="regresion-lineal.html#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="regresion-lineal.html#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo<span class="fl">.2</span>)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Cost.of.Living.Index ~ raiz_rent.index, data = cost_living)
@@ -942,43 +715,46 @@ Local.Purchasing.Power.Index
 ## Multiple R-squared:  0.7427, Adjusted R-squared:  0.7423 
 ## F-statistic:  1542 on 1 and 534 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>La prueba F indica que hay modelo, el <span class="math inline">\(R^2\)</span> ahora se sitúa en 0.74 mejorando el dato anterior y ambos parámetros son significativos. Se realiza el <em>scoring</em> para pintar la recta en la nube de puntos.</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="regresion-lineal.html#cb341-1" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object=</span>modelo<span class="fl">.2</span>, <span class="at">data=</span>cost_living<span class="sc">$</span>raiz_rent.index)</span>
-<span id="cb341-2"><a href="regresion-lineal.html#cb341-2" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">prediccion_Cost.of.Living =</span> estimacion.modelo<span class="fl">.2</span>)</span>
-<span id="cb341-3"><a href="regresion-lineal.html#cb341-3" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.2</span><span class="sc">$</span>Rent.Index <span class="ot">=</span> cost_living<span class="sc">$</span>Rent.Index</span>
-<span id="cb341-4"><a href="regresion-lineal.html#cb341-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb341-5"><a href="regresion-lineal.html#cb341-5" aria-hidden="true" tabindex="-1"></a>cost_living <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Rent.Index, <span class="at">y =</span> Cost.of.Living.Index)) <span class="sc">+</span> </span>
-<span id="cb341-6"><a href="regresion-lineal.html#cb341-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb341-7"><a href="regresion-lineal.html#cb341-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> estimacion.modelo<span class="fl">.2</span>, </span>
-<span id="cb341-8"><a href="regresion-lineal.html#cb341-8" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x=</span>Rent.Index, <span class="at">y=</span>prediccion_Cost.of.Living), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb341-9"><a href="regresion-lineal.html#cb341-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Estudio de la linealidad&quot;</span>)</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-231-1.png" width="672" /></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="regresion-lineal.html#cb23-1" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object=</span>modelo<span class="fl">.2</span>, <span class="at">data=</span>cost_living<span class="sc">$</span>raiz_rent.index)</span>
+<span id="cb23-2"><a href="regresion-lineal.html#cb23-2" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">prediccion_Cost.of.Living =</span> estimacion.modelo<span class="fl">.2</span>)</span>
+<span id="cb23-3"><a href="regresion-lineal.html#cb23-3" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.2</span><span class="sc">$</span>Rent.Index <span class="ot">=</span> cost_living<span class="sc">$</span>Rent.Index</span>
+<span id="cb23-4"><a href="regresion-lineal.html#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="regresion-lineal.html#cb23-5" aria-hidden="true" tabindex="-1"></a>cost_living <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Rent.Index, <span class="at">y =</span> Cost.of.Living.Index)) <span class="sc">+</span> </span>
+<span id="cb23-6"><a href="regresion-lineal.html#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb23-7"><a href="regresion-lineal.html#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> estimacion.modelo<span class="fl">.2</span>, </span>
+<span id="cb23-8"><a href="regresion-lineal.html#cb23-8" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x=</span>Rent.Index, <span class="at">y=</span>prediccion_Cost.of.Living), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb23-9"><a href="regresion-lineal.html#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Estudio de la linealidad&quot;</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>Se aprecia que la transformación recoge ese comportamiento sin linealidad, ¿lo recoge por completo? Para ello se dispone del estudio de los residuos.</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="regresion-lineal.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb342-2"><a href="regresion-lineal.html#cb342-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo<span class="fl">.1</span>)</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-232-1.png" width="672" /></p>
-<p>El primer gráfico recoge los residuos frente al ajuste, en estimaciones superiores a un índice de 80, -20% con respecto a NYC, hay un patrón que el modelo lineal no recoge. Lo corrobora el siguiente gráfico que estudia la normalidad de los residuos, falla en ambos extremos de la estimación pero más en estimaciones superiores. El gráfido de <strong>scale - location</strong> estudia la homocedasticidad, los residuos estudentizados deberían situarse sobre una línea central para asumir igualdad de varianza y esto no sucede. El último gráfico permite estudiar si hay residuos que estén influyendo sobre los resultados del modelo, se identifican la observación 12 y 14:</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="regresion-lineal.html#cb343-1" aria-hidden="true" tabindex="-1"></a>cost_living <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">14</span>))</span></code></pre></div>
-<pre><code>##   Rank                             City Cost.of.Living.Index Rent.Index Cost.of.Living.Plus.Rent.Index
-## 1   12      New York, NY, United States               100.00     100.00                         100.00
-## 2   14 San Francisco, CA, United States                96.88     106.49                         101.43
-##   Groceries.Index Restaurant.Price.Index Local.Purchasing.Power.Index raiz_rent.index
-## 1          100.00                 100.00                       100.00         10.0000
-## 2          101.93                  94.58                       125.95         10.3194</code></pre>
-<p>La propia Nueva York y San Francisco con un precio disparatado de los alquileres están afectando al modelo. Teóricamente el modelo no sirve porque no se cumplen las hipótesis, pero no es un mal modelo, el problema es que hay ciertas situaciones que no recoge. <strong>Pero el modelo no se puede descartar</strong> da igual lo que diga la teoría, el científico de datos tiene que separar la señal del ruido y es evidente que una simple función matemática está aislando el funcionamiento de la variable en estudio.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="regresion-lineal.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb24-2"><a href="regresion-lineal.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo<span class="fl">.1</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>El primer gráfico recoge los residuos frente al ajuste, en estimaciones superiores a un índice de 80, -20% con respecto a NYC, hay un patrón que el modelo lineal no recoge. Lo corrobora el siguiente gráfico que estudia la normalidad de los residuos, falla en ambos extremos de la estimación pero más en estimaciones superiores. El gráfico de <strong>scale - location</strong> estudia la homocedasticidad, los residuos estudentizados deberían situarse sobre una línea central para asumir igualdad de varianza y esto no sucede. El último gráfico permite estudiar si hay observaciones extremas (outliers) que estén influyendo sobre los resultados del modelo, se identifican la observación 12 y 14:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="regresion-lineal.html#cb25-1" aria-hidden="true" tabindex="-1"></a>cost_living <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">12</span>,<span class="dv">14</span>))</span></code></pre></div>
+<pre><code>##   Rank                             City Cost.of.Living.Index Rent.Index
+## 1   12      New York, NY, United States               100.00     100.00
+## 2   14 San Francisco, CA, United States                96.88     106.49
+##   Cost.of.Living.Plus.Rent.Index Groceries.Index Restaurant.Price.Index
+## 1                         100.00          100.00                 100.00
+## 2                         101.43          101.93                  94.58
+##   Local.Purchasing.Power.Index raiz_rent.index
+## 1                       100.00         10.0000
+## 2                       125.95         10.3194</code></pre>
+<p>La propia Nueva York y San Francisco con un precio disparatado de los alquileres están afectando al modelo y se podrían considerar outliers y podrían requerir un tratamiento especial. Teóricamente el modelo no sirve porque no se cumplen las hipótesis, pero no es un mal modelo, el problema es que hay ciertas situaciones que no recoge. <strong>Pero el modelo no se puede descartar</strong> da igual lo que diga la teoría, el científico de datos tiene que separar la señal del ruido y es evidente que una simple función matemática está aislando el funcionamiento de la variable en estudio.</p>
 </div>
 <div id="tramificación-de-variables-en-modelos-lineales" class="section level2 hasAnchor" number="13.4">
 <h2><span class="header-section-number">13.4</span> Tramificación de variables en modelos lineales<a href="regresion-lineal.html#tramificación-de-variables-en-modelos-lineales" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Además de transformar una variable también es posible tramificarla para recoger mejor el comportamiento de una variable que dependa de ella. A lo largo de todo el ensayo se ha hecho mención a la importancia que tiene esta labor y los modelos lineales no son una excepción. A continuación se realiza ese ejercicio.</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="regresion-lineal.html#cb345-1" aria-hidden="true" tabindex="-1"></a>cost_living <span class="ot">&lt;-</span> cost_living <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">fr_Rent.Index =</span> <span class="fu">case_when</span>(</span>
-<span id="cb345-2"><a href="regresion-lineal.html#cb345-2" aria-hidden="true" tabindex="-1"></a>  Rent.Index <span class="sc">&lt;=</span> <span class="dv">15</span> <span class="sc">~</span> <span class="st">&quot;1. &lt;=15&quot;</span>,</span>
-<span id="cb345-3"><a href="regresion-lineal.html#cb345-3" aria-hidden="true" tabindex="-1"></a>  Rent.Index <span class="sc">&lt;=</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">&quot;2. 16-30&quot;</span>,</span>
-<span id="cb345-4"><a href="regresion-lineal.html#cb345-4" aria-hidden="true" tabindex="-1"></a>  Rent.Index <span class="sc">&lt;=</span> <span class="dv">45</span> <span class="sc">~</span> <span class="st">&quot;3. 31-45&quot;</span>,</span>
-<span id="cb345-5"><a href="regresion-lineal.html#cb345-5" aria-hidden="true" tabindex="-1"></a>  Rent.Index <span class="sc">&lt;=</span> <span class="dv">60</span> <span class="sc">~</span> <span class="st">&quot;4. 46-60&quot;</span>,</span>
-<span id="cb345-6"><a href="regresion-lineal.html#cb345-6" aria-hidden="true" tabindex="-1"></a>  <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;5. mas de 60&quot;</span>))</span>
-<span id="cb345-7"><a href="regresion-lineal.html#cb345-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb345-8"><a href="regresion-lineal.html#cb345-8" aria-hidden="true" tabindex="-1"></a>modelo<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(cost_living, <span class="at">formula =</span> Cost.of.Living.Index <span class="sc">~</span> fr_Rent.Index)</span>
-<span id="cb345-9"><a href="regresion-lineal.html#cb345-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb345-10"><a href="regresion-lineal.html#cb345-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo<span class="fl">.3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="regresion-lineal.html#cb27-1" aria-hidden="true" tabindex="-1"></a>cost_living <span class="ot">&lt;-</span> cost_living <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">fr_Rent.Index =</span> <span class="fu">case_when</span>(</span>
+<span id="cb27-2"><a href="regresion-lineal.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  Rent.Index <span class="sc">&lt;=</span> <span class="dv">15</span> <span class="sc">~</span> <span class="st">&quot;1. &lt;=15&quot;</span>,</span>
+<span id="cb27-3"><a href="regresion-lineal.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  Rent.Index <span class="sc">&lt;=</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">&quot;2. 16-30&quot;</span>,</span>
+<span id="cb27-4"><a href="regresion-lineal.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  Rent.Index <span class="sc">&lt;=</span> <span class="dv">45</span> <span class="sc">~</span> <span class="st">&quot;3. 31-45&quot;</span>,</span>
+<span id="cb27-5"><a href="regresion-lineal.html#cb27-5" aria-hidden="true" tabindex="-1"></a>  Rent.Index <span class="sc">&lt;=</span> <span class="dv">60</span> <span class="sc">~</span> <span class="st">&quot;4. 46-60&quot;</span>,</span>
+<span id="cb27-6"><a href="regresion-lineal.html#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;5. mas de 60&quot;</span>))</span>
+<span id="cb27-7"><a href="regresion-lineal.html#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="regresion-lineal.html#cb27-8" aria-hidden="true" tabindex="-1"></a>modelo<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(cost_living, <span class="at">formula =</span> Cost.of.Living.Index <span class="sc">~</span> fr_Rent.Index)</span>
+<span id="cb27-9"><a href="regresion-lineal.html#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="regresion-lineal.html#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo<span class="fl">.3</span>)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Cost.of.Living.Index ~ fr_Rent.Index, data = cost_living)
@@ -1001,42 +777,42 @@ Local.Purchasing.Power.Index
 ## Multiple R-squared:  0.6877, Adjusted R-squared:  0.6854 
 ## F-statistic: 292.4 on 4 and 531 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>De un modo muy rápido se ha trameado la variable respuesta en 5 tramos y el modelo ha generado 4 parámetros más el término independiente con un <span class="math inline">\(R^2\)</span> de 0.68 que mejora incluso al que se obtenía con el modelo inicial. Se realiza el scoring de modelo para ver como es el modelo resultante sobre la nube de puntos.</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="regresion-lineal.html#cb347-1" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object=</span>modelo<span class="fl">.3</span>, <span class="at">data=</span>cost_living<span class="sc">$</span>fr_Rent.Index)</span>
-<span id="cb347-2"><a href="regresion-lineal.html#cb347-2" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">prediccion_Cost.of.Living =</span> estimacion.modelo<span class="fl">.3</span>)</span>
-<span id="cb347-3"><a href="regresion-lineal.html#cb347-3" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.3</span><span class="sc">$</span>Rent.Index <span class="ot">=</span> cost_living<span class="sc">$</span>Rent.Index</span>
-<span id="cb347-4"><a href="regresion-lineal.html#cb347-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb347-5"><a href="regresion-lineal.html#cb347-5" aria-hidden="true" tabindex="-1"></a>cost_living <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Rent.Index, <span class="at">y =</span> Cost.of.Living.Index)) <span class="sc">+</span> </span>
-<span id="cb347-6"><a href="regresion-lineal.html#cb347-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb347-7"><a href="regresion-lineal.html#cb347-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> estimacion.modelo<span class="fl">.3</span>, </span>
-<span id="cb347-8"><a href="regresion-lineal.html#cb347-8" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x=</span>Rent.Index, <span class="at">y=</span>prediccion_Cost.of.Living), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb347-9"><a href="regresion-lineal.html#cb347-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Estudio del modelo tramificado&quot;</span>)</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-235-1.png" width="672" /></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="regresion-lineal.html#cb29-1" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object=</span>modelo<span class="fl">.3</span>, <span class="at">data=</span>cost_living<span class="sc">$</span>fr_Rent.Index)</span>
+<span id="cb29-2"><a href="regresion-lineal.html#cb29-2" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">prediccion_Cost.of.Living =</span> estimacion.modelo<span class="fl">.3</span>)</span>
+<span id="cb29-3"><a href="regresion-lineal.html#cb29-3" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.3</span><span class="sc">$</span>Rent.Index <span class="ot">=</span> cost_living<span class="sc">$</span>Rent.Index</span>
+<span id="cb29-4"><a href="regresion-lineal.html#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="regresion-lineal.html#cb29-5" aria-hidden="true" tabindex="-1"></a>cost_living <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Rent.Index, <span class="at">y =</span> Cost.of.Living.Index)) <span class="sc">+</span> </span>
+<span id="cb29-6"><a href="regresion-lineal.html#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb29-7"><a href="regresion-lineal.html#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> estimacion.modelo<span class="fl">.3</span>, </span>
+<span id="cb29-8"><a href="regresion-lineal.html#cb29-8" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x=</span>Rent.Index, <span class="at">y=</span>prediccion_Cost.of.Living), <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb29-9"><a href="regresion-lineal.html#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Estudio del modelo tramificado&quot;</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>La mera tramificación de la variable, convertir una variable numérica en un factor, está salvando la linealidad pero se está trabajando con más de un parámetro, concretamente con 4 más el término independiente. Ya no se tiene una regresión linea simple ahora se tiene una <strong>regresión lineal múltiple</strong> y un parámetro ha pasado a crear 4, pero, ¿por qué la salida de R ofrece 4 parámetros cuando se ha tramificado la variable en 5 partes? Porque 4 parámetros son suficientes.</p>
 <p>El modelo planteado tendría la siguiente forma:</p>
 <p><span class="math inline">\(Y = \beta_0 + \beta_1*Rent.Index = 1. &lt;=15 + \beta_2*Rent.Index = 2. 16-30 + \beta_3*Rent.Index = 3. 31-45 + \beta_4*Rent.Index = 4. 46-60 + \beta_5*Rent.Index = 5. mas de 60\)</span></p>
 <p>Donde cada <span class="math inline">\(X_i\)</span> es una variable que toma valores 0 y 1 en función del nivel del factor que tiene cada observación. Pero la salida de R es:</p>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="regresion-lineal.html#cb348-1" aria-hidden="true" tabindex="-1"></a>modelo<span class="fl">.3</span><span class="sc">$</span>coefficients</span></code></pre></div>
-<pre><code>##               (Intercept)     fr_Rent.Index2. 16-30     fr_Rent.Index3. 31-45     fr_Rent.Index4. 46-60 
-##                  36.01184                  24.77269                  34.86257                  45.33367 
-## fr_Rent.Index5. mas de 60 
-##                  52.74416</code></pre>
-<p>¿Dónde está el nivel <code>fr_Rent.Index1. &lt;=15</code>? En realidad no hace falta, porque los modelos lineales que incluyen variables divididas en categorías crean variables “dummy”, es decir, si la observación pertenece a esa categoría toma un 1 en caso contrario 0. De ese modo, si la ciudad del conjunto de datos tiene un Rent.Index de 18 estaría en la categoría “2. 16-30” y el scoring (la predicción) para ese valor sería <span class="math inline">\(Y=36+24.77*1=60.77\)</span> porque pertenece a la categoría 2 luego se multiplica por su parámetro, si pertence a la categoría 1 <code>fr_Rent.Index1. &lt;=15</code> que no tiene parámetro entonces se le aplica el término independiente 36 (como aparece en el gráfico anterior).</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="regresion-lineal.html#cb30-1" aria-hidden="true" tabindex="-1"></a>modelo<span class="fl">.3</span><span class="sc">$</span>coefficients</span></code></pre></div>
+<pre><code>##               (Intercept)     fr_Rent.Index2. 16-30     fr_Rent.Index3. 31-45 
+##                  36.01184                  24.77269                  34.86257 
+##     fr_Rent.Index4. 46-60 fr_Rent.Index5. mas de 60 
+##                  45.33367                  52.74416</code></pre>
+<p>¿Dónde está el nivel <code>fr_Rent.Index1. &lt;=15</code>? En realidad no hace falta, porque los modelos lineales que incluyen variables divididas en categorías crean variables “dummy”, es decir, si la observación pertenece a esa categoría toma un 1 en caso contrario 0. De ese modo, si la ciudad del conjunto de datos tiene un Rent.Index de 18 estaría en la categoría “2. 16-30” y el scoring (la predicción) para ese valor sería <span class="math inline">\(Y=36+24.77*1=60.77\)</span> porque pertenece a la categoría 2 luego se multiplica por su parámetro, si pertenece a la categoría 1 <code>fr_Rent.Index1. &lt;=15</code> que no tiene parámetro entonces se le aplica el término independiente 36 (como aparece en el gráfico anterior).</p>
 <p>Como se ha esbozado con anterioridad, al transformar la variable a tramos, una variable en un modelo de regresión clásico es capaz de recoger efectos no lineales, pero está sacrificando algo: <strong>sencillez</strong>. Un modelo, cuantos más parámetros tenga más aumenta su complejidad y esto no es siempre positivo como se verá en capítulos posteriores.</p>
 </div>
 <div id="factores-en-modelos-de-regresión" class="section level2 hasAnchor" number="13.5">
 <h2><span class="header-section-number">13.5</span> Factores en modelos de regresión<a href="regresion-lineal.html#factores-en-modelos-de-regresión" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Este apartado es análogo a lo anteriormente tratado, pero se insiste en ello para que el científico de datos interprete correctamente los parámetros de un modelo de regresión. ¿Es distinto el valor del índice de costo en ciudades de EEUU, España y el resto del mundo?</p>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="regresion-lineal.html#cb350-1" aria-hidden="true" tabindex="-1"></a>cost_living <span class="ot">&lt;-</span> cost_living <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">pais =</span> <span class="fu">case_when</span>(</span>
-<span id="cb350-2"><a href="regresion-lineal.html#cb350-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&#39;United States&#39;</span>, City)<span class="sc">&gt;</span><span class="dv">0</span> <span class="sc">~</span> <span class="st">&#39;USA&#39;</span>,</span>
-<span id="cb350-3"><a href="regresion-lineal.html#cb350-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&#39;Spain&#39;</span>, City)<span class="sc">&gt;</span><span class="dv">0</span> <span class="sc">~</span> <span class="st">&#39;España&#39;</span>,</span>
-<span id="cb350-4"><a href="regresion-lineal.html#cb350-4" aria-hidden="true" tabindex="-1"></a>  <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&#39;Resto&#39;</span>))</span>
-<span id="cb350-5"><a href="regresion-lineal.html#cb350-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb350-6"><a href="regresion-lineal.html#cb350-6" aria-hidden="true" tabindex="-1"></a>cost_living <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Cost.of.Living.Index, <span class="at">fill=</span>pais, <span class="at">color=</span>pais, <span class="at">group=</span>pais)) <span class="sc">+</span> </span>
-<span id="cb350-7"><a href="regresion-lineal.html#cb350-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.3</span>)</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-237-1.png" width="672" /></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="regresion-lineal.html#cb32-1" aria-hidden="true" tabindex="-1"></a>cost_living <span class="ot">&lt;-</span> cost_living <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">pais =</span> <span class="fu">case_when</span>(</span>
+<span id="cb32-2"><a href="regresion-lineal.html#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&#39;United States&#39;</span>, City)<span class="sc">&gt;</span><span class="dv">0</span> <span class="sc">~</span> <span class="st">&#39;USA&#39;</span>,</span>
+<span id="cb32-3"><a href="regresion-lineal.html#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&#39;Spain&#39;</span>, City)<span class="sc">&gt;</span><span class="dv">0</span> <span class="sc">~</span> <span class="st">&#39;España&#39;</span>,</span>
+<span id="cb32-4"><a href="regresion-lineal.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&#39;Resto&#39;</span>))</span>
+<span id="cb32-5"><a href="regresion-lineal.html#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="regresion-lineal.html#cb32-6" aria-hidden="true" tabindex="-1"></a>cost_living <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Cost.of.Living.Index, <span class="at">fill=</span>pais, <span class="at">color=</span>pais, <span class="at">group=</span>pais)) <span class="sc">+</span> </span>
+<span id="cb32-7"><a href="regresion-lineal.html#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.3</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>Se crea la variable empleando la función <code>grepl</code> que pertenece a las funciones de las <em>regular expressions</em> y que sirven para la manipulación de texto, en este caso busca la existencia de patrones en cadenas de texto. Se aprecian comportamientos distintos para las distribuciones, ¿dónde se sitúan las medias?</p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="regresion-lineal.html#cb351-1" aria-hidden="true" tabindex="-1"></a>cost_living <span class="sc">%&gt;%</span>  <span class="fu">group_by</span>(pais) <span class="sc">%&gt;%</span> </span>
-<span id="cb351-2"><a href="regresion-lineal.html#cb351-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">media_indice =</span> <span class="fu">mean</span>(Cost.of.Living.Index)) </span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="regresion-lineal.html#cb33-1" aria-hidden="true" tabindex="-1"></a>cost_living <span class="sc">%&gt;%</span>  <span class="fu">group_by</span>(pais) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href="regresion-lineal.html#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">media_indice =</span> <span class="fu">mean</span>(Cost.of.Living.Index)) </span></code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##   pais   media_indice
 ##   &lt;chr&gt;         &lt;dbl&gt;
@@ -1044,7 +820,7 @@ Local.Purchasing.Power.Index
 ## 2 Resto          53.6
 ## 3 USA            70.9</code></pre>
 <p>Con los datos disponibles, ¿son distintas las medias? ¿A qué recuerda esta cuestión? El modelo lineal ayuda a resolver estos análisis y además, los parámetros dicen mucho acerca de las variables.</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="regresion-lineal.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(<span class="at">data=</span>cost_living, Cost.of.Living.Index<span class="sc">~</span>pais)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="regresion-lineal.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(<span class="at">data=</span>cost_living, Cost.of.Living.Index<span class="sc">~</span>pais)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Cost.of.Living.Index ~ pais, data = cost_living)
@@ -1053,7 +829,7 @@ Local.Purchasing.Power.Index
 ## (Intercept)    paisResto      paisUSA  
 ##       55.48        -1.89        15.42</code></pre>
 <p>Como se observa el término independiente es exactamente la media del índice para España, la primera en el orden lexicográfico, si a ese término independiente se le resta 1.89 se tiene la media del Resto del mundo y si a la media de España se le suma 15.42 se tiene la media del índice para los EEUU. Eso es un parámetro de la regresión lineal para el nivel de un factor y el test permite determinar si es significativo en el modelo, es decir, si esas medias son diferentes.</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="regresion-lineal.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(<span class="at">data=</span>cost_living, Cost.of.Living.Index<span class="sc">~</span>pais))</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="regresion-lineal.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(<span class="at">data=</span>cost_living, Cost.of.Living.Index<span class="sc">~</span>pais))</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Cost.of.Living.Index ~ pais, data = cost_living)
@@ -1073,7 +849,7 @@ Local.Purchasing.Power.Index
 ## Residual standard error: 18.76 on 533 degrees of freedom
 ## Multiple R-squared:  0.1221, Adjusted R-squared:  0.1188 
 ## F-statistic: 37.07 on 2 and 533 DF,  p-value: 8.471e-16</code></pre>
-<p>Como se intuía la agrupación de paises del Resto del mundo no es un parámetro significativo, sin embargo, las ciudades de EEUU si tienen una media distinta estableciendo el p-valor habitual. Evidentemente el <span class="math inline">\(R^2\)</span> es muy bajo, pero este ejercicio también sirve al científico de datos para crear nuevas variables a partir de las disponibles y no ser un mero ejecutor de funciones informáticas.</p>
+<p>Como se intuía la agrupación de países del Resto del mundo no es un parámetro significativo, sin embargo, las ciudades de EEUU si tienen una media distinta estableciendo el p-valor habitual. Evidentemente el <span class="math inline">\(R^2\)</span> es muy bajo, pero este ejercicio también sirve al científico de datos para crear nuevas variables a partir de las disponibles y no ser un mero ejecutor de funciones informáticas.</p>
 </div>
 <div id="modelo-de-regresión-lineal-múltiple" class="section level2 hasAnchor" number="13.6">
 <h2><span class="header-section-number">13.6</span> Modelo de regresión lineal múltiple<a href="regresion-lineal.html#modelo-de-regresión-lineal-múltiple" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -1086,29 +862,29 @@ Local.Purchasing.Power.Index
 </ul>
 <p>Pero hay que añadir una nueva, la <strong>no relación lineal entre las variables independientes</strong>. Cuando esto no se produce, es decir, hay relación lineal entre las variables independientes, entonces se tiene <strong>multicolinealidad</strong>. Esto es debido a la propia solución algebraica del modelo lineal múltiple, matricialmente se define como <span class="math inline">\(Y=\beta X + \epsilon\)</span> la estimación de los parámetros es <span class="math inline">\(\beta = [X^tX]^-1\)</span> si existe alguna relación lineal entre alguna de las variables independientes <span class="math inline">\(X\)</span> entonces <span class="math inline">\([X^tX]=0\)</span> y una división por 0 es un problema. Por los motivos antes expuestos uno de los primeros pasos a la hora de hacer un modelo de regresión lineal múltiple será estudiar las correlaciones.</p>
 <p>Continuando con el ejemplo anterior se plantea el mismo modelo de regresión lineal pero se van a añadir nuevas variables entre las disponibles por lo que ahora la variable <code>Cost.of.Living.Index</code> irá en función del resto de indicadores disponibles. El primer paso será estudiar gráficamente la relación lineal de la variable dependiente frente a las variables regresoras:</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="regresion-lineal.html#cb357-1" aria-hidden="true" tabindex="-1"></a>grafico_puntos <span class="ot">&lt;-</span> <span class="cf">function</span>(varib){</span>
-<span id="cb357-2"><a href="regresion-lineal.html#cb357-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb357-3"><a href="regresion-lineal.html#cb357-3" aria-hidden="true" tabindex="-1"></a>  cost_living <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes_string</span>(<span class="at">x =</span> varib, <span class="at">y =</span> <span class="st">&#39;Cost.of.Living.Index&#39;</span>)) <span class="sc">+</span> </span>
-<span id="cb357-4"><a href="regresion-lineal.html#cb357-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>  <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(<span class="st">&quot;Índice frente a &quot;</span>,varib))}</span>
-<span id="cb357-5"><a href="regresion-lineal.html#cb357-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb357-6"><a href="regresion-lineal.html#cb357-6" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">grafico_puntos</span>(<span class="st">&quot;Rent.Index&quot;</span>)</span>
-<span id="cb357-7"><a href="regresion-lineal.html#cb357-7" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">grafico_puntos</span>(<span class="st">&quot;Cost.of.Living.Plus.Rent.Index&quot;</span>)</span>
-<span id="cb357-8"><a href="regresion-lineal.html#cb357-8" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">grafico_puntos</span>(<span class="st">&quot;Groceries.Index&quot;</span>)</span>
-<span id="cb357-9"><a href="regresion-lineal.html#cb357-9" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">grafico_puntos</span>(<span class="st">&quot;Restaurant.Price.Index&quot;</span>)</span>
-<span id="cb357-10"><a href="regresion-lineal.html#cb357-10" aria-hidden="true" tabindex="-1"></a>p5 <span class="ot">&lt;-</span> <span class="fu">grafico_puntos</span>(<span class="st">&quot;Local.Purchasing.Power.Index&quot;</span>)</span>
-<span id="cb357-11"><a href="regresion-lineal.html#cb357-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb357-12"><a href="regresion-lineal.html#cb357-12" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,p3,p4,p5)</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-241-1.png" width="672" /></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="regresion-lineal.html#cb39-1" aria-hidden="true" tabindex="-1"></a>grafico_puntos <span class="ot">&lt;-</span> <span class="cf">function</span>(varib){</span>
+<span id="cb39-2"><a href="regresion-lineal.html#cb39-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb39-3"><a href="regresion-lineal.html#cb39-3" aria-hidden="true" tabindex="-1"></a>  cost_living <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes_string</span>(<span class="at">x =</span> varib, <span class="at">y =</span> <span class="st">&#39;Cost.of.Living.Index&#39;</span>)) <span class="sc">+</span> </span>
+<span id="cb39-4"><a href="regresion-lineal.html#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>  <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(<span class="st">&quot;Índice frente a &quot;</span>,varib))}</span>
+<span id="cb39-5"><a href="regresion-lineal.html#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="regresion-lineal.html#cb39-6" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">grafico_puntos</span>(<span class="st">&quot;Rent.Index&quot;</span>)</span>
+<span id="cb39-7"><a href="regresion-lineal.html#cb39-7" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">grafico_puntos</span>(<span class="st">&quot;Cost.of.Living.Plus.Rent.Index&quot;</span>)</span>
+<span id="cb39-8"><a href="regresion-lineal.html#cb39-8" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">grafico_puntos</span>(<span class="st">&quot;Groceries.Index&quot;</span>)</span>
+<span id="cb39-9"><a href="regresion-lineal.html#cb39-9" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">grafico_puntos</span>(<span class="st">&quot;Restaurant.Price.Index&quot;</span>)</span>
+<span id="cb39-10"><a href="regresion-lineal.html#cb39-10" aria-hidden="true" tabindex="-1"></a>p5 <span class="ot">&lt;-</span> <span class="fu">grafico_puntos</span>(<span class="st">&quot;Local.Purchasing.Power.Index&quot;</span>)</span>
+<span id="cb39-11"><a href="regresion-lineal.html#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-12"><a href="regresion-lineal.html#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,p3,p4,p5)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>Estos gráficos ya anticipan problemas. El índice está muy relacionado con todas las variables que se van a emplear en la regresión, no parece mala noticia, sin embargo, esa relación es muy parecida para todas las variables por lo que es imprescindible analizar si existe correlación entre las variables independientes. Para estudiar las correlaciones se dispone del coeficiente de correlación al que se hizo mención en el capítulo 11. Pero, se va a presentar una visualización que permite estudiar la correlación entre todas las variables que van a participar en el estudio, el <strong>gráfico de correlaciones</strong>.</p>
-<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="regresion-lineal.html#cb358-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="regresion-lineal.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span></code></pre></div>
 <pre><code>## corrplot 0.92 loaded</code></pre>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="regresion-lineal.html#cb360-1" aria-hidden="true" tabindex="-1"></a>matriz_correlaciones <span class="ot">&lt;-</span> <span class="fu">cor</span>(cost_living[,<span class="dv">3</span><span class="sc">:</span><span class="dv">8</span>])</span>
-<span id="cb360-2"><a href="regresion-lineal.html#cb360-2" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(matriz_correlaciones, <span class="at">title =</span> <span class="st">&quot;Gráfico de correlaciones&quot;</span>, <span class="at">method =</span> <span class="st">&quot;square&quot;</span>,  <span class="at">addCoef.col =</span> <span class="st">&quot;white&quot;</span>)</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-242-1.png" width="672" /></p>
-<p>Este gráfico se obtiene con la librería <code>corrplot</code> y sólo es necesario crear previamente la matriz de correlaciones con todas las variables. Se observa que la variable <code>Cost.of.Living.Index</code> tiene una correlación muy alta con muchas de las variables que van a explicar su comportamiento pero es que estas variables entre sí también tienen una alta correlación. Esto ya da pistas sobre la posible existencia de la multicolinealidad. Además, se va a prescindir de la variable <code>Cost.of.Living.Plus.Rent.Index</code> poruqe es el propio índice más <code>Rent.Index</code> y puede distorsionar el modelo. Con estas advertencias y consideraciones, se plantea el modelo:</p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="regresion-lineal.html#cb361-1" aria-hidden="true" tabindex="-1"></a>modelo<span class="fl">.4</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>cost_living, <span class="at">formula=</span>Cost.of.Living.Index <span class="sc">~</span> Rent.Index <span class="sc">+</span> Groceries.Index <span class="sc">+</span> Restaurant.Price.Index <span class="sc">+</span>  Local.Purchasing.Power.Index)</span>
-<span id="cb361-2"><a href="regresion-lineal.html#cb361-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb361-3"><a href="regresion-lineal.html#cb361-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo<span class="fl">.4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="regresion-lineal.html#cb42-1" aria-hidden="true" tabindex="-1"></a>matriz_correlaciones <span class="ot">&lt;-</span> <span class="fu">cor</span>(cost_living[,<span class="dv">3</span><span class="sc">:</span><span class="dv">8</span>])</span>
+<span id="cb42-2"><a href="regresion-lineal.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(matriz_correlaciones, <span class="at">title =</span> <span class="st">&quot;Gráfico de correlaciones&quot;</span>, <span class="at">method =</span> <span class="st">&quot;square&quot;</span>,  <span class="at">addCoef.col =</span> <span class="st">&quot;white&quot;</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>Este gráfico se obtiene con la librería <code>corrplot</code> y sólo es necesario crear previamente la matriz de correlaciones con todas las variables. Se observa que la variable <code>Cost.of.Living.Index</code> tiene una correlación muy alta con muchas de las variables que van a explicar su comportamiento pero es que estas variables entre sí también tienen una alta correlación. Esto ya da pistas sobre la posible existencia de la multicolinealidad. Además, se va a prescindir de la variable <code>Cost.of.Living.Plus.Rent.Index</code> porque es el propio índice más <code>Rent.Index</code> y puede distorsionar el modelo. Con estas advertencias y consideraciones, se plantea el modelo:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="regresion-lineal.html#cb43-1" aria-hidden="true" tabindex="-1"></a>modelo<span class="fl">.4</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>cost_living, <span class="at">formula=</span>Cost.of.Living.Index <span class="sc">~</span> Rent.Index <span class="sc">+</span> Groceries.Index <span class="sc">+</span> Restaurant.Price.Index <span class="sc">+</span>  Local.Purchasing.Power.Index)</span>
+<span id="cb43-2"><a href="regresion-lineal.html#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="regresion-lineal.html#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo<span class="fl">.4</span>)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Cost.of.Living.Index ~ Rent.Index + Groceries.Index + 
@@ -1131,10 +907,10 @@ Local.Purchasing.Power.Index
 ## Residual standard error: 3.023 on 531 degrees of freedom
 ## Multiple R-squared:  0.9773, Adjusted R-squared:  0.9771 
 ## F-statistic:  5711 on 4 and 531 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>Se dispone de un modelo con un excepcional <span class="math inline">\(R^2\)</span> donde la variable <code>Rent.Index</code> es la única que no supera el test de <span class="math inline">\(\beta_i=0\)</span> algo que lo indica el propio valor del parámetro, muy próximo a 0. El resto de variables si superan el test. Con estas cosideraciones es necesario replantear el modelo:</p>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="regresion-lineal.html#cb363-1" aria-hidden="true" tabindex="-1"></a>modelo<span class="fl">.5</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>cost_living, <span class="at">formula=</span>Cost.of.Living.Index <span class="sc">~</span> Groceries.Index <span class="sc">+</span> Restaurant.Price.Index <span class="sc">+</span>  Local.Purchasing.Power.Index)</span>
-<span id="cb363-2"><a href="regresion-lineal.html#cb363-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb363-3"><a href="regresion-lineal.html#cb363-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo<span class="fl">.5</span>)</span></code></pre></div>
+<p>Se dispone de un modelo con un excepcional <span class="math inline">\(R^2\)</span> donde la variable <code>Rent.Index</code> es la única que no supera el test de <span class="math inline">\(\beta_i=0\)</span> algo que lo indica el propio valor del parámetro, muy próximo a 0. El resto de variables si superan el test. Con estas consideraciones es necesario replantear el modelo:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="regresion-lineal.html#cb45-1" aria-hidden="true" tabindex="-1"></a>modelo<span class="fl">.5</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>cost_living, <span class="at">formula=</span>Cost.of.Living.Index <span class="sc">~</span> Groceries.Index <span class="sc">+</span> Restaurant.Price.Index <span class="sc">+</span>  Local.Purchasing.Power.Index)</span>
+<span id="cb45-2"><a href="regresion-lineal.html#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="regresion-lineal.html#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo<span class="fl">.5</span>)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Cost.of.Living.Index ~ Groceries.Index + Restaurant.Price.Index + 
@@ -1156,60 +932,62 @@ Local.Purchasing.Power.Index
 ## Residual standard error: 3.021 on 532 degrees of freedom
 ## Multiple R-squared:  0.9773, Adjusted R-squared:  0.9771 
 ## F-statistic:  7626 on 3 and 532 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>Ya se dispone de un modelo con todos los parámetros significativos, aunque <code>Local.Purchasing.Power.Index</code> no sería significativa si se fija un umbral más bajo de 0.002 ya que quedaría fuera de la región de aceptación. Con el primer modelo y teniendo en cuenta el anterior estudio de la correlación se torna necesario analizar la posible presencia de multicolinealidad. Hay diversos métodos para realizar esta tarea y se opta por ilustrar el ejemplo con el método VIF (Variance Inflation Factor). Si hay multicolinealidad <span class="math inline">\([X^tX]=0\)</span> está “hinflando” la varianza, ¿cuánto hinfla la varianza una variable dentro del modelo? Para determinar como está afectando se va a utilizar la librería de R <code>car</code></p>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="regresion-lineal.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb365-2"><a href="regresion-lineal.html#cb365-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(modelo<span class="fl">.5</span>)</span></code></pre></div>
-<pre><code>##              Groceries.Index       Restaurant.Price.Index Local.Purchasing.Power.Index 
-##                     3.887894                     4.283852                     2.000066</code></pre>
-<p>La función <code>vif</code> calcula cuanto está hinflando la varianza del modelo cada variable, valores por encima de 8 indican un problema, valores por encima de 4 indican la necesidad de analizar las variables en el modelo. En este modelo sólo <code>Restaurant.Price.Index</code> está causando problemas, está en manos del científico de datos eliminar la variable del modelo o transformarla para evitar problemas pero, como siempre, tiene que argumentar su eliminación. En este caso se opta por dejar el <code>modelo.5</code> como modelo definitivo y por último es necesario estudiar el comportamiento de los residuos.</p>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="regresion-lineal.html#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb367-2"><a href="regresion-lineal.html#cb367-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo<span class="fl">.5</span>)</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-246-1.png" width="672" /></p>
+<p>Ya se dispone de un modelo con todos los parámetros significativos, aunque <code>Local.Purchasing.Power.Index</code> no sería significativa si se fija un umbral más bajo de 0.002 ya que quedaría fuera de la región de aceptación. Con el primer modelo y teniendo en cuenta el anterior estudio de la correlación se torna necesario analizar la posible presencia de multicolinealidad. Hay diversos métodos para realizar esta tarea y se opta por ilustrar el ejemplo con el método VIF (Variance Inflation Factor). Si hay multicolinealidad <span class="math inline">\([X^tX]=0\)</span> está “inflando” la varianza, ¿cuánto infla la varianza una variable dentro del modelo? Para determinar como está afectando se va a utilizar la librería de R <code>car</code></p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="regresion-lineal.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb47-2"><a href="regresion-lineal.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(modelo<span class="fl">.5</span>)</span></code></pre></div>
+<pre><code>##              Groceries.Index       Restaurant.Price.Index 
+##                     3.887894                     4.283852 
+## Local.Purchasing.Power.Index 
+##                     2.000066</code></pre>
+<p>La función <code>vif</code> calcula cuanto está inflando la varianza del modelo cada variable, valores por encima de 8 indican un problema, valores por encima de 4 indican la necesidad de analizar las variables en el modelo. En este modelo sólo <code>Restaurant.Price.Index</code> está causando problemas, está en manos del científico de datos eliminar la variable del modelo o transformarla para evitar problemas pero, como siempre, tiene que argumentar su eliminación. En este caso se opta por dejar el <code>modelo.5</code> como modelo definitivo y por último es necesario estudiar el comportamiento de los residuos.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="regresion-lineal.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb49-2"><a href="regresion-lineal.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(modelo<span class="fl">.5</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <p>Desde el punto de vista teórico se dispone de un modelo aceptable, <strong>hay linealidad</strong>, pero los residuos “pierden” normalidad y pierden homogeneidad de varianza en valores altos. Se pueden identificar los registros, las ciudades que están causando problemas en el modelo.</p>
-<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="regresion-lineal.html#cb368-1" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.5</span> <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object=</span>modelo<span class="fl">.5</span>, <span class="at">data=</span>cost_living)</span>
-<span id="cb368-2"><a href="regresion-lineal.html#cb368-2" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.5</span> <span class="ot">&lt;-</span> cost_living <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">estimacion =</span> estimacion.modelo<span class="fl">.5</span>)</span>
-<span id="cb368-3"><a href="regresion-lineal.html#cb368-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb368-4"><a href="regresion-lineal.html#cb368-4" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.5</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span>(estimacion<span class="sc">&gt;</span><span class="dv">110</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb368-5"><a href="regresion-lineal.html#cb368-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(City, Cost.of.Living.Index, estimacion, Groceries.Index, Restaurant.Price.Index, </span>
-<span id="cb368-6"><a href="regresion-lineal.html#cb368-6" aria-hidden="true" tabindex="-1"></a>    Local.Purchasing.Power.Index)</span></code></pre></div>
-<pre><code>##                    City Cost.of.Living.Index estimacion Groceries.Index Restaurant.Price.Index
-## 1     Hamilton, Bermuda               137.56   138.8588          126.56                 151.77
-## 2   Zurich, Switzerland               128.65   129.1149          127.35                 127.14
-## 3    Basel, Switzerland               126.89   125.9851          120.44                 129.10
-## 4 Lausanne, Switzerland               119.62   121.3159          116.35                 122.83
-## 5     Bern, Switzerland               118.42   117.3921          114.54                 114.86
-## 6   Geneva, Switzerland               118.33   117.6710          112.08                 119.78
-## 7    Reykjavik, Iceland               112.57   113.7897           98.53                 127.87
-## 8   Lugano, Switzerland               111.88   113.9356          104.85                 120.62
-## 9     Stavanger, Norway               111.00   114.7029           95.97                 134.55
-##   Local.Purchasing.Power.Index
-## 1                       114.19
-## 2                       142.39
-## 3                       141.48
-## 4                       132.58
-## 5                       115.48
-## 6                       133.47
-## 7                        94.21
-## 8                       131.26
-## 9                       112.62</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="regresion-lineal.html#cb50-1" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.5</span> <span class="ot">&lt;-</span> <span class="fu">predict</span>(<span class="at">object=</span>modelo<span class="fl">.5</span>, <span class="at">data=</span>cost_living)</span>
+<span id="cb50-2"><a href="regresion-lineal.html#cb50-2" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.5</span> <span class="ot">&lt;-</span> cost_living <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">estimacion =</span> estimacion.modelo<span class="fl">.5</span>)</span>
+<span id="cb50-3"><a href="regresion-lineal.html#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="regresion-lineal.html#cb50-4" aria-hidden="true" tabindex="-1"></a>estimacion.modelo<span class="fl">.5</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span>(estimacion<span class="sc">&gt;</span><span class="dv">110</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb50-5"><a href="regresion-lineal.html#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(City, Cost.of.Living.Index, estimacion, Groceries.Index, Restaurant.Price.Index, </span>
+<span id="cb50-6"><a href="regresion-lineal.html#cb50-6" aria-hidden="true" tabindex="-1"></a>    Local.Purchasing.Power.Index)</span></code></pre></div>
+<pre><code>##                    City Cost.of.Living.Index estimacion Groceries.Index
+## 1     Hamilton, Bermuda               137.56   138.8588          126.56
+## 2   Zurich, Switzerland               128.65   129.1149          127.35
+## 3    Basel, Switzerland               126.89   125.9851          120.44
+## 4 Lausanne, Switzerland               119.62   121.3159          116.35
+## 5     Bern, Switzerland               118.42   117.3921          114.54
+## 6   Geneva, Switzerland               118.33   117.6710          112.08
+## 7    Reykjavik, Iceland               112.57   113.7897           98.53
+## 8   Lugano, Switzerland               111.88   113.9356          104.85
+## 9     Stavanger, Norway               111.00   114.7029           95.97
+##   Restaurant.Price.Index Local.Purchasing.Power.Index
+## 1                 151.77                       114.19
+## 2                 127.14                       142.39
+## 3                 129.10                       141.48
+## 4                 122.83                       132.58
+## 5                 114.86                       115.48
+## 6                 119.78                       133.47
+## 7                 127.87                        94.21
+## 8                 120.62                       131.26
+## 9                 134.55                       112.62</code></pre>
 <p>Muchas ciudades suizas están causando problemas en el modelo, parece que la estimación siempre está por encima probablemente debido al alto coste de la alimentación. En este caso el análisis de los residuos está ofreciendo un comportamiento interesante en los datos y por este motivo el científico de datos debe estudiar esta diferencia entre lo estimado y lo real porque las observaciones que no ajustan correctamente también pueden ofrecer información al análisis.</p>
 </div>
 <div id="métodos-de-selección-de-variables" class="section level2 hasAnchor" number="13.7">
 <h2><span class="header-section-number">13.7</span> Métodos de selección de variables<a href="regresion-lineal.html#métodos-de-selección-de-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En el apartado anterior se han introducido los modelos de regresión con múltiples variables, la selección de éstas se ha llevado a cabo en base a los criterios del analista. Se recomienda que el científico de datos participe en todo el proceso de modelización pero existen situaciones en las que se disponen de multitud de variables y ese análisis pormenorizado puede convertirse en ardua tarea. Por ello, es necesario conocer los métodos automáticos de selección de variables. En los modelos de regresión se plantean 3 formas de seleccionar variables, el método fordward, método backward y método stepwise.</p>
-<p>En este ensayo se van a ilustrar los tres métodos basando la capacidad predictiva de cada método en el <strong>critero de información de Akaike</strong> conocido como AIC. Al igual que el <span class="math inline">\(R^2\)</span> el AIC es una medida de lo correcto que es el ajuste pero está ponderado por el número de parámetros del modelo, sin entrar en aspectos teóricos cuanto menor es el AIC mejor es el modelo y si una variable no disminuye el AIC, no lo mejora sustancialmente, esta variable será prescindible.</p>
+<p>En este ensayo se van a ilustrar los tres métodos basando la capacidad predictiva de cada método en el <strong>criterio de información de Akaike</strong> conocido como AIC. Al igual que el <span class="math inline">\(R^2\)</span> el AIC es una medida de lo correcto que es el ajuste pero está ponderado por el número de parámetros del modelo, sin entrar en aspectos teóricos cuanto menor es el AIC mejor es el modelo y si una variable no disminuye el AIC, no lo mejora sustancialmente, esta variable será prescindible.</p>
 <div id="método-fordward" class="section level3 hasAnchor" number="13.7.1">
 <h3><span class="header-section-number">13.7.1</span> Método fordward<a href="regresion-lineal.html#método-fordward" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Se parte del modelo más sencillo posible y a éste se le irán introduciendo variables que vayan mejorando el AIC. La fórmula del modelo más sencillo posible será:</p>
-<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="regresion-lineal.html#cb370-1" aria-hidden="true" tabindex="-1"></a>inicio <span class="ot">&lt;-</span> <span class="fu">formula</span>(Cost.of.Living.Index<span class="sc">~</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="regresion-lineal.html#cb52-1" aria-hidden="true" tabindex="-1"></a>inicio <span class="ot">&lt;-</span> <span class="fu">formula</span>(Cost.of.Living.Index<span class="sc">~</span><span class="dv">1</span>)</span></code></pre></div>
 <p>La fórmula del modelo más completo posible será:</p>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="regresion-lineal.html#cb371-1" aria-hidden="true" tabindex="-1"></a>final <span class="ot">&lt;-</span> <span class="fu">formula</span>(Cost.of.Living.Index <span class="sc">~</span> Rent.Index <span class="sc">+</span> Groceries.Index <span class="sc">+</span> Restaurant.Price.Index <span class="sc">+</span>  Local.Purchasing.Power.Index) </span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="regresion-lineal.html#cb53-1" aria-hidden="true" tabindex="-1"></a>final <span class="ot">&lt;-</span> <span class="fu">formula</span>(Cost.of.Living.Index <span class="sc">~</span> Rent.Index <span class="sc">+</span> Groceries.Index <span class="sc">+</span> Restaurant.Price.Index <span class="sc">+</span>  Local.Purchasing.Power.Index) </span></code></pre></div>
 <p>Partiendo del inicio paso a paso se llegará al modelo seleccionado mediante la dirección <code>fordward</code>. Para realizar esta tarea se emplea la librería <code>MASS</code>.</p>
-<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="regresion-lineal.html#cb372-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb372-2"><a href="regresion-lineal.html#cb372-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb372-3"><a href="regresion-lineal.html#cb372-3" aria-hidden="true" tabindex="-1"></a>modelo_mas_sencillo <span class="ot">&lt;-</span> <span class="fu">lm</span>(inicio , <span class="at">data =</span> cost_living)</span>
-<span id="cb372-4"><a href="regresion-lineal.html#cb372-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb372-5"><a href="regresion-lineal.html#cb372-5" aria-hidden="true" tabindex="-1"></a>modelo_forward<span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(modelo_mas_sencillo, <span class="at">direction =</span> <span class="st">&quot;forward&quot;</span>, <span class="at">trace =</span> T, <span class="at">scope =</span> final)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="regresion-lineal.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb54-2"><a href="regresion-lineal.html#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="regresion-lineal.html#cb54-3" aria-hidden="true" tabindex="-1"></a>modelo_mas_sencillo <span class="ot">&lt;-</span> <span class="fu">lm</span>(inicio , <span class="at">data =</span> cost_living)</span>
+<span id="cb54-4"><a href="regresion-lineal.html#cb54-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-5"><a href="regresion-lineal.html#cb54-5" aria-hidden="true" tabindex="-1"></a>modelo_forward<span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(modelo_mas_sencillo, <span class="at">direction =</span> <span class="st">&quot;forward&quot;</span>, <span class="at">trace =</span> T, <span class="at">scope =</span> final)</span></code></pre></div>
 <pre><code>## Start:  AIC=3211.62
 ## Cost.of.Living.Index ~ 1
 ## 
@@ -1245,7 +1023,7 @@ Local.Purchasing.Power.Index
 ## &lt;none&gt;                    4856.1 1189.3
 ## + Rent.Index  1    2.0664 4854.0 1191.0</code></pre>
 <p>Con <code>trace = T</code> se indica que se puedan ver los pasos seguidos en el proceso, inicialmente entra la variable <code>Groceries.Index</code>, seguida de <code>Restaurant.Price.Index</code> que reduce lo suficiente el AIC y por último <code>Local.Purchasing.Power.Index</code> con una reducción del AIC mucho menor que la anterior pero el modelo cada vez era más completo. El modelo resultante es análogo al planteado de forma manual con anterioridad.</p>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="regresion-lineal.html#cb374-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo_forward)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="regresion-lineal.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo_forward)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Cost.of.Living.Index ~ Groceries.Index + Restaurant.Price.Index + 
@@ -1271,9 +1049,9 @@ Local.Purchasing.Power.Index
 <div id="método-backward" class="section level3 hasAnchor" number="13.7.2">
 <h3><span class="header-section-number">13.7.2</span> Método backward<a href="regresion-lineal.html#método-backward" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>El sentido contrario al método fordward, se parte del modelo completo y se determina que variable es candidata a salir porque el AIC del modelo no se ve alterado.</p>
-<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="regresion-lineal.html#cb376-1" aria-hidden="true" tabindex="-1"></a>modelo_completo <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>cost_living, <span class="at">formula =</span> final)</span>
-<span id="cb376-2"><a href="regresion-lineal.html#cb376-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb376-3"><a href="regresion-lineal.html#cb376-3" aria-hidden="true" tabindex="-1"></a>modelo_backward<span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(modelo_completo, <span class="at">direction =</span> <span class="st">&quot;backward&quot;</span>, <span class="at">trace =</span> T, <span class="at">scope =</span> final)</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="regresion-lineal.html#cb58-1" aria-hidden="true" tabindex="-1"></a>modelo_completo <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>cost_living, <span class="at">formula =</span> final)</span>
+<span id="cb58-2"><a href="regresion-lineal.html#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-3"><a href="regresion-lineal.html#cb58-3" aria-hidden="true" tabindex="-1"></a>modelo_backward<span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(modelo_completo, <span class="at">direction =</span> <span class="st">&quot;backward&quot;</span>, <span class="at">trace =</span> T, <span class="at">scope =</span> final)</span></code></pre></div>
 <pre><code>## Start:  AIC=1191.04
 ## Cost.of.Living.Index ~ Rent.Index + Groceries.Index + Restaurant.Price.Index + 
 ##     Local.Purchasing.Power.Index
@@ -1299,7 +1077,7 @@ Local.Purchasing.Power.Index
 <div id="método-stepwise" class="section level3 hasAnchor" number="13.7.3">
 <h3><span class="header-section-number">13.7.3</span> Método stepwise<a href="regresion-lineal.html#método-stepwise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Este método de selección de variables es una combinación de los dos anteriores, se parte del modelo y se evalúa que variable es candidata a salir y de las variables eliminadas se vuelve a evaluar si es candidata a entrar en el modelo.</p>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="regresion-lineal.html#cb378-1" aria-hidden="true" tabindex="-1"></a>modelo_combinado <span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(modelo_completo, <span class="at">trace=</span>T, <span class="at">direction=</span><span class="st">&quot;both&quot;</span>, <span class="at">scope=</span>final)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="regresion-lineal.html#cb60-1" aria-hidden="true" tabindex="-1"></a>modelo_combinado <span class="ot">&lt;-</span> <span class="fu">stepAIC</span>(modelo_completo, <span class="at">trace=</span>T, <span class="at">direction=</span><span class="st">&quot;both&quot;</span>, <span class="at">scope=</span>final)</span></code></pre></div>
 <pre><code>## Start:  AIC=1191.04
 ## Cost.of.Living.Index ~ Rent.Index + Groceries.Index + Restaurant.Price.Index + 
 ##     Local.Purchasing.Power.Index
@@ -1328,20 +1106,20 @@ Local.Purchasing.Power.Index
 <div id="el-principio-de-parsimonia" class="section level2 hasAnchor" number="13.8">
 <h2><span class="header-section-number">13.8</span> El principio de parsimonia<a href="regresion-lineal.html#el-principio-de-parsimonia" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El principio de parsimonia en los modelos de regresión consiste en buscar modelos con el menor número posible de parámetros ya que la presencia de múltiples parámetros puede hacer que existan relaciones lineales debidas al azar. Para ilustrar esta situación se realiza una simulación.</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="regresion-lineal.html#cb380-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12</span>)</span>
-<span id="cb380-2"><a href="regresion-lineal.html#cb380-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb380-3"><a href="regresion-lineal.html#cb380-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">dependiente =</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>,<span class="dv">100</span>,<span class="dv">10</span>))</span>
-<span id="cb380-4"><a href="regresion-lineal.html#cb380-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Bucle para añadir 300 variables</span></span>
-<span id="cb380-5"><a href="regresion-lineal.html#cb380-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">300</span>){</span>
-<span id="cb380-6"><a href="regresion-lineal.html#cb380-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">rnorm</span>(<span class="dv">1000</span>,<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,<span class="dv">1</span>),<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>,<span class="dv">1</span>)))</span>
-<span id="cb380-7"><a href="regresion-lineal.html#cb380-7" aria-hidden="true" tabindex="-1"></a>nombre <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">&quot;x&quot;</span>,i,<span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb380-8"><a href="regresion-lineal.html#cb380-8" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(x) <span class="ot">=</span> nombre</span>
-<span id="cb380-9"><a href="regresion-lineal.html#cb380-9" aria-hidden="true" tabindex="-1"></a>df<span class="ot">=</span><span class="fu">cbind</span>(df,x)</span>
-<span id="cb380-10"><a href="regresion-lineal.html#cb380-10" aria-hidden="true" tabindex="-1"></a><span class="fu">remove</span>(x)}</span>
-<span id="cb380-11"><a href="regresion-lineal.html#cb380-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb380-12"><a href="regresion-lineal.html#cb380-12" aria-hidden="true" tabindex="-1"></a><span class="co">#1.000 observaciones y 300 variables</span></span>
-<span id="cb380-13"><a href="regresion-lineal.html#cb380-13" aria-hidden="true" tabindex="-1"></a>modelo_aleatorio<span class="ot">=</span><span class="fu">lm</span>(dependiente<span class="sc">~</span>. ,<span class="at">data=</span>df)</span>
-<span id="cb380-14"><a href="regresion-lineal.html#cb380-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo_aleatorio)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="regresion-lineal.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12</span>)</span>
+<span id="cb62-2"><a href="regresion-lineal.html#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="regresion-lineal.html#cb62-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">dependiente =</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>,<span class="dv">100</span>,<span class="dv">10</span>))</span>
+<span id="cb62-4"><a href="regresion-lineal.html#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Bucle para añadir 300 variables</span></span>
+<span id="cb62-5"><a href="regresion-lineal.html#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">300</span>){</span>
+<span id="cb62-6"><a href="regresion-lineal.html#cb62-6" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">rnorm</span>(<span class="dv">1000</span>,<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,<span class="dv">1</span>),<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>,<span class="dv">1</span>)))</span>
+<span id="cb62-7"><a href="regresion-lineal.html#cb62-7" aria-hidden="true" tabindex="-1"></a>nombre <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">&quot;x&quot;</span>,i,<span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb62-8"><a href="regresion-lineal.html#cb62-8" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(x) <span class="ot">=</span> nombre</span>
+<span id="cb62-9"><a href="regresion-lineal.html#cb62-9" aria-hidden="true" tabindex="-1"></a>df<span class="ot">=</span><span class="fu">cbind</span>(df,x)</span>
+<span id="cb62-10"><a href="regresion-lineal.html#cb62-10" aria-hidden="true" tabindex="-1"></a><span class="fu">remove</span>(x)}</span>
+<span id="cb62-11"><a href="regresion-lineal.html#cb62-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-12"><a href="regresion-lineal.html#cb62-12" aria-hidden="true" tabindex="-1"></a><span class="co">#1.000 observaciones y 300 variables</span></span>
+<span id="cb62-13"><a href="regresion-lineal.html#cb62-13" aria-hidden="true" tabindex="-1"></a>modelo_aleatorio<span class="ot">=</span><span class="fu">lm</span>(dependiente<span class="sc">~</span>. ,<span class="at">data=</span>df)</span>
+<span id="cb62-14"><a href="regresion-lineal.html#cb62-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo_aleatorio)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = dependiente ~ ., data = df)
@@ -1552,7 +1330,107 @@ Local.Purchasing.Power.Index
 ## x197         3.400e-02  8.926e-02   0.381  0.70342   
 ## x198        -2.145e-03  1.492e-02  -0.144  0.88575   
 ## x199         3.831e-03  1.175e-02   0.326  0.74444   
-##  [ reached getOption(&quot;max.print&quot;) -- omitted 101 rows ]
+## x200         1.797e-02  2.171e-02   0.828  0.40805   
+## x201        -2.212e-02  1.474e-02  -1.500  0.13397   
+## x202         1.459e-02  1.249e-02   1.168  0.24313   
+## x203        -1.089e-02  1.143e-02  -0.953  0.34099   
+## x204         1.668e-02  4.484e-02   0.372  0.71000   
+## x205         2.639e-02  2.721e-02   0.970  0.33245   
+## x206        -9.844e-03  1.566e-02  -0.629  0.52974   
+## x207        -1.001e-02  1.469e-02  -0.681  0.49590   
+## x208        -1.225e-02  1.035e-02  -1.183  0.23728   
+## x209        -1.050e-03  9.908e-03  -0.106  0.91565   
+## x210        -1.080e-02  1.914e-02  -0.564  0.57265   
+## x211        -5.185e-04  8.918e-03  -0.058  0.95365   
+## x212        -4.358e-04  7.123e-03  -0.061  0.95123   
+## x213         1.309e-01  5.130e-02   2.552  0.01092 * 
+## x214        -4.756e-03  1.369e-02  -0.347  0.72834   
+## x215         6.342e-03  7.833e-03   0.810  0.41847   
+## x216         7.660e-03  9.177e-03   0.835  0.40413   
+## x217         1.218e-02  1.719e-02   0.708  0.47892   
+## x218         9.449e-03  7.121e-03   1.327  0.18494   
+## x219        -1.705e-02  2.715e-02  -0.628  0.53018   
+## x220         2.289e-02  1.610e-02   1.422  0.15541   
+## x221        -3.204e-03  1.639e-02  -0.196  0.84505   
+## x222         1.554e-02  1.579e-02   0.984  0.32540   
+## x223        -2.756e-03  1.114e-02  -0.247  0.80469   
+## x224         2.098e-02  1.920e-02   1.093  0.27487   
+## x225        -7.743e-05  9.639e-03  -0.008  0.99359   
+## x226        -1.733e-02  2.923e-02  -0.593  0.55335   
+## x227         4.185e-02  4.335e-02   0.965  0.33473   
+## x228        -4.284e-03  6.892e-03  -0.622  0.53444   
+## x229         9.605e-03  1.248e-02   0.770  0.44176   
+## x230        -2.600e-02  1.393e-02  -1.866  0.06244 . 
+## x231         5.871e-03  1.401e-02   0.419  0.67529   
+## x232         5.665e-02  5.827e-02   0.972  0.33122   
+## x233         1.765e-02  2.083e-02   0.847  0.39719   
+## x234        -1.095e-02  1.155e-02  -0.947  0.34371   
+## x235         6.817e-03  7.315e-03   0.932  0.35167   
+## x236        -7.906e-03  2.043e-02  -0.387  0.69889   
+## x237        -6.180e-03  8.993e-03  -0.687  0.49219   
+## x238        -1.991e-02  9.114e-03  -2.185  0.02925 * 
+## x239        -8.193e-03  2.561e-02  -0.320  0.74913   
+## x240         1.211e-02  5.823e-02   0.208  0.83527   
+## x241        -2.343e-03  1.251e-02  -0.187  0.85142   
+## x242         1.629e-01  5.786e-02   2.816  0.00500 **
+## x243         1.537e-02  2.023e-02   0.760  0.44766   
+## x244        -1.550e-02  1.080e-02  -1.435  0.15165   
+## x245        -1.057e-02  1.762e-02  -0.600  0.54871   
+## x246        -2.274e-02  1.433e-02  -1.587  0.11295   
+## x247         1.195e-02  1.173e-02   1.019  0.30847   
+## x248         9.252e-03  1.132e-02   0.818  0.41389   
+## x249         7.952e-02  1.784e-01   0.446  0.65595   
+## x250         5.515e-03  1.786e-02   0.309  0.75755   
+## x251        -1.078e-02  8.873e-03  -1.214  0.22501   
+## x252        -3.569e-02  4.376e-02  -0.816  0.41503   
+## x253        -1.593e-02  8.084e-03  -1.971  0.04911 * 
+## x254        -1.686e-02  1.611e-02  -1.047  0.29548   
+## x255         2.268e-03  9.303e-03   0.244  0.80746   
+## x256        -3.133e-02  2.882e-02  -1.087  0.27749   
+## x257        -1.015e-02  2.746e-02  -0.370  0.71181   
+## x258         3.126e-03  9.950e-03   0.314  0.75344   
+## x259        -1.513e-02  1.753e-02  -0.863  0.38840   
+## x260        -9.622e-03  9.943e-03  -0.968  0.33351   
+## x261        -6.538e-04  8.438e-03  -0.077  0.93826   
+## x262         1.228e-02  1.008e-02   1.219  0.22315   
+## x263        -6.324e-04  1.013e-02  -0.062  0.95023   
+## x264         7.520e-03  8.261e-03   0.910  0.36297   
+## x265         1.863e-03  1.074e-02   0.173  0.86236   
+## x266         1.188e-03  9.032e-03   0.132  0.89541   
+## x267        -3.116e-02  3.235e-02  -0.963  0.33588   
+## x268        -3.999e-01  1.781e-01  -2.246  0.02503 * 
+## x269        -5.764e-02  2.838e-02  -2.031  0.04262 * 
+## x270         4.843e-03  9.883e-03   0.490  0.62429   
+## x271        -3.099e-02  6.900e-02  -0.449  0.65351   
+## x272        -6.493e-03  1.461e-02  -0.445  0.65678   
+## x273         5.715e-03  1.751e-02   0.326  0.74426   
+## x274         2.541e-04  9.726e-03   0.026  0.97916   
+## x275        -2.335e-02  1.667e-02  -1.401  0.16161   
+## x276         4.779e-03  8.941e-03   0.535  0.59313   
+## x277        -1.548e-02  2.889e-02  -0.536  0.59217   
+## x278         1.056e-02  7.370e-03   1.433  0.15236   
+## x279         4.142e-03  9.363e-03   0.442  0.65834   
+## x280        -7.495e-03  7.940e-03  -0.944  0.34553   
+## x281         3.227e-02  9.083e-02   0.355  0.72250   
+## x282         4.535e-03  1.138e-02   0.398  0.69044   
+## x283         2.935e-03  7.152e-03   0.410  0.68164   
+## x284        -6.255e-03  7.655e-03  -0.817  0.41410   
+## x285         1.697e-02  1.701e-02   0.997  0.31889   
+## x286         1.029e-02  1.798e-02   0.572  0.56722   
+## x287         2.590e-02  5.752e-02   0.450  0.65265   
+## x288         9.422e-03  1.020e-02   0.923  0.35615   
+## x289        -2.032e-03  1.080e-02  -0.188  0.85084   
+## x290        -5.273e-03  8.965e-03  -0.588  0.55663   
+## x291        -1.900e-03  9.275e-03  -0.205  0.83778   
+## x292        -2.224e-02  9.524e-03  -2.335  0.01984 * 
+## x293         2.226e-02  1.141e-02   1.951  0.05142 . 
+## x294         5.135e-03  2.112e-02   0.243  0.80794   
+## x295        -1.126e-02  1.081e-02  -1.041  0.29816   
+## x296         2.135e-02  1.153e-02   1.851  0.06461 . 
+## x297         6.038e-02  3.078e-02   1.962  0.05020 . 
+## x298         1.477e-02  1.183e-02   1.248  0.21259   
+## x299         2.086e-03  7.954e-03   0.262  0.79322   
+## x300        -3.420e-02  1.865e-02  -1.833  0.06720 . 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 

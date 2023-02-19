@@ -117,3 +117,4 @@ método-fordward
 método-backward
 método-stepwise
 el-principio-de-parsimonia
+tab:unnamed-chunk-1
