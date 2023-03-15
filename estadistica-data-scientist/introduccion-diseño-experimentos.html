@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Capítulo 14 Introducción al diseño de experimentos | Introducción a la Estadística para Científicos de Datos con R</title>
+  <meta name="description" content="Libro de introducción a la estadística" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Capítulo 14 Introducción al diseño de experimentos | Introducción a la Estadística para Científicos de Datos con R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Libro de introducción a la estadística" />
+  <meta name="github-repo" content="https://github.com/rvaquerizo02/Estadistica-data-scientist" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Capítulo 14 Introducción al diseño de experimentos | Introducción a la Estadística para Científicos de Datos con R" />
+  
+  <meta name="twitter:description" content="Libro de introducción a la estadística" />
+  
+
+<meta name="author" content="Raul Vaquerizo" />
+
+
+<meta name="date" content="2023-03-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="regresion-lineal.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.24/datatables.js"></script>
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introducción a la Estadística para Científicos de Datos con R/a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.1</b> Objetivos</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#entorno-de-trabajo"><i class="fa fa-check"></i><b>1.2</b> Entorno de trabajo</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="datos.html"><a href="datos.html"><i class="fa fa-check"></i><b>2</b> Datos</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="datos.html"><a href="datos.html#qué-son-los-datos"><i class="fa fa-check"></i><b>2.1</b> Qué son los datos</a></li>
+<li class="chapter" data-level="2.2" data-path="datos.html"><a href="datos.html#tipos-de-datos"><i class="fa fa-check"></i><b>2.2</b> Tipos de datos</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="datos.html"><a href="datos.html#datos-internos"><i class="fa fa-check"></i><b>2.2.1</b> Datos internos</a></li>
+<li class="chapter" data-level="2.2.2" data-path="datos.html"><a href="datos.html#datos-externos"><i class="fa fa-check"></i><b>2.2.2</b> Datos externos:</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="datos.html"><a href="datos.html#almacenamiento-de-datos"><i class="fa fa-check"></i><b>2.3</b> Almacenamiento de datos</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="datos.html"><a href="datos.html#sistemas-operacionales"><i class="fa fa-check"></i><b>2.3.1</b> Sistemas operacionales</a></li>
+<li class="chapter" data-level="2.3.2" data-path="datos.html"><a href="datos.html#sistemas-informacionales-tradicionales"><i class="fa fa-check"></i><b>2.3.2</b> Sistemas informacionales tradicionales</a></li>
+<li class="chapter" data-level="2.3.3" data-path="datos.html"><a href="datos.html#data-lake"><i class="fa fa-check"></i><b>2.3.3</b> Data Lake</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="datos.html"><a href="datos.html#todo-es-álgebra-lineal"><i class="fa fa-check"></i><b>2.4</b> Todo es álgebra lineal</a></li>
+<li class="chapter" data-level="2.5" data-path="datos.html"><a href="datos.html#como-se-disponen-los-datos"><i class="fa fa-check"></i><b>2.5</b> Como se disponen los datos</a></li>
+<li class="chapter" data-level="2.6" data-path="datos.html"><a href="datos.html#tipos-de-variables"><i class="fa fa-check"></i><b>2.6</b> Tipos de Variables</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="datos.html"><a href="datos.html#variables-cuantitativas"><i class="fa fa-check"></i><b>2.6.1</b> Variables cuantitativas</a></li>
+<li class="chapter" data-level="2.6.2" data-path="datos.html"><a href="datos.html#variables-cualitativas.-factores"><i class="fa fa-check"></i><b>2.6.2</b> Variables cualitativas. Factores</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="datos.html"><a href="datos.html#el-rol-de-las-variables-en-los-datos"><i class="fa fa-check"></i><b>2.7</b> El rol de las variables en los datos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html"><i class="fa fa-check"></i><b>3</b> Manejo de datos con R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#universo-tidyverse"><i class="fa fa-check"></i><b>3.1</b> Universo tidyverse</a></li>
+<li class="chapter" data-level="3.2" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#selección-de-registros"><i class="fa fa-check"></i><b>3.2</b> Selección de registros</a></li>
+<li class="chapter" data-level="3.3" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#selección-de-columnas"><i class="fa fa-check"></i><b>3.3</b> Selección de columnas</a></li>
+<li class="chapter" data-level="3.4" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#creación-o-actualización-de-variables"><i class="fa fa-check"></i><b>3.4</b> Creación o actualización de variables</a></li>
+<li class="chapter" data-level="3.5" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#ordenar-datos"><i class="fa fa-check"></i><b>3.5</b> Ordenar datos</a></li>
+<li class="chapter" data-level="3.6" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#sumarizar-valores"><i class="fa fa-check"></i><b>3.6</b> Sumarizar valores</a></li>
+<li class="chapter" data-level="3.7" data-path="manejo-de-datos-con-r.html"><a href="manejo-de-datos-con-r.html#combinación-de-acciones"><i class="fa fa-check"></i><b>3.7</b> Combinación de acciones</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html"><i class="fa fa-check"></i><b>4</b> Uniones de tablas con R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#uniones-verticales"><i class="fa fa-check"></i><b>4.1</b> Uniones verticales</a></li>
+<li class="chapter" data-level="4.2" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#uniones-horizontales-o-join"><i class="fa fa-check"></i><b>4.2</b> Uniones horizontales o <em>join</em></a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#inner-join"><i class="fa fa-check"></i><b>4.2.1</b> Inner join</a></li>
+<li class="chapter" data-level="4.2.2" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#left-join"><i class="fa fa-check"></i><b>4.2.2</b> Left join</a></li>
+<li class="chapter" data-level="4.2.3" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#anti-join"><i class="fa fa-check"></i><b>4.2.3</b> Anti join</a></li>
+<li class="chapter" data-level="4.2.4" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#librería-sqldf"><i class="fa fa-check"></i><b>4.2.4</b> Librería sqldf</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#duplicidades-en-las-uniones-de-tablas"><i class="fa fa-check"></i><b>4.3</b> Duplicidades en las uniones de tablas</a></li>
+<li class="chapter" data-level="4.4" data-path="uniones-de-tablas-con-r.html"><a href="uniones-de-tablas-con-r.html#referencias"><i class="fa fa-check"></i><b>4.4</b> Referencias</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html"><i class="fa fa-check"></i><b>5</b> Representación gráfica básica con ggplot</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#histogramas"><i class="fa fa-check"></i><b>5.1</b> Histogramas</a></li>
+<li class="chapter" data-level="5.2" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-densidad"><i class="fa fa-check"></i><b>5.2</b> Gráficos de densidad</a></li>
+<li class="chapter" data-level="5.3" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-caja-boxplot"><i class="fa fa-check"></i><b>5.3</b> Gráficos de caja (boxplot)</a></li>
+<li class="chapter" data-level="5.4" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-tarta"><i class="fa fa-check"></i><b>5.4</b> Gráficos de tarta</a></li>
+<li class="chapter" data-level="5.5" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-barras"><i class="fa fa-check"></i><b>5.5</b> Gráficos de barras</a></li>
+<li class="chapter" data-level="5.6" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráficos-de-líneas"><i class="fa fa-check"></i><b>5.6</b> Gráficos de líneas</a></li>
+<li class="chapter" data-level="5.7" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#gráfico-de-dispersión"><i class="fa fa-check"></i><b>5.7</b> Gráfico de dispersión</a></li>
+<li class="chapter" data-level="5.8" data-path="basicos-ggplot.html"><a href="basicos-ggplot.html#múltiples-gráficos-con-gridextra"><i class="fa fa-check"></i><b>5.8</b> Múltiples gráficos con gridExtra</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html"><i class="fa fa-check"></i><b>6</b> Descripción numérica de variables</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#transformar-datos-en-información"><i class="fa fa-check"></i><b>6.1</b> Transformar datos en información</a></li>
+<li class="chapter" data-level="6.2" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#caso-práctico.-campaña-de-venta-cruzada"><i class="fa fa-check"></i><b>6.2</b> Caso práctico. Campaña de venta cruzada</a></li>
+<li class="chapter" data-level="6.3" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#el-rol-de-las-variables-en-el-conjunto-de-datos"><i class="fa fa-check"></i><b>6.3</b> El rol de las variables en el conjunto de datos</a></li>
+<li class="chapter" data-level="6.4" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#análisis-descriptivos-de-los-datos"><i class="fa fa-check"></i><b>6.4</b> Análisis descriptivos de los datos</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#descritivos-en-variables-cualitativas-factores"><i class="fa fa-check"></i><b>6.4.1</b> Descritivos en variables cualitativas (factores)</a></li>
+<li class="chapter" data-level="6.4.2" data-path="descripcion-numerica-variables.html"><a href="descripcion-numerica-variables.html#descritivos-en-variables-cuantitativas"><i class="fa fa-check"></i><b>6.4.2</b> Descritivos en variables cuantitativas</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="descripcion-grafica-datos.html"><a href="descripcion-grafica-datos.html"><i class="fa fa-check"></i><b>7</b> Descripción gráfica de datos</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="descripcion-grafica-datos.html"><a href="descripcion-grafica-datos.html#descripción-gráfica-de-factores"><i class="fa fa-check"></i><b>7.1</b> Descripción gráfica de factores</a></li>
+<li class="chapter" data-level="7.2" data-path="descripcion-grafica-datos.html"><a href="descripcion-grafica-datos.html#descripción-gráfica-de-variables-numéricas"><i class="fa fa-check"></i><b>7.2</b> Descripción gráfica de variables numéricas</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="problemas-datos.html"><a href="problemas-datos.html"><i class="fa fa-check"></i><b>8</b> Problemas con los datos</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="problemas-datos.html"><a href="problemas-datos.html#problemática-con-factores"><i class="fa fa-check"></i><b>8.1</b> Problemática con factores</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="problemas-datos.html"><a href="problemas-datos.html#factores-con-niveles-de-pocos-registros"><i class="fa fa-check"></i><b>8.1.1</b> Factores con niveles de pocos registros</a></li>
+<li class="chapter" data-level="8.1.2" data-path="problemas-datos.html"><a href="problemas-datos.html#factores-que-aparecen-como-variables-numéricas"><i class="fa fa-check"></i><b>8.1.2</b> Factores que aparecen como variables numéricas</a></li>
+<li class="chapter" data-level="8.1.3" data-path="problemas-datos.html"><a href="problemas-datos.html#factores-con-un-gran-número-de-niveles"><i class="fa fa-check"></i><b>8.1.3</b> Factores con un gran número de niveles</a></li>
+<li class="chapter" data-level="8.1.4" data-path="problemas-datos.html"><a href="problemas-datos.html#factores-con-valores-perdidos"><i class="fa fa-check"></i><b>8.1.4</b> Factores con valores perdidos</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="problemas-datos.html"><a href="problemas-datos.html#problemas-con-variables-numéricas"><i class="fa fa-check"></i><b>8.2</b> Problemas con variables numéricas</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="problemas-datos.html"><a href="problemas-datos.html#valores-modales"><i class="fa fa-check"></i><b>8.2.1</b> Valores modales</a></li>
+<li class="chapter" data-level="8.2.2" data-path="problemas-datos.html"><a href="problemas-datos.html#valores-atípicos"><i class="fa fa-check"></i><b>8.2.2</b> Valores atípicos</a></li>
+<li class="chapter" data-level="8.2.3" data-path="problemas-datos.html"><a href="problemas-datos.html#variables-numéricas-como-factores"><i class="fa fa-check"></i><b>8.2.3</b> Variables numéricas como factores</a></li>
+<li class="chapter" data-level="8.2.4" data-path="problemas-datos.html"><a href="problemas-datos.html#valores-perdidos-en-variables-numéricas"><i class="fa fa-check"></i><b>8.2.4</b> Valores perdidos en variables numéricas</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="analisis-exploratorio-datos-EDA.html"><a href="analisis-exploratorio-datos-EDA.html"><i class="fa fa-check"></i><b>9</b> Análisis Exploratorio de Datos. EDA</a></li>
+<li class="chapter" data-level="10" data-path="probabilidad-distribuciones.html"><a href="probabilidad-distribuciones.html"><i class="fa fa-check"></i><b>10</b> Probabilidad y distribuciones</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="probabilidad-distribuciones.html"><a href="probabilidad-distribuciones.html#conceptos-básicos-de-probabilidad"><i class="fa fa-check"></i><b>10.1</b> Conceptos básicos de probabilidad</a></li>
+<li class="chapter" data-level="10.2" data-path="probabilidad-distribuciones.html"><a href="probabilidad-distribuciones.html#distribución-de-un-evento"><i class="fa fa-check"></i><b>10.2</b> Distribución de un evento</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="probabilidad-distribuciones.html"><a href="probabilidad-distribuciones.html#distribuciones-conocidas"><i class="fa fa-check"></i><b>10.2.1</b> Distribuciones conocidas</a></li>
+<li class="chapter" data-level="10.2.2" data-path="probabilidad-distribuciones.html"><a href="probabilidad-distribuciones.html#obtención-de-probabilidades-con-r"><i class="fa fa-check"></i><b>10.2.2</b> Obtención de probabilidades con R</a></li>
+<li class="chapter" data-level="10.2.3" data-path="probabilidad-distribuciones.html"><a href="probabilidad-distribuciones.html#generación-de-números-aleatorios-con-r"><i class="fa fa-check"></i><b>10.2.3</b> Generación de números aleatorios con R</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="probabilidad-distribuciones.html"><a href="probabilidad-distribuciones.html#distribuciones-discretas"><i class="fa fa-check"></i><b>10.3</b> Distribuciones discretas</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="probabilidad-distribuciones.html"><a href="probabilidad-distribuciones.html#distribución-de-bernoulli"><i class="fa fa-check"></i><b>10.3.1</b> Distribución de Bernoulli</a></li>
+<li class="chapter" data-level="10.3.2" data-path="probabilidad-distribuciones.html"><a href="probabilidad-distribuciones.html#distribución-binomial"><i class="fa fa-check"></i><b>10.3.2</b> Distribución binomial</a></li>
+<li class="chapter" data-level="10.3.3" data-path="probabilidad-distribuciones.html"><a href="probabilidad-distribuciones.html#distribución-de-poisson"><i class="fa fa-check"></i><b>10.3.3</b> Distribución de Poisson</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="probabilidad-distribuciones.html"><a href="probabilidad-distribuciones.html#distribuciones-continuas"><i class="fa fa-check"></i><b>10.4</b> Distribuciones continuas</a>
+<ul>
+<li class="chapter" data-level="10.4.1" data-path="probabilidad-distribuciones.html"><a href="probabilidad-distribuciones.html#distribución-uniforme"><i class="fa fa-check"></i><b>10.4.1</b> Distribución uniforme</a></li>
+<li class="chapter" data-level="10.4.2" data-path="probabilidad-distribuciones.html"><a href="probabilidad-distribuciones.html#distribución-normal"><i class="fa fa-check"></i><b>10.4.2</b> Distribución normal</a></li>
+<li class="chapter" data-level="10.4.3" data-path="probabilidad-distribuciones.html"><a href="probabilidad-distribuciones.html#distribución-gamma"><i class="fa fa-check"></i><b>10.4.3</b> Distribución gamma</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="analisis-bivariable.html"><a href="analisis-bivariable.html"><i class="fa fa-check"></i><b>11</b> Análisis bivariable</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="analisis-bivariable.html"><a href="analisis-bivariable.html#variable-numérica-frente-a-variable-numérica"><i class="fa fa-check"></i><b>11.1</b> Variable numérica frente a variable numérica</a></li>
+<li class="chapter" data-level="11.2" data-path="analisis-bivariable.html"><a href="analisis-bivariable.html#factores-frente-a-variables-numéricas"><i class="fa fa-check"></i><b>11.2</b> Factores frente a variables numéricas</a></li>
+<li class="chapter" data-level="11.3" data-path="analisis-bivariable.html"><a href="analisis-bivariable.html#factores-frente-a-factores"><i class="fa fa-check"></i><b>11.3</b> Factores frente a factores</a></li>
+<li class="chapter" data-level="11.4" data-path="analisis-bivariable.html"><a href="analisis-bivariable.html#propuesta-de-análisis-gráfico-para-el-análisis-bivariable"><i class="fa fa-check"></i><b>11.4</b> Propuesta de análisis gráfico para el análisis bivariable</a></li>
+<li class="chapter" data-level="11.5" data-path="analisis-bivariable.html"><a href="analisis-bivariable.html#correlación-entre-factores.-la-v-de-cramer"><i class="fa fa-check"></i><b>11.5</b> Correlación entre factores. La V de Cramer</a></li>
+<li class="chapter" data-level="11.6" data-path="analisis-bivariable.html"><a href="analisis-bivariable.html#agrupación-de-variables-cuantitativas"><i class="fa fa-check"></i><b>11.6</b> Agrupación de variables cuantitativas</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html"><i class="fa fa-check"></i><b>12</b> Muestreo e inferencia estadística</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#muestreo"><i class="fa fa-check"></i><b>12.1</b> Muestreo</a>
+<ul>
+<li class="chapter" data-level="12.1.1" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#muestreo-aleatorio-simple"><i class="fa fa-check"></i><b>12.1.1</b> Muestreo aleatorio simple</a></li>
+<li class="chapter" data-level="12.1.2" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#muestreo-aleatorio-estratificado"><i class="fa fa-check"></i><b>12.1.2</b> Muestreo aleatorio estratificado</a></li>
+<li class="chapter" data-level="12.1.3" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#muestreo-por-conglomerados"><i class="fa fa-check"></i><b>12.1.3</b> Muestreo por conglomerados</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#inferencia-estadística"><i class="fa fa-check"></i><b>12.2</b> Inferencia estadística</a></li>
+<li class="chapter" data-level="12.3" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#estimación-de-parámetros"><i class="fa fa-check"></i><b>12.3</b> Estimación de parámetros</a></li>
+<li class="chapter" data-level="12.4" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#intervalos-de-confianza"><i class="fa fa-check"></i><b>12.4</b> Intervalos de confianza</a></li>
+<li class="chapter" data-level="12.5" data-path="muestreo-inferencia.html"><a href="muestreo-inferencia.html#contrastes-de-hipótesis"><i class="fa fa-check"></i><b>12.5</b> Contrastes de hipótesis</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="regresion-lineal.html"><a href="regresion-lineal.html"><i class="fa fa-check"></i><b>13</b> Regresión lineal</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="regresion-lineal.html"><a href="regresion-lineal.html#modelo-de-regresión-lineal-simple"><i class="fa fa-check"></i><b>13.1</b> Modelo de regresión lineal simple</a></li>
+<li class="chapter" data-level="13.2" data-path="regresion-lineal.html"><a href="regresion-lineal.html#el-coeficiente-de-determinación-o-r2"><i class="fa fa-check"></i><b>13.2</b> El coeficiente de determinación o <span class="math inline">\(R^2\)</span></a></li>
+<li class="chapter" data-level="13.3" data-path="regresion-lineal.html"><a href="regresion-lineal.html#transformaciones-de-variables"><i class="fa fa-check"></i><b>13.3</b> Transformaciones de variables</a></li>
+<li class="chapter" data-level="13.4" data-path="regresion-lineal.html"><a href="regresion-lineal.html#tramificación-de-variables-en-modelos-lineales"><i class="fa fa-check"></i><b>13.4</b> Tramificación de variables en modelos lineales</a></li>
+<li class="chapter" data-level="13.5" data-path="regresion-lineal.html"><a href="regresion-lineal.html#factores-en-modelos-de-regresión"><i class="fa fa-check"></i><b>13.5</b> Factores en modelos de regresión</a></li>
+<li class="chapter" data-level="13.6" data-path="regresion-lineal.html"><a href="regresion-lineal.html#modelo-de-regresión-lineal-múltiple"><i class="fa fa-check"></i><b>13.6</b> Modelo de regresión lineal múltiple</a></li>
+<li class="chapter" data-level="13.7" data-path="regresion-lineal.html"><a href="regresion-lineal.html#métodos-de-selección-de-variables"><i class="fa fa-check"></i><b>13.7</b> Métodos de selección de variables</a>
+<ul>
+<li class="chapter" data-level="13.7.1" data-path="regresion-lineal.html"><a href="regresion-lineal.html#método-fordward"><i class="fa fa-check"></i><b>13.7.1</b> Método fordward</a></li>
+<li class="chapter" data-level="13.7.2" data-path="regresion-lineal.html"><a href="regresion-lineal.html#método-backward"><i class="fa fa-check"></i><b>13.7.2</b> Método backward</a></li>
+<li class="chapter" data-level="13.7.3" data-path="regresion-lineal.html"><a href="regresion-lineal.html#método-stepwise"><i class="fa fa-check"></i><b>13.7.3</b> Método stepwise</a></li>
+</ul></li>
+<li class="chapter" data-level="13.8" data-path="regresion-lineal.html"><a href="regresion-lineal.html#el-principio-de-parsimonia"><i class="fa fa-check"></i><b>13.8</b> El principio de parsimonia</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="introduccion-diseño-experimentos.html"><a href="introduccion-diseño-experimentos.html"><i class="fa fa-check"></i><b>14</b> Introducción al diseño de experimentos</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="introduccion-diseño-experimentos.html"><a href="introduccion-diseño-experimentos.html#fundamentos-del-diseño-experimental"><i class="fa fa-check"></i><b>14.1</b> Fundamentos del diseño experimental</a></li>
+<li class="chapter" data-level="14.2" data-path="introduccion-diseño-experimentos.html"><a href="introduccion-diseño-experimentos.html#fuentes-de-variabilidad"><i class="fa fa-check"></i><b>14.2</b> Fuentes de variabilidad</a></li>
+<li class="chapter" data-level="14.3" data-path="introduccion-diseño-experimentos.html"><a href="introduccion-diseño-experimentos.html#planificación"><i class="fa fa-check"></i><b>14.3</b> Planificación</a></li>
+<li class="chapter" data-level="14.4" data-path="introduccion-diseño-experimentos.html"><a href="introduccion-diseño-experimentos.html#bloquear-y-aleatorizar-factores"><i class="fa fa-check"></i><b>14.4</b> Bloquear y aleatorizar factores</a></li>
+<li class="chapter" data-level="14.5" data-path="introduccion-diseño-experimentos.html"><a href="introduccion-diseño-experimentos.html#diseños-factoriales"><i class="fa fa-check"></i><b>14.5</b> Diseños factoriales</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="introduccion-diseño-experimentos.html"><a href="introduccion-diseño-experimentos.html#modelo-unifactorial.-ab-testing"><i class="fa fa-check"></i><b>14.5.1</b> Modelo unifactorial. A/B testing</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="introduccion-diseño-experimentos.html"><a href="introduccion-diseño-experimentos.html#modelos-bifactoriales.-interacciones-entre-variables"><i class="fa fa-check"></i><b>14.6</b> Modelos bifactoriales. Interacciones entre variables</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introducción a la Estadística para Científicos de Datos con R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduccion-diseño-experimentos" class="section level1 hasAnchor" number="14">
+<h1><span class="header-section-number">Capítulo 14</span> Introducción al diseño de experimentos<a href="introduccion-diseño-experimentos.html#introduccion-diseño-experimentos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Otro de los temas dedicados a la Estadística que tiene que conocer el científico de datos es el diseño de experimentos. La motivación del diseño de experimentos está magistralmente ilustrada por <a href="https://elultimoversodefermat.wordpress.com/" target="_blank"> Julio Mulero</a> en <a href="https://twitter.com/juliomulero/status/1331993894721097729" target="_blank">este hilo de Twitter</a>. Y se considera imprescindible conocer estas técnicas porque aportan una forma de trabajar, de plantear los problemas y un conocimiento de las variables que mejorará el desempeño (y los modelos) del científico de datos.</p>
+<p>Los modelos de diseño de experimentos son modelos estadísticos cuyo objetivo es <strong>determinar si unos factores influyen en una variable respuesta cuantitativa</strong>, y si influyen cuantificar esa influencia.</p>
+<div id="fundamentos-del-diseño-experimental" class="section level2 hasAnchor" number="14.1">
+<h2><span class="header-section-number">14.1</span> Fundamentos del diseño experimental<a href="introduccion-diseño-experimentos.html#fundamentos-del-diseño-experimental" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Es necesario plantear conceptos básicos (algunos ya conocidos) a tener en cuenta a la hora de realizar diseño de experimentos.</p>
+<p><strong>Observación experimental</strong>: es cada medición de la variable respuesta.</p>
+<p><strong>Unidad experimental</strong>: son los objetos o los individuos sobre los que se realiza la observación experimental.</p>
+<p><strong>Tamaño del Experimento</strong>: es el número total de unidades experimentales recogidas en el diseño.</p>
+<p><strong>Variable de interés o respuesta</strong>: es la variable cuantitativa que se desea estudiar y controlar su variabilidad, la variable dependiente.</p>
+<p><strong>Factor</strong>: son las variables cualitativas independientes que pueden influir en la variabilidad de la variable de interés. Pueden ser:</p>
+<ul>
+<li>Factor tratamiento: es un factor del que interesa conocer su influencia en la respuesta.</li>
+<li>Factor bloque: es un factor que aporta variación pero no es de interés en el experimento. Sin embargo, se quiere controlar para disminuir la variabilidad residual.</li>
+</ul>
+<p>Según sean elegidos por el experimentador o elegidos al azar de una amplia población se denominan factores de efectos fijos o factores de efectos aleatorios.</p>
+<p><strong>Niveles</strong>: cada uno de los resultados de un factor.</p>
+<p><strong>Tratamiento</strong>: es una combinación específica de los niveles de los factores en estudio. Son, por tanto, las condiciones experimentales que se desean comparar en el experimento. En un diseño con un único factor son los distintos niveles del factor y en un diseño con varios factores son las posibles combinaciones de niveles de los factores.</p>
+<p><strong>Interacción de factores</strong>: existe interacción entre dos factores <span class="math inline">\(F_i\)</span> y <span class="math inline">\(F_j\)</span> si el efecto de algún nivel de <span class="math inline">\(F_i\)</span> cambia al cambiar de nivel en <span class="math inline">\(F_j\)</span>. Esta definición puede hacerse de forma simétrica y se puede generalizar a interacciones de orden tres o superior. El análisis de interacciones permitirá al científico de datos mejorar variables presentes en sus modelos y tiene un apartado específico más adelante.</p>
+<p><strong>Ortogonalidad de factores</strong>: dos factores <span class="math inline">\(F_i\)</span> y <span class="math inline">\(F_j\)</span> con i y j niveles, respectivamente, son ortogonales si en cada nivel i de <span class="math inline">\(F_i\)</span> el número de observaciones de los j niveles de <span class="math inline">\(F_j\)</span> están en las mismas proporciones. Esta propiedad permite separar los efectos simples de los factores en estudio.</p>
+<p><strong>Diseño equilibrado o balanceado</strong>: es el diseño en el que todos los tratamientos son asignados a un número igual de unidades experimentales.</p>
+</div>
+<div id="fuentes-de-variabilidad" class="section level2 hasAnchor" number="14.2">
+<h2><span class="header-section-number">14.2</span> Fuentes de variabilidad<a href="introduccion-diseño-experimentos.html#fuentes-de-variabilidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Este tipo de análisis se basan en la experimentación y en el análisis de resultados, se estudia si empleando un tratamiento, como una vacuna, un nuevo diseño de la web, unos nuevos precios o modificando una publicación en RRSS se producen mejoras en unas unidades experimentales que serán los elementos que participan en el test, individuos, clics, likes… Fuera de un laboratorio es complicado controlar los efectos de una vacuna o una modificación de una web. Existen fuentes variación distintas a los factores que se pretenden estudiar y estos factores exógenos al problema pueden plantear cambios significativos en la variable respuesta. Por este motivo es importante diseñar correctamente el experimento y determinar los tipos de variabilidad se pueden encontrar a la hora de realizar el experimento:</p>
+<ul>
+<li><p><strong>Variabilidad sistemática y planificada</strong>. La establece los tratamientos y es la que se desea estudiar, tiene o no vacuna, grupo de control frente a grupo de tratamiento o la edad del individuo, aunque no interese medirla puede interesar el efecto. En una publicación en RRSS la vertiente política puede ser de interés pero aparece la hora de la publicación como fuente de variación, se tiene que tener claro que se desea medir para evitar introducir variabilidad no deseada.</p></li>
+<li><p><strong>Variabilidad por la naturaleza</strong>. Es un componente que a priori es aleatorio en el caso de la aplicación de la vacuna puede ser la raza o el lugar de residencia. En una publicación en RRSS pueden influir otras noticias de actualidad que inicialmente se desconocían y que han surgido en el momento de la publicación.</p></li>
+<li><p><strong>Variabilidad sistemática y no planificada</strong>. Hay causas desconocidas que afectan a los resultados y es fundamental encontrar estas fuentes de variación de la variable respuesta. En la prueba de la vacuna pueden existir patologías previas que estén influyendo negativamente y en el caso de las RRSS variaciones en la priorización llevadas a cabo por la propia red social o publicaciones de la competencia deberían detectarse para aislar su comportamiento.</p></li>
+</ul>
+</div>
+<div id="planificación" class="section level2 hasAnchor" number="14.3">
+<h2><span class="header-section-number">14.3</span> Planificación<a href="introduccion-diseño-experimentos.html#planificación" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Este es uno de los elementos más importantes del diseño de experimentos y lo que puede ayudar al científico de datos a mejorar en sus análisis porque en esta fase han de quedar claros todos los elementos participantes en el proceso de modelización. Paso a paso los elementos son:</p>
+<ul>
+<li><p><strong>Definir el objetivo del experimento</strong>. Es necesario tener claro cuales son las unidades experimentales y cual es la variable respuesta. Además, es importante saber como se estructuran estos elementos en los datos, en capítulos anteriores ya se hizo mención a la relevancia de la estructura.</p></li>
+<li><p><strong>Identificar las fuentes de variación</strong>. Los principales, los factores de tratamiento y la definición de los niveles. Pero está el ruido, esos factores bloque que están aportando variabilidad y que no son relevantes en el análisis, es necesario identificarlos para eliminar variación residual.</p></li>
+<li><p><strong>Definir el diseño</strong>. En este caso los diseños son muchos y variados, y es la parte más compleja del diseño de experimentos. En este ensayo no se entrarán en diseños de alta complejidad pero en función de las fuentes de variación, si hay uno o más factores de tratamiento, bloques, factores anidados,… se disponen de distintos tipos de diseño, en este capítulo se verán lo más importantes.</p></li>
+<li><p><strong>Modelo matemático</strong>. Una vez se tienen claros todos los elementos anteriores es necesario definir el modelo matemático porque será éste el que nos marque la <strong>tabla ANOVA</strong> a emplear para contrastar las hipótesis del estudio. Esta tabla contendrá todas las fuentes de variación, las sumas de cuadrados correspondientes a esas variaciones y los contrastes de igualdad de medias.</p></li>
+</ul>
+</div>
+<div id="bloquear-y-aleatorizar-factores" class="section level2 hasAnchor" number="14.4">
+<h2><span class="header-section-number">14.4</span> Bloquear y aleatorizar factores<a href="introduccion-diseño-experimentos.html#bloquear-y-aleatorizar-factores" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En diseños complejos es necesario determinar que se hacen con aquellos factores presentes en el estudio que pueden aportar variabilidad pero que no se desea estudiar; para ello es necesario determinar una estrategia. ¿Qué se hace con estas fuentes de variación irrelevantes? Se pueden bloquear o bien aleatorizar.</p>
+<p><strong>Bloquear</strong> es asumir que existe una fuente de variación, que no interesa en el experimento, pero que aparece y es necesario medir. Ese elemento ha de estar presente en el modelo matemático que será de esta forma <span class="math inline">\(respuesta = constante + tratamiento + bloque + error\)</span> una forma ya conocida donde además de la constante se añaden dos parámetros correspondientes a lo que interesa estudiar (tratamiento) y a un efecto que aparece pero que no interesa (bloque).</p>
+<p><strong>Aleatorizar</strong> consiste en transformar una posible fuente de variación sin interés en error, es decir, pasar de un modelo del tipo <span class="math inline">\(respuesta = constante + tratamiento + bloque + error\)</span> como el anterior a un modelo <span class="math inline">\(respuesta = constante + tratamiento + error\)</span> Como se comentó en el capítulo anterior siempre es positivo simplificar modelos, desaparece un elemento, pero ese “problema” no desaparece, se introduce en <span class="math inline">\(error\)</span>, reduce el sesgo incrementando el error (dilema sesgo-varianza), esta estrategia ha de tenerla clara el científico de datos cuando desee realizar un estudio.</p>
+<p>El paradigma de esta situación se da cuando se quieren analizar procesos industriales en los que hay intervención humana, las personas que realizan ese proceso son bloques o bien se diseña la recogida de datos de forma que la intervención humana sea completamente aleatoria. El analista tiene que tener claro que hacer. Por ejemplo, una campaña en medios digitales y se desean medir el número de clics a un banner. ¿El medio en el que aparece se puede bloquear (agrupar para transformar en un factor bloque)? ¿La posición del banner será relevante? ¿El tipo de noticia? ¿Fechas en las que aparece? Puede complicarse mucho el correcto planteamiento cuando lo que está interesando es estudiar el tipo de comunicación o el propio diseño del banner. En ese caso se puede optar por aleatorizar y asumir que es posible que se incremente el error.</p>
+</div>
+<div id="diseños-factoriales" class="section level2 hasAnchor" number="14.5">
+<h2><span class="header-section-number">14.5</span> Diseños factoriales<a href="introduccion-diseño-experimentos.html#diseños-factoriales" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Los diseños factoriales son los más sencillos y van a introducir las cuestiones que se plantean resolver mediante diseño de experimentos. ¿Las medias de una variable <span class="math inline">\(Y\)</span> son las mismas para todos los niveles de una variable <span class="math inline">\(X\)</span>? ¿Las medias de una variable Y son las mismas para todos los niveles de unas variables <span class="math inline">\(X_i\)</span> y <span class="math inline">\(X_j\)</span>?</p>
+<div id="modelo-unifactorial.-ab-testing" class="section level3 hasAnchor" number="14.5.1">
+<h3><span class="header-section-number">14.5.1</span> Modelo unifactorial. A/B testing<a href="introduccion-diseño-experimentos.html#modelo-unifactorial.-ab-testing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Al igual que pasaba con la regresión lineal simple el modelo con un sólo factor es el principio de todo. Como ya se ha anticipado con anterioridad el modelo matemático es del tipo <span class="math inline">\(respuesta = constante + tratamiento_i + error\)</span> y la cuestión que se plantea con él es. ¿Para todo i de <span class="math inline">\(tratamiento_i\)</span> son iguales las medias de <span class="math inline">\(respuesta\)</span>?</p>
+<p>Un ejemplo claro de modelo unifactorial es el A/B testing, con dialéctica se puede vestir como un análisis avanzado pero es el diseño experimental más sencillo. La tasa de conversión o el número de clics en una noticia son medidas cuantitativas fundamentales tanto en el comercio electrónico como en webs de contenidos. En esa medición que suele ser % de éxito (media de una proporción) pueden influir muchos factores como son la UX, el tráfico generado, la competencia, reputación,… El objetivo es aislar esos factores y realizar una medición que nos permita decantarnos por un diseño u otro o por un contenido u otro. A este diseño experimental se le conoce como A/B testing.</p>
+<p>En el comercio electrónico el A/B testing puede consistir en la comparación de dos versiones de una web que comparten URL y se han de mostrar aleatoriamente a los usuarios de la página una u otra versión. Se podrá comparar una medida de conversión para cada situación propuesta mediante un diseño experimental pero es fundamental <strong>aleatorizar</strong> completamente el experimento para que la variable a medir solamente se vea influenciada por el diseño. En el caso de la selección de contenidos <a href="https://blog.ida.cl/marketing-digital/estudio-usuarios-manipulacion-facebook/?_gl=1%2Ahzg0xo%2A_ga%2AcGJGRFBveFpTUHhQT0wyal9vY2FNTGYwLXFtV1RHU09JMVZEa2lOV2dTZ1FMYlFIUDZGYnVvdmotZ3dFN2t0Rg" target="_blank"> hay ejemplos como el de Facebook</a> que ha analizado emociones mediante esta técnica, ofreciendo a una selección de usuarios mensajes positivos y a otra selección mensajes negativos o mensajes con una ideología u otra para poder determinar las ideas políticas de los usuarios.</p>
+<p>La filosofía del ciclo de procesos de A/B testing es:</p>
+<blockquote>
+<p>Experimentar &gt;&gt; Analizar estadísticamente los resultados &gt;&gt; Seleccionar el elemento ganador &gt;&gt; Proponer nuevas Ideas &gt;&gt; Experimentar</p>
+</blockquote>
+<p>En función del modo en que interactuan las poblaciones en análisis se tienen distintos tipos de test:</p>
+<ul>
+<li><p>Test A/A. El mismo experimento se aplica en poblaciones distintas. Esta labor la realizará el científico de datos en múltiples ocasiones si trabaja en el ámbito del marketing, para medir una campaña comercial seleccionará un grupo de tratamiento y un grupo de control. Una campaña comercial es un experimento y ha de medirse el éxito.</p></li>
+<li><p>Test A/B. Distinto experimento, distintas poblaciones pero <strong>situación homogénea</strong>. Se prueba un tipo de publicación en RRSS analizando el número de likes para cada tipo de publicación. Un diseño de una web, se prueba otro diseño y se analiza el tiempo de permanencia en ella. En estos casos se contrastan diseños y es necesario velar porque los usuarios de las web y los tiempos de exposición sean similares, que exista esa igualdad de condiciones que garantice la aleatoriedad de las mediciones.</p></li>
+<li><p>Test A/B/N. Similar al test A/B pero introduciendo nuevos factores, en este caso es un diseño factorial con más de un factor en análisis con las complicaciones que ello tiene como se verá posteriormente.</p></li>
+</ul>
+<p><strong>Ejemplo con R</strong></p>
+<p>Para ilustrar como se realiza un modelo unifactorial A/B testing se plantea testear si el diseño de una página provoca más o menos conversión de objetivos. Al científico de datos le han suministrado un conjunto de datos <code>ab_data.txt</code> y se le plantean las siguientes cuestiones:</p>
+<ul>
+<li>Pregunta: ¿El diseño de la web afecta en la consecución de objetivos?</li>
+<li>Hipótesis: El nuevo diseño aumenta la conversión</li>
+<li>Variable dependiente: la conversión</li>
+<li>Variable independiente: el diseño de la web</li>
+</ul>
+<p>Comienza el trabajo con R:</p>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="introduccion-diseño-experimentos.html#cb382-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb382-2"><a href="introduccion-diseño-experimentos.html#cb382-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb382-3"><a href="introduccion-diseño-experimentos.html#cb382-3" aria-hidden="true" tabindex="-1"></a>ab_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;./data/ab_data.txt&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb382-4"><a href="introduccion-diseño-experimentos.html#cb382-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_data_frame</span>()</span>
+<span id="cb382-5"><a href="introduccion-diseño-experimentos.html#cb382-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ab_data)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 5
+##   user_id timestamp           group     landing_page converted
+##     &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;     &lt;chr&gt;            &lt;dbl&gt;
+## 1  851104 2017-01-21 22:11:48 control   old_page             0
+## 2  804228 2017-01-12 08:01:45 control   old_page             0
+## 3  661590 2017-01-11 16:55:06 treatment new_page             0
+## 4  853541 2017-01-08 18:28:03 treatment new_page             0
+## 5  864975 2017-01-21 01:52:26 control   old_page             1
+## 6  936923 2017-01-10 15:20:49 control   old_page             0</code></pre>
+<p>Se dispone de 5 variables.</p>
+<ul>
+<li><code>user_id</code> identificador de usuario. Juega el rol de ID</li>
+<li><code>timestamp</code> fecha y hora de la visita, si se ha realizado bien el experimento ha de ser intrascendente.</li>
+<li><code>group</code> define el grupo de control y el grupo de tratamiento</li>
+<li><code>landing_page</code> define el diseño de la página web, antiguo o nuevo</li>
+<li><code>converted</code> es la variable conversión, la que interesa medir</li>
+</ul>
+<p>Para la correcta realización de un A/B testing es necesario determinar el <strong>mínimo número de observaciones necesarias</strong> para que los resultados tengan validez estadística. ¿Son suficientes los registros que se disponen? Se recuerda que el científico de datos ha de tener nociones de muestreo, pueden aparecer estas situaciones. Se va a emplear la librería de R <code>powerMediation</code> para entender los elementos necesarios en la determinación del tamaño de la muestra.</p>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="introduccion-diseño-experimentos.html#cb384-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(powerMediation)</span></code></pre></div>
+<p>La función <code>SSizeLogicBin</code> permite calcular el tamaño necesario de la muestra en base a elementos tratados en el capítulo 12 dedicado al muestreo y la inferencia, a priori el científico de datos ha de fijar un p-valor y una potencia de test para una clasificación binaria (convierte o no convierte), la función requiere los siguientes parámetros:</p>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="introduccion-diseño-experimentos.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="fu">SSizeLogisticBin</span>(p1, </span>
+<span id="cb385-2"><a href="introduccion-diseño-experimentos.html#cb385-2" aria-hidden="true" tabindex="-1"></a>                p2, </span>
+<span id="cb385-3"><a href="introduccion-diseño-experimentos.html#cb385-3" aria-hidden="true" tabindex="-1"></a>                B, </span>
+<span id="cb385-4"><a href="introduccion-diseño-experimentos.html#cb385-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">alpha =</span> <span class="fl">0.05</span>, </span>
+<span id="cb385-5"><a href="introduccion-diseño-experimentos.html#cb385-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">power =</span> <span class="fl">0.8</span>)</span></code></pre></div>
+<p>Donde p1 es la probabilidad el evento cuando X = 0, cuando se está en el grupo de control, en la fórmula de la logística <span class="math inline">\(logit(p) = a + b X\)</span>; en el ejemplo de trabajo puede ser la proporción de éxito “habitual”, las conversiones lógicas con el actual diseño. Si no existe experiencia previa el científico de datos tendrá que establecer esta proporción del algún modo. En este caso se va a tomar directamente un 0.1</p>
+<p>El caso de p2 es la probabilidad del evento cuando x = 1, cuando es el grupo de tratamiento en la fórmula de la logística <span class="math inline">\(logit(p) = a + b X\)</span>, también es desconocida pero se asume superior a p1 porque no tendría sentido el experimento. Se toma el valor 0.12 porque conviene establecer proporciones realistas y no asumir que un experimento dará unos resultados excepcionales.</p>
+<p>El valor B es la proporción entre tratamiento y control. Se puede comprobar ese dato.</p>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="introduccion-diseño-experimentos.html#cb386-1" aria-hidden="true" tabindex="-1"></a>ab_data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">proporcion=</span><span class="fu">n</span>()<span class="sc">/</span><span class="fu">nrow</span>(ab_data))</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 2
+##   group     proporcion
+##   &lt;chr&gt;          &lt;dbl&gt;
+## 1 control        0.500
+## 2 treatment      0.500</code></pre>
+<p>La proporción es de un 50% por lo que se toma un valor de 0.5, este tipo de resultados son garantía de la correcta aleatorización que se comprobará en un paso poseterior.</p>
+<p>Como p-valor y potencia se toman los valores habituales de 0.05 y 0.8 respectivamente. Ya se disponen de todos los datos necesarios y se ejecuta la función.</p>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="introduccion-diseño-experimentos.html#cb388-1" aria-hidden="true" tabindex="-1"></a>tamaño <span class="ot">=</span> <span class="fu">SSizeLogisticBin</span>(<span class="at">p1 =</span> <span class="fl">0.10</span>, </span>
+<span id="cb388-2"><a href="introduccion-diseño-experimentos.html#cb388-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">p2 =</span> <span class="fl">0.12</span>, </span>
+<span id="cb388-3"><a href="introduccion-diseño-experimentos.html#cb388-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">B =</span><span class="fl">0.5</span>, </span>
+<span id="cb388-4"><a href="introduccion-diseño-experimentos.html#cb388-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">alpha =</span> <span class="fl">0.05</span>, </span>
+<span id="cb388-5"><a href="introduccion-diseño-experimentos.html#cb388-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">power =</span> <span class="fl">0.8</span>)</span>
+<span id="cb388-6"><a href="introduccion-diseño-experimentos.html#cb388-6" aria-hidden="true" tabindex="-1"></a>tamaño </span></code></pre></div>
+<pre><code>## [1] 7682</code></pre>
+<p>En este caso el experimento requieren 7682 observaciones. El conjunto de datos de trabajo tiene 294478, a priori el científico de datos ya sabía que tenía observaciones suficientes, pero este proceso recalca la posibilidad de reducir el número de observaciones y facilitar experimentos, reducir los tiempos de planteamiento del test y reducción de costes para obtener resultados con validez estadística.</p>
+<p>Como se ha indicado es necesario medir o analizar la aleatoriedad de los datos disponibles. Se ha de contrastar si el equipo que ha recopilado los datos lo ha hecho en igualdad de condiciones. El primer paso será identificar duplicidades en el <code>user_id</code>.</p>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="introduccion-diseño-experimentos.html#cb390-1" aria-hidden="true" tabindex="-1"></a>duplicados <span class="ot">&lt;-</span> ab_data <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(user_id) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">conteo=</span><span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb390-2"><a href="introduccion-diseño-experimentos.html#cb390-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(conteo <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb390-3"><a href="introduccion-diseño-experimentos.html#cb390-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(duplicados) </span></code></pre></div>
+<pre><code>## [1] 3894</code></pre>
+<p>Hay registros duplicados por usuario, directamente se opta por eliminar esos registros ya que se disponen de observaciones suficientes. El ejemplo ilustra como eliminar elementos de una lista con <code>dplyr</code></p>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="introduccion-diseño-experimentos.html#cb392-1" aria-hidden="true" tabindex="-1"></a>ab_data2 <span class="ot">&lt;-</span> ab_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span>(user_id <span class="sc">%in%</span> duplicados<span class="sc">$</span>user_id))</span></code></pre></div>
+<p>Hay una fecha de obtención del dato, el graficado de la serie temporal puede ayudar a determinar la aleatoriedad de los registros.</p>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="introduccion-diseño-experimentos.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb393-2"><a href="introduccion-diseño-experimentos.html#cb393-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb393-3"><a href="introduccion-diseño-experimentos.html#cb393-3" aria-hidden="true" tabindex="-1"></a>ab_data2 <span class="ot">&lt;-</span> ab_data2 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">fecha=</span><span class="fu">as_date</span>(timestamp))</span>
+<span id="cb393-4"><a href="introduccion-diseño-experimentos.html#cb393-4" aria-hidden="true" tabindex="-1"></a>ab_data2 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(fecha) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">visitas =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb393-5"><a href="introduccion-diseño-experimentos.html#cb393-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>fecha, <span class="at">y=</span>visitas)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&#39;identity&#39;</span>) <span class="sc">+</span> </span>
+<span id="cb393-6"><a href="introduccion-diseño-experimentos.html#cb393-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">&quot;%d/%m/%Y&quot;</span>) </span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-236-1.png" width="672" /></p>
+<p>Hay homogeneidad en las fechas excepto en 2, el inicio y el fin del experimento. De nuevo se utiliza la estrategia del exceso de observaciones por lo que esas fechas van a ser eliminadas.</p>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="introduccion-diseño-experimentos.html#cb394-1" aria-hidden="true" tabindex="-1"></a>ab_data2 <span class="ot">&lt;-</span> ab_data2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(fecha <span class="sc">&gt;</span> <span class="fu">min</span>(ab_data2<span class="sc">$</span>fecha) <span class="sc">&amp;</span> fecha <span class="sc">&lt;</span> <span class="fu">max</span>(ab_data2<span class="sc">$</span>fecha) )</span></code></pre></div>
+<p>Las visitas son las unidades experimentales pero lo que interesa estudiar en el experimento es el diseño de la web y para ello se elaboró un grupo de tratamiento con el nuevo diseño de la web y un grupo de control con el antiguo diseño.</p>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="introduccion-diseño-experimentos.html#cb395-1" aria-hidden="true" tabindex="-1"></a>ab_data2 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(group,landing_page) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">visitas=</span><span class="fu">n</span>())</span></code></pre></div>
+<pre><code>## # A tibble: 2 x 3
+## # Groups:   group [2]
+##   group     landing_page visitas
+##   &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt;
+## 1 control   old_page      136765
+## 2 treatment new_page      136949</code></pre>
+<p>Ya se sabía que las proporciones estaban equilibradas y eliminando observaciones siguen siendo muy parecidas. El número de visitas recogidas para cada nivel del factor en análisis es similar, no es imprescindible pero también refleja aleatoriedad. Además, se ha de corroborar que en las fechas no existe ningún comportamiento aleatorio.</p>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="introduccion-diseño-experimentos.html#cb397-1" aria-hidden="true" tabindex="-1"></a>ab_data2 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(<span class="at">grupo=</span><span class="fu">paste0</span>(landing_page,<span class="st">&quot;-&quot;</span>,group), fecha) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">visitas =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb397-2"><a href="introduccion-diseño-experimentos.html#cb397-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>fecha, <span class="at">y=</span>visitas, <span class="at">group=</span>grupo, <span class="at">color=</span>grupo)) <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb397-3"><a href="introduccion-diseño-experimentos.html#cb397-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">&quot;%d/%m/%Y&quot;</span>) </span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-239-1.png" width="672" /></p>
+<p>Hay algún comportamiento distinto en torno al día 12/01 pero no se considera suficiente para rechazar la aleatoriedad de los datos, existen test de aleatoriedad como el test de rachas pero en este caso puede servir la opinión argumentada del analista o la dificultad de volver a repetir el experimento.</p>
+<p>Analizada la <strong>suficiencia y la aleatoriedad</strong> de los datos disponibles es necesario determinar si existen diferencias significativas en la conversión de objetivos que es la variable de interés. Se plantea la siguiente cuestión ¿es la conversión distinta para los grupos de tratamiento? Se resuelve con el análisis de la varianza.</p>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="introduccion-diseño-experimentos.html#cb398-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">aov</span>(converted <span class="sc">~</span> group, <span class="at">data=</span> ab_data2)</span>
+<span id="cb398-2"><a href="introduccion-diseño-experimentos.html#cb398-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
+<pre><code>##                 Df Sum Sq Mean Sq F value Pr(&gt;F)
+## group            1      0  0.1403   1.334  0.248
+## Residuals   273712  28780  0.1051</code></pre>
+<p>Con la función <code>aov</code> se obtiene la tabla ANOVA, la hipótesis de partida es “son iguales los grupos” se realiza el test y el p-valor arrojado es superior a un umbral conservador de 0.1 por lo que los datos no evidencian diferencias en la conversión de la web en función del diseño de la misma, ese diseño podría ser descartado. Del mismo modo que se realiza el análisis de la varianza se puede plantear un modelo lineal generalizado (GLM con sus siglas en inglés).</p>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="introduccion-diseño-experimentos.html#cb400-1" aria-hidden="true" tabindex="-1"></a>modelo<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">glm</span>(converted <span class="sc">~</span> group, <span class="at">data=</span> ab_data2)</span>
+<span id="cb400-2"><a href="introduccion-diseño-experimentos.html#cb400-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo<span class="fl">.2</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = converted ~ group, data = ab_data2)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.1201  -0.1201  -0.1187  -0.1187   0.8813  
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     0.1201185  0.0008768 136.994   &lt;2e-16 ***
+## grouptreatment -0.0014319  0.0012396  -1.155    0.248    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for gaussian family taken to be 0.1051454)
+## 
+##     Null deviance: 28780  on 273713  degrees of freedom
+## Residual deviance: 28780  on 273712  degrees of freedom
+## AIC: 160254
+## 
+## Number of Fisher Scoring iterations: 2</code></pre>
+<p>En este caso la salida es un modelo con sus parámetros y el parámetro asociado al tipo de tratamiento tiene un p-valor análogo al obtenido con el análisis de la varianza, se puede observar que el parámetro asociado el prácticamente 0, en un modelo aditivo como el que se plantea no suma nada al cambio de la media de la conversión. Este tipo de modelos lineales se verán con posterioridad y sirven para resolver estas cuestiones.</p>
+</div>
+</div>
+<div id="modelos-bifactoriales.-interacciones-entre-variables" class="section level2 hasAnchor" number="14.6">
+<h2><span class="header-section-number">14.6</span> Modelos bifactoriales. Interacciones entre variables<a href="introduccion-diseño-experimentos.html#modelos-bifactoriales.-interacciones-entre-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Cuando existen dos factores que pueden presentar una fuente de variación se tienen modelos bifactoriales. Conviene no tener muchos factores en análisis cuando se realiza un diseño de experimentos porque se complica la posibilidad de estudiar como esos factores afectan a la variable de interés. Para entender como se complica basta con ver la formulación del modelo matemático del diseño bifactorial.</p>
+<p><span class="math display">\[Y = \nu + \alpha_i + \beta_j + \alpha\beta_{ij} + \epsilon\]</span>
+En la línea del modelo unifactorial, <span class="math inline">\(\nu\)</span> es la media global, <span class="math inline">\(\alpha\)</span> es la media debida al primer factor de interés, <span class="math inline">\(\beta\)</span> la media debida al segundo factor, ¿qué es <span class="math inline">\(\alpha\beta\)</span>? Es la <strong>interacción entre ambos factores</strong>. Cuantos más parámetros más contrastes, más complejidad.</p>
+<p>Existe interacción cuando la asociación entre dos variables varía según los diferentes niveles de otra u
+otras variables. Con el ANOVA bifactorial es posible analizar la existencia de interacción, pero el conocimiento previo y el análisis de esta situación pueden permitir al científico de datos <strong>crear nuevas variables</strong> para sus modelos que mejoren sustancialmente los resultados.</p>
+<p>El paradigma de la interacción entre variables es la paradoja de Simpson que se puede ilustrar con uno de los conjuntos de datos más conocidos que hay en R, <code>penguins</code></p>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="introduccion-diseño-experimentos.html#cb402-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(palmerpenguins)</span>
+<span id="cb402-2"><a href="introduccion-diseño-experimentos.html#cb402-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb402-3"><a href="introduccion-diseño-experimentos.html#cb402-3" aria-hidden="true" tabindex="-1"></a>pinguinos<span class="ot">&lt;-</span> palmerpenguins<span class="sc">::</span>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb402-4"><a href="introduccion-diseño-experimentos.html#cb402-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">na.omit</span>()</span>
+<span id="cb402-5"><a href="introduccion-diseño-experimentos.html#cb402-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb402-6"><a href="introduccion-diseño-experimentos.html#cb402-6" aria-hidden="true" tabindex="-1"></a>pinguinos <span class="sc">%&gt;%</span></span>
+<span id="cb402-7"><a href="introduccion-diseño-experimentos.html#cb402-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>bill_length_mm, <span class="at">y=</span>bill_depth_mm)) <span class="sc">+</span></span>
+<span id="cb402-8"><a href="introduccion-diseño-experimentos.html#cb402-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb402-9"><a href="introduccion-diseño-experimentos.html#cb402-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Longitud&quot;</span>, <span class="at">y=</span><span class="st">&quot;Profundidad&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&#39;lm&#39;</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-242-1.png" width="672" /></p>
+<p>Con <code>geom_smooth</code> se añade una función lineal que recoja la nube de puntos, el modelo de regresión lineal ya que el método es lm. Sin embargo, si se realiza un modelo lineal por especie.</p>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="introduccion-diseño-experimentos.html#cb403-1" aria-hidden="true" tabindex="-1"></a>pinguinos <span class="sc">%&gt;%</span></span>
+<span id="cb403-2"><a href="introduccion-diseño-experimentos.html#cb403-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>bill_length_mm, <span class="at">y=</span>bill_depth_mm, <span class="at">group=</span>species, <span class="at">color=</span>species)) <span class="sc">+</span></span>
+<span id="cb403-3"><a href="introduccion-diseño-experimentos.html#cb403-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb403-4"><a href="introduccion-diseño-experimentos.html#cb403-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Longitud&quot;</span>, <span class="at">y=</span><span class="st">&quot;Profundidad&quot;</span>) <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&#39;lm&#39;</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-243-1.png" width="672" /></p>
+<p>El comportamiento lineal es completamente distinto por especie, hay una interacción clave por especie si se desea modelar la longitud por la profundidad porque puede llevar a conclusiones incorrectas. Más allá del ejemplo forzado es evidente que hay factores que pueden variar sustancialmente el comportamiento de otros y no es una situación fácil de identificar, como en situaciones anteriores, se recomienda que el científico de datos cree sus herramientas para estudiar las posibles interacciones.</p>
+<p>Las interacciones pueden ser de tres tipos.</p>
+<p><img src="imagenes/interacciones.png" /></p>
+<p>El primer tipo es el que se ilustraba con la paradoja de Simpson, algún nivel de los factores presentes en el análisis cruza con algún nivel de otro factor en análisis. En el segundo caso uno de los niveles de un factor incrementa la variable respuesta mientras que el otro factor no varía y por último, ambos factores se modifican de forma similar pero uno de los niveles de un factor la variación es mayor.</p>
+<p>Para entender los diseños bifactoriales con R se emplea un conjunto de datos con los resultados de un experimento destinado a evaluar los efectos de una dieta.</p>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="introduccion-diseño-experimentos.html#cb404-1" aria-hidden="true" tabindex="-1"></a>dieta <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;./data/diet.csv&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb404-2"><a href="introduccion-diseño-experimentos.html#cb404-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_data_frame</span>()</span></code></pre></div>
+<pre><code>## Rows: 76 Columns: 7
+## -- Column specification ------------------------------------------------------------------------------------
+## Delimiter: &quot;,&quot;
+## chr (2): gender, diet.type
+## dbl (5): id, age, height, initial.weight, final.weight
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<p>Se tiene un experimento con 76 individuos que han sido sometidos a tres tipos de dieta distintos (A, B y C) para cada uno de ellos se tiene un código identificativo, el sexo del individuo, la edad, la altura, el tipo de dieta, peso inicial y peso final. Lo primero es definir la variable respuesta, será la variación de peso en función de su altura.</p>
+<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="introduccion-diseño-experimentos.html#cb406-1" aria-hidden="true" tabindex="-1"></a>dieta <span class="ot">&lt;-</span> dieta <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">variacion =</span> (initial.weight <span class="sc">-</span> final.weight)<span class="sc">/</span>height)</span>
+<span id="cb406-2"><a href="introduccion-diseño-experimentos.html#cb406-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb406-3"><a href="introduccion-diseño-experimentos.html#cb406-3" aria-hidden="true" tabindex="-1"></a>dieta <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>variacion)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-245-1.png" width="672" /></p>
+<p>Los factores presentes en el estudio son:</p>
+<ul>
+<li><p>La edad. No se considera una variable relevante pero puede presentar variación, se considera un factor aleatorizado por lo que no se analizará en el modelo.</p></li>
+<li><p>El sexo. Se considera factor de tratamiento con 2 niveles.</p></li>
+<li><p>El tipo de dieta. Evidentemente será un factor de tratamiento con 3 niveles.</p></li>
+</ul>
+<p>Como se tiene un modelo bifactorial es necesario estudiar previamente si existe interacción entre los factores presentes en el estudio.</p>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="introduccion-diseño-experimentos.html#cb407-1" aria-hidden="true" tabindex="-1"></a>dieta <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>diet.type,<span class="at">y=</span>variacion)) <span class="sc">+</span><span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>gender)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-246-1.png" width="672" /></p>
+<p>Parece evidente que hay un tipo de dieta que está funcionando mejor para el sexo femenino. Otro análisis visual para identificar interacciones es el gráfico de líneas con las medias de los efectos.</p>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="introduccion-diseño-experimentos.html#cb408-1" aria-hidden="true" tabindex="-1"></a>dieta <span class="sc">%&gt;%</span> </span>
+<span id="cb408-2"><a href="introduccion-diseño-experimentos.html#cb408-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> diet.type, <span class="at">color =</span> gender, <span class="at">group =</span> gender, <span class="at">y =</span> variacion)) <span class="sc">+</span></span>
+<span id="cb408-3"><a href="introduccion-diseño-experimentos.html#cb408-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.y =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>) <span class="sc">+</span></span>
+<span id="cb408-4"><a href="introduccion-diseño-experimentos.html#cb408-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.y =</span> mean, <span class="at">geom =</span> <span class="st">&quot;line&quot;</span>)</span></code></pre></div>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-247-1.png" width="672" /></p>
+<p>Se aprecia que los hombres han tenido una variación similar pero las mujeres tienen una alta variación para el <code>diet.type</code> C. Con estas consideraciones sobre la interacción entre los factores en estudio se plantea la tabla ANOVA.</p>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="introduccion-diseño-experimentos.html#cb409-1" aria-hidden="true" tabindex="-1"></a>modelo.bifactorial <span class="ot">&lt;-</span> <span class="fu">aov</span>(variacion <span class="sc">~</span> gender <span class="sc">+</span> diet.type <span class="sc">+</span> gender<span class="sc">*</span>diet.type, <span class="at">data=</span> dieta)</span>
+<span id="cb409-2"><a href="introduccion-diseño-experimentos.html#cb409-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo.bifactorial)</span></code></pre></div>
+<pre><code>##                  Df   Sum Sq   Mean Sq F value  Pr(&gt;F)   
+## gender            1 0.000004 0.0000044   0.024 0.87807   
+## diet.type         2 0.002552 0.0012760   6.833 0.00195 **
+## gender:diet.type  2 0.001311 0.0006556   3.511 0.03522 * 
+## Residuals        70 0.013071 0.0001867                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>En la formulación del modelo aparece la interacción como <code>gender*diet.type</code>, por defecto no se incluyen interacciones a la hora de modelar y por ello es relevante el análisis antes planteado ya que se pueden perder variables buenas para la realización de un modelo. La tabla ANOVA presenta tres fuentes de variación, la debida al sexo, la debida al tipo de dieta y la debida a la interacción entre ambas. La dieta, fijado un umbral superior a 0.001 aparece como una variable significativa, produce variación en el peso. Sin embargo, la interacción entre ambas variables con umbrales por debajo del habitual 0.05 podría ser despreciada, este hecho incide de nuevo en la importancia de los análisis previos de las interacciones.</p>
+<p>El científico de datos no se va a enfrentar a diseños complejos, pero si ha de contrastar como están funcionando sus modelos mediante pruebas piloto o experimentos. Por ello, se considera importante que maneje los conceptos básicos que se tratan en este capítulo del ensayo. Existen diseños más complejos como los anidados, cuadrados latinos, diseños por bloques, <span class="math inline">\(2^k\)</span>,… Si se desea material de fácil comprensión y que mejora la anterior exposición se recomienda estudiar los siguientes enlaces:</p>
+<ul>
+<li><a href="https://halweb.uc3m.es/esp/Personal/personas/jmmarin/esp/Disenno/IntroDE.pdf" target="_blank"> Introducción al diseño de experimentos</a></li>
+<li><a href="http://verso.mat.uam.es/~joser.berrendero/cursos/adatos/ad2-tema1-12.pdf" target="_blank"> Modelos unifactoriales </a></li>
+<li><a href="http://verso.mat.uam.es/~joser.berrendero/cursos/adatos/ad2-tema2-12.pdf" target="_blank"> Modelos con múltiples factores </a></li>
+<li><a href="https://designexptr.org/" target="_blank"> Design and Analysis of Experiments and Observational Studies using R </a></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="regresion-lineal.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rvaquerizo02/edit/master/13-introduccion-diseño-experimentos.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

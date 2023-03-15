@@ -23,7 +23,7 @@
 <meta name="author" content="Raul Vaquerizo" />
 
 
-<meta name="date" content="2023-02-19" />
+<meta name="date" content="2023-03-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -300,6 +300,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="13.8" data-path="regresion-lineal.html"><a href="regresion-lineal.html#el-principio-de-parsimonia"><i class="fa fa-check"></i><b>13.8</b> El principio de parsimonia</a></li>
 </ul></li>
+<li class="chapter" data-level="14" data-path="introduccion-diseño-experimentos.html"><a href="introduccion-diseño-experimentos.html"><i class="fa fa-check"></i><b>14</b> Introducción al diseño de experimentos</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="introduccion-diseño-experimentos.html"><a href="introduccion-diseño-experimentos.html#fundamentos-del-diseño-experimental"><i class="fa fa-check"></i><b>14.1</b> Fundamentos del diseño experimental</a></li>
+<li class="chapter" data-level="14.2" data-path="introduccion-diseño-experimentos.html"><a href="introduccion-diseño-experimentos.html#fuentes-de-variabilidad"><i class="fa fa-check"></i><b>14.2</b> Fuentes de variabilidad</a></li>
+<li class="chapter" data-level="14.3" data-path="introduccion-diseño-experimentos.html"><a href="introduccion-diseño-experimentos.html#planificación"><i class="fa fa-check"></i><b>14.3</b> Planificación</a></li>
+<li class="chapter" data-level="14.4" data-path="introduccion-diseño-experimentos.html"><a href="introduccion-diseño-experimentos.html#bloquear-y-aleatorizar-factores"><i class="fa fa-check"></i><b>14.4</b> Bloquear y aleatorizar factores</a></li>
+<li class="chapter" data-level="14.5" data-path="introduccion-diseño-experimentos.html"><a href="introduccion-diseño-experimentos.html#diseños-factoriales"><i class="fa fa-check"></i><b>14.5</b> Diseños factoriales</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="introduccion-diseño-experimentos.html"><a href="introduccion-diseño-experimentos.html#modelo-unifactorial.-ab-testing"><i class="fa fa-check"></i><b>14.5.1</b> Modelo unifactorial. A/B testing</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="introduccion-diseño-experimentos.html"><a href="introduccion-diseño-experimentos.html#modelos-bifactoriales.-interacciones-entre-variables"><i class="fa fa-check"></i><b>14.6</b> Modelos bifactoriales. Interacciones entre variables</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -357,7 +369,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb198-6"><a href="probabilidad-distribuciones.html#cb198-6" aria-hidden="true" tabindex="-1"></a>c1 <span class="ot">=</span> train <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Vehicle_Age)) <span class="sc">+</span> <span class="fu">geom_bar</span>() <span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">&quot;Valores discretos&quot;</span>)</span>
 <span id="cb198-7"><a href="probabilidad-distribuciones.html#cb198-7" aria-hidden="true" tabindex="-1"></a>c2 <span class="ot">=</span> train <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Age)) <span class="sc">+</span> <span class="fu">geom_density</span>() <span class="sc">+</span><span class="fu">ggtitle</span>(<span class="st">&quot;Valores continuos&quot;</span>)</span>
 <span id="cb198-8"><a href="probabilidad-distribuciones.html#cb198-8" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(c1, c2, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
 <p>En el caso de los valores discretos la probabilidad de pertenecer a alguno de los grupos de <code>Vehicle_Age</code> será:</p>
 <div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="probabilidad-distribuciones.html#cb199-1" aria-hidden="true" tabindex="-1"></a>train <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Vehicle_Age) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">pct=</span> <span class="fu">round</span>(<span class="fu">n</span>()<span class="sc">/</span><span class="fu">nrow</span>(train),<span class="dv">3</span>))</span></code></pre></div>
 <pre><code>## # A tibble: 3 x 2
@@ -370,7 +382,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="probabilidad-distribuciones.html#cb201-1" aria-hidden="true" tabindex="-1"></a>train <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Age)) <span class="sc">+</span> <span class="fu">geom_density</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Probabilidad de tener más de 50 años en los datos&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb201-2"><a href="probabilidad-distribuciones.html#cb201-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">50</span>, <span class="at">color =</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">80</span>, <span class="at">y =</span> <span class="fl">0.025</span>, <span class="at">xend =</span> <span class="dv">64</span>, <span class="at">yend =</span> <span class="fl">0.005</span>),</span>
 <span id="cb201-3"><a href="probabilidad-distribuciones.html#cb201-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.5</span>, <span class="st">&quot;cm&quot;</span>)), <span class="at">color=</span><span class="st">&#39;red&#39;</span>)</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
 <div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="probabilidad-distribuciones.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Es necesario obtener la función de densidad</span></span>
 <span id="cb202-2"><a href="probabilidad-distribuciones.html#cb202-2" aria-hidden="true" tabindex="-1"></a>densidad <span class="ot">&lt;-</span> <span class="fu">density</span>(train<span class="sc">$</span>Age)</span>
 <span id="cb202-3"><a href="probabilidad-distribuciones.html#cb202-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -485,7 +497,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb226-3"><a href="probabilidad-distribuciones.html#cb226-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">examen =</span> <span class="dv">0</span><span class="sc">:</span>numero_test, <span class="at">prob =</span> <span class="fu">dbinom</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span>numero_test, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.33</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb226-4"><a href="probabilidad-distribuciones.html#cb226-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">resultado =</span> <span class="fu">ifelse</span>(examen <span class="sc">&gt;=</span><span class="dv">5</span>, <span class="st">&quot;Aprueba&quot;</span>, <span class="st">&quot;Suspende&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb226-5"><a href="probabilidad-distribuciones.html#cb226-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(examen), <span class="at">y =</span> prob, <span class="at">fill =</span> resultado )) <span class="sc">+</span>  <span class="fu">geom_col</span>() </span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-142-1.png" width="672" /></p>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
 <p>Es evidente que es mejor estudiar. Pero en el gráfico se observa que la media está sobre el 3 ya que en la distribución binomial tiene como media n * prob_exito y como varianza n * prob_exito * prob_fracaso.</p>
 </div>
 <div id="distribución-de-poisson" class="section level3 hasAnchor" number="10.3.3">
@@ -501,13 +513,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="probabilidad-distribuciones.html#cb227-1" aria-hidden="true" tabindex="-1"></a>simulaciones <span class="ot">=</span> <span class="dv">1000</span></span>
 <span id="cb227-2"><a href="probabilidad-distribuciones.html#cb227-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">resultado =</span> <span class="fu">rpois</span>(simulaciones, <span class="at">lambda =</span>  <span class="fl">0.15</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb227-3"><a href="probabilidad-distribuciones.html#cb227-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as.factor</span>(resultado))) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-143-1.png" width="672" /></p>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-117-1.png" width="672" /></p>
 <p>Un λ = 0.15 hace que casi un 15% de las observaciones tengan un único evento, pero eso no exime de que se pueda producir más de uno, esta forma aparece, por ejemplo, cuando se trabajan con frecuencias siniestrales en el ámbito actuarial ya que se define como el número de eventos (siniestros) en un periodo de tiempo (365 días). Si el parámetro λ se sitúa en un valores más altos:</p>
 <div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="probabilidad-distribuciones.html#cb228-1" aria-hidden="true" tabindex="-1"></a>simulaciones <span class="ot">=</span> <span class="dv">1000</span></span>
 <span id="cb228-2"><a href="probabilidad-distribuciones.html#cb228-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb228-3"><a href="probabilidad-distribuciones.html#cb228-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">resultado =</span> <span class="fu">rpois</span>(simulaciones, <span class="dv">20</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb228-4"><a href="probabilidad-distribuciones.html#cb228-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as.factor</span>(resultado))) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-144-1.png" width="672" />
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-118-1.png" width="672" />
 La forma de esta distribución es prácticamente triangular una característica que se produce cuando la media es igual que la varianza. En esta distribución, ¿cuál es la probabilidad de obtener un 10?</p>
 <div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="probabilidad-distribuciones.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(<span class="at">x=</span><span class="dv">10</span>, <span class="at">lambda =</span> <span class="dv">100</span> )</span></code></pre></div>
 <pre><code>## [1] 1.025153e-30</code></pre>
@@ -521,7 +533,7 @@ La forma de esta distribución es prácticamente triangular una característica 
 <span id="cb231-7"><a href="probabilidad-distribuciones.html#cb231-7" aria-hidden="true" tabindex="-1"></a>simulacion <span class="ot">&lt;-</span> <span class="fu">rbind.data.frame</span>(situacion1, situacion2, situacion3) </span>
 <span id="cb231-8"><a href="probabilidad-distribuciones.html#cb231-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb231-9"><a href="probabilidad-distribuciones.html#cb231-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(simulacion) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">x=</span>numero, <span class="at">fill=</span>situacion), <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">preserve =</span> <span class="st">&#39;single&#39;</span>))</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-146-1.png" width="672" /></p>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-120-1.png" width="672" /></p>
 <p>Si a un comercio acuden 10 clientes cada 30 minutos es posible que en algún momento se tengan hasta 20 clientes en el comercio, se plantean hipótesis en base al número de dependientes. Se aprecia que es relevante en teoría de colas o líneas de espera para dimensionar servicios de atención al cliente.</p>
 </div>
 </div>
@@ -538,14 +550,14 @@ La forma de esta distribución es prácticamente triangular una característica 
 <span id="cb232-5"><a href="probabilidad-distribuciones.html#cb232-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">cbind.data.frame</span>(dia, dato_aleatorio)</span>
 <span id="cb232-6"><a href="probabilidad-distribuciones.html#cb232-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb232-7"><a href="probabilidad-distribuciones.html#cb232-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x=</span>dia,<span class="at">y=</span>dato_aleatorio)) <span class="sc">+</span> <span class="fu">geom_line</span>()</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-147-1.png" width="672" /></p>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
 <p>De 0 a 1 el resultado es equiprobable, luego la probabilidad de obtener un dato mayor de 0.2 en un paseo aleatorio será 0.2.</p>
 <div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="probabilidad-distribuciones.html#cb233-1" aria-hidden="true" tabindex="-1"></a>longitud<span class="ot">=</span><span class="dv">1000</span></span>
 <span id="cb233-2"><a href="probabilidad-distribuciones.html#cb233-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb233-3"><a href="probabilidad-distribuciones.html#cb233-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">dato_aleatorio =</span> <span class="fu">runif</span>(longitud, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb233-4"><a href="probabilidad-distribuciones.html#cb233-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prob =</span> <span class="fu">ifelse</span>(dato_aleatorio<span class="sc">&gt;=</span><span class="fl">0.2</span>, <span class="st">&quot;si&quot;</span> ,<span class="st">&quot;no&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb233-5"><a href="probabilidad-distribuciones.html#cb233-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>dato_aleatorio, <span class="at">color=</span> prob)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">50</span>)</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-148-1.png" width="672" /></p>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
 <p>Dada la equiprobabilidad de la distribución uniforme sería posible simular pi si se tienen puntos distribuidos aleatoriamente en el espacio de dos dimensiones.</p>
 <div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="probabilidad-distribuciones.html#cb234-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">runif</span>(<span class="dv">1000</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)</span>
 <span id="cb234-2"><a href="probabilidad-distribuciones.html#cb234-2" aria-hidden="true" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">runif</span>(<span class="dv">1000</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)</span>
@@ -556,7 +568,7 @@ La forma de esta distribución es prácticamente triangular una característica 
 <span id="cb235-3"><a href="probabilidad-distribuciones.html#cb235-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb235-4"><a href="probabilidad-distribuciones.html#cb235-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(simul, <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">color=</span>ok)) <span class="sc">+</span> </span>
 <span id="cb235-5"><a href="probabilidad-distribuciones.html#cb235-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-150-1.png" width="90%" height="90%" /></p>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-124-1.png" width="90%" height="90%" /></p>
 <p>La proporción de casos que caen dentro del círculo será el área, como se trata de un círculo de radio 2 se puede despejar <span class="math inline">\(\Pi\)</span> como el área por 4:</p>
 <div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="probabilidad-distribuciones.html#cb236-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">nrow</span>(<span class="fu">subset</span>(simul,ok<span class="sc">==</span><span class="st">&quot;1&quot;</span>))<span class="sc">/</span><span class="fu">nrow</span>(simul)) <span class="sc">*</span> <span class="dv">4</span></span></code></pre></div>
 <pre><code>## [1] 3.04</code></pre>
@@ -613,7 +625,7 @@ La forma de esta distribución es prácticamente triangular una característica 
 <span id="cb246-3"><a href="probabilidad-distribuciones.html#cb246-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span>altura_media<span class="sc">+</span>desviacion, <span class="at">color =</span> <span class="st">&#39;blue&#39;</span>) <span class="sc">+</span></span>
 <span id="cb246-4"><a href="probabilidad-distribuciones.html#cb246-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span>altura_media<span class="sc">-</span>desviacion<span class="sc">*</span><span class="dv">2</span>, <span class="at">color =</span> <span class="st">&#39;red&#39;</span>)<span class="sc">+</span></span>
 <span id="cb246-5"><a href="probabilidad-distribuciones.html#cb246-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span>altura_media<span class="sc">+</span>desviacion<span class="sc">*</span><span class="dv">2</span>, <span class="at">color =</span> <span class="st">&#39;red&#39;</span>)</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-156-1.png" width="672" /></p>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-130-1.png" width="672" /></p>
 <p>Entre las barras azules hay una desviación típica de la población, entre las barras rojas hay 2 desviaciones de la población, <strong>el 95% de la población en estudio</strong>. Es decir, si algo se distribuye normalmente el 95% de las ocasiones su valor está entre +/- 2 desviaciones típicas, se puede construir un intervalo.</p>
 <p>Se volverá sobre los resultados que ofrece esta distribución cuando se trabaje la inferencia estadística.</p>
 </div>
@@ -642,7 +654,7 @@ La forma de esta distribución es prácticamente triangular una característica 
 <span id="cb247-19"><a href="probabilidad-distribuciones.html#cb247-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Shape = 6 rate=0.1&quot;</span>)</span>
 <span id="cb247-20"><a href="probabilidad-distribuciones.html#cb247-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb247-21"><a href="probabilidad-distribuciones.html#cb247-21" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,p3,p4,p5,p6, <span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-157-1.png" width="672" /></p>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
 <p>Se observa como el parámetro de escala afecta al valor, no a la forma que permite mover ese “pico de densidad” hacia la derecha, cuando el parámetro de forma supera el 5 hay una aproximación a la distribución normal. Como se puede ver en el código anterior para simular datos con esta distribución está la función <code>rgamma(size, shape, rate, scale=1/rate)</code></p>
 <p>Esta distribución aparece habitualmente cuando se tienen importes. El siguiente programa carga un data frame que se denomina <em>moto</em> y que contiene los datos de siniestralidad de una cartera de seguros de motocicletas.</p>
 <div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="probabilidad-distribuciones.html#cb248-1" aria-hidden="true" tabindex="-1"></a>varib <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">edad =</span> 2L, <span class="at">sexo =</span> 1L, <span class="at">zona =</span> 1L, <span class="at">clase_moto =</span> 1L, <span class="at">antveh =</span> 2L,</span>
@@ -660,11 +672,11 @@ La forma de esta distribución es prácticamente triangular una característica 
 ## GLMbook/mccase.txt&#39;</code></pre>
 <p>El campo <code>impsin</code> tiene el importe de los siniestros de la cartera, si se traza un gráfico de densidad:</p>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="probabilidad-distribuciones.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(moto, <span class="fu">aes</span>(<span class="at">x=</span>impsin)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-159-1.png" width="672" /></p>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
 <p>Se observa como es una distribución completamente asimétrica, demasiado, ya que el importe siniestral se aleja mucho en algún caso, en estas situaciones se recomienda realizar un corte para conocer mejor la forma de la distribución:</p>
 <div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="probabilidad-distribuciones.html#cb251-1" aria-hidden="true" tabindex="-1"></a>moto <span class="ot">&lt;-</span> moto <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">impsin2 =</span> <span class="fu">ifelse</span>(impsin<span class="sc">&gt;</span><span class="dv">3000</span>, <span class="dv">3000</span>, impsin))</span>
 <span id="cb251-2"><a href="probabilidad-distribuciones.html#cb251-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(moto, <span class="fu">aes</span>(<span class="at">x=</span>impsin2)) <span class="sc">+</span> <span class="fu">geom_density</span>()</span></code></pre></div>
-<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-160-1.png" width="672" /></p>
+<p><img src="estadistica-data-scientist_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
 <p>Aunque se trabaje con un gran número de observaciones en el caso de realizar un proceso de modelización es mejor conocer que estos datos se distribuyen según una distribución gamma, no todos los eventos cuantitativos se distribuyen normalmente, esto es algo que ha te tener presente el científico de datos.</p>
 
 </div>

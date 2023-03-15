@@ -1,4 +1,4 @@
-tab:unnamed-chunk-218
+tab:unnamed-chunk-192
 introducción
 objetivos
 entorno-de-trabajo
@@ -117,4 +117,11 @@ método-fordward
 método-backward
 método-stepwise
 el-principio-de-parsimonia
-tab:unnamed-chunk-1
+introduccion-diseño-experimentos
+fundamentos-del-diseño-experimental
+fuentes-de-variabilidad
+planificación
+bloquear-y-aleatorizar-factores
+diseños-factoriales
+modelo-unifactorial.-ab-testing
+modelos-bifactoriales.-interacciones-entre-variables
