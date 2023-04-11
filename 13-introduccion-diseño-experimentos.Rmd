@@ -1,4 +1,4 @@
-# Introducción al diseño de experimentos {#introduccion-diseño-experimentos}
+# Introducción al diseño de experimentos {#introduccion-diseno-experimentos}
 
 Otro de los temas dedicados a la Estadística que tiene que conocer el científico de datos es el diseño de experimentos. La motivación del diseño de experimentos está magistralmente ilustrada por <a href="https://elultimoversodefermat.wordpress.com/" target="_blank"> Julio Mulero</a>  en <a href="https://twitter.com/juliomulero/status/1331993894721097729" target="_blank">este hilo de Twitter</a>. Y se considera imprescindible conocer estas técnicas porque aportan una forma de trabajar, de plantear los problemas y un conocimiento de las variables que mejorará el desempeño (y los modelos) del científico de datos. 
 

@@ -72,7 +72,7 @@ cost_living %>% ggplot(aes(x = Rent.Index, y = Cost.of.Living.Index)) +
   geom_point()
 ```
 
-El método de mínimos cuadrados traza una función lineal que minimiza la distancia de todos los puntos presentes en los datos a esa función. No se entra en los matices algebraicos para la obtención de la recta de regresión ya que en R está implementado el método mediante la función `lm`.
+El método de mínimos cuadrados traza una función lineal que minimiza la distancia de todos los puntos presentes en los datos a esa función. <a href="https://twitter.com/PinakiLaskar/status/1329748899347767296" target=_blank>En este enlace se puede entender visualmente como funciona el método de mínimos cuadrados en la recta de regresión</a>. No se entra en los matices algebraicos para la obtención de la recta de regresión ya que en R está implementado el método mediante la función `lm`.
 
 ```{r}
 modelo.1 <- lm(data = cost_living, formula = Cost.of.Living.Index ~ Rent.Index)
