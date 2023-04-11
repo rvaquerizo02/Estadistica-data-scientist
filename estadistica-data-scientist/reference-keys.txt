@@ -1,4 +1,3 @@
-tab:unnamed-chunk-192
 introducción
 objetivos
 entorno-de-trabajo
@@ -117,7 +116,7 @@ método-fordward
 método-backward
 método-stepwise
 el-principio-de-parsimonia
-introduccion-diseño-experimentos
+introduccion-diseno-experimentos
 fundamentos-del-diseño-experimental
 fuentes-de-variabilidad
 planificación
@@ -125,3 +124,10 @@ bloquear-y-aleatorizar-factores
 diseños-factoriales
 modelo-unifactorial.-ab-testing
 modelos-bifactoriales.-interacciones-entre-variables
+modelos-GLM
+motivación-de-los-modelos-glm
+la-función-de-enlace-en-los-modelos-glm
+regresión-logística
+regresión-de-poisson
+los-glm-y-el-concepto-microsegmento
+tab:unnamed-chunk-1

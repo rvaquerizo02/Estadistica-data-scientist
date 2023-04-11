@@ -16,6 +16,7 @@ description: "Libro de introducción a la estadística"
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache=FALSE)
 ```
+
 # Introducción
 
 ## Objetivos
