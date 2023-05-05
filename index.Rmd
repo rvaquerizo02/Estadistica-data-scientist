@@ -27,10 +27,9 @@ Hay muchos y mejores pero quiero mi propio ensayo de introducción a la estadís
 - [Introducction to Stadistical Learning](https://fcorowe.github.io/sl/)
 - [R for Data Science](https://es.r4ds.hadley.nz/index.html)
 - [Un Recorrido por los Métodos Cuantitativos en Ciencias Sociales a bordo de R](https://estadisticacienciassocialesr.rbind.io/)
-- [Analizando datos, visualizando información, contando historias de Javier Alvarez Liébana](https://dadosdelaplace.github.io/courses-ECI-2022/index.html)
 
 
-. Esta serie monográfica será similar a la formación que llevo impartiendo en empresas y postgrados universitarios desde hace algunos años. Los capítulos de los que tendrá este ensayo serán:
+Esta serie monográfica es similar a la formación que lleva el autor impartiendo en empresas y postgrados universitarios. Los capítulos de los que tendrá este ensayo serán:
 
 <ol>
  	<li>Datos</li>
@@ -39,9 +38,9 @@ Hay muchos y mejores pero quiero mi propio ensayo de introducción a la estadís
  	<li>Estadística descriptiva bivariable</li>
  	<li>Muestreo e inferencia de aquella manera</li>
  	<li>Regresión lineal</li>
- 	<li>Que nos cuenta el parámetro de un modelo</li>
  	<li>Diseño de experimentos</li>
  	<li>Modelos GLM</li>
+ 	<li>Método de modelización estadística</li>
 </ol>
 
 Visión completamente práctica y desde el punto de vista frecuentista que será distinta a lo que podéis encontrar en otros foros. Cada tema tendrá una sección descriptiva y una sección práctica con R.

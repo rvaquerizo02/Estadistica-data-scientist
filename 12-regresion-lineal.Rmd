@@ -487,3 +487,8 @@ summary(modelo_aleatorio)
 ```
 
 Partiendo de datos completamente aleatorios el test F está muy próximo a 0.05 por lo que existe modelo y por si fuera poco hay variables significativas, esto sucede porque hay un gran número de parámetros y la regresión lineal no maneja bien esta situación, por este motivo, no se recomienda realizar modelos de regresión lineal con más de 10 variables independientes ya que pueden aparecer relaciones debidas al puro azar. 
+
+```{r}
+detach(package:MASS,unload=TRUE)
+```
+

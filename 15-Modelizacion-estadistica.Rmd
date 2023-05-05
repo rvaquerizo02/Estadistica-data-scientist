@@ -1,0 +1,130 @@
+# Modelización estadística {#modelizacion-estadistica}
+
+## Establecer un método para la modelización estadística
+
+En el capítulo 3 del ensayo se hacía mención al <a href="https://www.tidyverse.org/" target=_blank>universo tidyverse</a> y las librerías de R que englobaba, además de esas librerias hay una publicación de Hadley Wickham y Garret Grolemund <a href="https://r4ds.had.co.nz/" target="_blank">R for data sience</a> donde aparece la siguiente imagen:
+
+![](https://d33wubrfki0l68.cloudfront.net/571b056757d68e6df81a3e3853f54d3c76ad6efc/32d37/diagrams/data-science.png)
+
+Esa imagen describe un método para realizar _ciencia de datos_. Este capítulo se dedicará a describir un método de modelización que recoge todo lo trabajado en el ensayo. Se empleará el ejemplo que ha servido de hilo conductor en otros capítulos.
+
+# Modelo de venta cruzada en el sector asegurador 
+
+Las compañías de seguros que operan en múltiples ramos tienen en sus propios clientes potenciales a los que ofrecer seguros de otro ramo. Esta estrategia no es solo beneficiosa para ganar clientes, también es importante para fidelizar e incluso a la hora de seleccionar riesgos. Si un cliente tiene asegurados dos vehículos en la compañía es de suponer que sólo está conduciendo uno de ellos. Por estos motivos un cliente integral en una compañía de seguros aporta más valor.
+
+A continuación se trabaja con un ejemplo de clientes de una compañía aseguradora que están en el ramo de Salud y esta compañía pretende comercializar entre estos clientes su seguro de automóviles, para ello realizó una encuesta y etiquetó a aquellos clientes que estarían interesados en el seguro de automóviles. Los datos empleados para este trabajo se pueden obtener en <a href="https://www.kaggle.com/datasets/anmolkumar/health-insurance-cross-sell-prediction" target="_blank">este link</a> ya que corresponden a una competición de kaggle.
+
+Como se indica en la propia competición:
+
+>El cliente es una compañía de seguros que ofrece seguros médicos, ahora ellos realizan un test para construir un modelo que permita predecir si los asegurados (clientes) del año pasado también estarán interesados en el seguro para vehículos provisto por la compañía.
+
+El científico de datos tiene que tener muy claro el objetivo de su trabajo y es claro. Con los datos que provienen de las encuestas es necesario realizar un modelo que permita seleccionar clientes y caracterizar a los clientes para futuras campañas comerciales. Y en este punto comienza el trabajo de modelización. 
+
+## Un método de moelización estadística
+
+Cada profesional ha de diseñar su propio método o seguir el que se utilice en el equipo con el que trabaje, en este ensayo se muestra un método probado en múltiples proyectos de ciencia de datos y que engloba todo lo trabajado en capítulos anteriores:
+
+![](./imagenes/metodo_modelizacion.png)
+
+Selección de datos, aproximación a los datos y análisis gráficos descriptivos para describir el problema. El estudio de la variable dependiente, creación de los factores que han de describirla y la modelización. Un breve resumen de todo lo trabajado en este ensayo. 
+
+## Conocimiento de los datos
+
+Antes de empezar es necesario disponer de los datos. Proceso ya conocido.
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(DT)
+
+train <- read.csv("./data/train.csv")
+datatable(head(train,5))
+```
+
+Da comienzo el proceso de modelización.
+
+### Muestreo. Datos de entrenamiento, datos de validación, datos de test y prueba ciega. 
+
+Para comprobar el correcto funcionamiento de los modelos es necesario separar los datos en distintos conjuntos de datos que permitan medir no sólo la capacidad predictiva del modelo, también hay que velar para que el modelo no se exceda con la complejidad de los parámetros y que éstos puedan servir solamente para el conjunto de datos de entrenamiento. En un proceso de modelización se pueden participar los siguientes conjuntos de datos. 
+
+![](./imagenes/entrenamiento_validacion_test.png)
+
+- Conjunto de datos de partida o universo. Es el conjunto inicial **ya depurado** que contiene la información necesaria para realizar el proceso de clasificación binomial mediante la regresión logística.  
+
+- Conjunto de datos de entrenamiento. Son los datos que se van a emplear para modelizar, como aparece en la figura anterior en ocasiones se _balanceará_ la muestra para incrementar el número de 1's en el modelo para que el proceso sea capaz de encontrar segmentos e indicios que permitan separar el azar de lo estadísticamente explicable. No hay un porcentaje mínimo de 1's que indiquen la necesidad de balancear la muestra pero porcentajes por debajo del 5% pueden suponer un problema para una regresión logística. 
+
+- Conjunto de datos de validación Para evitar el _overfitting_ o la _sobreparametrización_ se separa un conjunto de datos con las mismas características que el conjunto de datos de entrenamiento y se comprueba si el modelo está aprendiendo sólo de los datos de entrenamiento. La regresión logística no adolece de esta problemática pero es buena práctica validar el modelo pero es necesario que exista este conjunto de datos para interactuar con el modelo. 
+
+- Conjunto de datos de test. Es un conjunto de datos que tiene exactamente las mismas características que el conjunto de datos de partida, se deshacen los posibles balanceos y tiene las mismas proporciones de 1's que el universo. Sobre él se estudiará el comportamiento del modelo que finalmente seleccione el científico de datos. En el caso de no realizar balanceos se puede prescindir del conjunto de datos de validación y que los datos de test directamente hagan el rol de validación y test. 
+
+- Prueba ciega. No aparece en la figura, no todos los científicos de datos emplean esta prueba. Se trata de un conjunto de datos que no ha participado en ninguna parte del proceso de modelización pero que supondrá la prueba final para el modelo. Es habitual cuando se trabaja con "cosechas" de datos, conjuntos de datos particionados por periodos temporales, habitualmente meses, donde el último mes disponible puede hacer este rol. De este modo se puede medir con los datos más recientes si el modelo cumple su cometido. 
+
+Las proporciones de observaciones para cada uno de los conjuntos de datos la marcará el propio científico de datos. En el ejemplo de trabajo no se dispone de prueba ciega aunque revisando la competición de Kaggle se puede identificar un conjunto de datos que haga ese rol. Se dispone del data frame _train_ que se va a dividir en el conjunto de datos de entrenamiento y de test, se prescinde inicialmente de emplear valicación. Inicialmente, es recomendable emplear menos observaciones en las fases descriptivas porque requiere un alto tiempo de computación y de interacción con los datos. En un primer momento se divide _train_ al 50%.
+
+```{r}
+set.seed(45)
+indices <- sample(seq(1:nrow(train)) , round(nrow(train) * 0.50))
+
+entrenamiento <- train[indices,]; nrow(entrenamiento)/nrow(train)
+test <- train[-indices,]; nrow(test)/nrow(train)
+```
+
+Se ha dividido _train_ en _entrenamiento_ y _test_ al 50% y sobre _entrenamiento_ dan comienzo las primeras aproximaciones a los datos. 
+
+### Aproximación inicial a los datos 
+
+El primer paso es determinar el rol que juega cada variable dentro del conjunto de datos. 
+
+- `Id` es el campo identificativo del cliente, no debe participar en el proceso de modelización
+- `Response` es la variable respuesta, será el target
+- Resto de variables. Variables input
+
+Para el análisis EDA es necesario retomar el uso de de la librería `DataExplorer` y sin lanzar el análisis EDA al completo se obtienen una serie de gráficos ya conocidos.
+
+```{r message=FALSE, warning=FALSE}
+library(DataExplorer)
+introduce(entrenamiento)
+plot_histogram(entrenamiento, ncol = 3)
+```
+
+En este punto se tienen problemas conocidos, `Policy_Sales_Channel` y `Region_Code` son variables categóricas y aparecen como variables numéricas. Este tipo de situaciones sólo se identifican si se conocen los datos y de nuevo se reitera la necesidad de que el científico de datos se involucre con el problema de negocio y con los propios datos, no se pueden hacer medias de sexo ni contabilizar saldos en fondos de inversión, cada variable tiene su propio análisis como se ha visto a lo largo de todo el ensayo. 
+
+```{r}
+entrenamiento <- entrenamiento %>% mutate(
+  Policy_Sales_Channel = as.factor(Policy_Sales_Channel),
+  Region_Code = as.factor(Region_Code))
+```
+
+Ahora se está en disposición de estudiar los factores disponibles en el conjunto de datos. 
+
+```{r}
+plot_bar(entrenamiento, ncol=2)
+```
+
+Directamente se obtiene un mensaje que identifica otro problema, precisamente las variables que han de ser factores tienen un gran número de niveles, es necesario realizar un trabajo de agrupación de niveles que se hará con posterioridad. Otro de los problemas que apareció en capítulos anteriores se encuentra en la variable `Driving License` que sólo toma el valor 1, este hecho tiene todo el sentido ya que no se debe ofrecer un seguro de automóviles a aquel cliente que no dispone de licencia de conducción. Esta variable será eliminada. 
+
+```{r}
+entrenamiento <- entrenamiento %>% select(-Driving_License)
+```
+
+### Creación y clasificación de factores
+
+En las aproximaciones iniciales se han realizado las principales depuraciones de datos, pero no es un proceso acabado, las siguientes iteraciones en el proceso de modelización continuarán con esa labor de depuración. Sin embargo, a partir de ahora el científico de datos ya introduce "su problema" en los análisis. Cuando se tiene una variable target y una variable que ayude a describir ese target se está realizando análisis bivariable que se trabajó en el capítulo 11. 
+
+
+
+## Modelización
+
+Hay sentadas unas bases teóricas sobre el propósito de la regresión logística, es el momento de realizar un modelo con las variables disponibles y estudiar los parámetros que ofrece la regresión logística. El primer paso será la creación del conjunto de datos de entrenamiento y el conjunto de datos de test.
+
+
+
+
+
+
+
+
+
+
+
+
+

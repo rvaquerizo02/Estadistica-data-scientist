@@ -14,7 +14,7 @@ Para ambos modelos la variable respuesta ha de ser cuantitativa y distribuida no
 La respuesta normal o gaussiana aparece, pero existen otro tipo de situaciones a las que se enfrenta el científico de datos donde **el evento a estudiar no se distribuye normalmente**. Sin ir mas lejos, en el ejercicio que está sirviendo de hilo conductor en el ensayo, una aseguradora española que opera en múltiples ramos quiere ofrecer seguro de automóviles a sus clientes del ramo de salud. Para ello se realizó un cuestionario a los clientes de forma que se marcó quienes de ellos estarían interesados en el producto de automóviles y quienes no. La variable de interés es si o no lo que plantea una clasificación binomial. **¿Qué sucede si se modeliza eventos si/no mediante un modelo de regresión lineal?** Siguiendo el propio ejemplo de trabajo al que se hace permanentemente referencia. 
 
 
-```{r message=FALSE, warning=FALSE}
+```{r  message=FALSE, warning=FALSE}
 library(tidyverse)
 library(DT)
 
@@ -337,7 +337,7 @@ Esta transformación hará que los parámetros de la regresión de poisson tenga
 
 ```{r message=FALSE, warning=FALSE}
 # Edades en el conjunto de datos
-edades <- moto %>% select(edad) %>% unique()
+edades <- moto %>% dplyr::select(edad) %>% unique()
 
 # A las distintas edades se añade la frecuencia siniestral
 frec.siniestral <- moto %>% group_by(edad) %>% 
@@ -401,6 +401,7 @@ datatable(df)
 ```
 
 En el caso de la regresión de poisson no es necesario emplear la ponderación porque ya está implícita en el propio offset, por lo que el código es análogo. Señalar que no se ha determinado la validez estadística de cada parámetro, no se ha estudiado el test $\beta_i = 0$ ni la prevalencia en cada uno de los niveles de los factores. Por lo que el proceso de modelización tiene que pasar previamente por un agrupamiento de variables numéricas, análisis de los factores presentes en el modelo y creación de un número de factores con los niveles adecuados para crear esos microsegmentos que permitan que los resultados sean estadísticamente correctos y que den respuesta al problema que se plantea al científico de datos. Es decir, **es necesario seguir una serie de pasos para llegar a crear un modelo**, la modelización estadística no es escribir unas líneas de código y que un equipo informático haga magia, requiere de un método que se tratará en el siguiente capítulo. 
+
 
 
 
