@@ -1,4 +1,4 @@
-tab:unnamed-chunk-197
+tab:unnamed-chunk-254
 introducción
 objetivos
 entorno-de-trabajo
@@ -133,10 +133,10 @@ regresión-de-poisson
 los-glm-y-el-concepto-microsegmento
 modelizacion-estadistica
 establecer-un-método-para-la-modelización-estadística
-modelo-de-venta-cruzada-en-el-sector-asegurador
-un-método-de-moelización-estadística
+un-método-de-modelización-estadística
 conocimiento-de-los-datos
 muestreo.-datos-de-entrenamiento-datos-de-validación-datos-de-test-y-prueba-ciega.
 aproximación-inicial-a-los-datos
-creación-y-clasificación-de-factores
-modelización
+clasificación-de-factores
+el-código-de-reclasificación-de-factores
+análisis-de-interacciones
