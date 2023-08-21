@@ -1,4 +1,4 @@
-tab:unnamed-chunk-254
+tab:unnamed-chunk-192
 introducción
 objetivos
 entorno-de-trabajo
@@ -140,3 +140,8 @@ aproximación-inicial-a-los-datos
 clasificación-de-factores
 el-código-de-reclasificación-de-factores
 análisis-de-interacciones
+modelizacion-estadistica-2
+selección-de-variables
+selección-del-modelo
+la-capacidad-predictiva-del-modelo
+resultados-finales

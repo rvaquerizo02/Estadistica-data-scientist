@@ -411,7 +411,7 @@ train2 <- train2 %>% mutate(
 # Agrupación de zonas
 fr_zona <- train2 %>%
    group_by(Region_Code) %>%
-   summarise(clientes = round(n()*100/nrow(entrenamiento),1),
+   summarise(clientes = round(n()*100/nrow(train2),1),
            pct_interesados = round(sum(Response)*100/n(),1), 
            .groups='drop') %>% 
   arrange(desc(pct_interesados)) %>% mutate(fr_zona = case_when(
@@ -421,7 +421,7 @@ fr_zona <- train2 %>%
 
 fr_canal <- train2 %>%
    group_by(Policy_Sales_Channel) %>%
-   summarise(clientes = round(n()*100/nrow(entrenamiento),1),
+   summarise(clientes = round(n()*100/nrow(train2),1),
            pct_interesados = round(sum(Response)*100/n(),1), .groups='drop') %>% 
   arrange(desc(pct_interesados)) %>% 
   mutate(fr_canal = case_when(
